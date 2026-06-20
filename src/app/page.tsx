@@ -117,8 +117,8 @@ export default function HomePage() {
       <section className="relative overflow-hidden" style={{ minHeight: 380 }}>
         {/* Full-bleed coastal road photo */}
         <Image
-          src="https://images.unsplash.com/photo-1494976388531-d1058494cdd8?w=1800&q=85"
-          alt="Car driving down a scenic coastal highway"
+          src="/bc.png"
+          alt="Car driving down a scenic coastal highway with success sign"
           fill
           className="object-cover object-center"
           priority
@@ -166,34 +166,6 @@ export default function HomePage() {
             </div>
           </div>
 
-          {/* Right: highway sign */}
-          <div className="hidden lg:flex flex-col items-center shrink-0 select-none">
-            {/* Sign face */}
-            <div
-              className="relative text-white text-center shadow-2xl"
-              style={{
-                background: "#1e7a34",
-                border: "5px solid #fff",
-                outline: "3px solid #1e7a34",
-                padding: "22px 32px 18px",
-                width: 210,
-                boxShadow: "0 8px 32px rgba(0,0,0,0.45)",
-              }}
-            >
-              <p className="text-base font-bold uppercase tracking-[0.18em] leading-none mb-1">YOUR</p>
-              <p className="font-black uppercase leading-none" style={{ fontSize: 42, letterSpacing: "0.02em" }}>
-                SUCCESS
-              </p>
-              <p className="text-lg font-bold uppercase tracking-[0.1em] leading-none mt-1">STARTS HERE</p>
-              <div className="flex justify-end mt-2">
-                <svg className="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M5 12h14m-7-7 7 7-7 7" stroke="white" strokeWidth={3} strokeLinecap="round" strokeLinejoin="round" fill="none" />
-                </svg>
-              </div>
-            </div>
-            {/* Sign post */}
-            <div className="w-3 bg-gray-400" style={{ height: 60 }} />
-          </div>
         </div>
 
         {/* Trust badge strip pinned to bottom of hero */}

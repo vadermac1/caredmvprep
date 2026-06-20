@@ -56,23 +56,23 @@ export default function Header() {
   const toggle = (key: string) => setOpenKey((prev) => (prev === key ? null : key));
 
   return (
-    <header className="bg-[#0f1e3c] text-white sticky top-0 z-50 shadow-md">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-28">
+    <header className="text-white sticky top-0 z-50 shadow-md" style={{ backgroundColor: '#0f1e3c' }}>
+      <div className="w-full px-4">
+        <div className="flex items-center h-28">
           {/* Logo */}
-          <Link href="/" className="flex items-center shrink-0">
+          <Link href="/" className="flex items-center shrink-0 mr-6" style={{ overflow: 'visible' }}>
             <Image
               src="/logo.png"
               alt="CAREDMVPrep – Your Road to Success"
-              width={320}
-              height={80}
-              style={{ width: '220px', height: '110px', objectFit: 'fill' }}
+              width={380}
+              height={140}
+              style={{ width: '304px', height: '240px', objectFit: 'fill' }}
               priority
             />
           </Link>
 
           {/* Desktop nav */}
-          <nav className="hidden lg:flex items-center gap-0.5">
+          <nav className="hidden lg:flex items-center gap-0 shrink-0">
             {navItems.map((nav) => (
               <NavDropdown
                 key={nav.key}
@@ -92,7 +92,7 @@ export default function Header() {
           </nav>
 
           {/* CTA buttons */}
-          <div className="hidden lg:flex items-center gap-2">
+          <div className="hidden lg:flex items-center gap-2 ml-4 shrink-0">
             <Link
               href="/pricing"
               className="px-4 py-2 text-sm font-semibold border border-white/30 rounded hover:bg-white/10 transition"
@@ -164,7 +164,7 @@ function NavDropdown({
     <div className="relative">
       <button
         onClick={onToggle}
-        className="flex items-center gap-1 px-3 py-2 text-sm font-medium text-gray-200 hover:text-white hover:bg-white/10 rounded transition"
+        className="flex items-center gap-1 px-2 py-2 text-sm font-medium text-gray-200 hover:text-white hover:bg-white/10 rounded transition"
       >
         {label}
         <svg className={`w-3.5 h-3.5 transition-transform ${open ? "rotate-180" : ""}`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
