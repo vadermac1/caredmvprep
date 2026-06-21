@@ -114,33 +114,35 @@ export default function HomePage() {
   return (
     <>
       {/* ── HERO ─────────────────────────────────────────────── */}
-      <section className="relative overflow-hidden" style={{ minHeight: 380 }}>
-        {/* Full-bleed coastal road photo */}
+      <section className="relative overflow-hidden" style={{ height: '650px' }}>
+        {/* Full image scaled to fit — nothing cropped */}
         <Image
           src="/bc.png"
           alt="Car driving down a scenic coastal highway with success sign"
           fill
-          className="object-cover object-center"
+          style={{ objectFit: 'cover', objectPosition: 'center center' }}
           priority
         />
 
-        {/* Mobile: full white overlay. Desktop: left gradient only */}
-        <div
-          className="absolute inset-0 sm:hidden"
-          style={{ background: "rgba(255,255,255,0.88)" }}
-        />
-        <div
-          className="absolute inset-0 hidden sm:block"
-          style={{
-            background:
-              "linear-gradient(to right, rgba(255,255,255,0.96) 0%, rgba(255,255,255,0.88) 30%, rgba(255,255,255,0.55) 52%, rgba(255,255,255,0) 68%)",
-          }}
-        />
+        {/* Overlay + content absolutely positioned over image */}
+        <div className="absolute inset-0">
+          {/* Mobile: full white overlay. Desktop: left gradient only */}
+          <div
+            className="absolute inset-0 sm:hidden"
+            style={{ background: "rgba(255,255,255,0.88)" }}
+          />
+          <div
+            className="absolute inset-0 hidden sm:block"
+            style={{
+              background:
+                "linear-gradient(to right, rgba(255,255,255,0.96) 0%, rgba(255,255,255,0.88) 30%, rgba(255,255,255,0.55) 52%, rgba(255,255,255,0) 68%)",
+            }}
+          />
 
-        {/* Content row */}
-        <div className="relative max-w-7xl mx-auto px-6 sm:px-10 lg:px-14 py-10 sm:py-14 flex items-center justify-between gap-8">
-          {/* Left: text */}
-          <div className="max-w-md">
+          {/* Content row */}
+          <div className="relative h-full max-w-7xl mx-auto px-6 sm:px-10 lg:px-14 flex items-start pt-14 gap-8">
+            {/* Left: text */}
+            <div className="max-w-md">
             <h1 className="text-4xl sm:text-5xl font-extrabold text-[#0d1a2d] leading-tight">
               Pass Your DMV Test
             </h1>
@@ -170,24 +172,26 @@ export default function HomePage() {
             </div>
           </div>
 
-        </div>
-
-        {/* Trust badge strip pinned to bottom of hero */}
-        <div className="relative bg-white/90 backdrop-blur-sm border-t border-gray-200">
-          <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-14 py-3 grid grid-cols-2 sm:grid-cols-4 gap-x-6 gap-y-2">
-            {trustBadges.map((b) => (
-              <div key={b.label} className="flex items-center gap-2.5">
-                {b.icon}
-                <span className="text-xs text-gray-700 font-medium leading-tight">
-                  {b.label}
-                  <br />
-                  {b.sub}
-                </span>
-              </div>
-            ))}
           </div>
         </div>
+
       </section>
+
+      {/* Trust badge strip */}
+      <div className="bg-white border-t border-b border-gray-200">
+        <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-14 py-3 grid grid-cols-2 sm:grid-cols-4 gap-x-6 gap-y-2">
+          {trustBadges.map((b) => (
+            <div key={b.label} className="flex items-center gap-2.5">
+              {b.icon}
+              <span className="text-xs text-gray-700 font-medium leading-tight">
+                {b.label}
+                <br />
+                {b.sub}
+              </span>
+            </div>
+          ))}
+        </div>
+      </div>
 
       {/* ── CHOOSE YOUR STATE ─────────────────────────────────── */}
       <section id="choose-state" className="py-14 bg-white">

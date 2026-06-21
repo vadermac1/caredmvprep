@@ -57,16 +57,16 @@ export default function Header() {
 
   return (
     <header className="text-white sticky top-0 z-50 shadow-md" style={{ backgroundColor: '#0f1e3c' }}>
-      <div className="w-full px-4">
-        <div className="flex items-center h-28">
+      <div className="w-full px-4" style={{ paddingLeft: '340px' }}>
+        <div className="flex items-center justify-between h-16">
           {/* Logo */}
-          <Link href="/" className="flex items-center shrink-0 mr-6" style={{ overflow: 'visible' }}>
+          <Link href="/" className="flex items-center shrink-0" style={{ overflow: 'visible' }}>
             <Image
               src="/logo.png"
               alt="CAREDMVPrep – Your Road to Success"
               width={380}
               height={140}
-              style={{ width: '304px', height: '240px', objectFit: 'fill' }}
+              style={{ width: '274px', height: '216px', objectFit: 'fill' }}
               priority
             />
           </Link>
@@ -92,7 +92,7 @@ export default function Header() {
           </nav>
 
           {/* CTA buttons */}
-          <div className="hidden lg:flex items-center gap-2 ml-4 shrink-0">
+          <div className="hidden lg:flex items-center gap-2 shrink-0">
             <Link
               href="/pricing"
               className="px-4 py-2 text-sm font-semibold border border-white/30 rounded hover:bg-white/10 transition"
