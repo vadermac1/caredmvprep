@@ -42,6 +42,7 @@ export default function QuizResults() {
         await (supabase as any).from("user_answers").insert(
           result.answers.map((a) => ({
             session_id: session.id,
+            user_id: user.id,       // direct FK — avoids join in RLS + weak-topic refresh
             question_id: a.questionId,
             selected_index: a.selectedIndex,
             correct_index: a.correctIndex,

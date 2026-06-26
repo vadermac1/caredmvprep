@@ -44,12 +44,18 @@ const navItems = [
   },
 ];
 
+const PRODUCT_LABELS: Record<string, string> = {
+  dmv: 'DMV', motorcycle: 'Moto', cdl: 'CDL',
+  cdl_hazmat: 'HazMat', cdl_tanker: 'Tanker', cdl_doubles_triples: 'D&T',
+};
+
 interface Props {
   displayName: string;
-  subscriptionTier: string;
+  isPro: boolean;
+  activeProducts: string[];
 }
 
-export default function DashboardSidebar({ displayName, subscriptionTier }: Props) {
+export default function DashboardSidebar({ displayName, isPro, activeProducts }: Props) {
   const pathname = usePathname();
   const router = useRouter();
 
@@ -110,19 +116,29 @@ export default function DashboardSidebar({ displayName, subscriptionTier }: Prop
           </div>
           <div className="min-w-0">
             <p className="text-sm font-medium text-white truncate">{displayName}</p>
-            <span
-              className="inline-block text-xs px-1.5 py-0.5 rounded font-semibold"
-              style={
-                subscriptionTier === 'pro'
-                  ? { backgroundColor: '#1a7f3c', color: '#fff' }
-                  : { backgroundColor: 'rgba(255,255,255,0.15)', color: '#9ca3af' }
-              }
-            >
-              {subscriptionTier === 'pro' ? 'Pro' : 'Free'}
-            </span>
+            {isPro ? (
+              <div className="flex flex-wrap gap-1 mt-0.5">
+                {activeProducts.map((p) => (
+                  <span
+                    key={p}
+                    className="inline-block text-xs px-1.5 py-0.5 rounded font-semibold"
+                    style={{ backgroundColor: '#1a7f3c', color: '#fff' }}
+                  >
+                    {PRODUCT_LABELS[p] ?? p}
+                  </span>
+                ))}
+              </div>
+            ) : (
+              <span
+                className="inline-block text-xs px-1.5 py-0.5 rounded font-semibold"
+                style={{ backgroundColor: 'rgba(255,255,255,0.15)', color: '#9ca3af' }}
+              >
+                Free
+              </span>
+            )}
           </div>
         </div>
-        {subscriptionTier !== 'pro' && (
+        {!isPro && (
           <Link
             href="/pricing"
             className="block w-full text-center py-2 rounded-lg text-xs font-bold transition"

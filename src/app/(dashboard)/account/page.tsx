@@ -1,26 +1,28 @@
 import { redirect } from "next/navigation";
 import Link from "next/link";
 import { createClient } from "@/lib/supabase/server";
-import type { Profile, Subscription } from "@/types/database";
+import { getProfile, getUserSubscriptions } from "@/lib/supabase/queries";
+
+const PRODUCT_LABELS: Record<string, string> = {
+  dmv:                 "Driver's License Premium",
+  motorcycle:          "Motorcycle Premium",
+  cdl:                 "CDL Premium",
+  cdl_hazmat:          "CDL HazMat Add-on",
+  cdl_tanker:          "CDL Tanker Add-on",
+  cdl_doubles_triples: "CDL Doubles & Triples Add-on",
+};
 
 export default async function AccountPage() {
   const supabase = await createClient();
   const { data: { user } } = await supabase.auth.getUser();
   if (!user) redirect("/login");
 
-  const { data: profile } = await supabase
-    .from("profiles")
-    .select("*")
-    .eq("id", user.id)
-    .single() as { data: Profile | null; error: unknown };
+  const [profile, subscriptions] = await Promise.all([
+    getProfile(supabase, user.id),
+    getUserSubscriptions(supabase, user.id),
+  ]);
 
-  const { data: subscription } = await supabase
-    .from("subscriptions")
-    .select("*")
-    .eq("user_id", user.id)
-    .single() as { data: Subscription | null; error: unknown };
-
-  const isPro = profile?.subscription_tier === "pro";
+  const hasAnyPro = subscriptions.length > 0;
 
   return (
     <div className="max-w-2xl mx-auto">
@@ -48,69 +50,103 @@ export default async function AccountPage() {
                 : "—"}
             </dd>
           </div>
+          <div className="flex justify-between">
+            <dt className="text-gray-500">Study streak</dt>
+            <dd className="font-medium text-gray-900">
+              {profile?.streak_current ?? 0} days
+              {(profile?.streak_best ?? 0) > 0 && (
+                <span className="text-gray-400 font-normal ml-1">
+                  (best: {profile?.streak_best})
+                </span>
+              )}
+            </dd>
+          </div>
         </dl>
       </div>
 
-      {/* Subscription */}
+      {/* Subscriptions */}
       <div className="bg-white rounded-2xl border border-gray-200 px-6 py-5 mb-4">
-        <h2 className="text-sm font-bold text-gray-900 mb-4">Subscription</h2>
-        <div className="flex items-center justify-between">
-          <div>
-            <p className="text-sm font-semibold text-gray-900">
-              {isPro ? "Pro Plan" : "Free Plan"}
-            </p>
-            {isPro && subscription?.current_period_end && (
-              <p className="text-xs text-gray-400 mt-0.5">
-                {subscription.status === "canceled"
-                  ? `Access until ${new Date(subscription.current_period_end).toLocaleDateString()}`
-                  : `Renews ${new Date(subscription.current_period_end).toLocaleDateString()}`}
-              </p>
-            )}
-            {!isPro && (
-              <p className="text-xs text-gray-400 mt-0.5">
-                Upgrade to unlock full test banks, dashboard stats, and weak-topic tracking.
-              </p>
-            )}
-          </div>
-          {!isPro ? (
+        <div className="flex items-center justify-between mb-4">
+          <h2 className="text-sm font-bold text-gray-900">Subscriptions</h2>
+          {!hasAnyPro && (
             <Link
               href="/pricing"
-              className="px-4 py-2 rounded-lg text-xs font-bold text-white transition hover:opacity-90"
+              className="text-xs font-bold px-3 py-1.5 rounded-lg text-white transition hover:opacity-90"
               style={{ backgroundColor: '#1a7f3c' }}
             >
               Upgrade →
             </Link>
-          ) : (
-            <span className="px-3 py-1 rounded-full text-xs font-bold" style={{ backgroundColor: '#f0fdf4', color: '#1a7f3c' }}>
-              Active
-            </span>
           )}
         </div>
+
+        {hasAnyPro ? (
+          <div className="space-y-3">
+            {subscriptions.map((sub) => (
+              <div key={sub.id} className="flex items-center justify-between py-2 border-b border-gray-100 last:border-0">
+                <div>
+                  <p className="text-sm font-semibold text-gray-900">
+                    {PRODUCT_LABELS[sub.product] ?? sub.product}
+                  </p>
+                  {sub.current_period_end && (
+                    <p className="text-xs text-gray-400 mt-0.5">
+                      {sub.cancel_at_period_end
+                        ? `Cancels ${new Date(sub.current_period_end).toLocaleDateString()}`
+                        : `Renews ${new Date(sub.current_period_end).toLocaleDateString()}`}
+                    </p>
+                  )}
+                </div>
+                <span
+                  className="text-xs font-bold px-2 py-0.5 rounded-full"
+                  style={
+                    sub.status === 'active'
+                      ? { backgroundColor: '#f0fdf4', color: '#1a7f3c' }
+                      : { backgroundColor: '#fef2f2', color: '#b91c1c' }
+                  }
+                >
+                  {sub.status}
+                </span>
+              </div>
+            ))}
+          </div>
+        ) : (
+          <div>
+            <p className="text-sm text-gray-500 mb-3">
+              You are on the free plan. Upgrade to unlock full test banks and dashboard analytics.
+            </p>
+            <div className="space-y-2 text-sm">
+              {[
+                { label: "Sample questions (6 per test)", included: true },
+                { label: "Full question banks (30–500+ questions)", included: false },
+                { label: "Progress dashboard & stats", included: false },
+                { label: "Weak-topic tracking", included: false },
+                { label: "Timed exam mode", included: false },
+                { label: "Study streak & readiness score", included: false },
+              ].map((f) => (
+                <div key={f.label} className="flex items-center gap-2">
+                  <span
+                    className="shrink-0 w-4 h-4 rounded-full flex items-center justify-center text-xs"
+                    style={f.included ? { backgroundColor: '#f0fdf4', color: '#1a7f3c' } : { backgroundColor: '#f3f4f6', color: '#9ca3af' }}
+                  >
+                    {f.included ? "✓" : "—"}
+                  </span>
+                  <span className={f.included ? "text-gray-800" : "text-gray-400"}>{f.label}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
       </div>
 
-      {/* What's included */}
+      {/* Security */}
       <div className="bg-white rounded-2xl border border-gray-200 px-6 py-5">
-        <h2 className="text-sm font-bold text-gray-900 mb-4">Your Plan Includes</h2>
-        <ul className="space-y-2 text-sm">
-          {[
-            { label: "Sample practice questions (6 per test)", included: true },
-            { label: "Full question banks (30–50 questions)", included: isPro },
-            { label: "Progress dashboard & stats", included: isPro },
-            { label: "Weak-topic tracking", included: isPro },
-            { label: "Timed exam mode", included: isPro },
-            { label: "Unlimited retakes", included: isPro },
-          ].map((f) => (
-            <li key={f.label} className="flex items-center gap-2">
-              <span
-                className="shrink-0 w-4 h-4 rounded-full flex items-center justify-center text-xs"
-                style={f.included ? { backgroundColor: '#f0fdf4', color: '#1a7f3c' } : { backgroundColor: '#f3f4f6', color: '#9ca3af' }}
-              >
-                {f.included ? "✓" : "—"}
-              </span>
-              <span className={f.included ? "text-gray-800" : "text-gray-400"}>{f.label}</span>
-            </li>
-          ))}
-        </ul>
+        <h2 className="text-sm font-bold text-gray-900 mb-4">Security</h2>
+        <Link
+          href="/forgot-password"
+          className="text-sm font-medium hover:underline"
+          style={{ color: '#1a7f3c' }}
+        >
+          Change password →
+        </Link>
       </div>
     </div>
   );
