@@ -47,6 +47,7 @@ const navItems = [
 const PRODUCT_LABELS: Record<string, string> = {
   dmv: 'DMV', motorcycle: 'Moto', cdl: 'CDL',
   cdl_hazmat: 'HazMat', cdl_tanker: 'Tanker', cdl_doubles_triples: 'D&T',
+  cdl_school_bus: 'School Bus', cdl_passenger: 'Passenger',
 };
 
 interface Props {

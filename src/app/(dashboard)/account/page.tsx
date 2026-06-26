@@ -10,6 +10,8 @@ const PRODUCT_LABELS: Record<string, string> = {
   cdl_hazmat:          "CDL HazMat Add-on",
   cdl_tanker:          "CDL Tanker Add-on",
   cdl_doubles_triples: "CDL Doubles & Triples Add-on",
+  cdl_school_bus:      "CDL School Bus Package",
+  cdl_passenger:       "CDL Passenger Package",
 };
 
 export default async function AccountPage() {

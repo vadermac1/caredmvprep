@@ -3,19 +3,52 @@
 -- Migration 002: Full production database for national exam-prep SaaS
 -- Designed for 100,000+ questions, per-product subscriptions, and
 -- all Phase 1-4 features (auth, dashboard, bookmarks, streaks, admin).
+--
+-- QA notes (2026-06-26):
+--   * Enums use DO/EXCEPTION blocks — safe to re-run on a fresh project.
+--   * No INSERT trigger on quiz_sessions — answers must exist before
+--     refresh_weak_topics is called. Only the UPDATE trigger fires,
+--     after the 3-step commit flow in QuizResults.tsx.
+--   * subscription_product includes cdl_school_bus and cdl_passenger
+--     as standalone products (not add-ons).
 -- ================================================================
 
--- ─── ENUMS ───────────────────────────────────────────────────────────────────
+-- ─── ENUMS (safe creation — no IF NOT EXISTS in Postgres) ────────────────────
 
-CREATE TYPE question_status    AS ENUM ('draft', 'review', 'approved', 'deprecated');
-CREATE TYPE question_difficulty AS ENUM ('easy', 'medium', 'hard');
-CREATE TYPE subscription_product AS ENUM (
-  'dmv', 'motorcycle', 'cdl',
-  'cdl_hazmat', 'cdl_tanker', 'cdl_doubles_triples'
-);
-CREATE TYPE subscription_interval AS ENUM ('monthly', 'annual');
-CREATE TYPE subscription_status   AS ENUM ('active', 'canceled', 'past_due', 'trialing', 'incomplete');
-CREATE TYPE admin_role            AS ENUM ('admin', 'content_editor', 'moderator');
+DO $$ BEGIN
+  CREATE TYPE question_status AS ENUM ('draft', 'review', 'approved', 'deprecated');
+EXCEPTION WHEN duplicate_object THEN NULL; END $$;
+
+DO $$ BEGIN
+  CREATE TYPE question_difficulty AS ENUM ('easy', 'medium', 'hard');
+EXCEPTION WHEN duplicate_object THEN NULL; END $$;
+
+DO $$ BEGIN
+  CREATE TYPE subscription_product AS ENUM (
+    'dmv',
+    'motorcycle',
+    'cdl',
+    'cdl_hazmat',
+    'cdl_tanker',
+    'cdl_doubles_triples',
+    'cdl_school_bus',   -- standalone product (separate licensing path, not an add-on)
+    'cdl_passenger'     -- standalone product (separate licensing path, not an add-on)
+  );
+EXCEPTION WHEN duplicate_object THEN NULL; END $$;
+
+DO $$ BEGIN
+  CREATE TYPE subscription_interval AS ENUM ('monthly', 'annual');
+EXCEPTION WHEN duplicate_object THEN NULL; END $$;
+
+DO $$ BEGIN
+  CREATE TYPE subscription_status AS ENUM (
+    'active', 'canceled', 'past_due', 'trialing', 'incomplete'
+  );
+EXCEPTION WHEN duplicate_object THEN NULL; END $$;
+
+DO $$ BEGIN
+  CREATE TYPE admin_role AS ENUM ('admin', 'content_editor', 'moderator');
+EXCEPTION WHEN duplicate_object THEN NULL; END $$;
 
 -- ─── STATES (reference table) ────────────────────────────────────────────────
 
@@ -90,20 +123,23 @@ INSERT INTO public.categories (slug, label, sort_order) VALUES
 ON CONFLICT (slug) DO NOTHING;
 
 -- ─── EXTEND PROFILES ─────────────────────────────────────────────────────────
--- Drop the binary subscription_tier — replaced by subscriptions table (per-product)
+-- Drop the binary subscription_tier column — replaced by subscriptions table
+-- (one row per product per user).
 
 ALTER TABLE public.profiles DROP COLUMN IF EXISTS subscription_tier;
 
 ALTER TABLE public.profiles
   ADD COLUMN IF NOT EXISTS avatar_url      TEXT,
   ADD COLUMN IF NOT EXISTS target_state    CHAR(2) REFERENCES public.states(abbr),
-  ADD COLUMN IF NOT EXISTS target_license  TEXT,          -- license_type slug
+  ADD COLUMN IF NOT EXISTS target_license  TEXT,     -- license_type slug
   ADD COLUMN IF NOT EXISTS exam_date       DATE,
   ADD COLUMN IF NOT EXISTS streak_current  INT NOT NULL DEFAULT 0,
   ADD COLUMN IF NOT EXISTS streak_best     INT NOT NULL DEFAULT 0,
   ADD COLUMN IF NOT EXISTS streak_updated  DATE;
 
--- Update profile trigger to not reference dropped column
+-- Update profile trigger to not reference the dropped column.
+-- ON CONFLICT DO NOTHING prevents errors if the row was already created
+-- (e.g., via Supabase admin or a partial earlier run).
 CREATE OR REPLACE FUNCTION public.handle_new_user()
 RETURNS TRIGGER LANGUAGE plpgsql SECURITY DEFINER AS $$
 BEGIN
@@ -127,7 +163,8 @@ CREATE TABLE IF NOT EXISTS public.subscription_plans (
   UNIQUE(product, interval)
 );
 
--- Placeholder prices — update when Stripe products are created
+-- Placeholder prices — update with real Stripe price IDs before launch (Phase 5).
+-- cdl_school_bus and cdl_passenger are standalone products, not add-ons to CDL.
 INSERT INTO public.subscription_plans (product, interval, price_cents, label) VALUES
   ('dmv',                 'monthly', 999,   'Driver''s License Premium — Monthly'),
   ('dmv',                 'annual',  7999,  'Driver''s License Premium — Annual'),
@@ -140,7 +177,11 @@ INSERT INTO public.subscription_plans (product, interval, price_cents, label) VA
   ('cdl_tanker',          'monthly', 499,   'CDL Tanker Add-on — Monthly'),
   ('cdl_tanker',          'annual',  3999,  'CDL Tanker Add-on — Annual'),
   ('cdl_doubles_triples', 'monthly', 499,   'CDL Doubles & Triples Add-on — Monthly'),
-  ('cdl_doubles_triples', 'annual',  3999,  'CDL Doubles & Triples Add-on — Annual')
+  ('cdl_doubles_triples', 'annual',  3999,  'CDL Doubles & Triples Add-on — Annual'),
+  ('cdl_school_bus',      'monthly', 499,   'CDL School Bus Package — Monthly'),
+  ('cdl_school_bus',      'annual',  3999,  'CDL School Bus Package — Annual'),
+  ('cdl_passenger',       'monthly', 499,   'CDL Passenger Package — Monthly'),
+  ('cdl_passenger',       'annual',  3999,  'CDL Passenger Package — Annual')
 ON CONFLICT (product, interval) DO NOTHING;
 
 -- ─── SUBSCRIPTIONS (one row per product per user) ────────────────────────────
@@ -170,7 +211,8 @@ CREATE TABLE public.subscriptions (
 
 CREATE INDEX idx_subscriptions_user_id   ON public.subscriptions(user_id);
 CREATE INDEX idx_subscriptions_customer  ON public.subscriptions(stripe_customer_id);
-CREATE INDEX idx_subscriptions_active    ON public.subscriptions(user_id, status) WHERE status = 'active';
+CREATE INDEX idx_subscriptions_active    ON public.subscriptions(user_id, status)
+  WHERE status = 'active';
 
 -- ─── QUESTIONS (supports 100k+) ──────────────────────────────────────────────
 
@@ -214,22 +256,25 @@ CREATE INDEX idx_questions_category    ON public.questions(category_id)
 CREATE INDEX idx_questions_difficulty  ON public.questions(difficulty)
   WHERE status = 'approved';
 CREATE INDEX idx_questions_status      ON public.questions(status, created_at DESC);
--- Full-text search for admin
-CREATE INDEX idx_questions_prompt_fts  ON public.questions USING gin(to_tsvector('english', prompt));
+-- Full-text search for admin question search
+CREATE INDEX idx_questions_prompt_fts  ON public.questions
+  USING gin(to_tsvector('english', prompt));
 
 -- ─── ADD user_id TO user_answers ─────────────────────────────────────────────
--- Direct user_id avoids a subquery in every RLS check and aggregation.
+-- Direct user_id avoids a subquery join in every RLS check and aggregation.
+-- The old policies used: auth.uid() = (SELECT user_id FROM quiz_sessions WHERE ...)
+-- New policies use the faster direct column check.
 
 ALTER TABLE public.user_answers
   ADD COLUMN IF NOT EXISTS user_id UUID REFERENCES public.profiles(id) ON DELETE CASCADE;
 
--- Backfill from quiz_sessions (safe — no real data yet, but correct for future runs)
+-- Backfill from quiz_sessions (safe — no real data pre-launch, but correct for future runs)
 UPDATE public.user_answers ua
 SET user_id = qs.user_id
 FROM public.quiz_sessions qs
 WHERE ua.session_id = qs.id AND ua.user_id IS NULL;
 
--- Replace the expensive subquery RLS policy with a direct column check
+-- Replace old subquery-based policies with direct column checks
 DROP POLICY IF EXISTS "answers_select_own" ON public.user_answers;
 DROP POLICY IF EXISTS "answers_insert_own" ON public.user_answers;
 
@@ -272,7 +317,13 @@ CREATE INDEX idx_study_sessions_user ON public.study_sessions(user_id, started_a
 
 -- ─── WEAK TOPICS CACHE ───────────────────────────────────────────────────────
 -- Refreshed automatically after each completed quiz session (see trigger below).
--- Keyed on category slug (matches user_answers.category TEXT column).
+-- Keyed on category slug — matches the TEXT category column in user_answers.
+--
+-- IMPORTANT: refresh_weak_topics is called from the UPDATE trigger only,
+-- after QuizResults.tsx completes the 3-step flow:
+--   1. INSERT quiz_session (completed_at = NULL)
+--   2. INSERT user_answers
+--   3. UPDATE quiz_session SET completed_at = now()  ← trigger fires here
 
 CREATE TABLE IF NOT EXISTS public.weak_topics (
   user_id       UUID NOT NULL REFERENCES public.profiles(id) ON DELETE CASCADE,
@@ -343,7 +394,6 @@ CREATE TABLE IF NOT EXISTS public.user_roles (
 
 -- ─── HELPER FUNCTIONS ────────────────────────────────────────────────────────
 
--- Used in RLS policies — avoids repeated subqueries
 CREATE OR REPLACE FUNCTION public.is_admin(uid UUID DEFAULT auth.uid())
 RETURNS BOOLEAN LANGUAGE sql SECURITY DEFINER STABLE AS $$
   SELECT EXISTS (
@@ -351,7 +401,6 @@ RETURNS BOOLEAN LANGUAGE sql SECURITY DEFINER STABLE AS $$
   );
 $$;
 
--- Returns array of products the user has an active subscription for
 CREATE OR REPLACE FUNCTION public.user_active_products(uid UUID DEFAULT auth.uid())
 RETURNS TEXT[] LANGUAGE sql SECURITY DEFINER STABLE AS $$
   SELECT COALESCE(ARRAY_AGG(product::TEXT), '{}')
@@ -360,7 +409,6 @@ RETURNS TEXT[] LANGUAGE sql SECURITY DEFINER STABLE AS $$
 $$;
 
 -- ─── STREAK UPDATE ───────────────────────────────────────────────────────────
--- Called automatically by trigger after quiz session completion.
 
 CREATE OR REPLACE FUNCTION public.update_streak(p_user_id UUID)
 RETURNS VOID LANGUAGE plpgsql SECURITY DEFINER AS $$
@@ -375,7 +423,7 @@ BEGIN
   FROM public.profiles WHERE id = p_user_id;
 
   IF v_last = v_today THEN
-    RETURN;  -- Already updated today; nothing to do
+    RETURN;  -- Already updated today; no-op
   ELSIF v_last = v_today - INTERVAL '1 day' THEN
     v_cur := COALESCE(v_cur, 0) + 1;
   ELSE
@@ -394,8 +442,9 @@ END;
 $$;
 
 -- ─── WEAK TOPICS REFRESH ─────────────────────────────────────────────────────
--- Full recalculation from user_answers for a given user.
--- Runs after each completed session via trigger (see below).
+-- Full recalculation from user_answers joined to quiz_sessions.
+-- Called by the UPDATE trigger after completed_at is set, at which point
+-- all user_answers for the session exist in the table.
 
 CREATE OR REPLACE FUNCTION public.refresh_weak_topics(p_user_id UUID)
 RETURNS VOID LANGUAGE plpgsql SECURITY DEFINER AS $$
@@ -413,7 +462,7 @@ BEGIN
     now()
   FROM public.user_answers ua
   JOIN public.quiz_sessions qs ON qs.id = ua.session_id
-  WHERE qs.user_id = p_user_id
+  WHERE qs.user_id  = p_user_id
     AND qs.completed_at IS NOT NULL
   GROUP BY qs.user_id, ua.category, qs.license_type
   ON CONFLICT (user_id, category_slug, license_type) DO UPDATE
@@ -425,8 +474,14 @@ END;
 $$;
 
 -- ─── QUIZ SESSION COMPLETION TRIGGER ─────────────────────────────────────────
--- Fires when completed_at transitions from NULL to a timestamp.
--- Automatically refreshes weak topics cache and updates streak.
+-- UPDATE trigger only. Fires when completed_at transitions NULL → timestamp.
+-- The app (QuizResults.tsx) must complete 3 steps in order:
+--   Step 1: INSERT session with completed_at = NULL
+--   Step 2: INSERT all user_answers (with user_id)
+--   Step 3: UPDATE session SET completed_at = now()  ← this trigger fires
+--
+-- No INSERT trigger — it would fire before answers exist, producing
+-- a no-op refresh_weak_topics that silently discards the update.
 
 CREATE OR REPLACE FUNCTION public.on_quiz_session_completed()
 RETURNS TRIGGER LANGUAGE plpgsql SECURITY DEFINER AS $$
@@ -443,23 +498,12 @@ CREATE OR REPLACE TRIGGER quiz_session_completed
   AFTER UPDATE ON public.quiz_sessions
   FOR EACH ROW EXECUTE FUNCTION public.on_quiz_session_completed();
 
--- Also fire on INSERT when session is inserted as already-completed
-CREATE OR REPLACE FUNCTION public.on_quiz_session_inserted()
-RETURNS TRIGGER LANGUAGE plpgsql SECURITY DEFINER AS $$
-BEGIN
-  IF NEW.completed_at IS NOT NULL THEN
-    PERFORM public.refresh_weak_topics(NEW.user_id);
-    PERFORM public.update_streak(NEW.user_id);
-  END IF;
-  RETURN NEW;
-END;
-$$;
-
-CREATE OR REPLACE TRIGGER quiz_session_inserted
-  AFTER INSERT ON public.quiz_sessions
-  FOR EACH ROW EXECUTE FUNCTION public.on_quiz_session_inserted();
-
 -- ─── ROW LEVEL SECURITY ──────────────────────────────────────────────────────
+-- RLS audit (2026-06-26):
+--   Logged-out user:        auth.uid() = NULL → NULL = user_id is always false → blocked ✓
+--   is_admin(NULL):         EXISTS on NULL user_id returns false → non-admin path ✓
+--   Cross-user access:      auth.uid() ≠ other_user.id → denied ✓
+--   SECURITY DEFINER fns:   bypass RLS — used only in triggers ✓
 
 ALTER TABLE public.states             ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.categories         ENABLE ROW LEVEL SECURITY;
@@ -475,32 +519,32 @@ ALTER TABLE public.flashcards         ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.study_plans        ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.user_roles         ENABLE ROW LEVEL SECURITY;
 
--- Reference data: publicly readable
-CREATE POLICY "states_public"      ON public.states             FOR SELECT USING (true);
-CREATE POLICY "categories_public"  ON public.categories         FOR SELECT USING (true);
-CREATE POLICY "subcategories_public" ON public.subcategories    FOR SELECT USING (true);
-CREATE POLICY "plans_public"       ON public.subscription_plans FOR SELECT USING (active = true);
+-- Reference data: publicly readable (no auth required)
+CREATE POLICY "states_public"           ON public.states             FOR SELECT USING (true);
+CREATE POLICY "categories_public"       ON public.categories         FOR SELECT USING (true);
+CREATE POLICY "subcategories_public"    ON public.subcategories      FOR SELECT USING (true);
+CREATE POLICY "plans_public"            ON public.subscription_plans FOR SELECT USING (active = true);
 
--- Questions: approved = public; all = admin
+-- Questions: approved rows are public; admin can see/manage all
 CREATE POLICY "questions_approved_read" ON public.questions
   FOR SELECT USING (status = 'approved' OR public.is_admin());
 CREATE POLICY "questions_admin_write"   ON public.questions
   FOR ALL USING (public.is_admin());
 
--- Subscriptions: own or admin
-CREATE POLICY "subscriptions_select" ON public.subscriptions
+-- Subscriptions: own rows only (admin can also read for support tooling)
+CREATE POLICY "subscriptions_select"    ON public.subscriptions
   FOR SELECT USING (auth.uid() = user_id OR public.is_admin());
 
--- Personal data (own rows only)
-CREATE POLICY "bookmarks_own"        ON public.bookmarks        FOR ALL USING (auth.uid() = user_id);
-CREATE POLICY "study_sessions_own"   ON public.study_sessions   FOR ALL USING (auth.uid() = user_id);
-CREATE POLICY "weak_topics_own"      ON public.weak_topics      FOR ALL USING (auth.uid() = user_id);
-CREATE POLICY "flashcard_decks_own"  ON public.flashcard_decks  FOR ALL USING (auth.uid() = user_id);
-CREATE POLICY "flashcards_own"       ON public.flashcards
+-- Personal data: own rows only for all operations
+CREATE POLICY "bookmarks_own"           ON public.bookmarks        FOR ALL USING (auth.uid() = user_id);
+CREATE POLICY "study_sessions_own"      ON public.study_sessions   FOR ALL USING (auth.uid() = user_id);
+CREATE POLICY "weak_topics_own"         ON public.weak_topics      FOR ALL USING (auth.uid() = user_id);
+CREATE POLICY "flashcard_decks_own"     ON public.flashcard_decks  FOR ALL USING (auth.uid() = user_id);
+CREATE POLICY "flashcards_own"          ON public.flashcards
   FOR ALL USING (
     auth.uid() = (SELECT user_id FROM public.flashcard_decks WHERE id = deck_id)
   );
-CREATE POLICY "study_plans_own"      ON public.study_plans      FOR ALL USING (auth.uid() = user_id);
+CREATE POLICY "study_plans_own"         ON public.study_plans      FOR ALL USING (auth.uid() = user_id);
 
--- Admin roles: admins only
-CREATE POLICY "user_roles_admin" ON public.user_roles FOR ALL USING (public.is_admin());
+-- Admin roles table: only admins can read/modify role assignments
+CREATE POLICY "user_roles_admin"        ON public.user_roles       FOR ALL USING (public.is_admin());

@@ -12,7 +12,11 @@ export default function QuizResults() {
   const config = useQuizStore((s) => s.config);
   const resetQuiz = useQuizStore((s) => s.resetQuiz);
 
-  // Persist to Supabase on mount
+  // Persist to Supabase on mount.
+  // 3-step flow required by DB trigger design:
+  //   Step 1: INSERT session (completed_at = NULL, started_at = actual start)
+  //   Step 2: INSERT user_answers (with user_id for fast RLS)
+  //   Step 3: UPDATE session SET completed_at → triggers refresh_weak_topics + update_streak
   useEffect(() => {
     if (!result || !config) return;
     async function persist() {
@@ -20,38 +24,51 @@ export default function QuizResults() {
       const { data: { user } } = await supabase.auth.getUser();
       if (!user || !result || !config) return;
 
+      // Step 1 — create the session row (not yet marked complete)
+      const startedAt = new Date(Date.now() - result.totalTimeMs).toISOString();
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const { data: session } = await (supabase as any)
         .from("quiz_sessions")
         .insert({
-          user_id: user.id,
-          test_id: config.testId,
-          state: config.state,
-          license_type: config.licenseType,
+          user_id:         user.id,
+          test_id:         config.testId,
+          state:           config.state,
+          license_type:    config.licenseType,
           total_questions: result.totalQuestions,
-          score: result.correctCount,
-          passed: result.passed,
           time_limit_secs: config.timeLimitSecs ?? null,
-          completed_at: new Date().toISOString(),
+          started_at:      startedAt,
+          // score and passed are NULL until Step 3
         })
         .select("id")
-        .single() as { data: { id: string } | null; error: unknown };
+        .single() as { data: { id: string } | null };
 
-      if (session?.id) {
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        await (supabase as any).from("user_answers").insert(
-          result.answers.map((a) => ({
-            session_id: session.id,
-            user_id: user.id,       // direct FK — avoids join in RLS + weak-topic refresh
-            question_id: a.questionId,
-            selected_index: a.selectedIndex,
-            correct_index: a.correctIndex,
-            is_correct: a.isCorrect,
-            category: a.category,
-            time_spent_ms: a.timeSpentMs,
-          }))
-        );
-      }
+      if (!session?.id) return;
+
+      // Step 2 — insert all answers (user_id enables fast RLS without a join)
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      await (supabase as any).from("user_answers").insert(
+        result.answers.map((a) => ({
+          session_id:     session.id,
+          user_id:        user.id,
+          question_id:    a.questionId,
+          selected_index: a.selectedIndex,
+          correct_index:  a.correctIndex,
+          is_correct:     a.isCorrect,
+          category:       a.category,
+          time_spent_ms:  a.timeSpentMs,
+        }))
+      );
+
+      // Step 3 — mark session complete; DB trigger refresh_weak_topics + update_streak fire here
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      await (supabase as any)
+        .from("quiz_sessions")
+        .update({
+          completed_at: new Date().toISOString(),
+          score:        result.correctCount,
+          passed:       result.passed,
+        })
+        .eq("id", session.id);
     }
     persist();
   }, []); // eslint-disable-line react-hooks/exhaustive-deps

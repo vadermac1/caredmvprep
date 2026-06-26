@@ -37,9 +37,10 @@ for (const script of SCRIPTS) {
       { encoding: "utf8", stdio: "pipe" }
     );
     results.push({ name: script.name, passed: true, output });
-  } catch (err: any) {
+  } catch (err: unknown) {
     totalErrors++;
-    const output = err.stdout ?? err.message ?? "";
+    const e = err as { stdout?: string; message?: string };
+    const output = e.stdout ?? e.message ?? "";
     results.push({ name: script.name, passed: false, output });
   }
 }

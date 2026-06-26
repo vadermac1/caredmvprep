@@ -13,7 +13,9 @@ export type SubscriptionProduct =
   | 'cdl'
   | 'cdl_hazmat'
   | 'cdl_tanker'
-  | 'cdl_doubles_triples';
+  | 'cdl_doubles_triples'
+  | 'cdl_school_bus'    // standalone product — separate licensing path
+  | 'cdl_passenger';    // standalone product — separate licensing path
 export type SubscriptionInterval = 'monthly' | 'annual';
 export type SubscriptionStatus   = 'active' | 'canceled' | 'past_due' | 'trialing' | 'incomplete';
 export type AdminRole            = 'admin' | 'content_editor' | 'moderator';
@@ -236,7 +238,8 @@ export type Database = {
       subscription_plans: TableDef<SubscriptionPlan,  Omit<SubscriptionPlan, 'id'>>;
       subscriptions:      TableDef<Subscription,      Omit<Subscription, 'id' | 'created_at' | 'updated_at'>>;
       questions:          TableDef<Question,           Omit<Question, 'id' | 'created_at' | 'updated_at'>>;
-      quiz_sessions:      TableDef<QuizSession,        Omit<QuizSession, 'id' | 'started_at'>>;
+      // started_at has DEFAULT now() — omit from required Insert but allow explicit override
+      quiz_sessions:      TableDef<QuizSession, Omit<QuizSession, 'id'> & { started_at?: string }>;
       user_answers:       TableDef<UserAnswer,         Omit<UserAnswer, 'id' | 'created_at'>>;
       bookmarks:          TableDef<Bookmark,           Omit<Bookmark, 'id' | 'created_at'>>;
       study_sessions:     TableDef<StudySession,       Omit<StudySession, 'id' | 'started_at'>>;
