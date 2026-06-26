@@ -9,7 +9,7 @@ interface Props {
   topics: string[];
 }
 
-export default function StatePracticePage({ state, abbreviation, emoji, slug, description, topics }: Props) {
+export default function StatePracticePage({ state, abbreviation, emoji, description, topics }: Props) {
   return (
     <div>
       {/* Hero */}

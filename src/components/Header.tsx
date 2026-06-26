@@ -9,42 +9,49 @@ const navItems = [
     label: "DMV Practice Tests",
     key: "dmv",
     items: [
-      { label: "All States", href: "/" },
+      { label: "All 50 States", href: "/states" },
       { label: "California", href: "/california-dmv-practice-test" },
       { label: "Texas", href: "/texas-dmv-practice-test" },
       { label: "Florida", href: "/florida-dmv-practice-test" },
       { label: "New York", href: "/new-york-dmv-practice-test" },
-      { label: "View All States", href: "/" },
     ],
   },
   {
     label: "CDL Tests",
     key: "cdl",
     items: [
-      { label: "CDL General Knowledge", href: "/cdl-practice-test" },
-      { label: "Air Brakes", href: "/cdl-practice-test#air-brakes" },
-      { label: "Hazmat", href: "/cdl-practice-test#hazmat" },
-      { label: "Passenger", href: "/cdl-practice-test#passenger" },
-      { label: "School Bus", href: "/cdl-practice-test#school-bus" },
-      { label: "View All CDL Tests", href: "/cdl-practice-test" },
+      { label: "CDL Overview", href: "/cdl-practice-test" },
+      { label: "General Knowledge", href: "/cdl-general-knowledge" },
+      { label: "Air Brakes", href: "/cdl-air-brakes" },
+      { label: "Hazmat", href: "/cdl-hazmat" },
+      { label: "Passenger", href: "/cdl-passenger" },
+      { label: "School Bus", href: "/cdl-school-bus" },
+      { label: "Tanker", href: "/cdl-tanker" },
+      { label: "Doubles & Triples", href: "/cdl-doubles-triples" },
     ],
   },
   {
     label: "Motorcycle Tests",
     key: "moto",
     items: [
-      { label: "Motorcycle Practice Test", href: "/motorcycle-practice-test" },
+      { label: "Motorcycle Overview", href: "/motorcycle-practice-test" },
+      { label: "Permit Test", href: "/motorcycle-permit-test" },
+      { label: "Endorsement Test", href: "/motorcycle-endorsement-test" },
+      { label: "License Test", href: "/motorcycle-license-test" },
+      { label: "Road Signs", href: "/motorcycle-road-signs" },
+      { label: "Safety Tips", href: "/motorcycle-safety-tips" },
     ],
   },
   {
     label: "Resources",
     key: "resources",
     items: [
-      { label: "DMV Study Tips", href: "/about" },
-      { label: "Driver's License Guide", href: "/about" },
-      { label: "CDL Guide", href: "/cdl-practice-test" },
-      { label: "FAQs", href: "/about" },
-      { label: "Blog", href: "/about" },
+      { label: "All Resources", href: "/resources" },
+      { label: "DMV Study Tips", href: "/dmv-study-tips" },
+      { label: "Driver's License Guide", href: "/drivers-license-guide" },
+      { label: "CDL Guide", href: "/cdl-guide" },
+      { label: "Motorcycle Guide", href: "/motorcycle-guide" },
+      { label: "FAQs", href: "/faqs" },
     ],
   },
 ];
@@ -69,8 +76,8 @@ export default function Header() {
             <Image
               src="/logo-header.png"
               alt="CAREDMVPrep – Your Road to Success"
-              width={600}
-              height={120}
+              width={700}
+              height={140}
               className="header-logo"
               priority
             />
@@ -99,13 +106,13 @@ export default function Header() {
           {/* CTA buttons */}
           <div className="hidden lg:flex items-center gap-2 shrink-0">
             <Link
-              href="/pricing"
+              href="/login"
               className="px-4 py-2 text-sm font-semibold border border-white/30 rounded hover:bg-white/10 transition"
             >
               LOG IN
             </Link>
             <Link
-              href="/pricing"
+              href="/signup"
               className="px-4 py-2 text-sm font-semibold bg-[#1a7f3c] rounded hover:bg-[#158532] transition"
             >
               SIGN UP
@@ -143,10 +150,10 @@ export default function Header() {
             Pricing
           </Link>
           <div className="pt-3 flex gap-2">
-            <Link href="/pricing" className="flex-1 text-center py-2 text-sm font-semibold border border-white/30 rounded hover:bg-white/10">
+            <Link href="/login" className="flex-1 text-center py-2 text-sm font-semibold border border-white/30 rounded hover:bg-white/10">
               Log In
             </Link>
-            <Link href="/pricing" className="flex-1 text-center py-2 text-sm font-semibold bg-[#1a7f3c] rounded hover:bg-[#158532]">
+            <Link href="/signup" className="flex-1 text-center py-2 text-sm font-semibold bg-[#1a7f3c] rounded hover:bg-[#158532]">
               Sign Up
             </Link>
           </div>

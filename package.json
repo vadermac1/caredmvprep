@@ -6,12 +6,26 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "qa:all": "npx tsx scripts/qa/run-all.ts",
+    "qa:fields": "npx tsx scripts/qa/check-missing-fields.ts",
+    "qa:duplicates": "npx tsx scripts/qa/check-duplicates.ts",
+    "qa:stale": "npx tsx scripts/qa/check-stale.ts",
+    "qa:patterns": "npx tsx scripts/qa/check-answer-patterns.ts",
+    "qa:isolation": "npx tsx scripts/qa/check-state-isolation.ts",
+    "qa:explanations": "npx tsx scripts/qa/check-explanation-quality.ts",
+    "qa:unverified": "npx tsx scripts/qa/check-unverified.ts",
+    "qa:facts": "npx tsx scripts/qa/check-facts-mismatch.ts",
+    "qa:hardcodes": "npx tsx scripts/qa/check-page-hardcodes.ts",
+    "qa:stale:fix": "npx tsx scripts/qa/check-stale.ts --fix"
   },
   "dependencies": {
+    "@supabase/ssr": "^0.12.0",
+    "@supabase/supabase-js": "^2.108.2",
     "next": "16.2.9",
     "react": "19.2.4",
-    "react-dom": "19.2.4"
+    "react-dom": "19.2.4",
+    "zustand": "^5.0.14"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
