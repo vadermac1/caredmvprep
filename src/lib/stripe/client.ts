@@ -1,22 +1,23 @@
 // Client-side Stripe utilities (no secret key — safe to import in client components).
 // Checkout sessions are created server-side via /api/stripe/create-checkout.
 
-import type { SubscriptionProduct } from '@/types/database';
+import type { SubscriptionProduct, PaymentType } from '@/types/database';
 
-export type CheckoutInterval = 'monthly' | 'annual';
+export type { PaymentType };
 
 /**
- * Redirects the current page to Stripe Checkout for the given product.
- * Throws if the API returns an error (missing Stripe keys, invalid product, etc.).
+ * Redirects to Stripe Checkout.
+ * paymentType 'recurring' → subscription mode ($12 or $19/mo)
+ * paymentType 'one_time'  → payment mode (one-time pass, fixed access window)
  */
 export async function startCheckout(
-  product: SubscriptionProduct,
-  interval: CheckoutInterval
+  product:     SubscriptionProduct,
+  paymentType: PaymentType
 ): Promise<void> {
   const res = await fetch('/api/stripe/create-checkout', {
-    method: 'POST',
+    method:  'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ product, interval }),
+    body:    JSON.stringify({ product, paymentType }),
   });
 
   if (!res.ok) {

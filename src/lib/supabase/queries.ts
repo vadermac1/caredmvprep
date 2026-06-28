@@ -23,19 +23,30 @@ export async function getUserSubscriptions(
   supabase: Client,
   userId: string
 ): Promise<Subscription[]> {
-  const { data } = await supabase
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const { data: raw } = await (supabase as any)
     .from('subscriptions')
     .select('*')
     .eq('user_id', userId)
-    .eq('status', 'active');
-  return data ?? [];
+    .eq('status', 'active') as { data: Subscription[] | null };
+
+  if (!raw) return [];
+
+  // Filter client-side: recurring rows are valid by status alone;
+  // one-time rows must also have an unexpired access_expires_at.
+  const now = new Date().toISOString();
+  return raw.filter((s) =>
+    s.payment_type === 'recurring' ||
+    (s.payment_type === 'one_time' && !!s.access_expires_at && s.access_expires_at > now)
+  );
 }
 
 export function hasActiveProduct(
   subscriptions: Subscription[],
   product: string
 ): boolean {
-  return subscriptions.some((s) => s.product === product && s.status === 'active');
+  // getUserSubscriptions already filters for valid access — just check product
+  return subscriptions.some((s) => s.product === product);
 }
 
 export function hasAnySubscription(subscriptions: Subscription[]): boolean {

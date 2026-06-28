@@ -1,17 +1,17 @@
 import Stripe from 'stripe';
 import { getStripe } from '@/lib/stripe/server';
 import { createAdminClient } from '@/lib/supabase/admin';
-import type { SubscriptionProduct, SubscriptionStatus } from '@/types/database';
+import { PRODUCT_CONFIG } from '@/lib/stripe/config';
+import type { SubscriptionProduct, SubscriptionStatus, PaymentType } from '@/types/database';
 
-// Must be dynamic — reads raw body + Stripe signature header
 export const dynamic = 'force-dynamic';
 
-// ─── DB helper ───────────────────────────────────────────────────────────────
+// ─── Plan ID lookup ───────────────────────────────────────────────────────────
 
 async function getPlanId(
   supabase: ReturnType<typeof createAdminClient>,
-  product: SubscriptionProduct,
-  interval: 'monthly' | 'annual'
+  product:  SubscriptionProduct,
+  interval: 'monthly' | 'one_time'
 ): Promise<string | null> {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const { data } = await (supabase as any)
@@ -23,40 +23,51 @@ async function getPlanId(
   return data?.id ?? null;
 }
 
-async function upsertSubscription(
+// ─── Access upsert ────────────────────────────────────────────────────────────
+
+interface UpsertArgs {
+  userId:                 string;
+  product:                SubscriptionProduct;
+  paymentType:            PaymentType;
+  planInterval:           'monthly' | 'one_time';
+  stripeCustomerId:       string;
+  stripeSubId:            string | null;
+  stripeSubItemId:        string | null;
+  stripePaymentIntentId:  string | null;
+  status:                 SubscriptionStatus;
+  periodStart:            Date | null;
+  periodEnd:              Date | null;
+  cancelAtEnd:            boolean;
+  canceledAt:             Date | null;
+  trialEnd:               Date | null;
+  accessExpiresAt:        Date | null;   // one-time only
+}
+
+async function upsertAccess(
   supabase: ReturnType<typeof createAdminClient>,
-  args: {
-    userId:           string;
-    product:          SubscriptionProduct;
-    interval:         string;
-    stripeCustomerId: string;
-    stripeSubId:      string;
-    stripeSubItemId:  string | null;
-    status:           SubscriptionStatus;
-    periodStart:      Date | null;
-    periodEnd:        Date | null;
-    cancelAtEnd:      boolean;
-    canceledAt:       Date | null;
-    trialEnd:         Date | null;
-  }
+  args: UpsertArgs
 ) {
-  const planId = await getPlanId(supabase, args.product, args.interval as 'monthly' | 'annual');
+  const planId = await getPlanId(supabase, args.product, args.planInterval);
 
   const row = {
     user_id:                     args.userId,
-    plan_id:                     planId ?? '00000000-0000-0000-0000-000000000000', // fallback if plan missing
+    plan_id:                     planId ?? '00000000-0000-0000-0000-000000000000',
     product:                     args.product,
+    payment_type:                args.paymentType,
     stripe_customer_id:          args.stripeCustomerId,
     stripe_subscription_id:      args.stripeSubId,
     stripe_subscription_item_id: args.stripeSubItemId,
+    stripe_payment_intent_id:    args.stripePaymentIntentId,
     status:                      args.status,
-    current_period_start:        args.periodStart?.toISOString() ?? null,
-    current_period_end:          args.periodEnd?.toISOString()   ?? null,
+    current_period_start:        args.periodStart?.toISOString()    ?? null,
+    current_period_end:          args.periodEnd?.toISOString()      ?? null,
     cancel_at_period_end:        args.cancelAtEnd,
-    canceled_at:                 args.canceledAt?.toISOString()  ?? null,
-    trial_end:                   args.trialEnd?.toISOString()    ?? null,
+    canceled_at:                 args.canceledAt?.toISOString()     ?? null,
+    trial_end:                   args.trialEnd?.toISOString()       ?? null,
+    access_expires_at:           args.accessExpiresAt?.toISOString() ?? null,
   };
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   await (supabase.from('subscriptions') as any)
     .upsert(row, { onConflict: 'user_id,product' });
 }
@@ -64,7 +75,7 @@ async function upsertSubscription(
 // ─── Webhook handler ──────────────────────────────────────────────────────────
 
 export async function POST(request: Request) {
-  const body      = await request.text();        // raw body required for sig verification
+  const body      = await request.text();
   const signature = request.headers.get('stripe-signature') ?? '';
   const secret    = process.env.STRIPE_WEBHOOK_SECRET;
 
@@ -86,50 +97,96 @@ export async function POST(request: Request) {
   try {
     switch (event.type) {
 
-      // ── New checkout completed ─────────────────────────────────────────────
+      // ── Checkout completed ────────────────────────────────────────────────
+      // Handles BOTH subscription and one-time payment checkouts.
       case 'checkout.session.completed': {
         const session = event.data.object as Stripe.Checkout.Session;
-        if (session.mode !== 'subscription') break;
 
-        const userId   = session.metadata?.user_id;
-        const product  = session.metadata?.product  as SubscriptionProduct | undefined;
-        const interval = session.metadata?.interval ?? 'monthly';
+        const userId      = session.metadata?.user_id;
+        const product     = session.metadata?.product      as SubscriptionProduct | undefined;
+        const paymentType = (session.metadata?.payment_type ?? 'recurring') as PaymentType;
 
         if (!userId || !product) {
           console.error('[webhook] checkout.session.completed missing metadata', session.id);
           break;
         }
 
-        // Fetch the full subscription to get period dates and item ID.
-        // In Stripe API 2025+, current_period_start/end live on the SubscriptionItem.
-        const sub = await getStripe().subscriptions.retrieve(
-          session.subscription as string
-        );
-        const item = sub.items.data[0];
+        // ── Recurring subscription ──────────────────────────────────────────
+        if (session.mode === 'subscription') {
+          const sub  = await getStripe().subscriptions.retrieve(session.subscription as string);
+          const item = sub.items.data[0];
 
-        await upsertSubscription(supabase, {
-          userId,
-          product,
-          interval,
-          stripeCustomerId: session.customer as string,
-          stripeSubId:      sub.id,
-          stripeSubItemId:  item?.id ?? null,
-          status:           'active',
-          periodStart:      item?.current_period_start ? new Date(item.current_period_start * 1000) : null,
-          periodEnd:        item?.current_period_end   ? new Date(item.current_period_end   * 1000) : null,
-          cancelAtEnd:      sub.cancel_at_period_end,
-          canceledAt:       null,
-          trialEnd:         sub.trial_end ? new Date(sub.trial_end * 1000) : null,
-        });
+          await upsertAccess(supabase, {
+            userId,
+            product,
+            paymentType:           'recurring',
+            planInterval:          'monthly',
+            stripeCustomerId:      session.customer as string,
+            stripeSubId:           sub.id,
+            stripeSubItemId:       item?.id ?? null,
+            stripePaymentIntentId: null,
+            status:                'active',
+            periodStart:           item?.current_period_start ? new Date(item.current_period_start * 1000) : null,
+            periodEnd:             item?.current_period_end   ? new Date(item.current_period_end   * 1000) : null,
+            cancelAtEnd:           sub.cancel_at_period_end,
+            canceledAt:            null,
+            trialEnd:              sub.trial_end ? new Date(sub.trial_end * 1000) : null,
+            accessExpiresAt:       null,
+          });
+          break;
+        }
+
+        // ── One-time payment ────────────────────────────────────────────────
+        if (session.mode === 'payment') {
+          // Guard: do NOT overwrite an active recurring subscription
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          const { data: existing } = await (supabase as any)
+            .from('subscriptions')
+            .select('payment_type, status')
+            .eq('user_id', userId)
+            .eq('product', product)
+            .maybeSingle() as { data: { payment_type: string; status: string } | null };
+
+          if (existing?.payment_type === 'recurring' && existing?.status === 'active') {
+            console.warn(
+              '[webhook] Skipping one-time upsert — user already has active recurring sub for',
+              product, userId
+            );
+            break;
+          }
+
+          const durationMonths = PRODUCT_CONFIG[product]?.oneTime?.durationMonths ?? 3;
+          const accessExpiresAt = new Date();
+          accessExpiresAt.setMonth(accessExpiresAt.getMonth() + durationMonths);
+
+          await upsertAccess(supabase, {
+            userId,
+            product,
+            paymentType:           'one_time',
+            planInterval:          'one_time',
+            stripeCustomerId:      session.customer as string,
+            stripeSubId:           null,
+            stripeSubItemId:       null,
+            stripePaymentIntentId: session.payment_intent as string,
+            status:                'active',
+            periodStart:           null,
+            periodEnd:             null,
+            cancelAtEnd:           false,
+            canceledAt:            null,
+            trialEnd:              null,
+            accessExpiresAt,
+          });
+          break;
+        }
+
         break;
       }
 
-      // ── Subscription updated (renewal, plan change, cancel toggled) ────────
+      // ── Subscription renewed / updated ────────────────────────────────────
       case 'customer.subscription.updated': {
-        const sub = event.data.object as Stripe.Subscription;
-        const userId   = sub.metadata?.user_id;
-        const product  = sub.metadata?.product  as SubscriptionProduct | undefined;
-        const interval = sub.metadata?.interval ?? 'monthly';
+        const sub     = event.data.object as Stripe.Subscription;
+        const userId  = sub.metadata?.user_id;
+        const product = sub.metadata?.product as SubscriptionProduct | undefined;
 
         if (!userId || !product) {
           console.warn('[webhook] subscription.updated missing metadata', sub.id);
@@ -146,53 +203,54 @@ export async function POST(request: Request) {
         };
 
         const subItem = sub.items.data[0];
-        await upsertSubscription(supabase, {
+        await upsertAccess(supabase, {
           userId,
           product,
-          interval,
-          stripeCustomerId: sub.customer as string,
-          stripeSubId:      sub.id,
-          stripeSubItemId:  subItem?.id ?? null,
-          status:           statusMap[sub.status] ?? 'active',
-          periodStart:      subItem?.current_period_start ? new Date(subItem.current_period_start * 1000) : null,
-          periodEnd:        subItem?.current_period_end   ? new Date(subItem.current_period_end   * 1000) : null,
-          cancelAtEnd:      sub.cancel_at_period_end,
-          canceledAt:       sub.canceled_at ? new Date(sub.canceled_at * 1000) : null,
-          trialEnd:         sub.trial_end ? new Date(sub.trial_end * 1000) : null,
+          paymentType:           'recurring',
+          planInterval:          'monthly',
+          stripeCustomerId:      sub.customer as string,
+          stripeSubId:           sub.id,
+          stripeSubItemId:       subItem?.id ?? null,
+          stripePaymentIntentId: null,
+          status:                statusMap[sub.status] ?? 'active',
+          periodStart:           subItem?.current_period_start ? new Date(subItem.current_period_start * 1000) : null,
+          periodEnd:             subItem?.current_period_end   ? new Date(subItem.current_period_end   * 1000) : null,
+          cancelAtEnd:           sub.cancel_at_period_end,
+          canceledAt:            sub.canceled_at ? new Date(sub.canceled_at * 1000) : null,
+          trialEnd:              sub.trial_end ? new Date(sub.trial_end * 1000) : null,
+          accessExpiresAt:       null,
         });
         break;
       }
 
-      // ── Subscription deleted (canceled and period ended) ───────────────────
+      // ── Subscription canceled (period ended) ──────────────────────────────
       case 'customer.subscription.deleted': {
-        const sub = event.data.object as Stripe.Subscription;
-        const userId   = sub.metadata?.user_id;
-        const product  = sub.metadata?.product as SubscriptionProduct | undefined;
+        const sub     = event.data.object as Stripe.Subscription;
+        const userId  = sub.metadata?.user_id;
+        const product = sub.metadata?.product as SubscriptionProduct | undefined;
 
         if (!userId || !product) {
           console.warn('[webhook] subscription.deleted missing metadata', sub.id);
           break;
         }
 
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         await (supabase.from('subscriptions') as any)
-          .update({
-            status:      'canceled',
-            canceled_at: new Date().toISOString(),
-          })
+          .update({ status: 'canceled', canceled_at: new Date().toISOString() })
           .eq('stripe_subscription_id', sub.id);
         break;
       }
 
-      // ── Payment failed (grace period / past_due) ───────────────────────────
+      // ── Payment failed (grace period → past_due) ──────────────────────────
       case 'invoice.payment_failed': {
         const invoice = event.data.object as Stripe.Invoice;
-        // In Stripe API 2025+, subscription is in invoice.parent.subscription_details.subscription
         const subId =
           invoice.parent?.type === 'subscription_details'
             ? (invoice.parent.subscription_details?.subscription as string | null)
             : null;
         if (!subId) break;
 
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         await (supabase.from('subscriptions') as any)
           .update({ status: 'past_due' })
           .eq('stripe_subscription_id', subId);
@@ -200,12 +258,11 @@ export async function POST(request: Request) {
       }
 
       default:
-        // Acknowledge unknown events without error
         break;
     }
   } catch (err) {
     console.error(`[webhook] Error handling ${event.type}:`, err);
-    // Return 200 so Stripe doesn't retry — log the error separately
+    // Return 200 anyway — Stripe retries on non-2xx, causing duplicate processing
   }
 
   return Response.json({ received: true });

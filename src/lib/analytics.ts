@@ -29,8 +29,8 @@ export function trackQuizCompleted(args: {
   });
 }
 
-export function trackCheckoutStarted(product: SubscriptionProduct, interval: string) {
-  posthog.capture("subscription_checkout_started", { product, interval });
+export function trackCheckoutStarted(product: SubscriptionProduct, paymentType: 'recurring' | 'one_time') {
+  posthog.capture("subscription_checkout_started", { product, payment_type: paymentType });
 }
 
 export function trackWeakTopicPracticed(category: string, testId: string) {

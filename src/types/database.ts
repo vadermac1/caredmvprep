@@ -16,7 +16,8 @@ export type SubscriptionProduct =
   | 'cdl_doubles_triples'
   | 'cdl_school_bus'    // standalone product — separate licensing path
   | 'cdl_passenger';    // standalone product — separate licensing path
-export type SubscriptionInterval = 'monthly' | 'annual';
+export type SubscriptionInterval = 'monthly' | 'one_time';
+export type PaymentType          = 'recurring' | 'one_time';
 export type SubscriptionStatus   = 'active' | 'canceled' | 'past_due' | 'trialing' | 'incomplete';
 export type AdminRole            = 'admin' | 'content_editor' | 'moderator';
 
@@ -75,6 +76,7 @@ export interface SubscriptionPlan {
   product:         SubscriptionProduct;
   interval:        SubscriptionInterval;
   price_cents:     number;
+  duration_months: number | null;   // null for recurring; 3 or 6 for one-time
   stripe_price_id: string | null;
   label:           string;
   active:          boolean;
@@ -85,15 +87,18 @@ export interface Subscription {
   user_id:                     string;
   plan_id:                     string;
   product:                     SubscriptionProduct;
+  payment_type:                PaymentType;
   stripe_customer_id:          string | null;
-  stripe_subscription_id:      string | null;
-  stripe_subscription_item_id: string | null;
+  stripe_subscription_id:      string | null;   // null for one-time
+  stripe_subscription_item_id: string | null;   // null for one-time
+  stripe_payment_intent_id:    string | null;   // null for recurring
   status:                      SubscriptionStatus;
   current_period_start:        string | null;
   current_period_end:          string | null;
   cancel_at_period_end:        boolean;
   canceled_at:                 string | null;
   trial_end:                   string | null;
+  access_expires_at:           string | null;   // set for one-time; null for recurring
   created_at:                  string;
   updated_at:                  string;
 }

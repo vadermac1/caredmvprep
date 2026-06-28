@@ -1,178 +1,238 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import CheckoutButton from "@/components/ui/CheckoutButton";
 import { PRODUCT_CONFIG, formatCents } from "@/lib/stripe/config";
+import { createClient } from "@/lib/supabase/client";
 import type { SubscriptionProduct } from "@/types/database";
 
-const FEATURED_PRODUCTS: { product: SubscriptionProduct; badge?: string }[] = [
-  { product: "dmv",       badge: "Most Popular" },
-  { product: "motorcycle" },
-  { product: "cdl",       badge: "Commercial" },
-];
-
-const ADDON_PRODUCTS: SubscriptionProduct[] = [
+// Products shown on pricing page — School Bus and Passenger omitted until banks are ready
+const CORE_PRODUCTS: SubscriptionProduct[] = ["dmv", "motorcycle", "cdl"];
+const ENDORSEMENT_PRODUCTS: SubscriptionProduct[] = [
   "cdl_hazmat",
   "cdl_tanker",
   "cdl_doubles_triples",
-  "cdl_school_bus",
-  "cdl_passenger",
 ];
 
-export default function PricingCards() {
-  const [interval, setInterval] = useState<"monthly" | "annual">("monthly");
+type AccessState =
+  | { kind: "loading" }
+  | { kind: "none" }
+  | { kind: "recurring" }
+  | { kind: "one_time"; expiresAt: string };
+
+function useProductAccess(product: SubscriptionProduct): AccessState {
+  const [state, setState] = useState<AccessState>({ kind: "loading" });
+
+  useEffect(() => {
+    const supabase = createClient();
+    supabase.auth.getUser().then(async ({ data: { user } }) => {
+      if (!user) { setState({ kind: "none" }); return; }
+
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const result = await (supabase as any)
+        .from("subscriptions")
+        .select("payment_type, status, access_expires_at")
+        .eq("user_id", user.id)
+        .eq("product", product as string)
+        .eq("status", "active")
+        .maybeSingle() as {
+          data: { payment_type: string; status: string; access_expires_at: string | null } | null
+        };
+      const data = result.data;
+
+      if (!data) { setState({ kind: "none" }); return; }
+
+      if (data.payment_type === "recurring") {
+        setState({ kind: "recurring" });
+      } else {
+        const now = new Date().toISOString();
+        if (data.access_expires_at && data.access_expires_at > now) {
+          setState({ kind: "one_time", expiresAt: data.access_expires_at });
+        } else {
+          setState({ kind: "none" });
+        }
+      }
+    });
+  }, [product]);
+
+  return state;
+}
+
+function formatExpiry(iso: string): string {
+  return new Date(iso).toLocaleDateString("en-US", {
+    month: "long", day: "numeric", year: "numeric",
+  });
+}
+
+// ─── Core product card (dmv / motorcycle / cdl) ───────────────────────────────
+
+function CoreProductCard({ product }: { product: SubscriptionProduct }) {
+  const config = PRODUCT_CONFIG[product];
+  const access = useProductAccess(product);
 
   return (
-    <div>
-      {/* Interval toggle */}
-      <div className="flex justify-center mb-10">
-        <div className="inline-flex rounded-lg border border-gray-200 bg-white p-1 gap-1">
-          <button
-            onClick={() => setInterval("monthly")}
-            className={`px-5 py-2 rounded-md text-sm font-semibold transition ${
-              interval === "monthly"
-                ? "bg-[#0f1e3c] text-white shadow-sm"
-                : "text-gray-600 hover:text-gray-900"
-            }`}
-          >
-            Monthly
-          </button>
-          <button
-            onClick={() => setInterval("annual")}
-            className={`px-5 py-2 rounded-md text-sm font-semibold transition ${
-              interval === "annual"
-                ? "bg-[#0f1e3c] text-white shadow-sm"
-                : "text-gray-600 hover:text-gray-900"
-            }`}
-          >
-            Annual
-            <span className="ml-1.5 text-[10px] font-bold bg-[#1a7f3c] text-white rounded px-1.5 py-0.5 align-middle">
-              SAVE 33%
-            </span>
-          </button>
-        </div>
+    <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 flex flex-col">
+      <div className="mb-5">
+        <h2 className="text-base font-bold text-gray-900 mb-1">{config.label}</h2>
+        <p className="text-xs text-gray-500">{config.description}</p>
       </div>
 
-      {/* Free + featured product cards */}
-      <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-5 mb-12">
-        {/* Free card */}
-        <div className="rounded-2xl border border-gray-100 bg-white shadow-sm p-6 flex flex-col">
-          <div className="mb-5">
-            <h2 className="text-base font-bold text-gray-900 mb-1">Free</h2>
-            <p className="text-xs text-gray-500 mb-4">Start preparing with no commitment.</p>
-            <div className="flex items-end gap-1">
-              <span className="text-3xl font-extrabold text-gray-900">$0</span>
-              <span className="text-xs text-gray-400 mb-1">/forever</span>
-            </div>
+      {/* Active-access states */}
+      {access.kind === "recurring" && (
+        <div className="flex-1 flex flex-col justify-end">
+          <div
+            className="rounded-xl px-4 py-3 text-center"
+            style={{ backgroundColor: "#f0fdf4", border: "1px solid #1a7f3c" }}
+          >
+            <p className="text-sm font-semibold" style={{ color: "#1a7f3c" }}>
+              ✓ Active Monthly Plan
+            </p>
+            <p className="text-xs text-gray-500 mt-0.5">
+              Manage in{" "}
+              <a href="/account" className="underline">Account settings</a>
+            </p>
           </div>
-          <ul className="space-y-2 flex-1 mb-6 text-xs text-gray-700">
-            {[
-              "Sample practice questions",
-              "All available states",
-              "Instant feedback",
-              "Detailed explanations",
-            ].map((f) => (
-              <li key={f} className="flex items-center gap-2">
-                <span className="text-[#1a7f3c] font-bold">✓</span> {f}
-              </li>
-            ))}
-          </ul>
-          <a
-            href="/signup"
-            className="block text-center py-2.5 rounded-lg text-sm font-semibold border border-gray-300 text-gray-700 hover:bg-gray-50 transition"
-          >
-            Get Started Free
-          </a>
         </div>
+      )}
 
-        {/* Per-product cards */}
-        {FEATURED_PRODUCTS.map(({ product, badge }) => {
-          const cfg = PRODUCT_CONFIG[product];
-          const price = interval === "monthly" ? cfg.priceCentsMonthly : cfg.priceCentsAnnual;
-          const perUnit = interval === "annual"
-            ? `${formatCents(Math.round(price / 12))}/mo — billed annually`
-            : `${formatCents(price)}/mo`;
-          return (
-            <div
-              key={product}
-              className={`rounded-2xl border bg-white shadow-sm p-6 flex flex-col relative ${
-                badge === "Most Popular"
-                  ? "border-[#1a7f3c] ring-2 ring-[#1a7f3c]"
-                  : "border-gray-100"
-              }`}
+      {access.kind === "one_time" && (
+        <div className="flex-1 flex flex-col justify-end">
+          <div
+            className="rounded-xl px-4 py-3 text-center"
+            style={{ backgroundColor: "#f0fdf4", border: "1px solid #1a7f3c" }}
+          >
+            <p className="text-sm font-semibold" style={{ color: "#1a7f3c" }}>
+              ✓ Access Active
+            </p>
+            <p className="text-xs text-gray-500 mt-0.5">
+              Until {formatExpiry(access.expiresAt)}
+            </p>
+          </div>
+        </div>
+      )}
+
+      {/* No access — show both options */}
+      {(access.kind === "none" || access.kind === "loading") && (
+        <div className="flex-1 flex flex-col justify-end space-y-3">
+          {/* Best Value — one-time */}
+          <div
+            className="rounded-xl border px-4 py-3 relative"
+            style={{ borderColor: "#1a7f3c", backgroundColor: "#f0fdf4" }}
+          >
+            <span
+              className="absolute -top-2.5 left-1/2 -translate-x-1/2 text-[10px] font-bold px-2.5 py-0.5 rounded-full text-white whitespace-nowrap"
+              style={{ backgroundColor: "#1a7f3c" }}
             >
-              {badge && (
-                <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-[#1a7f3c] text-white text-[10px] font-bold px-3 py-1 rounded-full whitespace-nowrap">
-                  {badge}
-                </div>
-              )}
-              <div className="mb-5">
-                <h2 className="text-base font-bold text-gray-900 mb-1">{cfg.label}</h2>
-                <p className="text-xs text-gray-500 mb-4">{cfg.description}</p>
-                <div className="flex items-end gap-1">
-                  <span className="text-3xl font-extrabold text-gray-900">
-                    {formatCents(interval === "annual" ? Math.round(price / 12) : price)}
-                  </span>
-                  <span className="text-xs text-gray-400 mb-1">/mo</span>
-                </div>
-                {interval === "annual" && (
-                  <p className="text-[10px] text-gray-400 mt-0.5">{perUnit}</p>
-                )}
-              </div>
-              <ul className="space-y-2 flex-1 mb-6 text-xs text-gray-700">
-                {[
-                  "Full question bank",
-                  "Progress tracking",
-                  "Weak-topic identification",
-                  "Timed exam mode",
-                  "Unlimited retakes",
-                ].map((f) => (
-                  <li key={f} className="flex items-center gap-2">
-                    <span className="text-[#1a7f3c] font-bold">✓</span> {f}
-                  </li>
-                ))}
-              </ul>
-              <CheckoutButton
-                product={product}
-                interval={interval}
-                label={`Subscribe — ${formatCents(price)}/${interval === "monthly" ? "mo" : "yr"}`}
-                variant={badge === "Most Popular" ? "primary" : "secondary"}
-              />
+              Best Value
+            </span>
+            <div className="flex items-baseline justify-between mb-2 mt-1">
+              <span className="text-xl font-extrabold text-gray-900">
+                {formatCents(config.oneTime!.priceCents)}
+              </span>
+              <span className="text-xs text-gray-500">
+                {config.oneTime!.durationMonths} months
+              </span>
             </div>
-          );
-        })}
+            <CheckoutButton
+              product={product}
+              paymentType="one_time"
+              label={`Buy ${config.oneTime!.durationMonths}-Month Pass`}
+              style={{
+                width: "100%", padding: "8px", borderRadius: "8px",
+                fontSize: "13px", fontWeight: 600,
+                backgroundColor: "#1a7f3c", color: "#fff",
+              }}
+            />
+          </div>
+
+          {/* Monthly */}
+          <div className="rounded-xl border border-gray-200 px-4 py-3">
+            <div className="flex items-baseline justify-between mb-2">
+              <span className="text-xl font-extrabold text-gray-900">
+                {formatCents(config.recurring!.priceCents)}
+                <span className="text-xs font-normal text-gray-400">/mo</span>
+              </span>
+              <span className="text-xs text-gray-500">Cancel anytime</span>
+            </div>
+            <CheckoutButton
+              product={product}
+              paymentType="recurring"
+              label="Subscribe Monthly"
+              variant="secondary"
+              className="w-full py-2 rounded-lg text-xs font-semibold border border-gray-300 text-gray-700 hover:bg-gray-50 transition"
+            />
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
+// ─── Endorsement card (hazmat / tanker / doubles) — one-time only ─────────────
+
+function EndorsementCard({ product }: { product: SubscriptionProduct }) {
+  const config = PRODUCT_CONFIG[product];
+  const access = useProductAccess(product);
+
+  return (
+    <div className="border border-gray-100 rounded-xl bg-white p-4 flex flex-col gap-3">
+      <div>
+        <p className="text-sm font-semibold text-gray-900">{config.label}</p>
+        <p className="text-xs text-gray-500 mt-0.5">
+          {config.description.split(" — ")[0]}
+        </p>
       </div>
 
-      {/* CDL Add-on section */}
-      <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6">
-        <h3 className="text-sm font-bold text-gray-900 mb-1">CDL Endorsement Add-ons</h3>
-        <p className="text-xs text-gray-500 mb-5">Each endorsement bank is sold separately. Requires an active CDL Core subscription.</p>
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-          {ADDON_PRODUCTS.map((product) => {
-            const cfg = PRODUCT_CONFIG[product];
-            const price = interval === "monthly" ? cfg.priceCentsMonthly : cfg.priceCentsAnnual;
-            return (
-              <div key={product} className="border border-gray-100 rounded-xl p-4 flex flex-col gap-3">
-                <div>
-                  <p className="text-sm font-semibold text-gray-900">{cfg.label}</p>
-                  <p className="text-xs text-gray-500 mt-0.5">{cfg.description.split(" — ")[0]}</p>
-                </div>
-                <div className="flex items-center justify-between">
-                  <span className="text-lg font-extrabold text-gray-900">
-                    {formatCents(price)}
-                    <span className="text-xs font-normal text-gray-400">/{interval === "monthly" ? "mo" : "yr"}</span>
-                  </span>
-                  <CheckoutButton
-                    product={product}
-                    interval={interval}
-                    label="Add"
-                    variant="secondary"
-                    className="text-xs px-3 py-1.5"
-                  />
-                </div>
-              </div>
-            );
-          })}
+      {access.kind === "recurring" || access.kind === "one_time" ? (
+        <div className="text-xs font-semibold" style={{ color: "#1a7f3c" }}>
+          {access.kind === "one_time"
+            ? `✓ Access until ${formatExpiry(access.expiresAt)}`
+            : "✓ Active"}
+        </div>
+      ) : (
+        <div className="flex items-center justify-between">
+          <span className="text-base font-extrabold text-gray-900">
+            {formatCents(config.oneTime!.priceCents)}
+            <span className="text-xs font-normal text-gray-400">
+              {" "}/ {config.oneTime!.durationMonths} mo
+            </span>
+          </span>
+          <CheckoutButton
+            product={product}
+            paymentType="one_time"
+            label="Buy"
+            className="text-xs font-semibold px-3 py-1.5 rounded-lg border border-gray-300 text-gray-700 hover:bg-gray-50 transition"
+          />
+        </div>
+      )}
+    </div>
+  );
+}
+
+// ─── Public export ────────────────────────────────────────────────────────────
+
+export default function PricingCards() {
+  return (
+    <div>
+      {/* Core products */}
+      <div className="grid md:grid-cols-3 gap-5 mb-10">
+        {CORE_PRODUCTS.map((p) => (
+          <CoreProductCard key={p} product={p} />
+        ))}
+      </div>
+
+      {/* CDL Endorsements */}
+      <div className="bg-gray-50 rounded-2xl border border-gray-100 p-6">
+        <div className="mb-4">
+          <h3 className="text-sm font-bold text-gray-900">CDL Endorsements</h3>
+          <p className="text-xs text-gray-500 mt-0.5">
+            One-time purchase · 6 months access · Requires CDL Core
+          </p>
+        </div>
+        <div className="grid sm:grid-cols-3 gap-3">
+          {ENDORSEMENT_PRODUCTS.map((p) => (
+            <EndorsementCard key={p} product={p} />
+          ))}
         </div>
       </div>
     </div>
