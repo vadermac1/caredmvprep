@@ -24,11 +24,15 @@ export async function getUserSubscriptions(
   userId: string
 ): Promise<Subscription[]> {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const { data: raw } = await (supabase as any)
+  const { data: raw, error } = await (supabase as any)
     .from('subscriptions')
     .select('*')
     .eq('user_id', userId)
-    .eq('status', 'active') as { data: Subscription[] | null };
+    .eq('status', 'active') as { data: Subscription[] | null; error: { message: string; code: string } | null };
+
+  if (error) {
+    console.error('[getUserSubscriptions] query failed:', error.message, 'code:', error.code, 'user:', userId);
+  }
 
   if (!raw) return [];
 

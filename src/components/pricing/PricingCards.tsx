@@ -1,10 +1,11 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
 import CheckoutButton from "@/components/ui/CheckoutButton";
+import { startCheckout } from "@/lib/stripe/client";
 import { PRODUCT_CONFIG, formatCents } from "@/lib/stripe/config";
 import { createClient } from "@/lib/supabase/client";
-import type { SubscriptionProduct } from "@/types/database";
+import type { SubscriptionProduct, PaymentType } from "@/types/database";
 
 // Products shown on pricing page — School Bus and Passenger omitted until banks are ready
 const CORE_PRODUCTS: SubscriptionProduct[] = ["dmv", "motorcycle", "cdl"];
@@ -12,6 +13,15 @@ const ENDORSEMENT_PRODUCTS: SubscriptionProduct[] = [
   "cdl_hazmat",
   "cdl_tanker",
   "cdl_doubles_triples",
+];
+
+const STATES = [
+  { abbr: "CA", name: "California",   available: true  },
+  { abbr: "TX", name: "Texas",        available: false },
+  { abbr: "FL", name: "Florida",      available: false },
+  { abbr: "NY", name: "New York",     available: false },
+  { abbr: "PA", name: "Pennsylvania", available: false },
+  { abbr: "IL", name: "Illinois",     available: false },
 ];
 
 type AccessState =
@@ -64,11 +74,96 @@ function formatExpiry(iso: string): string {
   });
 }
 
+// ─── State picker modal ───────────────────────────────────────────────────────
+
+function StatePicker({
+  onConfirm,
+  onCancel,
+}: {
+  onConfirm: (state: string) => void;
+  onCancel:  () => void;
+}) {
+  const [selected, setSelected] = useState<string | null>(null);
+
+  return (
+    <div
+      className="fixed inset-0 z-50 flex items-center justify-center px-4"
+      style={{ backgroundColor: "rgba(0,0,0,0.5)" }}
+    >
+      <div className="bg-white rounded-2xl shadow-xl w-full max-w-md p-6">
+        <h2 className="text-lg font-bold mb-1" style={{ color: "#0f1e3c" }}>
+          Where are you studying?
+        </h2>
+        <p className="text-sm text-gray-500 mb-5">
+          Select your state to continue to checkout.
+        </p>
+
+        <div className="grid grid-cols-2 gap-3 mb-6">
+          {STATES.map((s) => (
+            <button
+              key={s.abbr}
+              disabled={!s.available}
+              onClick={() => setSelected(s.abbr)}
+              className={`relative flex items-center gap-3 px-4 py-3.5 rounded-xl border text-left transition ${
+                !s.available
+                  ? "border-gray-100 bg-gray-50 opacity-40 cursor-not-allowed"
+                  : selected === s.abbr
+                  ? "border-green-600 bg-green-50"
+                  : "border-gray-200 hover:border-gray-400"
+              }`}
+            >
+              <div>
+                <p className="text-sm font-semibold text-gray-900">{s.name}</p>
+                {!s.available && (
+                  <p className="text-xs text-gray-400">Coming soon</p>
+                )}
+              </div>
+              {selected === s.abbr && (
+                <span className="absolute top-2 right-2 text-green-600 text-xs font-bold">
+                  ✓
+                </span>
+              )}
+            </button>
+          ))}
+        </div>
+
+        <div className="flex gap-3">
+          <button
+            onClick={onCancel}
+            className="flex-1 py-2.5 rounded-xl text-sm font-semibold border border-gray-300 text-gray-600 hover:bg-gray-50 transition"
+          >
+            Cancel
+          </button>
+          <button
+            disabled={!selected}
+            onClick={() => selected && onConfirm(selected)}
+            className="flex-1 py-2.5 rounded-xl text-sm font-bold text-white transition hover:opacity-90 disabled:opacity-40 disabled:cursor-not-allowed"
+            style={{ backgroundColor: "#1a7f3c" }}
+          >
+            Continue to Checkout →
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 // ─── Core product card (dmv / motorcycle / cdl) ───────────────────────────────
 
-function CoreProductCard({ product }: { product: SubscriptionProduct }) {
+function CoreProductCard({
+  product,
+  onBuyClick,
+  checkingOut,
+}: {
+  product:     SubscriptionProduct;
+  onBuyClick:  (product: SubscriptionProduct, paymentType: PaymentType) => void;
+  checkingOut: { product: SubscriptionProduct; paymentType: PaymentType } | null;
+}) {
   const config = PRODUCT_CONFIG[product];
   const access = useProductAccess(product);
+
+  const isLoading = (pt: PaymentType) =>
+    checkingOut?.product === product && checkingOut.paymentType === pt;
 
   return (
     <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 flex flex-col">
@@ -89,7 +184,9 @@ function CoreProductCard({ product }: { product: SubscriptionProduct }) {
             </p>
             <p className="text-xs text-gray-500 mt-0.5">
               Manage in{" "}
-              <a href="/account" className="underline">Account settings</a>
+              <a href="/account" className="underline">
+                Account settings
+              </a>
             </p>
           </div>
         </div>
@@ -133,16 +230,21 @@ function CoreProductCard({ product }: { product: SubscriptionProduct }) {
                 {config.oneTime!.durationMonths} months
               </span>
             </div>
-            <CheckoutButton
-              product={product}
-              paymentType="one_time"
-              label={`Buy ${config.oneTime!.durationMonths}-Month Pass`}
+            <button
+              onClick={() => onBuyClick(product, "one_time")}
+              disabled={checkingOut !== null}
               style={{
                 width: "100%", padding: "8px", borderRadius: "8px",
                 fontSize: "13px", fontWeight: 600,
                 backgroundColor: "#1a7f3c", color: "#fff",
+                opacity: checkingOut !== null ? 0.6 : 1,
+                cursor: checkingOut !== null ? "not-allowed" : "pointer",
               }}
-            />
+            >
+              {isLoading("one_time")
+                ? "Redirecting to checkout…"
+                : `Buy ${config.oneTime!.durationMonths}-Month Pass`}
+            </button>
           </div>
 
           {/* Monthly */}
@@ -154,13 +256,13 @@ function CoreProductCard({ product }: { product: SubscriptionProduct }) {
               </span>
               <span className="text-xs text-gray-500">Cancel anytime</span>
             </div>
-            <CheckoutButton
-              product={product}
-              paymentType="recurring"
-              label="Subscribe Monthly"
-              variant="secondary"
-              className="w-full py-2 rounded-lg text-xs font-semibold border border-gray-300 text-gray-700 hover:bg-gray-50 transition"
-            />
+            <button
+              onClick={() => onBuyClick(product, "recurring")}
+              disabled={checkingOut !== null}
+              className="w-full py-2 rounded-lg text-xs font-semibold border border-gray-300 text-gray-700 hover:bg-gray-50 transition disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              {isLoading("recurring") ? "Redirecting to checkout…" : "Subscribe Monthly"}
+            </button>
           </div>
         </div>
       )}
@@ -170,9 +272,42 @@ function CoreProductCard({ product }: { product: SubscriptionProduct }) {
 
 // ─── Endorsement card (hazmat / tanker / doubles) — one-time only ─────────────
 
-function EndorsementCard({ product }: { product: SubscriptionProduct }) {
+function EndorsementCard({
+  product,
+  cdlCoreActive,
+}: {
+  product:       SubscriptionProduct;
+  cdlCoreActive: boolean;
+}) {
   const config = PRODUCT_CONFIG[product];
   const access = useProductAccess(product);
+
+  if (!cdlCoreActive) {
+    return (
+      <div className="border border-gray-100 rounded-xl bg-gray-50 p-4 flex flex-col gap-3">
+        <div>
+          <p className="text-sm font-semibold text-gray-400">{config.label}</p>
+          <p className="text-xs text-gray-400 mt-0.5">
+            {config.description.split(" — ")[0]}
+          </p>
+        </div>
+        <div className="flex items-center justify-between">
+          <span className="text-base font-extrabold text-gray-300">
+            {formatCents(config.oneTime!.priceCents)}
+            <span className="text-xs font-normal text-gray-300">
+              {" "}/ {config.oneTime!.durationMonths} mo
+            </span>
+          </span>
+          <button
+            disabled
+            className="text-xs font-semibold px-3 py-1.5 rounded-lg border border-gray-200 text-gray-400 cursor-not-allowed"
+          >
+            Requires CDL Core
+          </button>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="border border-gray-100 rounded-xl bg-white p-4 flex flex-col gap-3">
@@ -212,12 +347,93 @@ function EndorsementCard({ product }: { product: SubscriptionProduct }) {
 // ─── Public export ────────────────────────────────────────────────────────────
 
 export default function PricingCards() {
+  const cdlAccess    = useProductAccess("cdl");
+  const hasCdlCore   = cdlAccess.kind === "recurring" || cdlAccess.kind === "one_time";
+  const cdlCoreLoading = cdlAccess.kind === "loading";
+
+  const [checkingOut, setCheckingOut] = useState<{
+    product:     SubscriptionProduct;
+    paymentType: PaymentType;
+  } | null>(null);
+  const [picker, setPicker] = useState<{
+    product:     SubscriptionProduct;
+    paymentType: PaymentType;
+  } | null>(null);
+  const [checkoutError, setCheckoutError] = useState<string | null>(null);
+
+  async function handleBuyClick(product: SubscriptionProduct, paymentType: PaymentType) {
+    setCheckingOut({ product, paymentType });
+    setCheckoutError(null);
+
+    try {
+      const supabase = createClient();
+      const { data: { user } } = await supabase.auth.getUser();
+      if (!user) { window.location.href = "/login"; return; }
+
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const { data: profileData } = await (supabase as any)
+        .from("profiles")
+        .select("target_state")
+        .eq("id", user.id)
+        .single() as { data: { target_state: string | null } | null };
+
+      const existingState = profileData?.target_state ?? null;
+
+      if (existingState) {
+        // State already set — go straight to Stripe
+        await startCheckout(product, paymentType, { target_state: existingState });
+      } else {
+        // No state on profile — show picker first
+        setCheckingOut(null);
+        setPicker({ product, paymentType });
+      }
+    } catch (err) {
+      setCheckoutError(err instanceof Error ? err.message : "Checkout failed. Try again.");
+      setCheckingOut(null);
+    }
+  }
+
+  async function handlePickerConfirm(state: string) {
+    if (!picker) return;
+    const { product, paymentType } = picker;
+    setPicker(null);
+    setCheckingOut({ product, paymentType });
+    setCheckoutError(null);
+
+    try {
+      await startCheckout(product, paymentType, { target_state: state });
+    } catch (err) {
+      setCheckoutError(err instanceof Error ? err.message : "Checkout failed. Try again.");
+      setCheckingOut(null);
+    }
+  }
+
   return (
     <div>
+      {/* State picker modal */}
+      {picker && (
+        <StatePicker
+          onConfirm={handlePickerConfirm}
+          onCancel={() => { setPicker(null); setCheckingOut(null); }}
+        />
+      )}
+
+      {/* Checkout error */}
+      {checkoutError && (
+        <div className="mb-5 rounded-xl px-4 py-3 text-sm text-red-700 border border-red-200 bg-red-50">
+          {checkoutError}
+        </div>
+      )}
+
       {/* Core products */}
       <div className="grid md:grid-cols-3 gap-5 mb-10">
         {CORE_PRODUCTS.map((p) => (
-          <CoreProductCard key={p} product={p} />
+          <CoreProductCard
+            key={p}
+            product={p}
+            onBuyClick={handleBuyClick}
+            checkingOut={checkingOut}
+          />
         ))}
       </div>
 
@@ -228,10 +444,18 @@ export default function PricingCards() {
           <p className="text-xs text-gray-500 mt-0.5">
             One-time purchase · 6 months access · Requires CDL Core
           </p>
+          {!hasCdlCore && !cdlCoreLoading && (
+            <p
+              className="mt-2 text-xs rounded-lg px-3 py-2 border border-amber-100 text-amber-700"
+              style={{ backgroundColor: "#fffbeb" }}
+            >
+              Purchase CDL Core above to unlock these endorsements.
+            </p>
+          )}
         </div>
         <div className="grid sm:grid-cols-3 gap-3">
           {ENDORSEMENT_PRODUCTS.map((p) => (
-            <EndorsementCard key={p} product={p} />
+            <EndorsementCard key={p} product={p} cdlCoreActive={hasCdlCore} />
           ))}
         </div>
       </div>

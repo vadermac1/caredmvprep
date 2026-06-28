@@ -27,8 +27,11 @@ export default function QuizEngine({ config }: QuizEngineProps) {
     }
   }, [config.testId]); // eslint-disable-line react-hooks/exhaustive-deps
 
-  const correctSoFar = answers.filter((a) => a.isCorrect).length;
-  const progress = useQuizStore((s) => s.progress());
+  const correctSoFar     = answers.filter((a) => a.isCorrect).length;
+  // progress() returns a new object each call — select primitives directly to avoid
+  // the "getSnapshot result should be cached" infinite-loop error.
+  const progressTotal    = storeConfig?.questions.length ?? 0;
+  const progressAnswered = answers.length;
 
   if (phase === 'idle') {
     return (
@@ -57,8 +60,8 @@ export default function QuizEngine({ config }: QuizEngineProps) {
       </div>
 
       <QuizProgress
-        answered={progress.answered}
-        total={progress.total}
+        answered={progressAnswered}
+        total={progressTotal}
         correct={correctSoFar}
       />
 

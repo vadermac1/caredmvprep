@@ -22,6 +22,72 @@ export async function POST(request: Request) {
       return Response.json({ error: 'Invalid product' }, { status: 400 });
     }
 
+    // CDL endorsements require an active CDL Core subscription
+    const CDL_ENDORSEMENTS = new Set(['cdl_hazmat', 'cdl_tanker', 'cdl_doubles_triples', 'cdl_school_bus', 'cdl_passenger']);
+    if (CDL_ENDORSEMENTS.has(product)) {
+      const now = new Date().toISOString();
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const { data: cdlSub } = await (supabase as any)
+        .from('subscriptions')
+        .select('payment_type, status, access_expires_at')
+        .eq('user_id', user.id)
+        .eq('product', 'cdl')
+        .eq('status', 'active')
+        .maybeSingle() as { data: { payment_type: string; status: string; access_expires_at: string | null } | null };
+
+      const hasCdlCore = cdlSub && (
+        cdlSub.payment_type === 'recurring' ||
+        (cdlSub.payment_type === 'one_time' && cdlSub.access_expires_at !== null && cdlSub.access_expires_at > now)
+      );
+
+      if (!hasCdlCore) {
+        return Response.json(
+          { error: 'CDL Core subscription required to purchase endorsements.' },
+          { status: 403 }
+        );
+      }
+    }
+
+    // Resolve target state and license — stored in Stripe metadata and written to profile by webhook
+    const ALLOWED_STATES = new Set(['CA']);
+    const PRODUCT_LICENSE_MAP: Partial<Record<string, string>> = {
+      dmv:        'permit',
+      motorcycle: 'motorcycle',
+      cdl:        'cdl_general',
+    };
+
+    let resolvedState:   string;
+    let resolvedLicense: string;
+
+    if (CDL_ENDORSEMENTS.has(product)) {
+      // Endorsements: derive state from the user's profile (set when CDL Core was purchased)
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const { data: profileData } = await (supabase as any)
+        .from('profiles')
+        .select('target_state, target_license')
+        .eq('id', user.id)
+        .single() as { data: { target_state: string | null; target_license: string | null } | null };
+      resolvedState   = profileData?.target_state   ?? 'CA';
+      resolvedLicense = profileData?.target_license ?? 'cdl_general';
+    } else {
+      // Core products — state must be provided by the client (via state picker)
+      const targetState = body.target_state as string | undefined;
+      if (!targetState) {
+        return Response.json(
+          { error: 'Please select a state before purchasing.' },
+          { status: 400 }
+        );
+      }
+      if (!ALLOWED_STATES.has(targetState)) {
+        return Response.json(
+          { error: 'That state is not yet available. Please check back soon.' },
+          { status: 400 }
+        );
+      }
+      resolvedState   = targetState;
+      resolvedLicense = PRODUCT_LICENSE_MAP[product] ?? 'permit';
+    }
+
     // Resolve price ID and Stripe checkout mode
     let priceId: string;
     let mode: 'subscription' | 'payment';
@@ -68,9 +134,11 @@ export async function POST(request: Request) {
       customer_email:       user.email,
       client_reference_id:  user.id,
       metadata: {
-        user_id:      user.id,
+        user_id:        user.id,
         product,
-        payment_type: paymentType,
+        payment_type:   paymentType,
+        target_state:   resolvedState,
+        target_license: resolvedLicense,
       },
       success_url: `${appUrl}/account?checkout=success&product=${encodeURIComponent(product)}&type=${paymentType}`,
       cancel_url:  `${appUrl}/pricing`,
@@ -80,7 +148,13 @@ export async function POST(request: Request) {
     // Subscription-specific: copy metadata so webhook can read it from the subscription object
     if (mode === 'subscription') {
       sessionParams.subscription_data = {
-        metadata: { user_id: user.id, product, payment_type: paymentType },
+        metadata: {
+          user_id:        user.id,
+          product,
+          payment_type:   paymentType,
+          target_state:   resolvedState,
+          target_license: resolvedLicense,
+        },
       };
     }
 

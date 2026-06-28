@@ -91,14 +91,14 @@ export default function DashboardSidebar({ displayName, isPro, activeProducts }:
       style={{ backgroundColor: '#0f1e3c' }}
     >
       {/* Logo */}
-      <div className="px-6 py-5 border-b border-white/10">
+      <div className="px-5 py-5 border-b border-white/10">
         <Link href="/">
           <Image
             src="/logo.png"
             alt="CAREDMVPrep"
-            width={160}
-            height={64}
-            style={{ height: '44px', width: 'auto' }}
+            width={220}
+            height={88}
+            className="w-[170px] h-auto"
           />
         </Link>
       </div>

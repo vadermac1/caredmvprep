@@ -3,6 +3,7 @@ import Link from "next/link";
 import { createClient } from "@/lib/supabase/server";
 import {
   getProfile,
+  getUserSubscriptions,
   getDashboardStats,
   getWeakTopics,
   getStrongTopics,
@@ -12,6 +13,13 @@ import {
   getBookmarkCount,
   getStreak,
 } from "@/lib/supabase/queries";
+
+// Study path auto-set when a user purchases before completing onboarding
+const PRODUCT_TO_PROFILE: Partial<Record<string, { target_state: string; target_license: string }>> = {
+  dmv:        { target_state: 'CA', target_license: 'permit' },
+  motorcycle: { target_state: 'CA', target_license: 'motorcycle' },
+  cdl:        { target_state: 'CA', target_license: 'cdl_general' },
+};
 import { computeReadiness, computeWeeklyActivity } from "@/lib/readiness";
 import ReadinessCard from "@/components/dashboard/ReadinessCard";
 import CoachBanner from "@/components/dashboard/CoachBanner";
@@ -65,9 +73,32 @@ export default async function DashboardPage({ searchParams }: Props) {
   const { data: { user } } = await supabase.auth.getUser();
   if (!user) redirect("/login");
 
-  // All queries in parallel — zero sequential waterfalls
+  // Profile first — determines whether to redirect, auto-set, or proceed
+  let profile = await getProfile(supabase, user.id);
+
+  if (!profile?.target_state) {
+    // User may have purchased before completing onboarding (or webhook not yet processed).
+    // Derive study path from their subscriptions instead of forcing onboarding.
+    const subs = await getUserSubscriptions(supabase, user.id);
+    const coreSub = subs.find((s) => PRODUCT_TO_PROFILE[s.product]);
+    if (coreSub && profile) {
+      const updates = PRODUCT_TO_PROFILE[coreSub.product]!;
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      await (supabase as any)
+        .from('profiles')
+        .update({ ...updates, updated_at: new Date().toISOString() })
+        .eq('id', user.id);
+      profile = { ...profile, ...updates };
+    } else {
+      redirect("/onboarding");
+    }
+  }
+
+  // TypeScript narrowing — if we're still here, profile has target_state
+  if (!profile?.target_state) redirect("/onboarding");
+
+  // All remaining queries in parallel
   const [
-    profile,
     stats,
     weakTopics,
     strongTopics,
@@ -76,7 +107,6 @@ export default async function DashboardPage({ searchParams }: Props) {
     studyPlan,
     bookmarkCount,
   ] = await Promise.all([
-    getProfile(supabase, user.id),
     getDashboardStats(supabase, user.id),
     getWeakTopics(supabase, user.id, 6),
     getStrongTopics(supabase, user.id),
@@ -85,11 +115,6 @@ export default async function DashboardPage({ searchParams }: Props) {
     getStudyPlan(supabase, user.id),
     getBookmarkCount(supabase, user.id),
   ]);
-
-  // Redirect new users who haven't completed onboarding
-  if (!profile?.target_state) {
-    redirect("/onboarding");
-  }
 
   const quizHref     = getQuizHref(profile.target_state, profile.target_license);
   const streak       = getStreak(profile);

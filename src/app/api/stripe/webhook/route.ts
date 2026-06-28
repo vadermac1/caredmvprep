@@ -6,6 +6,14 @@ import type { SubscriptionProduct, SubscriptionStatus, PaymentType } from '@/typ
 
 export const dynamic = 'force-dynamic';
 
+// Maps purchased product → default study path set on the user's profile.
+// Only applied when target_state is null (user bought before completing onboarding).
+const PRODUCT_PROFILE_MAP: Partial<Record<string, { target_state: string; target_license: string }>> = {
+  dmv:        { target_state: 'CA', target_license: 'permit' },
+  motorcycle: { target_state: 'CA', target_license: 'motorcycle' },
+  cdl:        { target_state: 'CA', target_license: 'cdl_general' },
+};
+
 // ─── Plan ID lookup ───────────────────────────────────────────────────────────
 
 async function getPlanId(
@@ -14,12 +22,17 @@ async function getPlanId(
   interval: 'monthly' | 'one_time'
 ): Promise<string | null> {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const { data } = await (supabase as any)
+  const { data, error } = await (supabase as any)
     .from('subscription_plans')
     .select('id')
     .eq('product', product)
     .eq('interval', interval)
-    .single() as { data: { id: string } | null };
+    .maybeSingle() as { data: { id: string } | null; error: { message: string; code: string } | null };
+
+  if (error) {
+    console.error(`[webhook] getPlanId query error for ${product}/${interval}:`, error.message, 'code:', error.code);
+  }
+  console.log(`[webhook] getPlanId(${product}, ${interval}) → data:`, JSON.stringify(data), 'error:', JSON.stringify(error));
   return data?.id ?? null;
 }
 
@@ -48,10 +61,18 @@ async function upsertAccess(
   args: UpsertArgs
 ) {
   const planId = await getPlanId(supabase, args.product, args.planInterval);
+  console.log(`[webhook] getPlanId(${args.product}, ${args.planInterval}) →`, planId);
+
+  if (!planId) {
+    throw new Error(
+      `[webhook] No subscription_plans row found for product="${args.product}" interval="${args.planInterval}". ` +
+      `Run migration 003 or insert the missing row.`
+    );
+  }
 
   const row = {
     user_id:                     args.userId,
-    plan_id:                     planId ?? '00000000-0000-0000-0000-000000000000',
+    plan_id:                     planId,
     product:                     args.product,
     payment_type:                args.paymentType,
     stripe_customer_id:          args.stripeCustomerId,
@@ -67,9 +88,17 @@ async function upsertAccess(
     access_expires_at:           args.accessExpiresAt?.toISOString() ?? null,
   };
 
+  console.log('[webhook] upserting row:', JSON.stringify(row));
+
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  await (supabase.from('subscriptions') as any)
+  const { error } = await (supabase.from('subscriptions') as any)
     .upsert(row, { onConflict: 'user_id,product' });
+
+  if (error) {
+    throw new Error(`[webhook] subscriptions upsert failed: ${error.message} (code: ${error.code})`);
+  }
+
+  console.log('[webhook] upsert succeeded for', args.userId, args.product);
 }
 
 // ─── Webhook handler ──────────────────────────────────────────────────────────
@@ -92,7 +121,14 @@ export async function POST(request: Request) {
     return Response.json({ error: 'Invalid signature' }, { status: 400 });
   }
 
-  const supabase = createAdminClient();
+  let supabase: ReturnType<typeof createAdminClient>;
+  try {
+    supabase = createAdminClient();
+    console.log('[webhook] createAdminClient() succeeded');
+  } catch (err) {
+    console.error('[webhook] createAdminClient() threw:', err);
+    return Response.json({ error: 'Admin client init failed' }, { status: 500 });
+  }
 
   try {
     switch (event.type) {
@@ -101,6 +137,9 @@ export async function POST(request: Request) {
       // Handles BOTH subscription and one-time payment checkouts.
       case 'checkout.session.completed': {
         const session = event.data.object as Stripe.Checkout.Session;
+
+        console.log('[webhook] checkout.session.completed session.id:', session.id, 'mode:', session.mode);
+        console.log('[webhook] metadata:', JSON.stringify(session.metadata));
 
         const userId      = session.metadata?.user_id;
         const product     = session.metadata?.product      as SubscriptionProduct | undefined;
@@ -133,6 +172,19 @@ export async function POST(request: Request) {
             trialEnd:              sub.trial_end ? new Date(sub.trial_end * 1000) : null,
             accessExpiresAt:       null,
           });
+
+          // Set study path from checkout metadata (state/license chosen at purchase).
+          // Falls back to PRODUCT_PROFILE_MAP for any replayed events without metadata.
+          const targetState   = session.metadata?.target_state   ?? PRODUCT_PROFILE_MAP[product]?.target_state;
+          const targetLicense = session.metadata?.target_license ?? PRODUCT_PROFILE_MAP[product]?.target_license;
+          if (targetState && targetLicense) {
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            await (supabase as any)
+              .from('profiles')
+              .update({ target_state: targetState, target_license: targetLicense, updated_at: new Date().toISOString() })
+              .eq('id', userId)
+              .is('target_state', null);
+          }
           break;
         }
 
@@ -176,6 +228,19 @@ export async function POST(request: Request) {
             trialEnd:              null,
             accessExpiresAt,
           });
+
+          // Set study path from checkout metadata (state/license chosen at purchase).
+          // Falls back to PRODUCT_PROFILE_MAP for any replayed events without metadata.
+          const targetState   = session.metadata?.target_state   ?? PRODUCT_PROFILE_MAP[product]?.target_state;
+          const targetLicense = session.metadata?.target_license ?? PRODUCT_PROFILE_MAP[product]?.target_license;
+          if (targetState && targetLicense) {
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            await (supabase as any)
+              .from('profiles')
+              .update({ target_state: targetState, target_license: targetLicense, updated_at: new Date().toISOString() })
+              .eq('id', userId)
+              .is('target_state', null);
+          }
           break;
         }
 
@@ -262,8 +327,11 @@ export async function POST(request: Request) {
     }
   } catch (err) {
     console.error(`[webhook] Error handling ${event.type}:`, err);
-    // Return 200 anyway — Stripe retries on non-2xx, causing duplicate processing
+    // Return 500 so Stripe retries. upsert uses onConflict so retries are idempotent.
+    console.log('[webhook] → HTTP 500 returned to Stripe');
+    return Response.json({ error: String(err) }, { status: 500 });
   }
 
+  console.log('[webhook] → HTTP 200 returned to Stripe');
   return Response.json({ received: true });
 }

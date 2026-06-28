@@ -67,6 +67,12 @@ export interface Profile {
   streak_current:  number;
   streak_best:     number;
   streak_updated:  string | null;   // ISO date
+  phone:           string | null;
+  address_line1:   string | null;
+  address_line2:   string | null;
+  city:            string | null;
+  address_state:   string | null;
+  postal_code:     string | null;
   created_at:      string;
   updated_at:      string;
 }

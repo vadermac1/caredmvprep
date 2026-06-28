@@ -110,9 +110,21 @@ export const PRODUCT_CONFIG: Record<SubscriptionProduct, ProductConfig> = {
 // ─── Quiz → required subscription product ────────────────────────────────────
 
 export const QUIZ_PRODUCT_MAP: Partial<Record<string, SubscriptionProduct>> = {
+  // California
   'california-permit':        'dmv',
   'california-motorcycle':    'motorcycle',
   'california-cdl-general':   'cdl',
+  'california-permit-mock-1': 'dmv',
+  'california-permit-mock-2': 'dmv',
+  'california-permit-mock-3': 'dmv',
+  // Texas
+  'texas-permit':             'dmv',
+  'texas-motorcycle':         'motorcycle',
+  'texas-cdl-general':        'cdl',
+  'texas-permit-mock-1':      'dmv',
+  'texas-permit-mock-2':      'dmv',
+  'texas-permit-mock-3':      'dmv',
+  // CDL endorsements (federal — state-agnostic)
   'cdl-hazmat':               'cdl_hazmat',
   'cdl-tank-vehicles':        'cdl_tanker',
   'cdl-doubles-triples':      'cdl_doubles_triples',
@@ -120,9 +132,6 @@ export const QUIZ_PRODUCT_MAP: Partial<Record<string, SubscriptionProduct>> = {
   'cdl-combination-vehicles': 'cdl',
   'cdl-passenger':            'cdl_passenger',
   'cdl-school-bus':           'cdl_school_bus',
-  'california-permit-mock-1': 'dmv',
-  'california-permit-mock-2': 'dmv',
-  'california-permit-mock-3': 'dmv',
 };
 
 // Formats cents as "$12" or "$29" (no trailing .00)

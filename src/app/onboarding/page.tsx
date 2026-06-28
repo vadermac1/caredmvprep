@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
+import Link from "next/link";
 import { createClient } from "@/lib/supabase/client";
 
 const STATES = [
@@ -50,26 +51,46 @@ export default function OnboardingPage() {
     const { data: { user } } = await supabase.auth.getUser();
     if (!user) { router.push('/login'); return; }
 
+    // UPDATE (not upsert) — the profile row is guaranteed to exist from the
+    // on_auth_user_created trigger. upsert sends INSERT ... ON CONFLICT which
+    // is blocked by RLS because there is no INSERT policy on profiles.
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    await (supabase.from('profiles') as any).upsert({
-      id:             user.id,
-      target_state:   selectedState,
-      target_license: selectedLicense,
-      exam_date:      examDate || null,
-      updated_at:     new Date().toISOString(),
-    });
+    const { error } = await (supabase.from('profiles') as any)
+      .update({
+        target_state:   selectedState,
+        target_license: selectedLicense,
+        exam_date:      examDate || null,
+        updated_at:     new Date().toISOString(),
+      })
+      .eq('id', user.id);
+
+    if (error) {
+      console.error('[onboarding] profile update failed:', error.message);
+      setLoading(false);
+      return;
+    }
 
     router.push('/dashboard?welcome=1');
   }
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center px-4 py-12" style={{ backgroundColor: '#f0f4f8' }}>
-      <div className="w-full max-w-lg">
+    <div className="min-h-screen flex flex-col" style={{ backgroundColor: '#f0f4f8' }}>
+      {/* Dark header — logo on navy for contrast */}
+      <div className="w-full flex items-center justify-center py-5" style={{ backgroundColor: '#0f1e3c' }}>
+        <Link href="/">
+          <Image
+            src="/logo.png"
+            alt="CAREDMVPrep"
+            width={220}
+            height={88}
+            className="w-[170px] sm:w-[220px] h-auto"
+            priority
+          />
+        </Link>
+      </div>
 
-        {/* Logo */}
-        <div className="flex justify-center mb-8">
-          <Image src="/logo.png" alt="CAREDMVPrep" width={200} height={80} style={{ height: '52px', width: 'auto' }} />
-        </div>
+      <div className="flex-1 flex flex-col items-center justify-center px-4 py-10">
+      <div className="w-full max-w-lg">
 
         {/* Progress indicator */}
         <div className="flex items-center gap-2 mb-8">
@@ -226,6 +247,7 @@ export default function OnboardingPage() {
         <p className="mt-6 text-center text-xs text-gray-400">
           CAREDMVPrep.com is not affiliated with any government agency.
         </p>
+      </div>
       </div>
     </div>
   );
