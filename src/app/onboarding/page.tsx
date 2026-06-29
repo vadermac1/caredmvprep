@@ -9,7 +9,7 @@ import { createClient } from "@/lib/supabase/client";
 
 const STATES = [
   { abbr: 'CA', name: 'California', available: true },
-  { abbr: 'TX', name: 'Texas', available: false },
+  { abbr: 'TX', name: 'Texas', available: true },
   { abbr: 'FL', name: 'Florida', available: false },
   { abbr: 'NY', name: 'New York', available: false },
   { abbr: 'PA', name: 'Pennsylvania', available: false },

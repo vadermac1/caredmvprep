@@ -1,9 +1,38 @@
 import Link from "next/link";
+import { redirect } from "next/navigation";
+import { createClient } from "@/lib/supabase/server";
+import { getProfile } from "@/lib/supabase/queries";
 import { MOCK_EXAM_DEFS } from "@/data/questions/index";
+
+export const dynamic = 'force-dynamic';
 
 export const metadata = {
   title: "Mock Exams — CAREDMVPrep",
   robots: { index: false, follow: false },
+};
+
+// State-specific exam metadata
+const STATE_META: Record<string, {
+  questionCount: number;
+  passingPct: number;
+  passingLabel: string;
+  timeMins: number;
+  testName: string;
+}> = {
+  CA: {
+    questionCount: 46,
+    passingPct: 80,
+    passingLabel: '37 of 46 correct',
+    timeMins: 50,
+    testName: 'CA DMV permit test',
+  },
+  TX: {
+    questionCount: 30,
+    passingPct: 70,
+    passingLabel: '21 of 30 correct',
+    timeMins: 45,
+    testName: 'Texas DPS permit test',
+  },
 };
 
 function ClockIcon() {
@@ -22,8 +51,18 @@ function CheckIcon() {
   );
 }
 
-export default function MockExamPage() {
-  const exams = MOCK_EXAM_DEFS;
+export default async function MockExamPage() {
+  const supabase = await createClient();
+  const { data: { user } } = await supabase.auth.getUser();
+  if (!user) redirect('/login');
+
+  const profile = await getProfile(supabase, user.id);
+  const stateAbbr = (profile?.target_state ?? 'CA').toUpperCase();
+
+  // Filter exams to the user's state
+  const stateKey = stateAbbr === 'TX' ? 'texas-permit' : 'california-permit';
+  const exams = MOCK_EXAM_DEFS.filter(e => e.baseTestId === stateKey);
+  const meta = STATE_META[stateAbbr] ?? STATE_META['CA'];
 
   return (
     <div className="max-w-3xl mx-auto pb-12">
@@ -32,7 +71,7 @@ export default function MockExamPage() {
           Mock Exams
         </h1>
         <p className="text-sm text-gray-500">
-          Full-length simulations that match the real CA DMV permit test. Each exam uses a unique question set.
+          Full-length simulations that match the real {meta.testName}. Each exam uses a unique question set.
         </p>
       </div>
 
@@ -40,9 +79,9 @@ export default function MockExamPage() {
       <div className="rounded-xl border border-blue-100 bg-blue-50 px-5 py-4 mb-8">
         <h2 className="text-sm font-semibold text-blue-900 mb-2">What to expect</h2>
         <ul className="text-sm text-blue-800 space-y-1">
-          <li className="flex items-start gap-2"><CheckIcon /><span>46 questions — same length as the real CA DMV permit test</span></li>
-          <li className="flex items-start gap-2"><CheckIcon /><span>Passing score: 80% (37 of 46 correct)</span></li>
-          <li className="flex items-start gap-2"><CheckIcon /><span>Timed mode: 50 minutes (choose below). Untimed mode available for self-study.</span></li>
+          <li className="flex items-start gap-2"><CheckIcon /><span>{meta.questionCount} questions — same length as the real {meta.testName}</span></li>
+          <li className="flex items-start gap-2"><CheckIcon /><span>Passing score: {meta.passingPct}% ({meta.passingLabel})</span></li>
+          <li className="flex items-start gap-2"><CheckIcon /><span>Timed mode: {meta.timeMins} minutes (choose below). Untimed mode available for self-study.</span></li>
           <li className="flex items-start gap-2"><CheckIcon /><span>Full question review with explanations after you finish</span></li>
         </ul>
       </div>
@@ -73,7 +112,7 @@ export default function MockExamPage() {
                   <div className="flex items-center gap-4 text-xs text-gray-400">
                     <span>{exam.questionCount} questions</span>
                     <span className="flex items-center gap-1"><ClockIcon />{mins} min timed</span>
-                    <span>Passing: 80%</span>
+                    <span>Passing: {meta.passingPct}%</span>
                   </div>
                 </div>
               </div>

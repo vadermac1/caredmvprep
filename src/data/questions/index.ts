@@ -183,6 +183,7 @@ export interface MockExamDef {
 }
 
 export const MOCK_EXAM_DEFS: MockExamDef[] = [
+  // ── California ─────────────────────────────────────────────────────────────
   {
     examId:        'california-permit-mock-1',
     label:         'California Permit Mock Exam #1',
@@ -211,6 +212,37 @@ export const MOCK_EXAM_DEFS: MockExamDef[] = [
     questionCount: 46,
     seed:          3,
     timeLimitSecs: 50 * 60,
+    description:   'Third exam simulation — no repeated questions from #1 or #2.',
+  },
+  // ── Texas ──────────────────────────────────────────────────────────────────
+  {
+    examId:        'texas-permit-mock-1',
+    label:         'Texas DPS Permit Mock Exam #1',
+    shortLabel:    'Mock Exam #1',
+    baseTestId:    'texas-permit',
+    questionCount: 30,
+    seed:          1,
+    timeLimitSecs: 45 * 60,
+    description:   'Simulates the real Texas DPS permit test — 30 questions, 45 min.',
+  },
+  {
+    examId:        'texas-permit-mock-2',
+    label:         'Texas DPS Permit Mock Exam #2',
+    shortLabel:    'Mock Exam #2',
+    baseTestId:    'texas-permit',
+    questionCount: 30,
+    seed:          2,
+    timeLimitSecs: 45 * 60,
+    description:   'A unique second simulation with a different question mix.',
+  },
+  {
+    examId:        'texas-permit-mock-3',
+    label:         'Texas DPS Permit Mock Exam #3',
+    shortLabel:    'Mock Exam #3',
+    baseTestId:    'texas-permit',
+    questionCount: 30,
+    seed:          3,
+    timeLimitSecs: 45 * 60,
     description:   'Third exam simulation — no repeated questions from #1 or #2.',
   },
 ];
