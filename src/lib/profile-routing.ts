@@ -15,6 +15,9 @@ export function getDefaultTestId(
     'TX-permit':      'texas-permit',
     'TX-motorcycle':  'texas-motorcycle',
     'TX-cdl_general': 'texas-cdl-general',
+    'FL-permit':      'florida-permit',
+    'FL-motorcycle':  'florida-motorcycle',
+    'FL-cdl_general': 'florida-cdl-general',
   };
   return MAP[key] ?? 'california-permit';
 }

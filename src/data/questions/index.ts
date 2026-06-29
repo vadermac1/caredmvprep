@@ -3,6 +3,7 @@ import type { Question, QuizConfig } from '@/types/question';
 
 import caDmvQuestions                from './dmv/california';
 import txDmvQuestions                from './dmv/texas';
+import flDmvQuestions                from './dmv/florida';
 import caMotoQuestions               from './motorcycle/california';
 import txMotoQuestions               from './motorcycle/texas';
 import cdlFederalQuestions           from './cdl/federal';
@@ -58,9 +59,33 @@ export const quizRegistry: Record<string, QuizConfig> = {
     passingScore: 0.80,  // 40 of 50 — federal standard
   },
 
+  // ── Florida ───────────────────────────────────────────────────────────────
+  'florida-permit': {
+    testId:      'florida-permit',
+    label:       'Florida DHSMV Permit Practice Test',
+    state:       'florida',
+    licenseType: 'permit',
+    questions:   verified(flDmvQuestions),
+    passingScore: 0.80,  // 40 of 50 correct — Florida DHSMV standard
+  },
+  'florida-motorcycle': {
+    testId:      'florida-motorcycle',
+    label:       'Florida DHSMV Motorcycle (Class E + M) Practice Test',
+    state:       'florida',
+    licenseType: 'motorcycle',
+    questions:   [],  // bank pending — fl-moto.ts to be authored
+    passingScore: 0.80,
+  },
+  'florida-cdl-general': {
+    testId:      'florida-cdl-general',
+    label:       'Florida CDL General Knowledge Practice Test',
+    state:       'florida',
+    licenseType: 'cdl_general',
+    questions:   verified(cdlFederalQuestions),
+    passingScore: 0.80,  // 40 of 50 — FMCSA federal standard
+  },
+
   // ── Texas ─────────────────────────────────────────────────────────────────
-  // Question banks are empty until the TX bank is authored. The quiz page
-  // returns 404 when questions.length === 0, so these registrations are safe.
 
   'texas-permit': {
     testId:      'texas-permit',
@@ -212,6 +237,37 @@ export const MOCK_EXAM_DEFS: MockExamDef[] = [
     questionCount: 46,
     seed:          3,
     timeLimitSecs: 50 * 60,
+    description:   'Third exam simulation — no repeated questions from #1 or #2.',
+  },
+  // ── Florida ────────────────────────────────────────────────────────────────
+  {
+    examId:        'florida-permit-mock-1',
+    label:         'Florida DHSMV Permit Mock Exam #1',
+    shortLabel:    'Mock Exam #1',
+    baseTestId:    'florida-permit',
+    questionCount: 50,
+    seed:          1,
+    timeLimitSecs: 60 * 60,
+    description:   'Simulates the real Florida DHSMV permit test — 50 questions, 60 min.',
+  },
+  {
+    examId:        'florida-permit-mock-2',
+    label:         'Florida DHSMV Permit Mock Exam #2',
+    shortLabel:    'Mock Exam #2',
+    baseTestId:    'florida-permit',
+    questionCount: 50,
+    seed:          2,
+    timeLimitSecs: 60 * 60,
+    description:   'A unique second simulation with a different question mix.',
+  },
+  {
+    examId:        'florida-permit-mock-3',
+    label:         'Florida DHSMV Permit Mock Exam #3',
+    shortLabel:    'Mock Exam #3',
+    baseTestId:    'florida-permit',
+    questionCount: 50,
+    seed:          3,
+    timeLimitSecs: 60 * 60,
     description:   'Third exam simulation — no repeated questions from #1 or #2.',
   },
   // ── Texas ──────────────────────────────────────────────────────────────────
