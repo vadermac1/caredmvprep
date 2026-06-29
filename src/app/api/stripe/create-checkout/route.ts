@@ -70,11 +70,24 @@ export async function POST(request: Request) {
       resolvedState   = profileData?.target_state   ?? 'CA';
       resolvedLicense = profileData?.target_license ?? 'cdl_general';
     } else {
-      // Core products — state must be provided by the client (via state picker)
-      const targetState = body.target_state as string | undefined;
+      // Core products: use state from request body, or fall back to saved profile
+      let targetState    = body.target_state    as string | undefined;
+      let profileLicense = body.target_license  as string | undefined;
+
+      if (!targetState) {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        const { data: profileFallback } = await (supabase as any)
+          .from('profiles')
+          .select('target_state, target_license')
+          .eq('id', user.id)
+          .maybeSingle() as { data: { target_state: string | null; target_license: string | null } | null };
+        targetState    = profileFallback?.target_state    ?? undefined;
+        profileLicense = profileFallback?.target_license  ?? undefined;
+      }
+
       if (!targetState) {
         return Response.json(
-          { error: 'Please select a state before purchasing.' },
+          { error: 'Please complete onboarding to set your state before purchasing.' },
           { status: 400 }
         );
       }
@@ -85,7 +98,7 @@ export async function POST(request: Request) {
         );
       }
       resolvedState   = targetState;
-      resolvedLicense = PRODUCT_LICENSE_MAP[product] ?? 'permit';
+      resolvedLicense = profileLicense ?? PRODUCT_LICENSE_MAP[product] ?? 'permit';
     }
 
     // Resolve price ID and Stripe checkout mode

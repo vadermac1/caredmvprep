@@ -373,17 +373,21 @@ export default function PricingCards() {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const { data: profileData } = await (supabase as any)
         .from("profiles")
-        .select("target_state")
+        .select("target_state, target_license")
         .eq("id", user.id)
-        .single() as { data: { target_state: string | null } | null };
+        .maybeSingle() as { data: { target_state: string | null; target_license: string | null } | null };
 
-      const existingState = profileData?.target_state ?? null;
+      const existingState   = profileData?.target_state   ?? null;
+      const existingLicense = profileData?.target_license ?? null;
 
       if (existingState) {
-        // State already set — go straight to Stripe
-        await startCheckout(product, paymentType, { target_state: existingState });
+        // State already set — pass both to checkout (server also falls back to profile)
+        await startCheckout(product, paymentType, {
+          target_state:   existingState,
+          target_license: existingLicense ?? undefined,
+        });
       } else {
-        // No state on profile — show picker first
+        // No profile state — show picker
         setCheckingOut(null);
         setPicker({ product, paymentType });
       }

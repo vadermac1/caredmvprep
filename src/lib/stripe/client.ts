@@ -13,7 +13,7 @@ export type { PaymentType };
 export async function startCheckout(
   product:     SubscriptionProduct,
   paymentType: PaymentType,
-  extra?:      { target_state?: string }
+  extra?:      { target_state?: string; target_license?: string }
 ): Promise<void> {
   const res = await fetch('/api/stripe/create-checkout', {
     method:  'POST',
