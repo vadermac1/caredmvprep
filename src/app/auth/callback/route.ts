@@ -72,6 +72,25 @@ export async function GET(request: NextRequest) {
     return NextResponse.redirect(url);
   }
 
-  // Session is now set via cookies — redirect the user to their destination
-  return NextResponse.redirect(new URL(next, origin));
+  // If next is explicitly set (e.g. /onboarding from emailRedirectTo), honour it.
+  // Otherwise check whether the user has completed onboarding; if not, send them there.
+  if (next !== '/dashboard') {
+    return NextResponse.redirect(new URL(next, origin));
+  }
+
+  const { data: { user: sessionUser } } = await supabase.auth.getUser();
+  if (sessionUser) {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const { data: profile } = await (supabase as any)
+      .from('profiles')
+      .select('target_state')
+      .eq('id', sessionUser.id)
+      .maybeSingle() as { data: { target_state: string | null } | null };
+
+    if (!profile?.target_state) {
+      return NextResponse.redirect(new URL('/onboarding', origin));
+    }
+  }
+
+  return NextResponse.redirect(new URL('/dashboard', origin));
 }
