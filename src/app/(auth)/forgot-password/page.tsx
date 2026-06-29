@@ -19,8 +19,11 @@ export default function ForgotPasswordPage() {
     const email = form.get("email") as string;
 
     const supabase = createClient();
+    // Use window.location.origin so the link is always the real domain at runtime,
+    // never a build-time localhost value baked into the JS bundle.
+    const origin = window.location.origin;
     const { error: resetError } = await supabase.auth.resetPasswordForEmail(email, {
-      redirectTo: `${process.env.NEXT_PUBLIC_APP_URL}/reset-password`,
+      redirectTo: `${origin}/auth/callback?next=/reset-password`,
     });
 
     // Always show success to avoid email enumeration

@@ -12,7 +12,12 @@ function LoginForm() {
   const searchParams = useSearchParams();
   const redirectTo = searchParams.get("redirectTo") ?? "/dashboard";
 
-  const [error, setError] = useState<string | null>(null);
+  const authError = searchParams.get("error");
+  const [error, setError] = useState<string | null>(
+    authError === "link_expired"
+      ? "That link has expired or already been used. Request a new one below."
+      : null
+  );
   const [loading, setLoading] = useState(false);
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
