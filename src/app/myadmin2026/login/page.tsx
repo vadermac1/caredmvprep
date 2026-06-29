@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import Image from "next/image";
+import BrandLogo from "@/components/BrandLogo";
 import { createClient } from "@/lib/supabase/client";
 import { Lock, Mail, AlertCircle } from "lucide-react";
 
@@ -34,7 +34,7 @@ export default function AdminLoginPage() {
         style={{ backgroundColor: "#0f1e3c", borderRight: "1px solid rgba(255,255,255,0.07)" }}
       >
         <div>
-          <Image src="/logo.png" alt="CAREDMVPrep" width={220} height={88} className="w-[200px] h-auto mb-12" />
+          <BrandLogo height={48} className="mb-12" priority />
           <h2 className="text-3xl font-bold text-white leading-tight mb-4">
             Admin<br />Control Center
           </h2>
@@ -73,7 +73,7 @@ export default function AdminLoginPage() {
         <div className="w-full max-w-sm">
           {/* Mobile logo */}
           <div className="flex justify-center mb-10 lg:hidden">
-            <Image src="/logo.png" alt="CAREDMVPrep" width={200} height={80} className="w-[180px] h-auto" />
+            <BrandLogo height={44} />
           </div>
 
           <div className="mb-8">

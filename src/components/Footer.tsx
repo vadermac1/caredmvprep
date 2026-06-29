@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
+import BrandLogo from "@/components/BrandLogo";
 
 const driverLinks = [
   { label: "All 50 States", href: "/states" },
@@ -104,14 +105,7 @@ export default function Footer() {
           {/* Brand */}
           <div className="lg:col-span-1">
             <Link href="/" className="inline-block mb-4">
-              <Image
-                src="/logo.png"
-                alt="CAREDMVPrep – Your Road to Success"
-                width={280}
-                height={110}
-                style={{ height: '88px', width: 'auto' }}
-                className="rounded"
-              />
+              <BrandLogo height={40} />
             </Link>
             <p className="text-gray-400 text-sm leading-relaxed mb-4">
               The trusted DMV test prep platform in the United States.

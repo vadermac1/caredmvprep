@@ -2,8 +2,8 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
+import BrandLogo from "@/components/BrandLogo";
 import { createClient } from "@/lib/supabase/client";
 
 const navItems = [
@@ -40,13 +40,7 @@ export default function MobileNav({ displayName, isPro }: Props) {
         style={{ backgroundColor: "#0f1e3c" }}
       >
         <Link href="/dashboard">
-          <Image
-            src="/logo.png"
-            alt="CAREDMVPrep"
-            width={140}
-            height={56}
-            style={{ height: "36px", width: "auto" }}
-          />
+          <BrandLogo height={36} />
         </Link>
         <button
           onClick={() => setOpen(true)}
@@ -76,13 +70,7 @@ export default function MobileNav({ displayName, isPro }: Props) {
           >
             {/* Drawer header */}
             <div className="flex items-center justify-between px-5 py-4 border-b border-white/10">
-              <Image
-                src="/logo.png"
-                alt="CAREDMVPrep"
-                width={140}
-                height={56}
-                style={{ height: "36px", width: "auto" }}
-              />
+              <BrandLogo height={36} />
               <button
                 onClick={() => setOpen(false)}
                 className="p-1 text-gray-400 hover:text-white transition"

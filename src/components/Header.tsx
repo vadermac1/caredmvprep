@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
+import BrandLogo from "@/components/BrandLogo";
 import { useState, useEffect } from "react";
 import { createClient } from "@/lib/supabase/client";
 
@@ -92,14 +93,7 @@ export default function Header() {
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
           <Link href="/" className="flex items-center shrink-0">
-            <Image
-              src="/logo-header.png"
-              alt="CAREDMVPrep – Your Road to Success"
-              width={700}
-              height={140}
-              className="header-logo"
-              priority
-            />
+            <BrandLogo className="header-logo" priority />
           </Link>
 
           {/* Desktop nav */}

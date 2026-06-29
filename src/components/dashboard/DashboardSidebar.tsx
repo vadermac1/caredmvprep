@@ -1,8 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
+import BrandLogo from "@/components/BrandLogo";
 import { createClient } from "@/lib/supabase/client";
 
 const navItems = [
@@ -93,13 +93,7 @@ export default function DashboardSidebar({ displayName, isPro, activeProducts }:
       {/* Logo */}
       <div className="px-5 py-5 border-b border-white/10">
         <Link href="/">
-          <Image
-            src="/logo.png"
-            alt="CAREDMVPrep"
-            width={220}
-            height={88}
-            className="w-[170px] h-auto"
-          />
+          <BrandLogo height={44} priority />
         </Link>
       </div>
 

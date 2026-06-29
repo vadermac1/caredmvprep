@@ -1,8 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
+import BrandLogo from "@/components/BrandLogo";
 import { createClient } from "@/lib/supabase/client";
 import {
   LayoutDashboard, BarChart2, Users, CreditCard, TrendingUp,
@@ -74,14 +74,7 @@ export default function AdminSidebar({ userEmail }: Props) {
       {/* Logo */}
       <div className="px-5 pt-5 pb-4 border-b" style={{ borderColor: "rgba(255,255,255,0.08)" }}>
         <Link href="/myadmin2026">
-          <Image
-            src="/logo.png"
-            alt="CAREDMVPrep"
-            width={240}
-            height={96}
-            className="w-[190px] h-auto"
-            priority
-          />
+          <BrandLogo height={44} priority />
         </Link>
         <div className="mt-2.5 inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full" style={{ backgroundColor: "rgba(26,127,60,0.25)" }}>
           <div className="w-1.5 h-1.5 rounded-full bg-green-400" />

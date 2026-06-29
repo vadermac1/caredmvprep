@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
+import BrandLogo from "@/components/BrandLogo";
 import { createClient } from "@/lib/supabase/client";
 
 const STATES = [
@@ -78,14 +79,7 @@ export default function OnboardingPage() {
       {/* Dark header — logo on navy for contrast */}
       <div className="w-full flex items-center justify-center py-5" style={{ backgroundColor: '#0f1e3c' }}>
         <Link href="/">
-          <Image
-            src="/logo.png"
-            alt="CAREDMVPrep"
-            width={220}
-            height={88}
-            className="w-[170px] sm:w-[220px] h-auto"
-            priority
-          />
+          <BrandLogo height={44} priority />
         </Link>
       </div>
 

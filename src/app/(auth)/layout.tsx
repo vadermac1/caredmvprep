@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import Image from "next/image";
+import BrandLogo from "@/components/BrandLogo";
 
 export const metadata: Metadata = {
   robots: { index: false, follow: false },
@@ -15,14 +15,7 @@ export default function AuthLayout({ children }: { children: React.ReactNode }) 
         style={{ backgroundColor: "#0f1e3c" }}
       >
         <Link href="/">
-          <Image
-            src="/logo.png"
-            alt="CAREDMVPrep"
-            width={220}
-            height={88}
-            className="w-[170px] sm:w-[220px] h-auto"
-            priority
-          />
+          <BrandLogo height={44} priority />
         </Link>
       </div>
 
