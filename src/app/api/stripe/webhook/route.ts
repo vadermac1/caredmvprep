@@ -64,15 +64,15 @@ async function upsertAccess(
   console.log(`[webhook] getPlanId(${args.product}, ${args.planInterval}) →`, planId);
 
   if (!planId) {
-    throw new Error(
-      `[webhook] No subscription_plans row found for product="${args.product}" interval="${args.planInterval}". ` +
-      `Run migration 003 or insert the missing row.`
+    console.warn(
+      `[webhook] No subscription_plans row for product="${args.product}" interval="${args.planInterval}". ` +
+      `Proceeding without plan_id — run migration 009 if this persists.`
     );
   }
 
-  const row = {
+  const row: Record<string, unknown> = {
     user_id:                     args.userId,
-    plan_id:                     planId,
+    ...(planId ? { plan_id: planId } : {}),
     product:                     args.product,
     payment_type:                args.paymentType,
     stripe_customer_id:          args.stripeCustomerId,

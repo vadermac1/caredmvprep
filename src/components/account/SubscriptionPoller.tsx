@@ -48,8 +48,13 @@ export default function SubscriptionPoller({ product }: { product?: string }) {
         }
       } catch { /* network / RLS error — just retry */ }
 
-      if (attempts.current < 15) { // 30 s max
+      if (attempts.current < 30) { // 60 s max
         timer = setTimeout(poll, 2000);
+      } else {
+        // Webhook took too long or failed — navigate to /account without
+        // checkout params so the spinner stops. User sees their current state.
+        done.current = true;
+        router.replace('/account?activation=pending');
       }
     }
 

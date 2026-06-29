@@ -56,11 +56,11 @@ const PRODUCT_TO_STUDY: Record<string, { state: string; license: string }> = {
 // ── Page ──────────────────────────────────────────────────────────────────────
 
 interface Props {
-  searchParams: Promise<{ checkout?: string; product?: string }>;
+  searchParams: Promise<{ checkout?: string; product?: string; activation?: string }>;
 }
 
 export default async function AccountPage({ searchParams }: Props) {
-  const { checkout, product: checkoutProduct } = await searchParams;
+  const { checkout, product: checkoutProduct, activation } = await searchParams;
   const supabase = await createClient();
   const { data: { user } } = await supabase.auth.getUser();
   if (!user) redirect("/login");
@@ -97,6 +97,19 @@ export default async function AccountPage({ searchParams }: Props) {
       <div className="mb-6">
         <h1 className="text-2xl font-bold" style={{ color: "#0f1e3c" }}>Account</h1>
       </div>
+
+      {/* Activation delayed banner */}
+      {activation === "pending" && !hasAnyPro && (
+        <div className="mb-6 rounded-2xl px-6 py-4 border border-amber-200 bg-amber-50">
+          <p className="font-bold text-sm text-amber-800">Activation is taking longer than usual</p>
+          <p className="text-xs mt-0.5 text-amber-700">
+            Your payment was received. If your subscription doesn&apos;t appear within a few minutes,{" "}
+            <a href="/account" className="underline font-semibold">refresh this page</a>.
+            If it still doesn&apos;t show, email{" "}
+            <a href="mailto:support@caredmvprep.com" className="underline">support@caredmvprep.com</a>.
+          </p>
+        </div>
+      )}
 
       {/* Post-checkout success banner */}
       {checkout === "success" && (
