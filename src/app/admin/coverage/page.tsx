@@ -223,7 +223,7 @@ function Badge({ n, color, label }: { n: number; color: string; label: string })
 export default async function CoverageDashboard() {
   const supabase = await createClient();
   const { data: { user } } = await supabase.auth.getUser();
-  if (!user) redirect('/login');
+  if (!user) redirect('/myadmin2026/login');
 
   const { data: isAdmin, error } = await supabase.rpc('is_admin');
   if (error || !isAdmin) redirect('/');

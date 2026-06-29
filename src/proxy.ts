@@ -8,8 +8,10 @@ const PROTECTED_PREFIXES = [
   '/review',
   '/history',
   '/account',
+  '/flashcards',
   '/onboarding',
   '/admin/',
+  '/myadmin2026/',
 ];
 const AUTH_PAGES = ['/login', '/signup', '/forgot-password', '/reset-password'];
 

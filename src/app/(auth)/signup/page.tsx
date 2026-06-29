@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
@@ -11,6 +11,9 @@ export default function SignupPage() {
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
+  const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  useEffect(() => () => { if (timerRef.current) clearTimeout(timerRef.current); }, []);
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -49,7 +52,7 @@ export default function SignupPage() {
 
     setSuccess("Account created! Check your email to confirm your address, then sign in.");
     setLoading(false);
-    setTimeout(() => router.push("/login"), 3000);
+    timerRef.current = setTimeout(() => router.push("/login"), 3000);
   }
 
   return (
@@ -66,9 +69,9 @@ export default function SignupPage() {
           <input type="checkbox" required className="mt-0.5 shrink-0 accent-green-700" />
           <span className="text-sm text-gray-600">
             I agree to the{" "}
-            <Link href="/about" className="underline hover:text-gray-900">Terms of Use</Link>
+            <Link href="/terms" className="underline hover:text-gray-900">Terms of Service</Link>
             {" "}and{" "}
-            <Link href="/about" className="underline hover:text-gray-900">Privacy Policy</Link>.
+            <Link href="/privacy" className="underline hover:text-gray-900">Privacy Policy</Link>.
           </span>
         </label>
       </AuthForm>
