@@ -22,6 +22,7 @@ const STATES = [
   { abbr: "NY", name: "New York",     available: true  },
   { abbr: "PA", name: "Pennsylvania", available: true  },
   { abbr: "IL", name: "Illinois",     available: true  },
+  { abbr: "OH", name: "Ohio",         available: true  },
 ];
 
 type AccessState =

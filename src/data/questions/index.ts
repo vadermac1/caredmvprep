@@ -13,6 +13,7 @@ import flMotoQuestions               from './motorcycle/florida';
 import nyMotoQuestions               from './motorcycle/new-york';
 import paMotoQuestions               from './motorcycle/pennsylvania';
 import ilMotoQuestions               from './motorcycle/illinois';
+import ohDmvQuestions                from './dmv/ohio';
 import cdlFederalQuestions           from './cdl/federal';
 import cdlSchoolBusQuestions         from './cdl/school-bus';
 import cdlTankVehicleQuestions       from './cdl/tank-vehicles';
@@ -64,6 +65,32 @@ export const quizRegistry: Record<string, QuizConfig> = {
     licenseType: 'cdl_general',
     questions:   verified(cdlFederalQuestions),
     passingScore: 0.80,  // 40 of 50 — federal standard
+  },
+
+  // ── Ohio ──────────────────────────────────────────────────────────────────
+  'ohio-permit': {
+    testId:      'ohio-permit',
+    label:       'Ohio BMV Permit Practice Test',
+    state:       'ohio',
+    licenseType: 'permit',
+    questions:   verified(ohDmvQuestions),
+    passingScore: 0.75,  // 15 of 20 — Ohio BMV standard (75%)
+  },
+  'ohio-motorcycle': {
+    testId:      'ohio-motorcycle',
+    label:       'Ohio BMV Motorcycle Practice Test',
+    state:       'ohio',
+    licenseType: 'motorcycle',
+    questions:   [],
+    passingScore: 0.75,
+  },
+  'ohio-cdl-general': {
+    testId:      'ohio-cdl-general',
+    label:       'Ohio CDL General Knowledge Practice Test',
+    state:       'ohio',
+    licenseType: 'cdl_general',
+    questions:   verified(cdlFederalQuestions),
+    passingScore: 0.80,
   },
 
   // ── Illinois ──────────────────────────────────────────────────────────────
@@ -384,6 +411,37 @@ export const MOCK_EXAM_DEFS: MockExamDef[] = [
     questionCount: 50,
     seed:          3,
     timeLimitSecs: 60 * 60,
+    description:   'Third exam simulation — no repeated questions from #1 or #2.',
+  },
+  // ── Ohio ──────────────────────────────────────────────────────────────────
+  {
+    examId:        'ohio-permit-mock-1',
+    label:         'Ohio BMV Permit Mock Exam #1',
+    shortLabel:    'Mock Exam #1',
+    baseTestId:    'ohio-permit',
+    questionCount: 20,
+    seed:          1,
+    timeLimitSecs: 40 * 60,
+    description:   'Simulates the real Ohio BMV permit test — 20 questions, 40 min.',
+  },
+  {
+    examId:        'ohio-permit-mock-2',
+    label:         'Ohio BMV Permit Mock Exam #2',
+    shortLabel:    'Mock Exam #2',
+    baseTestId:    'ohio-permit',
+    questionCount: 20,
+    seed:          2,
+    timeLimitSecs: 40 * 60,
+    description:   'A unique second simulation with a different question mix.',
+  },
+  {
+    examId:        'ohio-permit-mock-3',
+    label:         'Ohio BMV Permit Mock Exam #3',
+    shortLabel:    'Mock Exam #3',
+    baseTestId:    'ohio-permit',
+    questionCount: 20,
+    seed:          3,
+    timeLimitSecs: 40 * 60,
     description:   'Third exam simulation — no repeated questions from #1 or #2.',
   },
   // ── Illinois ──────────────────────────────────────────────────────────────
