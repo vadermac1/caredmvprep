@@ -15,6 +15,7 @@ import paMotoQuestions               from './motorcycle/pennsylvania';
 import ilMotoQuestions               from './motorcycle/illinois';
 import ohDmvQuestions                from './dmv/ohio';
 import ohMotoQuestions               from './motorcycle/ohio';
+import gaDmvQuestions                from './dmv/georgia';
 import cdlFederalQuestions           from './cdl/federal';
 import cdlSchoolBusQuestions         from './cdl/school-bus';
 import cdlTankVehicleQuestions       from './cdl/tank-vehicles';
@@ -66,6 +67,32 @@ export const quizRegistry: Record<string, QuizConfig> = {
     licenseType: 'cdl_general',
     questions:   verified(cdlFederalQuestions),
     passingScore: 0.80,  // 40 of 50 — federal standard
+  },
+
+  // ── Georgia ───────────────────────────────────────────────────────────────
+  'georgia-permit': {
+    testId:      'georgia-permit',
+    label:       'Georgia DDS Permit Practice Test',
+    state:       'georgia',
+    licenseType: 'permit',
+    questions:   verified(gaDmvQuestions),
+    passingScore: 0.75,  // 15 of 20 — Georgia DDS standard (75%)
+  },
+  'georgia-motorcycle': {
+    testId:      'georgia-motorcycle',
+    label:       'Georgia DDS Motorcycle Practice Test',
+    state:       'georgia',
+    licenseType: 'motorcycle',
+    questions:   [],
+    passingScore: 0.75,
+  },
+  'georgia-cdl-general': {
+    testId:      'georgia-cdl-general',
+    label:       'Georgia CDL General Knowledge Practice Test',
+    state:       'georgia',
+    licenseType: 'cdl_general',
+    questions:   verified(cdlFederalQuestions),
+    passingScore: 0.80,
   },
 
   // ── Ohio ──────────────────────────────────────────────────────────────────
@@ -412,6 +439,37 @@ export const MOCK_EXAM_DEFS: MockExamDef[] = [
     questionCount: 50,
     seed:          3,
     timeLimitSecs: 60 * 60,
+    description:   'Third exam simulation — no repeated questions from #1 or #2.',
+  },
+  // ── Georgia ───────────────────────────────────────────────────────────────
+  {
+    examId:        'georgia-permit-mock-1',
+    label:         'Georgia DDS Permit Mock Exam #1',
+    shortLabel:    'Mock Exam #1',
+    baseTestId:    'georgia-permit',
+    questionCount: 20,
+    seed:          1,
+    timeLimitSecs: 40 * 60,
+    description:   'Simulates the real Georgia DDS permit test — 20 questions, 40 min.',
+  },
+  {
+    examId:        'georgia-permit-mock-2',
+    label:         'Georgia DDS Permit Mock Exam #2',
+    shortLabel:    'Mock Exam #2',
+    baseTestId:    'georgia-permit',
+    questionCount: 20,
+    seed:          2,
+    timeLimitSecs: 40 * 60,
+    description:   'A unique second simulation with a different question mix.',
+  },
+  {
+    examId:        'georgia-permit-mock-3',
+    label:         'Georgia DDS Permit Mock Exam #3',
+    shortLabel:    'Mock Exam #3',
+    baseTestId:    'georgia-permit',
+    questionCount: 20,
+    seed:          3,
+    timeLimitSecs: 40 * 60,
     description:   'Third exam simulation — no repeated questions from #1 or #2.',
   },
   // ── Ohio ──────────────────────────────────────────────────────────────────
