@@ -18,6 +18,9 @@ export function getDefaultTestId(
     'FL-permit':      'florida-permit',
     'FL-motorcycle':  'florida-motorcycle',
     'FL-cdl_general': 'florida-cdl-general',
+    'NY-permit':      'new-york-permit',
+    'NY-motorcycle':  'new-york-motorcycle',
+    'NY-cdl_general': 'new-york-cdl-general',
   };
   return MAP[key] ?? 'california-permit';
 }

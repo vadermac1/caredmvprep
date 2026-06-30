@@ -19,7 +19,7 @@ const STATES = [
   { abbr: "CA", name: "California",   available: true  },
   { abbr: "TX", name: "Texas",        available: true  },
   { abbr: "FL", name: "Florida",      available: true  },
-  { abbr: "NY", name: "New York",     available: false },
+  { abbr: "NY", name: "New York",     available: true  },
   { abbr: "PA", name: "Pennsylvania", available: false },
   { abbr: "IL", name: "Illinois",     available: false },
 ];

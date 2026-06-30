@@ -4,6 +4,7 @@ import type { Question, QuizConfig } from '@/types/question';
 import caDmvQuestions                from './dmv/california';
 import txDmvQuestions                from './dmv/texas';
 import flDmvQuestions                from './dmv/florida';
+import nyDmvQuestions                from './dmv/new-york';
 import caMotoQuestions               from './motorcycle/california';
 import txMotoQuestions               from './motorcycle/texas';
 import flMotoQuestions               from './motorcycle/florida';
@@ -58,6 +59,32 @@ export const quizRegistry: Record<string, QuizConfig> = {
     licenseType: 'cdl_general',
     questions:   verified(cdlFederalQuestions),
     passingScore: 0.80,  // 40 of 50 — federal standard
+  },
+
+  // ── New York ──────────────────────────────────────────────────────────────
+  'new-york-permit': {
+    testId:      'new-york-permit',
+    label:       'New York DMV Permit Practice Test',
+    state:       'new-york',
+    licenseType: 'permit',
+    questions:   verified(nyDmvQuestions),
+    passingScore: 0.70,  // 14 of 20 — NY DMV standard (70%)
+  },
+  'new-york-motorcycle': {
+    testId:      'new-york-motorcycle',
+    label:       'New York DMV Motorcycle Practice Test',
+    state:       'new-york',
+    licenseType: 'motorcycle',
+    questions:   [],  // bank pending
+    passingScore: 0.70,
+  },
+  'new-york-cdl-general': {
+    testId:      'new-york-cdl-general',
+    label:       'New York CDL General Knowledge Practice Test',
+    state:       'new-york',
+    licenseType: 'cdl_general',
+    questions:   verified(cdlFederalQuestions),
+    passingScore: 0.80,  // 40 of 50 — FMCSA standard
   },
 
   // ── Florida ───────────────────────────────────────────────────────────────
@@ -238,6 +265,37 @@ export const MOCK_EXAM_DEFS: MockExamDef[] = [
     questionCount: 46,
     seed:          3,
     timeLimitSecs: 50 * 60,
+    description:   'Third exam simulation — no repeated questions from #1 or #2.',
+  },
+  // ── New York ────────────────────────────────────────────────────────────────
+  {
+    examId:        'new-york-permit-mock-1',
+    label:         'New York DMV Permit Mock Exam #1',
+    shortLabel:    'Mock Exam #1',
+    baseTestId:    'new-york-permit',
+    questionCount: 20,
+    seed:          1,
+    timeLimitSecs: 30 * 60,
+    description:   'Simulates the real NY DMV permit test — 20 questions, 30 min.',
+  },
+  {
+    examId:        'new-york-permit-mock-2',
+    label:         'New York DMV Permit Mock Exam #2',
+    shortLabel:    'Mock Exam #2',
+    baseTestId:    'new-york-permit',
+    questionCount: 20,
+    seed:          2,
+    timeLimitSecs: 30 * 60,
+    description:   'A unique second simulation with a different question mix.',
+  },
+  {
+    examId:        'new-york-permit-mock-3',
+    label:         'New York DMV Permit Mock Exam #3',
+    shortLabel:    'Mock Exam #3',
+    baseTestId:    'new-york-permit',
+    questionCount: 20,
+    seed:          3,
+    timeLimitSecs: 30 * 60,
     description:   'Third exam simulation — no repeated questions from #1 or #2.',
   },
   // ── Florida ────────────────────────────────────────────────────────────────
