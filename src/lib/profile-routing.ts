@@ -24,6 +24,9 @@ export function getDefaultTestId(
     'PA-permit':      'pennsylvania-permit',
     'PA-motorcycle':  'pennsylvania-motorcycle',
     'PA-cdl_general': 'pennsylvania-cdl-general',
+    'IL-permit':      'illinois-permit',
+    'IL-motorcycle':  'illinois-motorcycle',
+    'IL-cdl_general': 'illinois-cdl-general',
   };
   return MAP[key] ?? 'california-permit';
 }

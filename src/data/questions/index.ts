@@ -6,6 +6,7 @@ import txDmvQuestions                from './dmv/texas';
 import flDmvQuestions                from './dmv/florida';
 import nyDmvQuestions                from './dmv/new-york';
 import paDmvQuestions                from './dmv/pennsylvania';
+import ilDmvQuestions                from './dmv/illinois';
 import caMotoQuestions               from './motorcycle/california';
 import txMotoQuestions               from './motorcycle/texas';
 import flMotoQuestions               from './motorcycle/florida';
@@ -60,6 +61,32 @@ export const quizRegistry: Record<string, QuizConfig> = {
     licenseType: 'cdl_general',
     questions:   verified(cdlFederalQuestions),
     passingScore: 0.80,  // 40 of 50 — federal standard
+  },
+
+  // ── Illinois ──────────────────────────────────────────────────────────────
+  'illinois-permit': {
+    testId:      'illinois-permit',
+    label:       'Illinois Secretary of State Permit Practice Test',
+    state:       'illinois',
+    licenseType: 'permit',
+    questions:   verified(ilDmvQuestions),
+    passingScore: 0.80,  // 28 of 35 correct — Illinois SOS standard (80%)
+  },
+  'illinois-motorcycle': {
+    testId:      'illinois-motorcycle',
+    label:       'Illinois Secretary of State Motorcycle Practice Test',
+    state:       'illinois',
+    licenseType: 'motorcycle',
+    questions:   [],  // bank pending
+    passingScore: 0.80,
+  },
+  'illinois-cdl-general': {
+    testId:      'illinois-cdl-general',
+    label:       'Illinois CDL General Knowledge Practice Test',
+    state:       'illinois',
+    licenseType: 'cdl_general',
+    questions:   verified(cdlFederalQuestions),
+    passingScore: 0.80,  // 40 of 50 — FMCSA federal standard
   },
 
   // ── Pennsylvania ──────────────────────────────────────────────────────────
@@ -352,6 +379,37 @@ export const MOCK_EXAM_DEFS: MockExamDef[] = [
     shortLabel:    'Mock Exam #3',
     baseTestId:    'florida-permit',
     questionCount: 50,
+    seed:          3,
+    timeLimitSecs: 60 * 60,
+    description:   'Third exam simulation — no repeated questions from #1 or #2.',
+  },
+  // ── Illinois ──────────────────────────────────────────────────────────────
+  {
+    examId:        'illinois-permit-mock-1',
+    label:         'Illinois SOS Permit Mock Exam #1',
+    shortLabel:    'Mock Exam #1',
+    baseTestId:    'illinois-permit',
+    questionCount: 35,
+    seed:          1,
+    timeLimitSecs: 60 * 60,
+    description:   'Simulates the real Illinois SOS permit test — 35 questions, 60 min.',
+  },
+  {
+    examId:        'illinois-permit-mock-2',
+    label:         'Illinois SOS Permit Mock Exam #2',
+    shortLabel:    'Mock Exam #2',
+    baseTestId:    'illinois-permit',
+    questionCount: 35,
+    seed:          2,
+    timeLimitSecs: 60 * 60,
+    description:   'A unique second simulation with a different question mix.',
+  },
+  {
+    examId:        'illinois-permit-mock-3',
+    label:         'Illinois SOS Permit Mock Exam #3',
+    shortLabel:    'Mock Exam #3',
+    baseTestId:    'illinois-permit',
+    questionCount: 35,
     seed:          3,
     timeLimitSecs: 60 * 60,
     description:   'Third exam simulation — no repeated questions from #1 or #2.',
