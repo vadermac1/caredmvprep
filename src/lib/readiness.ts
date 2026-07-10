@@ -42,7 +42,8 @@ export function topicConfidence(total: number): TopicConfidence {
 export function computeReadiness(
   stats: DashboardStats,
   weakTopics: WeakTopic[],
-  strongTopics: WeakTopic[] = []
+  strongTopics: WeakTopic[] = [],
+  hasMockExam = true
 ): ReadinessResult {
   const topicsMastered = strongTopics.length;
   const totalTopics    = weakTopics.length + strongTopics.length;
@@ -107,7 +108,9 @@ export function computeReadiness(
 
   let nextStep: string;
   if (confidence === 'ready') {
-    nextStep = 'Take the California Permit Mock Exam to confirm readiness.';
+    nextStep = hasMockExam
+      ? 'Take a timed Mock Exam to confirm readiness.'
+      : 'Take another full practice test to confirm readiness.';
   } else if (weakTopics.length > 0) {
     const worst = weakTopics[0];
     const name  = getCategoryLabel(worst.category_slug);

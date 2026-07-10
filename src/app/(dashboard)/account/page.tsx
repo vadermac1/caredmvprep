@@ -1,9 +1,10 @@
 import { redirect } from "next/navigation";
 import Link from "next/link";
 import { createClient } from "@/lib/supabase/server";
-import { getProfile, getUserSubscriptions } from "@/lib/supabase/queries";
+import { getProfile, getUserSubscriptions, getPastDueSubscriptions } from "@/lib/supabase/queries";
 import SubscriptionPoller from "@/components/account/SubscriptionPoller";
 import EditProfileForm from "@/components/account/EditProfileForm";
+import ManageBillingButton from "@/components/account/ManageBillingButton";
 import stateFacts from "@/data/questions/state-facts";
 
 // ── Label maps ────────────────────────────────────────────────────────────────
@@ -63,9 +64,10 @@ export default async function AccountPage({ searchParams }: Props) {
   const { data: { user } } = await supabase.auth.getUser();
   if (!user) redirect("/login");
 
-  const [profile, subscriptions] = await Promise.all([
+  const [profile, subscriptions, pastDueSubscriptions] = await Promise.all([
     getProfile(supabase, user.id),
     getUserSubscriptions(supabase, user.id),
+    getPastDueSubscriptions(supabase, user.id),
   ]);
 
   // Backfill display_name from auth metadata for users created before the trigger
@@ -95,6 +97,21 @@ export default async function AccountPage({ searchParams }: Props) {
       <div className="mb-6">
         <h1 className="text-2xl font-bold" style={{ color: "#0f1e3c" }}>Account</h1>
       </div>
+
+      {/* Past-due payment banner */}
+      {pastDueSubscriptions.length > 0 && (
+        <div className="mb-6 rounded-2xl px-6 py-4 border border-red-200 bg-red-50">
+          <p className="font-bold text-sm text-red-800">There&apos;s a problem with your payment</p>
+          <p className="text-xs mt-0.5 text-red-700">
+            We couldn&apos;t process your last payment for{" "}
+            {pastDueSubscriptions.map((s) => PRODUCT_LABELS[s.product] ?? s.product).join(", ")}.
+            Update your payment method to keep your access.
+          </p>
+          <div className="mt-3">
+            <ManageBillingButton className="text-xs font-bold px-3 py-1.5 rounded-lg text-white transition hover:opacity-90 bg-red-700" />
+          </div>
+        </div>
+      )}
 
       {/* Activation delayed banner */}
       {activation === "pending" && !hasAnyPro && (
@@ -208,14 +225,18 @@ export default async function AccountPage({ searchParams }: Props) {
       <div className="bg-white rounded-2xl border border-gray-200 px-6 py-5 mb-4">
         <div className="flex items-center justify-between mb-4">
           <h2 className="text-sm font-bold text-gray-900">Subscriptions</h2>
-          {!hasAnyPro && !isActivating && (
-            <Link
-              href="/pricing"
-              className="text-xs font-bold px-3 py-1.5 rounded-lg text-white transition hover:opacity-90"
-              style={{ backgroundColor: "#1a7f3c" }}
-            >
-              Upgrade →
-            </Link>
+          {hasAnyPro ? (
+            <ManageBillingButton />
+          ) : (
+            !isActivating && (
+              <Link
+                href="/pricing"
+                className="text-xs font-bold px-3 py-1.5 rounded-lg text-white transition hover:opacity-90"
+                style={{ backgroundColor: "#1a7f3c" }}
+              >
+                Upgrade →
+              </Link>
+            )
           )}
         </div>
 

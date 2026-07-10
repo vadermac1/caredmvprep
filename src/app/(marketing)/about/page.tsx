@@ -36,7 +36,10 @@ export default function AboutPage() {
             study with confidence knowing the material reflects what your state actually tests.
           </p>
           <p className="text-gray-600 leading-relaxed">
-            We cover all 50 states, plus CDL and motorcycle endorsement tests — all in one place.
+            Free sample questions are available for all 50 states. Full practice tests, timed mock
+            exams, and progress tracking are live today for California, Texas, Florida, New York,
+            Pennsylvania, Illinois, Ohio, Georgia, North Carolina, and Arizona — plus CDL and
+            motorcycle endorsement tests — with more states added regularly.
           </p>
         </div>
       </section>
@@ -79,7 +82,7 @@ export default function AboutPage() {
       <section className="bg-[#1a7f3c] text-white py-12 text-center">
         <div className="max-w-2xl mx-auto px-4">
           <h2 className="text-2xl font-bold mb-2">Ready to start practicing?</h2>
-          <p className="text-green-100 text-sm mb-6">Free tests available for all 50 states.</p>
+          <p className="text-green-100 text-sm mb-6">Free sample questions available for all 50 states.</p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <Link href="/" className="px-7 py-3 bg-white text-[#1a7f3c] font-bold rounded-lg hover:bg-gray-100 transition">
               Choose Your State

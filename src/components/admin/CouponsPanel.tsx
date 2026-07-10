@@ -67,8 +67,21 @@ export default function CouponsPanel({ initialCoupons }: Props) {
     <div className="space-y-6">
       {/* Create form */}
       <div className="bg-white rounded-xl border border-gray-200 px-5 py-5">
-        <h2 className="text-sm font-bold text-gray-900 mb-1">Create Coupon Code</h2>
-        <p className="text-xs text-gray-400 mb-4">Codes are stored in the database and active immediately — no redeploy needed.</p>
+        <h2 className="text-sm font-bold text-gray-900 mb-1">Coupon Tracker (does not apply discounts)</h2>
+        <p className="text-xs text-gray-400 mb-4">
+          This log is for internal tracking only — creating a row here does <strong>not</strong> create a
+          working discount code. Customers redeem codes via Stripe&apos;s checkout promo field, so any code
+          you want customers to actually use must also be created as a Promotion Code in the{" "}
+          <a
+            href="https://dashboard.stripe.com/coupons"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="underline text-blue-600"
+          >
+            Stripe Dashboard
+          </a>{" "}
+          with the identical code.
+        </p>
         <form onSubmit={handleCreate} className="flex flex-wrap gap-3 items-end">
           <input value={code} onChange={(e) => setCode(e.target.value)} placeholder="CODE (e.g. SUMMER30)" className={`${inputCls} w-44`} />
           <input value={pct} onChange={(e) => setPct(e.target.value)} type="number" min={1} max={100} placeholder="% off" className={`${inputCls} w-20`} />

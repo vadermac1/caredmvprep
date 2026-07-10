@@ -24,4 +24,5 @@ export interface QuizConfig {
   passingScore:   number;         // 0–1, e.g. 0.80
   timeLimitSecs?: number;
   autoStart?:     boolean;        // skip session selector and start immediately
+  isMockExam?:    boolean;        // fixed-length exam simulation — always runs all of `questions`, even when untimed
 }

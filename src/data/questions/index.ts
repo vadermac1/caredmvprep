@@ -752,5 +752,6 @@ export function getMockExamConfig(examId: string, timed = true): QuizConfig | nu
     questions,
     passingScore: base.passingScore,
     timeLimitSecs: timed ? def.timeLimitSecs : undefined,
+    isMockExam:   true,
   };
 }

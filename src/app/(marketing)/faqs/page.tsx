@@ -30,7 +30,7 @@ const faqCategories = [
       },
       {
         q: "Which states are covered?",
-        a: "We currently offer state-specific practice tests for California, Texas, Florida, and New York. We are actively building out tests for all 50 states and plan to cover every state. Sign up to be notified when your state is added.",
+        a: "Free sample questions are available for all 50 states. Full practice tests, timed mock exams, and progress tracking are currently live for California, Texas, Florida, New York, Pennsylvania, Illinois, Ohio, Georgia, North Carolina, and Arizona — with more states added regularly. Sign up to be notified when your state gets full coverage.",
       },
       {
         q: "How often are questions updated?",

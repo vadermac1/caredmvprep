@@ -22,7 +22,7 @@ const PRODUCT_TO_PROFILE: Partial<Record<string, { target_state: string; target_
   motorcycle: { target_state: 'CA', target_license: 'motorcycle' },
   cdl:        { target_state: 'CA', target_license: 'cdl_general' },
 };
-import { getDefaultTestId } from "@/lib/profile-routing";
+import { getDefaultTestId, hasMockExams } from "@/lib/profile-routing";
 import { quizRegistry } from "@/data/questions";
 import { computeReadiness, computeWeeklyActivity } from "@/lib/readiness";
 import ReadinessCard from "@/components/dashboard/ReadinessCard";
@@ -116,7 +116,7 @@ export default async function DashboardPage({ searchParams }: Props) {
       questions: quizRegistry[id].questions.length,
     }));
   const streak       = getStreak(profile);
-  const readiness    = computeReadiness(stats, weakTopics, strongTopics);
+  const readiness    = computeReadiness(stats, weakTopics, strongTopics, hasMockExams(profile.target_license));
   const weeklyActivity = computeWeeklyActivity(stats.sessions);
 
   const firstName = profile?.display_name?.split(' ')[0] ?? null;

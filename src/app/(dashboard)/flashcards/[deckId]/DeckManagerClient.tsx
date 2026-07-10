@@ -58,6 +58,7 @@ export default function DeckManagerClient({ deckId, userId, initialCards }: Prop
   }
 
   async function handleDeleteCard(cardId: string) {
+    if (!window.confirm("Delete this card? This can't be undone.")) return;
     const supabase = createClient();
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     await (supabase.from("flashcards") as any).delete().eq("id", cardId);

@@ -57,6 +57,22 @@ export function hasAnySubscription(subscriptions: Subscription[]): boolean {
   return subscriptions.length > 0;
 }
 
+// Past-due subscriptions are excluded from getUserSubscriptions (which only
+// returns valid, access-granting rows) but still need to be surfaced to the
+// customer so a failed card doesn't silently look like "never subscribed."
+export async function getPastDueSubscriptions(
+  supabase: Client,
+  userId: string
+): Promise<Subscription[]> {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const { data } = await (supabase as any)
+    .from('subscriptions')
+    .select('*')
+    .eq('user_id', userId)
+    .eq('status', 'past_due') as { data: Subscription[] | null };
+  return data ?? [];
+}
+
 // ─── DASHBOARD STATS ─────────────────────────────────────────────────────────
 
 export interface DashboardStats {

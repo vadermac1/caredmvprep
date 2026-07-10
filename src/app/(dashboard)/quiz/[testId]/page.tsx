@@ -99,9 +99,19 @@ export default async function QuizPage({ params, searchParams }: Props) {
     }
   }
 
+  // A fresh key per distinct session request forces QuizEngine to remount
+  // (instead of re-rendering in place) whenever the user asks for a new
+  // session on the same test — e.g. clicking "Practice All" or a per-topic
+  // "Practice" link from a just-finished results screen, where testId is
+  // unchanged but the question set/autostart flag differ. Without this,
+  // React preserves the existing component instance across the navigation
+  // (only the search params changed) and the quiz store is left stuck on
+  // the prior session's "complete" phase, silently no-oping the click.
+  const sessionKey = `${testId}:${focus ?? ''}:${count ?? ''}:${autostart ?? ''}:${practiceAll ?? ''}`;
+
   return (
     <div className="max-w-2xl mx-auto">
-      <QuizEngine config={activeConfig} />
+      <QuizEngine key={sessionKey} config={activeConfig} />
     </div>
   );
 }

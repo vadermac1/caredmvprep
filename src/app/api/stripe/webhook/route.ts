@@ -259,12 +259,14 @@ export async function POST(request: Request) {
         }
 
         const statusMap: Record<string, SubscriptionStatus> = {
-          active:     'active',
-          canceled:   'canceled',
-          past_due:   'past_due',
-          trialing:   'trialing',
-          incomplete: 'incomplete',
-          unpaid:     'past_due',
+          active:             'active',
+          canceled:           'canceled',
+          past_due:           'past_due',
+          trialing:           'trialing',
+          incomplete:         'incomplete',
+          unpaid:             'past_due',
+          paused:             'canceled',
+          incomplete_expired: 'canceled',
         };
 
         const subItem = sub.items.data[0];

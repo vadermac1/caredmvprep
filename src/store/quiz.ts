@@ -165,15 +165,21 @@ export const useQuizStore = create<QuizStore>((set, get) => ({
       if (s.timeRemaining === null || s.timeRemaining <= 0) return s;
       const next = s.timeRemaining - 1;
       if (next <= 0) {
-        // Time's up — auto-submit remaining as skipped and complete
-        const remaining = s.config!.questions.slice(s.currentIndex).map((q) => ({
-          questionId: q.id,
-          selectedIndex: -1,
-          correctIndex: q.correctIndex,
-          isCorrect: false,
-          category: q.category,
-          timeSpentMs: 0,
-        }));
+        // Time's up — auto-submit unanswered questions as skipped and complete.
+        // Exclude questions already in `answers` (e.g. the current one, if the
+        // user submitted it the instant before the timer hit zero) to avoid
+        // double-counting a question and deflating the final score.
+        const answeredIds = new Set(s.answers.map((a) => a.questionId));
+        const remaining = s.config!.questions.slice(s.currentIndex)
+          .filter((q) => !answeredIds.has(q.id))
+          .map((q) => ({
+            questionId: q.id,
+            selectedIndex: -1,
+            correctIndex: q.correctIndex,
+            isCorrect: false,
+            category: q.category,
+            timeSpentMs: 0,
+          }));
         const allAnswers = [...s.answers, ...remaining];
         const totalTimeMs = s.sessionStartTime ? Date.now() - s.sessionStartTime : 0;
         const result = computeResult(s.config!, allAnswers, totalTimeMs);

@@ -25,7 +25,7 @@ export interface ProductConfig {
 export const PRODUCT_CONFIG: Record<SubscriptionProduct, ProductConfig> = {
   dmv: {
     label:       "Driver's License",
-    description: "Full CA DMV permit question bank + 3 timed mock exams",
+    description: "Full state DMV permit question bank + 3 timed mock exams",
     recurring: {
       priceCents: 1200,
       priceId:    process.env.STRIPE_PRICE_DMV_MONTHLY   ?? '',
@@ -39,7 +39,7 @@ export const PRODUCT_CONFIG: Record<SubscriptionProduct, ProductConfig> = {
 
   motorcycle: {
     label:       "Motorcycle License",
-    description: "Full CA motorcycle endorsement question bank",
+    description: "Full state motorcycle endorsement question bank",
     recurring: {
       priceCents: 1200,
       priceId:    process.env.STRIPE_PRICE_MOTO_MONTHLY   ?? '',

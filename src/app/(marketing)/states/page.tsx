@@ -40,6 +40,14 @@ type StateEntry = {
   cdl?: string;
 };
 
+// States with a full practice test bank, timed mock exams, and progress
+// tracking after signup — kept in sync with LIVE_STATE_SLUGS in
+// src/lib/stripe/config.ts. Every state has free sample questions on its
+// own landing page regardless of this list.
+const FULLY_LIVE_ABBRS = new Set([
+  "CA", "TX", "FL", "NY", "PA", "IL", "OH", "GA", "NC", "AZ",
+]);
+
 const states: StateEntry[] = [
   {
     name: "Alabama", abbr: "AL", emoji: "🌲",
@@ -343,8 +351,8 @@ const states: StateEntry[] = [
   },
 ];
 
-const available = states.filter((s) => s.license);
-const comingSoon = states.filter((s) => !s.license);
+const available = states.filter((s) => FULLY_LIVE_ABBRS.has(s.abbr));
+const sampleOnly = states.filter((s) => !FULLY_LIVE_ABBRS.has(s.abbr));
 
 export default function StatesPage() {
   return (
@@ -386,8 +394,8 @@ export default function StatesPage() {
             State-specific questions for your driver&apos;s license, motorcycle endorsement, and CDL — based on your official state DMV handbook.
           </p>
           <div className="mt-6 flex flex-wrap justify-center gap-3">
-            <span className="bg-white/10 text-white text-sm px-3 py-1 rounded-full">{available.length} states available now</span>
-            <span className="bg-white/10 text-white text-sm px-3 py-1 rounded-full">{comingSoon.length} states coming soon</span>
+            <span className="bg-white/10 text-white text-sm px-3 py-1 rounded-full">{available.length} states with full tests & mock exams</span>
+            <span className="bg-white/10 text-white text-sm px-3 py-1 rounded-full">Free sample questions in all 50</span>
           </div>
         </div>
       </section>
@@ -456,24 +464,25 @@ export default function StatesPage() {
         </div>
       </section>
 
-      {/* Coming Soon */}
+      {/* More states — free sample questions, full test coming soon */}
       <section className="py-14 bg-gray-50">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-2xl font-bold text-gray-900 mb-2">Coming Soon</h2>
-          <p className="text-gray-500 text-sm mb-8">These states are in progress. Sign up to be notified when your state launches — Driver&apos;s License, Motorcycle, and CDL tests all included.</p>
+          <h2 className="text-2xl font-bold text-gray-900 mb-2">More States</h2>
+          <p className="text-gray-500 text-sm mb-8">Free sample questions are available now. Full practice tests, mock exams, and progress tracking are rolling out to these states next — sign up to be notified.</p>
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3">
-            {comingSoon.map((state) => (
-              <div
+            {sampleOnly.map((state) => (
+              <Link
                 key={state.abbr}
-                className="block rounded-xl border border-gray-200 bg-white p-4 text-center opacity-70"
+                href={state.license!}
+                className="block rounded-xl border border-gray-200 bg-white p-4 text-center hover:border-[#1a7f3c] transition"
               >
                 <div className="text-2xl mb-1">{state.emoji}</div>
                 <div className="font-medium text-gray-700 text-sm">{state.name}</div>
                 <div className="text-xs text-gray-400">{state.abbr}</div>
                 <div className="mt-2">
-                  <span className="text-xs bg-gray-100 text-gray-500 px-2 py-0.5 rounded-full">🔒 Coming Soon</span>
+                  <span className="text-xs bg-gray-100 text-gray-500 px-2 py-0.5 rounded-full">Sample questions</span>
                 </div>
-              </div>
+              </Link>
             ))}
           </div>
         </div>

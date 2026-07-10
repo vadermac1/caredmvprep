@@ -38,14 +38,7 @@ export default function QuizEngine({ config }: QuizEngineProps) {
 
   const [selectedSize, setSelectedSize] = useState<number | null>(25);
 
-  // When navigating to a different test, reset to idle so the selector shows
-  useEffect(() => {
-    if (storeConfig?.testId !== config.testId) {
-      resetQuiz();
-    }
-  }, [config.testId]); // eslint-disable-line react-hooks/exhaustive-deps
-
-  const isMockExam  = config.timeLimitSecs !== undefined;
+  const isMockExam  = config.isMockExam === true;
   const isAutoStart = config.autoStart === true;
   const bankTotal   = config.questions.length;
 
@@ -57,9 +50,17 @@ export default function QuizEngine({ config }: QuizEngineProps) {
     trackQuizStarted(config.testId, questions.length);
   }
 
-  // Auto-start focused practice sessions without showing the selector
+  // The parent page assigns this component a fresh React `key` per distinct
+  // session request (testId + focus/practiceAll/count params), so every
+  // mount here represents a new quiz the user asked to start — including
+  // "Practice All" / per-topic "Practice" clicks from a just-finished
+  // results screen, where testId is unchanged but the questions/autoStart
+  // flag differ. Reset any leftover state from a prior session on mount,
+  // then auto-start focused/personalized sessions without showing the
+  // selector.
   useEffect(() => {
-    if (isAutoStart && phase === 'idle') {
+    resetQuiz();
+    if (isAutoStart) {
       handleStart(bankTotal);
     }
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
