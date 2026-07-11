@@ -79,7 +79,7 @@ export function computeReadiness(
         sum + (s.total_questions > 0 ? ((s.score ?? 0) / s.total_questions) * 100 : 0), 0
       ) / recent.length;
     const diff = recentAvg - stats.avgPct;
-    if (diff > 3)       { trend = 'up';     trendLabel = `↑ +${Math.round(diff)}% recently`;          score = Math.min(score + 2, 100); }
+    if (diff > 3)       { trend = 'up';     trendLabel = `↑ +${Math.round(diff)}% recently`; }
     else if (diff < -3) { trend = 'down';   trendLabel = `↓ ${Math.round(Math.abs(diff))}% recently`; }
     else                { trend = 'stable'; trendLabel = '→ Holding steady'; }
   }
@@ -198,6 +198,43 @@ export const CATEGORY_LABELS: Record<string, string> = {
   pedestrians_cyclists:        'Pedestrians & Cyclists',
   highway_driving:             'Highway Driving',
   road_signs:                  'Road Signs',
+  // MI / MO / TN / VA / WA DMV
+  road_rules:                  'Road Rules',
+  traffic_controls:            'Traffic Signals & Controls',
+  safety:                      'Safe Driving',
+  sharing_road:                'Sharing the Road',
+  fines_penalties:             'Fines & Penalties',
+  emergencies:                 'Emergency Procedures',
+  dwi_penalties:               'DWI/DUI Penalties',
+  dwi_law:                     'DWI/DUI Law',
+  permit_requirements:         'Permit Requirements',
+  gdl:                         'Graduated License (GDL)',
+  child_restraints:            'Child Restraints',
+  regulatory_signs:            'Regulatory Signs',
+  warning_signs:               'Warning Signs',
+  guide_signs:                 'Guide Signs',
+  service_signs:               'Service Signs',
+  construction_signs:          'Construction Signs',
+  crashes_emergencies:         'Crashes & Emergencies',
+  bac_limits:                  'BAC Limits',
+  headlights:                  'Headlights',
+  seat_belts:                  'Seat Belts',
+  school_buses:                'School Buses',
+  school_zones:                'School Zones',
+  move_over:                   'Move Over Law',
+  open_container:              'Open Container Law',
+  railroad_crossings:          'Railroad Crossings',
+  reckless_driving:            'Reckless Driving',
+  residential_speed:           'Residential Speed',
+  rural_speed:                 'Rural Speed',
+  freeway_speed:               'Freeway Speed',
+  stop_signs:                  'Stop Signs',
+  turn_signals:                'Turn Signals',
+  work_zones:                  'Work Zones',
+  implied_consent:             'Implied Consent',
+  driver_fitness:              'Driver Fitness',
+  points_system:               'Points System',
+  insurance:                   'Insurance',
   // TX Motorcycle
   protective_gear:             'Protective Gear',
   pre_ride:                    'Pre-Ride Inspection',

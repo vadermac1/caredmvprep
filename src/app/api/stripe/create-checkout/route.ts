@@ -171,6 +171,13 @@ export async function POST(request: Request) {
           target_license: resolvedLicense,
         },
       };
+    } else {
+      // One-time payments don't create a Stripe Customer by default, only a
+      // PaymentIntent. Without a Customer, stripe_customer_id ends up null
+      // and the billing portal (Manage Billing) has nothing to open for
+      // this customer. Force one to be created so every purchase path —
+      // not just recurring subscriptions — can use the billing portal.
+      sessionParams.customer_creation = 'always';
     }
 
     const session = await stripe.checkout.sessions.create(sessionParams);

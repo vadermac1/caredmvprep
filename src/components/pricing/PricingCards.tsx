@@ -111,7 +111,7 @@ function StatePicker({
       className="fixed inset-0 z-50 flex items-center justify-center px-4"
       style={{ backgroundColor: "rgba(0,0,0,0.5)" }}
     >
-      <div className="bg-white rounded-2xl shadow-xl w-full max-w-md p-6">
+      <div className="bg-white rounded-2xl shadow-xl w-full max-w-md p-6 max-h-[85vh] overflow-y-auto">
         <h2 className="text-lg font-bold mb-1" style={{ color: "#0f1e3c" }}>
           Where are you studying?
         </h2>

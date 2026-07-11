@@ -19,7 +19,7 @@ const websiteSchema = {
       "@id": "https://caredmvprep.com/#website",
       "url": "https://caredmvprep.com",
       "name": "CAREDMVPrep",
-      "description": "Free DMV practice tests for all 50 states — driver's license, CDL, and motorcycle.",
+      "description": "Free DMV sample questions for all 50 states, with full practice tests, mock exams, CDL, and motorcycle available in 15 states and growing.",
       "potentialAction": {
         "@type": "SearchAction",
         "target": {
@@ -144,7 +144,7 @@ const whyItems = [
       </svg>
     ),
     title: "All 50 States Covered",
-    desc: "Whether you're in California or Wyoming, we have up-to-date practice tests tailored to your state's requirements.",
+    desc: "Free sample questions for every state, with full practice tests, mock exams, and progress tracking live in 15 states and growing.",
   },
 ];
 
@@ -266,7 +266,7 @@ export default function HomePage() {
               </div>
               <h3 className="text-xl font-bold mb-2" style={{ color: '#0d1a2d' }}>Driver&apos;s License Tests</h3>
               <p className="text-sm leading-relaxed mb-5" style={{ color: '#6b7280' }}>
-                Practice for your state&apos;s written knowledge test. All 50 states covered with questions from official DMV manuals.
+                Practice for your state&apos;s written knowledge test. Sample questions for all 50 states, full practice tests in 15 and growing.
               </p>
               <span className="inline-flex items-center gap-1 text-sm font-bold" style={{ color: '#1a7f3c' }}>
                 Start Practicing →
@@ -479,7 +479,7 @@ export default function HomePage() {
             <div>
               <h2 className="text-xl font-bold">Start Your Journey Today</h2>
               <p className="text-green-100 text-sm mt-0.5">
-                Free practice tests for all 50 states — driver&apos;s license, CDL, and motorcycle.
+                Free sample questions for all 50 states — full practice tests, CDL, and motorcycle where available.
               </p>
             </div>
           </div>

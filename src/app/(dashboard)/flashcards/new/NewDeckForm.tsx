@@ -4,14 +4,11 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
 import { createDeckFromWeakTopic } from "./actions";
+import { getCategoryLabel } from "@/lib/readiness";
 
 interface Props {
   userId: string;
   weakTopics: Array<{ category_slug: string; accuracy_pct: number; total: number }>;
-}
-
-function fmt(slug: string) {
-  return slug.replace(/_/g, " ").replace(/\b\w/g, (c) => c.toUpperCase());
 }
 
 export default function NewDeckForm({ userId, weakTopics }: Props) {
@@ -104,7 +101,7 @@ export default function NewDeckForm({ userId, weakTopics }: Props) {
                 disabled={loading}
                 className="w-full flex items-center justify-between px-4 py-2.5 rounded-lg border border-gray-200 text-sm hover:bg-gray-50 transition text-left disabled:opacity-50"
               >
-                <span className="font-medium text-gray-900">{fmt(t.category_slug)}</span>
+                <span className="font-medium text-gray-900">{getCategoryLabel(t.category_slug)}</span>
                 <span className="text-xs text-gray-500">
                   {Math.round(t.accuracy_pct)}% · {t.total} seen
                 </span>

@@ -11,6 +11,12 @@ import { trackQuizStarted } from "@/lib/analytics";
 
 interface QuizEngineProps {
   config: QuizConfig;
+  // Identifies this specific session request (testId + focus/practiceAll/
+  // count/etc.). Lets the mount effect tell "the user reloaded mid-quiz,
+  // resume it" apart from "this is a genuinely different session request
+  // that happens to reuse the same store," e.g. clicking a different
+  // weak-topic practice link before finishing the current one.
+  sessionKey: string;
 }
 
 const SESSION_OPTIONS = [
@@ -29,12 +35,14 @@ function shuffled<T>(arr: T[]): T[] {
   return a;
 }
 
-export default function QuizEngine({ config }: QuizEngineProps) {
+export default function QuizEngine({ config, sessionKey }: QuizEngineProps) {
   const phase = useQuizStore((s) => s.phase);
   const startQuiz = useQuizStore((s) => s.startQuiz);
   const resetQuiz = useQuizStore((s) => s.resetQuiz);
   const answers = useQuizStore((s) => s.answers);
   const storeConfig = useQuizStore((s) => s.config);
+  const storeSessionKey = useQuizStore((s) => s.sessionKey);
+  const hasHydrated = useQuizStore((s) => s.hasHydrated);
 
   const [selectedSize, setSelectedSize] = useState<number | null>(25);
 
@@ -46,28 +54,46 @@ export default function QuizEngine({ config }: QuizEngineProps) {
     const count = (size ?? selectedSize) ?? bankTotal;
     const questions = shuffled(config.questions).slice(0, count);
     const sessionConfig: QuizConfig = { ...config, questions };
-    startQuiz(sessionConfig);
+    startQuiz(sessionConfig, sessionKey);
     trackQuizStarted(config.testId, questions.length);
   }
 
   // The parent page assigns this component a fresh React `key` per distinct
   // session request (testId + focus/practiceAll/count params), so every
-  // mount here represents a new quiz the user asked to start — including
-  // "Practice All" / per-topic "Practice" clicks from a just-finished
-  // results screen, where testId is unchanged but the questions/autoStart
-  // flag differ. Reset any leftover state from a prior session on mount,
-  // then auto-start focused/personalized sessions without showing the
-  // selector.
+  // mount here represents either a new quiz the user asked to start, or a
+  // reload/reopen of a tab that had one already in progress. sessionKey
+  // (persisted to sessionStorage alongside the quiz state) tells these two
+  // apart: if it still matches and the session was active, resume it as-is
+  // instead of wiping the user's progress out from under them. Otherwise
+  // treat this as a fresh session request — including "Practice All" /
+  // per-topic "Practice" clicks from a just-finished results screen, where
+  // testId is unchanged but the questions/autoStart flag differ.
   useEffect(() => {
-    resetQuiz();
-    if (isAutoStart) {
-      handleStart(bankTotal);
+    // Zustand's persist rehydration is asynchronous — until it finishes,
+    // `phase` still reads its pre-hydration default ('idle'), which would
+    // otherwise look identical to "nothing to resume" and wipe out a
+    // session that's actually still in progress (e.g. on page reload).
+    if (!hasHydrated) return;
+    const canResume = phase === 'active' && storeSessionKey === sessionKey;
+    if (!canResume) {
+      resetQuiz();
+      if (isAutoStart) {
+        handleStart(bankTotal);
+      }
     }
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [hasHydrated]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const correctSoFar     = answers.filter((a) => a.isCorrect).length;
   const progressTotal    = storeConfig?.questions.length ?? 0;
   const progressAnswered = answers.length;
+
+  // Don't render the idle selector (or anything else) until we know
+  // whether there's a session to resume — otherwise a reload mid-quiz
+  // flashes the "choose your session length" screen for a frame before
+  // snapping back to the actual in-progress question.
+  if (!hasHydrated) {
+    return <div className="py-20 text-center text-sm text-gray-400">Loading session…</div>;
+  }
 
   if (phase === 'idle') {
     // Auto-start in progress — show nothing to avoid flash of selector
@@ -99,6 +125,11 @@ export default function QuizEngine({ config }: QuizEngineProps) {
 
     return (
       <div className="max-w-xl mx-auto py-10">
+        {config.notice && (
+          <div className="mb-6 rounded-xl border border-amber-200 bg-amber-50 px-4 py-3 text-sm text-amber-800">
+            {config.notice}
+          </div>
+        )}
         <div className="mb-8 text-center">
           <h1 className="text-2xl font-bold mb-1" style={{ color: '#0f1e3c' }}>
             {displayLabel}

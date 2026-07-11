@@ -1,7 +1,6 @@
 import { redirect } from "next/navigation";
 import Link from "next/link";
 import { createClient } from "@/lib/supabase/server";
-import FlashcardsClient from "./FlashcardsClient";
 
 export const metadata = {
   title: "Flashcards — CAREDMVPrep",
@@ -183,9 +182,6 @@ export default async function FlashcardsPage() {
           <li>• Study a little each day. 10 minutes of spaced repetition beats cramming the night before.</li>
         </ul>
       </div>
-
-      {/* Client component for interactivity (create deck from weak topics) */}
-      <FlashcardsClient />
     </div>
   );
 }

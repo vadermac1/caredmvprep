@@ -9,12 +9,23 @@ interface Props {
   plan:          StudyPlan | null;
   userId:        string;
   weakTopicCount: number;
+  licenseType:   string;
+}
+
+// `new Date("YYYY-MM-DD")` parses the string as UTC midnight, which then
+// rolls back to the previous day once rendered in any timezone west of
+// Greenwich (i.e. every US timezone) — a customer picking August 10 would
+// see "August 9" everywhere this date is displayed. Parsing the components
+// directly constructs the date in the browser's local timezone instead.
+function parseLocalDate(isoDate: string): Date {
+  const [year, month, day] = isoDate.split('-').map(Number);
+  return new Date(year, month - 1, day);
 }
 
 function daysUntil(isoDate: string): number {
   const today = new Date();
   today.setHours(0, 0, 0, 0);
-  const target = new Date(isoDate);
+  const target = parseLocalDate(isoDate);
   return Math.ceil((target.getTime() - today.getTime()) / (1000 * 60 * 60 * 24));
 }
 
@@ -24,7 +35,7 @@ function urgencyColor(days: number): string {
   return '#1a7f3c';
 }
 
-export default function StudyPlanCard({ plan, userId, weakTopicCount }: Props) {
+export default function StudyPlanCard({ plan, userId, weakTopicCount, licenseType }: Props) {
   const [editing, setEditing]   = useState(false);
   const [date, setDate]         = useState(plan?.exam_date?.slice(0, 10) ?? '');
   const [saving, setSaving]     = useState(false);
@@ -36,7 +47,7 @@ export default function StudyPlanCard({ plan, userId, weakTopicCount }: Props) {
     const supabase = createClient();
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     await (supabase.from('study_plans') as any).upsert(
-      { user_id: userId, license_type: 'permit', exam_date: date, daily_goal_mins: 20 },
+      { user_id: userId, license_type: licenseType, exam_date: date, daily_goal_mins: 20 },
       { onConflict: 'user_id,license_type' }
     );
     setSaving(false);
@@ -50,7 +61,8 @@ export default function StudyPlanCard({ plan, userId, weakTopicCount }: Props) {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     await (supabase.from('study_plans') as any)
       .update({ exam_date: null })
-      .eq('user_id', userId);
+      .eq('user_id', userId)
+      .eq('license_type', licenseType);
     setDate('');
     router.refresh();
   }
@@ -81,7 +93,7 @@ export default function StudyPlanCard({ plan, userId, weakTopicCount }: Props) {
                 <span className="text-sm text-gray-500">days until your exam</span>
               </div>
               <p className="text-xs text-gray-400 mb-4">
-                {new Date(examDate).toLocaleDateString('en-US', {
+                {parseLocalDate(examDate).toLocaleDateString('en-US', {
                   weekday: 'long', month: 'long', day: 'numeric', year: 'numeric',
                 })}
               </p>

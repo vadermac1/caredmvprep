@@ -96,11 +96,11 @@ export default async function DashboardPage({ searchParams }: Props) {
     bookmarkCount,
   ] = await Promise.all([
     getDashboardStats(supabase, user.id),
-    getWeakTopics(supabase, user.id, 6),
-    getStrongTopics(supabase, user.id),
+    getWeakTopics(supabase, user.id, 6, profile.target_license),
+    getStrongTopics(supabase, user.id, 5, profile.target_license),
     getRecentlyMissed(supabase, user.id),
     getFlashcardStats(supabase, user.id),
-    getStudyPlan(supabase, user.id),
+    getStudyPlan(supabase, user.id, profile.target_license),
     getBookmarkCount(supabase, user.id),
   ]);
 
@@ -241,13 +241,14 @@ export default async function DashboardPage({ searchParams }: Props) {
           plan={studyPlan}
           userId={user.id}
           weakTopicCount={weakTopics.length}
+          licenseType={profile.target_license ?? 'permit'}
         />
       </div>
 
       {/* ── Zone 6: Recent activity ─────────────────────────────────────── */}
       {stats.sessions.length > 0 && (
         <div className="mb-8">
-          <RecentActivity sessions={stats.sessions.slice(0, 5)} />
+          <RecentActivity sessions={stats.sessions.slice(0, 5)} quizHref={quizHref} />
         </div>
       )}
 

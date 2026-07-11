@@ -115,14 +115,17 @@ export async function getDashboardStats(
 export async function getWeakTopics(
   supabase: Client,
   userId: string,
-  limit = 8
+  limit = 8,
+  licenseType?: string | null
 ): Promise<WeakTopic[]> {
-  const { data } = await supabase
+  let query = supabase
     .from('weak_topics')
     .select('*')
     .eq('user_id', userId)
     .gte('total', 5)
-    .lt('accuracy_pct', 80)
+    .lt('accuracy_pct', 80);
+  if (licenseType) query = query.eq('license_type', licenseType);
+  const { data } = await query
     .order('accuracy_pct', { ascending: true })
     .limit(limit);
   return data ?? [];
@@ -165,14 +168,17 @@ export async function getRecentSessions(
 export async function getStrongTopics(
   supabase: Client,
   userId: string,
-  limit = 5
+  limit = 5,
+  licenseType?: string | null
 ): Promise<WeakTopic[]> {
-  const { data } = await supabase
+  let query = supabase
     .from('weak_topics')
     .select('*')
     .eq('user_id', userId)
     .gte('accuracy_pct', 80)
-    .gte('total', 10)
+    .gte('total', 10);
+  if (licenseType) query = query.eq('license_type', licenseType);
+  const { data } = await query
     .order('accuracy_pct', { ascending: false })
     .limit(limit);
   return data ?? [];
@@ -191,14 +197,31 @@ export async function getRecentlyMissed(
   userId: string,
   limit = 20
 ): Promise<MissedQuestion[]> {
+  // Pull a wider window of the user's most recent answers (not just wrong
+  // ones) so we can tell, per question, whether the most recent attempt was
+  // actually still wrong — a question missed once but answered correctly
+  // since shouldn't keep showing up here, and a question missed across
+  // several sessions shouldn't be counted more than once.
   const { data } = await supabase
     .from('user_answers')
-    .select('question_id, category, created_at')
+    .select('question_id, category, created_at, is_correct')
     .eq('user_id', userId)
-    .eq('is_correct', false)
     .order('created_at', { ascending: false })
-    .limit(limit);
-  return (data ?? []) as MissedQuestion[];
+    .limit(limit * 10);
+
+  const rows = (data ?? []) as (MissedQuestion & { is_correct: boolean })[];
+
+  const latestByQuestion = new Map<string, MissedQuestion & { is_correct: boolean }>();
+  for (const row of rows) {
+    if (!latestByQuestion.has(row.question_id)) {
+      latestByQuestion.set(row.question_id, row);
+    }
+  }
+
+  return [...latestByQuestion.values()]
+    .filter((row) => !row.is_correct)
+    .slice(0, limit)
+    .map(({ question_id, category, created_at }) => ({ question_id, category, created_at }));
 }
 
 // ─── FLASHCARD STATS ──────────────────────────────────────────────────────────
@@ -243,14 +266,15 @@ export async function getFlashcardStats(
 
 export async function getStudyPlan(
   supabase: Client,
-  userId: string
+  userId: string,
+  licenseType?: string | null
 ): Promise<StudyPlan | null> {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const { data } = await (supabase.from('study_plans') as any)
+  let query = (supabase.from('study_plans') as any)
     .select('*')
-    .eq('user_id', userId)
-    .limit(1)
-    .maybeSingle();
+    .eq('user_id', userId);
+  if (licenseType) query = query.eq('license_type', licenseType);
+  const { data } = await query.limit(1).maybeSingle();
   return (data ?? null) as StudyPlan | null;
 }
 

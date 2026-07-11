@@ -1,5 +1,5 @@
 import type { MissedQuestion, FlashcardStats } from '@/lib/supabase/queries';
-import { CATEGORY_LABELS } from '@/lib/readiness';
+import { getCategoryLabel } from '@/lib/readiness';
 import Link from 'next/link';
 
 interface Props {
@@ -59,7 +59,7 @@ export default function SmartReviewCard({ missedQuestions, flashcards, bookmarkC
             {topCategories.map(([slug, count]) => (
               <div key={slug} className="flex items-center justify-between">
                 <span className="text-xs text-gray-700">
-                  {CATEGORY_LABELS[slug] ?? slug}
+                  {getCategoryLabel(slug)}
                 </span>
                 <span
                   className="text-xs font-bold px-2 py-0.5 rounded-full"

@@ -4,6 +4,7 @@ import { createClient } from "@/lib/supabase/server";
 import { getProfile } from "@/lib/supabase/queries";
 import { getDefaultTestId } from "@/lib/profile-routing";
 import { quizRegistry } from "@/data/questions/index";
+import { getCategoryLabel } from "@/lib/readiness";
 
 interface CreateFromWeakTopicResult {
   deckId?: string;
@@ -30,7 +31,13 @@ export async function createDeckFromWeakTopic(
     ? config.questions.filter((q) => q.category === categorySlug)
     : [];
 
-  const deckName = categorySlug.replace(/_/g, " ").replace(/\b\w/g, (c) => c.toUpperCase());
+  // Nothing to put in the deck — don't create an empty, confusing deck named
+  // after a topic with zero cards in it. Surface it as an error instead.
+  if (matches.length === 0) {
+    return { error: "No questions found for that topic in your current test bank." };
+  }
+
+  const deckName = getCategoryLabel(categorySlug);
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const { data: deck, error: deckErr } = await (supabase.from("flashcard_decks") as any)
@@ -42,19 +49,17 @@ export async function createDeckFromWeakTopic(
     return { error: deckErr?.message ?? "Failed to create deck." };
   }
 
-  if (matches.length > 0) {
-    const cards = matches.map((q) => ({
-      deck_id:     deck.id,
-      question_id: q.id,
-      front:       q.question,
-      back:        `${q.options[q.correctIndex]}\n\n${q.explanation}`,
-    }));
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const { error: cardsErr } = await (supabase.from("flashcards") as any).insert(cards);
-    if (cardsErr) {
-      // Deck exists but cards failed — surface it rather than silently returning an empty deck.
-      return { deckId: deck.id, error: `Deck created, but cards failed to populate: ${cardsErr.message}` };
-    }
+  const cards = matches.map((q) => ({
+    deck_id:     deck.id,
+    question_id: q.id,
+    front:       q.question,
+    back:        `${q.options[q.correctIndex]}\n\n${q.explanation}`,
+  }));
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const { error: cardsErr } = await (supabase.from("flashcards") as any).insert(cards);
+  if (cardsErr) {
+    // Deck exists but cards failed — surface it rather than silently returning an empty deck.
+    return { deckId: deck.id, error: `Deck created, but cards failed to populate: ${cardsErr.message}` };
   }
 
   return { deckId: deck.id };

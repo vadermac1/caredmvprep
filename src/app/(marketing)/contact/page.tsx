@@ -16,6 +16,9 @@ export default function ContactPage() {
   const [subject, setSubject] = useState(subjects[0]);
   const [message, setMessage] = useState("");
   const [sent, setSent] = useState(false);
+  const [copied, setCopied] = useState(false);
+
+  const fullMessage = `Name: ${name}\nEmail: ${email}\nSubject: ${subject}\n\n${message}`;
 
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -23,6 +26,16 @@ export default function ContactPage() {
     const mailto = `mailto:hello@caredmvprep.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
     window.location.href = mailto;
     setSent(true);
+  }
+
+  async function handleCopy() {
+    try {
+      await navigator.clipboard.writeText(fullMessage);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2500);
+    } catch {
+      // Clipboard API unavailable — the textarea below is still selectable/copyable by hand.
+    }
   }
 
   return (
@@ -41,22 +54,41 @@ export default function ContactPage() {
         <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8">
 
           {sent ? (
-            <div className="bg-green-50 border border-green-200 rounded-2xl p-10 text-center">
-              <div className="text-4xl mb-4">✅</div>
-              <h2 className="text-xl font-bold text-gray-900 mb-2">Message Ready to Send</h2>
-              <p className="text-gray-600 text-sm">
-                Your email client should have opened with your message pre-filled. If it didn&apos;t,
-                email us directly at{" "}
+            <div className="bg-green-50 border border-green-200 rounded-2xl p-8 text-center">
+              <div className="text-4xl mb-4">📨</div>
+              <h2 className="text-xl font-bold text-gray-900 mb-2">Almost there</h2>
+              <p className="text-gray-600 text-sm mb-5">
+                We just tried to open your email app with your message pre-filled. If a new email
+                popped up, hit send there and you&apos;re done. If nothing opened — common on phones
+                and Chromebooks without a mail app set up — copy your message below and paste it into
+                whatever email you use, addressed to{" "}
                 <a href="mailto:hello@caredmvprep.com" className="text-[#1a7f3c] font-semibold underline">
                   hello@caredmvprep.com
-                </a>
+                </a>.
               </p>
+              <textarea
+                readOnly
+                value={fullMessage}
+                rows={6}
+                className="w-full border border-green-200 rounded-lg px-4 py-2.5 text-sm bg-white text-gray-700 resize-none mb-3"
+                onFocus={(e) => e.currentTarget.select()}
+              />
               <button
-                onClick={() => setSent(false)}
-                className="mt-6 text-sm text-gray-500 underline"
+                type="button"
+                onClick={handleCopy}
+                className="px-5 py-2 rounded-lg text-sm font-semibold text-white transition"
+                style={{ backgroundColor: "#1a7f3c" }}
               >
-                Send another message
+                {copied ? "Copied ✓" : "Copy message"}
               </button>
+              <div>
+                <button
+                  onClick={() => setSent(false)}
+                  className="mt-6 text-sm text-gray-500 underline"
+                >
+                  Send another message
+                </button>
+              </div>
             </div>
           ) : (
             <div className="bg-gray-50 rounded-2xl border border-gray-100 p-8">

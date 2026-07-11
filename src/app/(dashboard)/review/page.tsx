@@ -54,9 +54,10 @@ export default async function ReviewPage() {
   const { data: { user } } = await supabase.auth.getUser();
   if (!user) redirect("/login");
 
-  const [profile, weakTopics, missedRaw, bookmarks, flashcards] = await Promise.all([
-    getProfile(supabase, user.id),
-    getWeakTopics(supabase, user.id, 10),
+  const profile = await getProfile(supabase, user.id);
+
+  const [weakTopics, missedRaw, bookmarks, flashcards] = await Promise.all([
+    getWeakTopics(supabase, user.id, 10, profile?.target_license),
     getRecentlyMissed(supabase, user.id, 30),
     getBookmarks(supabase, user.id, 30),
     getFlashcardStats(supabase, user.id),

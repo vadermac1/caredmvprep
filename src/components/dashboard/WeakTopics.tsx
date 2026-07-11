@@ -9,12 +9,16 @@ interface FocusTopic {
 }
 
 interface Props {
-  topics:  FocusTopic[];
-  testId?: string;
-  title?:  string;
+  topics: FocusTopic[];
+  // Required (no fallback): defaulting this to a specific state's test was
+  // the cause of a real bug — every "Practice" link silently sent customers
+  // in every other state to a California test. Missing it should be a
+  // compile error, not a silent wrong-state redirect.
+  testId: string;
+  title?: string;
 }
 
-export default function WeakTopics({ topics, testId = 'california-permit', title = 'Focus Areas' }: Props) {
+export default function WeakTopics({ topics, testId, title = 'Focus Areas' }: Props) {
   if (topics.length === 0) {
     return (
       <div className="bg-white rounded-xl border border-gray-200 px-5 py-5">

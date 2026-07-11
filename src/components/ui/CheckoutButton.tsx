@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import { startCheckout } from "@/lib/stripe/client";
 import type { SubscriptionProduct, PaymentType } from "@/types/database";
 
@@ -50,7 +51,19 @@ export default function CheckoutButton({
       >
         {loading ? "Redirecting to checkout…" : label}
       </button>
-      {error && <p className="mt-2 text-xs text-red-600">{error}</p>}
+      {error && (
+        <p className="mt-2 text-xs text-red-600">
+          {error}
+          {error.toLowerCase().includes("complete onboarding") && (
+            <>
+              {" "}
+              <Link href="/onboarding" className="underline font-semibold">
+                Finish onboarding →
+              </Link>
+            </>
+          )}
+        </p>
+      )}
     </div>
   );
 }

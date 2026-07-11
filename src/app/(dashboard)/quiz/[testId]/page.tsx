@@ -36,7 +36,7 @@ export default async function QuizPage({ params, searchParams }: Props) {
 
   // ── practiceAll=1: weighted 25q personalized session ────────────────────────
   if (practiceAll === '1' && user) {
-    const weakTopics = await getWeakTopics(supabase, user.id, 20);
+    const weakTopics = await getWeakTopics(supabase, user.id, 20, config.licenseType);
 
     if (weakTopics.length > 0) {
       const TARGET = 25;
@@ -96,6 +96,14 @@ export default async function QuizPage({ params, searchParams }: Props) {
         label:     `${config.label} — Focused Review`,
         autoStart: autostart === '1' || !!count,
       };
+    } else {
+      // Not enough questions match the requested topic(s) to build a focused
+      // session — fall back to the full test, but tell the user why instead
+      // of silently swapping out what they clicked for.
+      activeConfig = {
+        ...config,
+        notice: "We couldn't find enough questions for that specific topic, so here's the full practice test instead.",
+      };
     }
   }
 
@@ -111,7 +119,7 @@ export default async function QuizPage({ params, searchParams }: Props) {
 
   return (
     <div className="max-w-2xl mx-auto">
-      <QuizEngine key={sessionKey} config={activeConfig} />
+      <QuizEngine key={sessionKey} sessionKey={sessionKey} config={activeConfig} />
     </div>
   );
 }

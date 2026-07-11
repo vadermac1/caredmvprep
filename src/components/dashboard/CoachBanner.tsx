@@ -1,6 +1,6 @@
 import type { ReadinessResult } from '@/lib/readiness';
 import type { WeakTopic } from '@/types/database';
-import { CATEGORY_LABELS } from '@/lib/readiness';
+import { getCategoryLabel } from '@/lib/readiness';
 import Link from 'next/link';
 
 interface Props {
@@ -41,7 +41,7 @@ function buildMessage(
     };
   }
 
-  const topicName = CATEGORY_LABELS[weakest.category_slug] ?? weakest.category_slug;
+  const topicName = getCategoryLabel(weakest.category_slug);
   const pct       = Math.round(Number(weakest.accuracy_pct));
 
   return {

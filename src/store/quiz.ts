@@ -1,4 +1,5 @@
 import { create } from 'zustand';
+import { persist, createJSONStorage } from 'zustand/middleware';
 import type { Question, QuizConfig } from '@/types/question';
 
 export interface AnswerRecord {
@@ -27,6 +28,12 @@ interface QuizStore {
   // Config
   config: QuizConfig | null;
 
+  // Identifies which session request (testId + focus/practiceAll/count/etc.)
+  // produced the current config, so a page remount (e.g. an accidental
+  // reload mid-quiz) can tell "resume this" apart from "this is a different
+  // session request that happens to reuse the same store."
+  sessionKey: string | null;
+
   // Runtime state
   phase: Phase;
   currentIndex: number;
@@ -38,8 +45,17 @@ interface QuizStore {
   // Computed result (set on complete)
   result: QuizResult | null;
 
+  // Zustand's persist middleware rehydrates from sessionStorage
+  // asynchronously — on mount, `phase` briefly reads its default ('idle')
+  // until rehydration finishes. Consumers (QuizEngine) must wait for this
+  // flag before deciding whether a session can be resumed, or they'll
+  // wrongly conclude there's nothing to resume and reset a session that's
+  // actually still in progress.
+  hasHydrated: boolean;
+  setHasHydrated: (value: boolean) => void;
+
   // Actions
-  startQuiz: (config: QuizConfig) => void;
+  startQuiz: (config: QuizConfig, sessionKey?: string) => void;
   submitAnswer: (selectedIndex: number) => void;
   nextQuestion: () => void;
   skipQuestion: () => void;
@@ -80,8 +96,11 @@ function computeResult(config: QuizConfig, answers: AnswerRecord[], totalTimeMs:
   };
 }
 
-export const useQuizStore = create<QuizStore>((set, get) => ({
+export const useQuizStore = create<QuizStore>()(
+  persist(
+    (set, get) => ({
   config: null,
+  sessionKey: null,
   phase: 'idle',
   currentIndex: 0,
   answers: [],
@@ -89,10 +108,13 @@ export const useQuizStore = create<QuizStore>((set, get) => ({
   questionStartTime: null,
   timeRemaining: null,
   result: null,
+  hasHydrated: false,
+  setHasHydrated: (value) => set({ hasHydrated: value }),
 
-  startQuiz: (config) => {
+  startQuiz: (config, sessionKey) => {
     set({
       config,
+      sessionKey: sessionKey ?? null,
       phase: 'active',
       currentIndex: 0,
       answers: [],
@@ -192,6 +214,7 @@ export const useQuizStore = create<QuizStore>((set, get) => ({
   resetQuiz: () =>
     set({
       config: null,
+      sessionKey: null,
       phase: 'idle',
       currentIndex: 0,
       answers: [],
@@ -220,4 +243,32 @@ export const useQuizStore = create<QuizStore>((set, get) => ({
     const answered = answers.length;
     return { answered, total, percent: total > 0 ? Math.round((answered / total) * 100) : 0 };
   },
-}));
+    }),
+    {
+      // sessionStorage (not localStorage): survives an accidental reload or
+      // tab close/reopen within the same browser tab, but doesn't linger
+      // indefinitely across unrelated future visits the way localStorage
+      // would. Only worth persisting while a quiz is actually in progress —
+      // idle/complete states have nothing worth resuming.
+      name: 'quiz-session',
+      storage: createJSONStorage(() => sessionStorage),
+      partialize: (state) => (
+        state.phase === 'active'
+          ? {
+              config: state.config,
+              sessionKey: state.sessionKey,
+              phase: state.phase,
+              currentIndex: state.currentIndex,
+              answers: state.answers,
+              sessionStartTime: state.sessionStartTime,
+              questionStartTime: state.questionStartTime,
+              timeRemaining: state.timeRemaining,
+            }
+          : {}
+      ),
+      onRehydrateStorage: () => (state) => {
+        state?.setHasHydrated(true);
+      },
+    }
+  )
+);

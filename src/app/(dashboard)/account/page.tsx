@@ -198,7 +198,7 @@ export default async function AccountPage({ searchParams }: Props) {
           <div className="flex justify-between">
             <dt className="text-gray-500">Study streak</dt>
             <dd className="font-medium text-gray-900">
-              {profile?.streak_current ?? 0} days
+              {profile?.streak_current ?? 0} {(profile?.streak_current ?? 0) === 1 ? "day" : "days"}
               {(profile?.streak_best ?? 0) > 0 && (
                 <span className="text-gray-400 font-normal ml-1">
                   (best: {profile?.streak_best})

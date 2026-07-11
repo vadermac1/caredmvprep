@@ -32,9 +32,11 @@ export default async function MockExamRunnerPage({ params, searchParams }: Props
     }
   }
 
+  const sessionKey = `${examId}:${isTimedMode ? '1' : '0'}`;
+
   return (
     <div className="max-w-2xl mx-auto">
-      <QuizEngine config={config} />
+      <QuizEngine key={sessionKey} sessionKey={sessionKey} config={config} />
     </div>
   );
 }

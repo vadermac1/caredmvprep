@@ -121,6 +121,12 @@ export default function QuizResults() {
 
   if (!result || !config) return null;
 
+  // Mock exams use their own instance id as `testId` (e.g.
+  // "virginia-permit-mock-1"), which isn't in the quiz registry — only the
+  // underlying practice test is. Practice links must point at that base
+  // test, or they 404 after every mock exam.
+  const practiceTestId = config.baseTestId ?? config.testId;
+
   const pct        = Math.round(result.scorePercent * 100);
   const passingPct = Math.round(result.passingScore * 100);
 
@@ -185,7 +191,7 @@ export default function QuizResults() {
       {/* Weak topics */}
       {topicData.length > 0 && (
         <div className="mb-6">
-          <WeakTopics topics={topicData} title="Topic Breakdown" />
+          <WeakTopics topics={topicData} title="Topic Breakdown" testId={practiceTestId} />
         </div>
       )}
 
@@ -255,7 +261,7 @@ export default function QuizResults() {
                 <strong>Top focus area:</strong>{" "}
                 {getCategoryLabel(result.weakCategories[0])}.{" "}
                 <Link
-                  href={`/quiz/${config?.testId ?? "california-permit"}?focus=${result.weakCategories[0]}`}
+                  href={`/quiz/${practiceTestId}?focus=${result.weakCategories[0]}`}
                   className="underline font-semibold"
                   style={{ color: "#1a7f3c" }}
                 >
