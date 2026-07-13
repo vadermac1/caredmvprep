@@ -4,7 +4,7 @@ import PracticeTestPage, { type PracticeTestPageProps } from "@/components/Pract
 export const metadata: Metadata = {
   title: "Louisiana Motorcycle Practice Test 2025 – Free LA OMV Class M Endorsement Exam Prep",
   description:
-    "Free Louisiana motorcycle endorsement practice test. 25 questions, 80% passing. Universal helmet law ALL riders, Louisiana OMV Class M, open container law applies differently for motorcycle operators, and hurricane evacuation contraflow rules for riders.",
+    "Free Louisiana motorcycle endorsement practice test. Universal helmet law ALL riders, Louisiana OMV Class M, open container law applies differently for motorcycle operators, and hurricane evacuation contraflow rules for riders.",
   alternates: { canonical: "https://caredmvprep.com/louisiana-motorcycle-practice-test" },
   openGraph: { url: "https://caredmvprep.com/louisiana-motorcycle-practice-test", images: [{ url: "https://caredmvprep.com/opengraph-image", width: 1200, height: 630 }] },
 };
@@ -16,10 +16,10 @@ const data: PracticeTestPageProps = {
   slug: "louisiana-motorcycle-practice-test",
   headline: "Louisiana Motorcycle Endorsement Practice Test 2025",
   intro:
-    "Louisiana's Office of Motor Vehicles (OMV) issues a Class M motorcycle endorsement. The 25-question test requires 80% (20/25) to pass. Louisiana's universal helmet law requires helmets for all riders of any age. Louisiana's open container law — where passengers can have open containers but the operator cannot — has implications specific to motorcycle operation. Hurricane evacuation contraflow rules also apply to motorcycle riders.",
+    "Louisiana's Office of Motor Vehicles (OMV) issues a Class M motorcycle endorsement. Louisiana's universal helmet law requires helmets for all riders of any age. Louisiana's open container law — where passengers can have open containers but the operator cannot — has implications specific to motorcycle operation. Hurricane evacuation contraflow rules also apply to motorcycle riders.",
   basedOn: "Louisiana OMV Motorcycle Operator Manual (current DPSC edition)",
   about: [
-    "Louisiana's motorcycle endorsement (Class M) is issued by the Office of Motor Vehicles (OMV), part of the Louisiana Department of Public Safety and Corrections (DPSC). To obtain the endorsement, applicants must pass the motorcycle knowledge test (25 questions, 80%) and the motorcycle skills test, OR complete an approved MSF Basic RiderCourse (BRC) which waives the skills test. Louisiana has a universal helmet law (La. R.S. 32:190): all motorcycle riders and passengers must wear a DOT-approved helmet on public roads, regardless of age or experience. Louisiana's open container law (La. R.S. 32:300) specifically prohibits the OPERATOR (driver) from having an open alcoholic container — on a motorcycle, the operator is the only person who can have access to storage; therefore, a motorcycle operator with an open container in a saddlebag within reach would potentially be in violation of the law.",
+    "Louisiana's motorcycle endorsement (Class M) is issued by the Office of Motor Vehicles (OMV), part of the Louisiana Department of Public Safety and Corrections (DPSC). To obtain the endorsement, applicants must pass the motorcycle knowledge test and the motorcycle skills test, OR complete an approved MSF Basic RiderCourse (BRC), which waives the skills test only (the knowledge test is still required either way). Louisiana has a universal helmet law (La. R.S. 32:190): all motorcycle riders and passengers must wear a DOT-approved helmet on public roads, regardless of age or experience. Louisiana's open container law (La. R.S. 32:300) specifically prohibits the OPERATOR (driver) from having an open alcoholic container — on a motorcycle, the operator is the only person who can have access to storage; therefore, a motorcycle operator with an open container in a saddlebag within reach would potentially be in violation of the law.",
     "Louisiana's riding environment is distinctive: the state has the lowest elevation of any U.S. state on average, and much of the state is laced with bayous, causeways, and river crossings. The Lake Pontchartrain Causeway — the world's longest over-water bridge (approximately 24 miles) — is a challenge for motorcycle riders, particularly in crosswinds. Louisiana's summer heat and humidity create extreme riding discomfort and dehydration risk. The Atchafalaya Basin region, the Mississippi River Delta, and the Tunica Hills of northern Louisiana each offer unique riding environments. During hurricane season (June–November), Louisiana motorcycle riders need to know contraflow evacuation procedures — motorcycles are permitted on contraflow routes and must follow the same directional and access-point rules as automobiles.",
   ],
   sampleQuestions: [
@@ -133,7 +133,7 @@ const data: PracticeTestPageProps = {
     {
       question: "How does the Louisiana OMV motorcycle endorsement process work?",
       answer:
-        "Louisiana Class M endorsement: (1) Pass the motorcycle knowledge test (25 questions, 80%) at any OMV field office; (2) Pass the OMV motorcycle skills test OR complete an approved MSF Basic RiderCourse (BRC) — BRC completion waives the skills test; (3) Pay the endorsement fee. For adults (17+), Louisiana's unique policy of not requiring a road skills test for standard driver's licenses does NOT extend to motorcycle endorsements — the motorcycle endorsement has its own skills test or BRC completion requirement.",
+        "Louisiana Class M endorsement: (1) Pass the motorcycle knowledge test at any OMV field office; (2) Pass the OMV motorcycle skills test OR complete an approved MSF Basic RiderCourse (BRC) — BRC completion waives the skills test only, not the knowledge test; (3) Pay the endorsement fee. For adults (17+), Louisiana's unique policy of not requiring a road skills test for standard driver's licenses does NOT extend to motorcycle endorsements — the motorcycle endorsement has its own skills test or BRC completion requirement.",
     },
     {
       question: "What should Louisiana motorcycle riders do when a hurricane evacuation order is issued?",
@@ -173,7 +173,7 @@ const data: PracticeTestPageProps = {
     {
       question: "Does completing a motorcycle safety course waive the skills test in Louisiana?",
       answer:
-        "In many states, completing an approved Motorcycle Safety Foundation (MSF) Basic RiderCourse or an equivalent state-approved program waives the DMV riding skills test requirement. Some states also waive the knowledge test for course graduates. Louisiana DMV policies on course waivers vary — check the DMV website or contact them directly to confirm which approved courses qualify for test waivers and whether any age restrictions apply.",
+        "Yes, but only partially: completing an approved Motorcycle Safety Foundation (MSF) Basic RiderCourse (or Louisiana's R.S. 32:402.3 state-run Motorcycle Safety, Awareness, and Operator Training Program) waives the OMV riding skills test. It does NOT waive the written knowledge test — every applicant must still pass the knowledge test regardless of course completion.",
     },
   ],
   relatedTests: [

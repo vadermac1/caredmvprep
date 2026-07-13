@@ -4,7 +4,7 @@ import PracticeTestPage, { type PracticeTestPageProps } from "@/components/Pract
 export const metadata: Metadata = {
   title: "Alabama Motorcycle Practice Test 2025 – Free AL ALEA Class M Endorsement Exam Prep",
   description:
-    "Free Alabama motorcycle endorsement practice test. 25 questions, 80% passing. Universal helmet law ALL riders (no exceptions), ALEA agency, Hands-Free Act (2024) applies to motorcyclists, and MSF BRC waiver. Pass your Alabama motorcycle test first try.",
+    "Free Alabama motorcycle endorsement practice test. Universal helmet law ALL riders (no exceptions), ALEA agency, Hands-Free Act (2024) applies to motorcyclists. Pass your Alabama motorcycle test first try.",
   alternates: { canonical: "https://caredmvprep.com/alabama-motorcycle-practice-test" },
   openGraph: { url: "https://caredmvprep.com/alabama-motorcycle-practice-test", images: [{ url: "https://caredmvprep.com/opengraph-image", width: 1200, height: 630 }] },
 };
@@ -16,10 +16,10 @@ const data: PracticeTestPageProps = {
   slug: "alabama-motorcycle-practice-test",
   headline: "Alabama Motorcycle Endorsement Practice Test 2025",
   intro:
-    "Alabama's Law Enforcement Agency (ALEA) issues a motorcycle endorsement (Class M) on your Alabama driver's license. Alabama has a universal helmet law — DOT-approved helmets are required for ALL riders and passengers of any age with no exceptions. The 25-question endorsement test requires 80% (20/25) to pass. Alabama's Hands-Free Act (effective January 1, 2024) applies to all riders.",
-  basedOn: "Alabama DPS Motorcycle Operator's Manual (current ALEA edition)",
+    "Alabama's Law Enforcement Agency (ALEA) issues a motorcycle endorsement (Class M) on your Alabama driver's license. Alabama has a universal helmet law — DOT-approved helmets are required for ALL riders and passengers of any age with no exceptions. The endorsement requires passing a knowledge test based on the ALEA Motorcycle Manual. Alabama's Hands-Free Act (effective January 1, 2024) applies to all riders.",
+  basedOn: "Alabama Motorcycle Manual (current ALEA edition)",
   about: [
-    "Alabama's motorcycle endorsement is a Class M designation issued by the Alabama Law Enforcement Agency (ALEA) Driver License Division. Applicants must pass the motorcycle knowledge test (25 questions, 80%) and the motorcycle skills test, OR complete an approved MSF Basic RiderCourse (BRC), which waives the ALEA skills test. Alabama has a universal helmet law (Code of Ala. 1975 § 32-5A-245): ALL motorcycle riders and passengers must wear a DOT-approved helmet at all times on public roads — no age or experience exceptions. Alabama's Hands-Free Act (Act 2023-382, effective January 1, 2024) applies to motorcycle operators — holding or using a wireless device while riding is prohibited statewide.",
+    "Alabama's motorcycle endorsement is a Class M designation issued by the Alabama Law Enforcement Agency (ALEA) Driver License Division. Applicants must pass the motorcycle knowledge test and the motorcycle skills test. Alabama has a universal helmet law: ALL motorcycle riders and passengers must wear approved protective headgear at all times on public roads — no age or experience exceptions found in the Motorcycle Manual. Alabama's Hands-Free Act (Act 2023-382, effective January 1, 2024) applies to motorcycle operators — holding or using a wireless device while riding is prohibited statewide.",
     "Alabama's riding environment spans from the Gulf Coast beaches of Gulf Shores and Orange Beach — with coastal two-lane routes and bridge crossings subject to crosswinds and sea spray — to the Appalachian ridges of northeast Alabama, where US 431 and AL 35 offer mountain roads with variable surface conditions. Alabama's summer heat (frequently exceeding 100°F in July–August) creates specific riding hazards: road surface softening on asphalt increases tire deformation risk; heat mirages obscure road conditions ahead; and rider dehydration becomes a genuine safety issue on longer summer rides. Protective gear worn in summer must balance abrasion protection against heat management.",
   ],
   sampleQuestions: [
@@ -133,7 +133,7 @@ const data: PracticeTestPageProps = {
     {
       question: "How does the Alabama ALEA motorcycle endorsement process work?",
       answer:
-        "To obtain an Alabama Class M motorcycle endorsement: (1) Pass the motorcycle knowledge test at an ALEA driver license office; (2) Pass the ALEA motorcycle skills test OR complete an approved MSF Basic RiderCourse (BRC) — BRC completion waives the skills test; (3) Pay the endorsement fee to ALEA. The BRC is offered at Alabama community colleges and approved training sites. First-time riders should strongly consider the BRC — it includes range practice that builds foundational skills before any public road riding.",
+        "To obtain an Alabama Class M motorcycle endorsement: (1) Pass the motorcycle knowledge test at an ALEA driver license office; (2) Pass the ALEA motorcycle skills test. An approved MSF Basic RiderCourse (BRC) is also available and strongly recommended for first-time riders — it includes range practice that builds foundational skills before any public road riding. Check with your local ALEA office to confirm current course-waiver policies before assuming a BRC certificate substitutes for the skills test.",
     },
     {
       question: "Does Alabama's DUI law apply to motorcycle operation?",

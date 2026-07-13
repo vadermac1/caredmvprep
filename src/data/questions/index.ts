@@ -28,6 +28,17 @@ import tnDmvQuestions                from './dmv/tennessee';
 import vaDmvQuestions                from './dmv/virginia';
 import vaMotoQuestions               from './motorcycle/virginia';
 import waDmvQuestions                from './dmv/washington';
+import njDmvQuestions                from './dmv/new-jersey';
+import mdDmvQuestions                from './dmv/maryland';
+import mdMotoQuestions               from './motorcycle/maryland';
+import maDmvQuestions                from './dmv/massachusetts';
+import maMotoQuestions               from './motorcycle/massachusetts';
+import wiDmvQuestions                from './dmv/wisconsin';
+import orDmvQuestions                from './dmv/oregon';
+import orMotoQuestions               from './motorcycle/oregon';
+import okDmvQuestions                from './dmv/oklahoma';
+import ctDmvQuestions                from './dmv/connecticut';
+import nvDmvQuestions                from './dmv/nevada';
 import cdlFederalQuestions           from './cdl/federal';
 import cdlSchoolBusQuestions         from './cdl/school-bus';
 import cdlTankVehicleQuestions       from './cdl/tank-vehicles';
@@ -417,6 +428,180 @@ export const quizRegistry: Record<string, QuizConfig> = {
     testId:      'washington-cdl-general',
     label:       'Washington CDL General Knowledge Practice Test',
     state:       'washington',
+    licenseType: 'cdl_general',
+    questions:   verified(cdlFederalQuestions),
+    passingScore: 0.80,
+  },
+
+  // ── New Jersey ────────────────────────────────────────────────────────────
+  // Motorcycle intentionally not wired — question count/passing score not published
+  // by NJMVC; tracked in the motorcycle verification queue (see VERIFICATION.md).
+  'new-jersey-permit': {
+    testId:      'new-jersey-permit',
+    label:       'New Jersey MVC Permit Practice Test',
+    state:       'new-jersey',
+    licenseType: 'permit',
+    questions:   verified(njDmvQuestions),
+    passingScore: 0.80,  // 40 of 50 — NJ MVC standard (80%), Driver Manual p.31
+  },
+  'new-jersey-cdl-general': {
+    testId:      'new-jersey-cdl-general',
+    label:       'New Jersey CDL General Knowledge Practice Test',
+    state:       'new-jersey',
+    licenseType: 'cdl_general',
+    questions:   verified(cdlFederalQuestions),
+    passingScore: 0.80,
+  },
+
+  // ── Maryland ──────────────────────────────────────────────────────────────
+  'maryland-permit': {
+    testId:      'maryland-permit',
+    label:       'Maryland MVA Permit Practice Test',
+    state:       'maryland',
+    licenseType: 'permit',
+    questions:   verified(mdDmvQuestions),
+    passingScore: 0.88,  // 22 of 25 — MVA standard (88%), Driver's Manual Section 1.B
+  },
+  'maryland-motorcycle': {
+    testId:      'maryland-motorcycle',
+    label:       'Maryland MVA Motorcycle Practice Test',
+    state:       'maryland',
+    licenseType: 'motorcycle',
+    questions:   verified(mdMotoQuestions),
+    passingScore: 0.88,  // 22 of 25 — same 88% standard as the Class C test
+  },
+  'maryland-cdl-general': {
+    testId:      'maryland-cdl-general',
+    label:       'Maryland CDL General Knowledge Practice Test',
+    state:       'maryland',
+    licenseType: 'cdl_general',
+    questions:   verified(cdlFederalQuestions),
+    passingScore: 0.80,
+  },
+
+  // ── Massachusetts ─────────────────────────────────────────────────────────
+  'massachusetts-permit': {
+    testId:      'massachusetts-permit',
+    label:       'Massachusetts RMV Permit Practice Test',
+    state:       'massachusetts',
+    licenseType: 'permit',
+    questions:   verified(maDmvQuestions),
+    passingScore: 0.72,  // 18 of 25 — RMV standard (72%), Driver's Manual "Learner's Permit Exam Procedures"
+  },
+  'massachusetts-motorcycle': {
+    testId:      'massachusetts-motorcycle',
+    label:       'Massachusetts RMV Motorcycle Practice Test',
+    state:       'massachusetts',
+    licenseType: 'motorcycle',
+    questions:   verified(maMotoQuestions),
+    passingScore: 0.72,  // 18 of 25 — same ATS system/standard as the Class D test
+  },
+  'massachusetts-cdl-general': {
+    testId:      'massachusetts-cdl-general',
+    label:       'Massachusetts CDL General Knowledge Practice Test',
+    state:       'massachusetts',
+    licenseType: 'cdl_general',
+    questions:   verified(cdlFederalQuestions),
+    passingScore: 0.80,
+  },
+
+  // ── Wisconsin ─────────────────────────────────────────────────────────────
+  // Motorcycle intentionally not wired — question count/passing score not published
+  // by WisDOT; tracked in the motorcycle verification queue (see VERIFICATION.md).
+  // Wisconsin actually requires two separate official tests (15-Q Highway Signs Test
+  // + 50-Q Knowledge Test, both 80%) — this bank covers both topic areas in one quiz.
+  'wisconsin-permit': {
+    testId:      'wisconsin-permit',
+    label:       'Wisconsin DMV Permit Practice Test',
+    state:       'wisconsin',
+    licenseType: 'permit',
+    questions:   verified(wiDmvQuestions),
+    passingScore: 0.80,  // 40 of 50 (Knowledge Test) / 12 of 15 (Highway Signs Test) — both 80%, confirmed in the Motorists' Handbook
+  },
+  'wisconsin-cdl-general': {
+    testId:      'wisconsin-cdl-general',
+    label:       'Wisconsin CDL General Knowledge Practice Test',
+    state:       'wisconsin',
+    licenseType: 'cdl_general',
+    questions:   verified(cdlFederalQuestions),
+    passingScore: 0.80,
+  },
+
+  // ── Oregon ────────────────────────────────────────────────────────────────
+  'oregon-permit': {
+    testId:      'oregon-permit',
+    label:       'Oregon DMV Permit Practice Test',
+    state:       'oregon',
+    licenseType: 'permit',
+    questions:   verified(orDmvQuestions),
+    passingScore: 0.80,  // 28 of 35 — confirmed verbatim in the 2026-2027 Oregon Driver Manual
+  },
+  'oregon-motorcycle': {
+    testId:      'oregon-motorcycle',
+    label:       'Oregon DMV Motorcycle Practice Test',
+    state:       'oregon',
+    licenseType: 'motorcycle',
+    questions:   verified(orMotoQuestions),
+    passingScore: 0.80,  // 20 of 25 — passing threshold in the Motorcycle and Moped Manual, total pool confirmed on the official ODOT motorcycle endorsement page
+  },
+  'oregon-cdl-general': {
+    testId:      'oregon-cdl-general',
+    label:       'Oregon CDL General Knowledge Practice Test',
+    state:       'oregon',
+    licenseType: 'cdl_general',
+    questions:   verified(cdlFederalQuestions),
+    passingScore: 0.80,
+  },
+
+  // ── Oklahoma (DL + CDL only — motorcycle question count not officially verified) ──
+  'oklahoma-permit': {
+    testId:      'oklahoma-permit',
+    label:       'Oklahoma Written Knowledge Test Practice',
+    state:       'oklahoma',
+    licenseType: 'permit',
+    questions:   verified(okDmvQuestions),
+    passingScore: 0.75,  // 15 of 20 — confirmed on the official Service Oklahoma written-test webpage
+  },
+  'oklahoma-cdl-general': {
+    testId:      'oklahoma-cdl-general',
+    label:       'Oklahoma CDL General Knowledge Practice Test',
+    state:       'oklahoma',
+    licenseType: 'cdl_general',
+    questions:   verified(cdlFederalQuestions),
+    passingScore: 0.80,
+  },
+
+  // ── Connecticut (DL + CDL only — motorcycle passing score not officially verified) ──
+  'connecticut-permit': {
+    testId:      'connecticut-permit',
+    label:       'Connecticut DMV Permit Practice Test',
+    state:       'connecticut',
+    licenseType: 'permit',
+    questions:   verified(ctDmvQuestions),
+    passingScore: 0.80,  // 20 of 25 — confirmed verbatim in the Connecticut Driver's Manual
+  },
+  'connecticut-cdl-general': {
+    testId:      'connecticut-cdl-general',
+    label:       'Connecticut CDL General Knowledge Practice Test',
+    state:       'connecticut',
+    licenseType: 'cdl_general',
+    questions:   verified(cdlFederalQuestions),
+    passingScore: 0.80,
+  },
+
+  // ── Nevada (DL + CDL only — motorcycle passing score not officially verified) ──
+  'nevada-permit': {
+    testId:      'nevada-permit',
+    label:       'Nevada DMV Knowledge Test Practice',
+    state:       'nevada',
+    licenseType: 'permit',
+    questions:   verified(nvDmvQuestions),
+    passingScore: 0.80,  // 20 of 25 (adaptive: stops at 20 correct or 6 incorrect) — confirmed on the official Nevada DMV testing webpage
+  },
+  'nevada-cdl-general': {
+    testId:      'nevada-cdl-general',
+    label:       'Nevada CDL General Knowledge Practice Test',
+    state:       'nevada',
     licenseType: 'cdl_general',
     questions:   verified(cdlFederalQuestions),
     passingScore: 0.80,
@@ -981,6 +1166,254 @@ export const MOCK_EXAM_DEFS: MockExamDef[] = [
     questionCount: 40,
     seed:          3,
     timeLimitSecs: 60 * 60,
+    description:   'Third exam simulation — no repeated questions from #1 or #2.',
+  },
+  // ── New Jersey ────────────────────────────────────────────────────────────
+  {
+    examId:        'new-jersey-permit-mock-1',
+    label:         'New Jersey MVC Permit Mock Exam #1',
+    shortLabel:    'Mock Exam #1',
+    baseTestId:    'new-jersey-permit',
+    questionCount: 50,
+    seed:          1,
+    timeLimitSecs: 60 * 60,
+    description:   'Simulates the real NJ MVC permit test — 50 questions, untimed knowledge test modeled at 60 min.',
+  },
+  {
+    examId:        'new-jersey-permit-mock-2',
+    label:         'New Jersey MVC Permit Mock Exam #2',
+    shortLabel:    'Mock Exam #2',
+    baseTestId:    'new-jersey-permit',
+    questionCount: 50,
+    seed:          2,
+    timeLimitSecs: 60 * 60,
+    description:   'A unique second simulation with a different question mix.',
+  },
+  {
+    examId:        'new-jersey-permit-mock-3',
+    label:         'New Jersey MVC Permit Mock Exam #3',
+    shortLabel:    'Mock Exam #3',
+    baseTestId:    'new-jersey-permit',
+    questionCount: 50,
+    seed:          3,
+    timeLimitSecs: 60 * 60,
+    description:   'Third exam simulation — no repeated questions from #1 or #2.',
+  },
+  // ── Maryland ──────────────────────────────────────────────────────────────
+  {
+    examId:        'maryland-permit-mock-1',
+    label:         'Maryland MVA Permit Mock Exam #1',
+    shortLabel:    'Mock Exam #1',
+    baseTestId:    'maryland-permit',
+    questionCount: 25,
+    seed:          1,
+    timeLimitSecs: 20 * 60,
+    description:   'Simulates the real Maryland MVA permit test — 25 questions, 20 min.',
+  },
+  {
+    examId:        'maryland-permit-mock-2',
+    label:         'Maryland MVA Permit Mock Exam #2',
+    shortLabel:    'Mock Exam #2',
+    baseTestId:    'maryland-permit',
+    questionCount: 25,
+    seed:          2,
+    timeLimitSecs: 20 * 60,
+    description:   'A unique second simulation with a different question mix.',
+  },
+  {
+    examId:        'maryland-permit-mock-3',
+    label:         'Maryland MVA Permit Mock Exam #3',
+    shortLabel:    'Mock Exam #3',
+    baseTestId:    'maryland-permit',
+    questionCount: 25,
+    seed:          3,
+    timeLimitSecs: 20 * 60,
+    description:   'Third exam simulation — no repeated questions from #1 or #2.',
+  },
+  // ── Massachusetts ─────────────────────────────────────────────────────────
+  {
+    examId:        'massachusetts-permit-mock-1',
+    label:         'Massachusetts RMV Permit Mock Exam #1',
+    shortLabel:    'Mock Exam #1',
+    baseTestId:    'massachusetts-permit',
+    questionCount: 25,
+    seed:          1,
+    timeLimitSecs: 25 * 60,
+    description:   'Simulates the real Massachusetts RMV permit test — 25 questions, 25 min.',
+  },
+  {
+    examId:        'massachusetts-permit-mock-2',
+    label:         'Massachusetts RMV Permit Mock Exam #2',
+    shortLabel:    'Mock Exam #2',
+    baseTestId:    'massachusetts-permit',
+    questionCount: 25,
+    seed:          2,
+    timeLimitSecs: 25 * 60,
+    description:   'A unique second simulation with a different question mix.',
+  },
+  {
+    examId:        'massachusetts-permit-mock-3',
+    label:         'Massachusetts RMV Permit Mock Exam #3',
+    shortLabel:    'Mock Exam #3',
+    baseTestId:    'massachusetts-permit',
+    questionCount: 25,
+    seed:          3,
+    timeLimitSecs: 25 * 60,
+    description:   'Third exam simulation — no repeated questions from #1 or #2.',
+  },
+  // ── Wisconsin ─────────────────────────────────────────────────────────────
+  {
+    examId:        'wisconsin-permit-mock-1',
+    label:         'Wisconsin DMV Permit Mock Exam #1',
+    shortLabel:    'Mock Exam #1',
+    baseTestId:    'wisconsin-permit',
+    questionCount: 50,
+    seed:          1,
+    timeLimitSecs: 45 * 60,
+    description:   'Simulates the real Wisconsin Knowledge Test — 50 questions, 45 min.',
+  },
+  {
+    examId:        'wisconsin-permit-mock-2',
+    label:         'Wisconsin DMV Permit Mock Exam #2',
+    shortLabel:    'Mock Exam #2',
+    baseTestId:    'wisconsin-permit',
+    questionCount: 50,
+    seed:          2,
+    timeLimitSecs: 45 * 60,
+    description:   'A unique second simulation with a different question mix.',
+  },
+  {
+    examId:        'wisconsin-permit-mock-3',
+    label:         'Wisconsin DMV Permit Mock Exam #3',
+    shortLabel:    'Mock Exam #3',
+    baseTestId:    'wisconsin-permit',
+    questionCount: 50,
+    seed:          3,
+    timeLimitSecs: 45 * 60,
+    description:   'Third exam simulation — no repeated questions from #1 or #2.',
+  },
+  // ── Oregon ────────────────────────────────────────────────────────────────
+  {
+    examId:        'oregon-permit-mock-1',
+    label:         'Oregon DMV Permit Mock Exam #1',
+    shortLabel:    'Mock Exam #1',
+    baseTestId:    'oregon-permit',
+    questionCount: 35,
+    seed:          1,
+    timeLimitSecs: 30 * 60,
+    description:   'Simulates the real Oregon DMV knowledge test — 35 questions, 30 min.',
+  },
+  {
+    examId:        'oregon-permit-mock-2',
+    label:         'Oregon DMV Permit Mock Exam #2',
+    shortLabel:    'Mock Exam #2',
+    baseTestId:    'oregon-permit',
+    questionCount: 35,
+    seed:          2,
+    timeLimitSecs: 30 * 60,
+    description:   'A unique second simulation with a different question mix.',
+  },
+  {
+    examId:        'oregon-permit-mock-3',
+    label:         'Oregon DMV Permit Mock Exam #3',
+    shortLabel:    'Mock Exam #3',
+    baseTestId:    'oregon-permit',
+    questionCount: 35,
+    seed:          3,
+    timeLimitSecs: 30 * 60,
+    description:   'Third exam simulation — no repeated questions from #1 or #2.',
+  },
+  // ── Oklahoma ──────────────────────────────────────────────────────────────
+  {
+    examId:        'oklahoma-permit-mock-1',
+    label:         'Oklahoma Written Knowledge Test Mock Exam #1',
+    shortLabel:    'Mock Exam #1',
+    baseTestId:    'oklahoma-permit',
+    questionCount: 20,
+    seed:          1,
+    timeLimitSecs: 60 * 60,
+    description:   'Simulates the real Oklahoma written test — 20 questions, 60 min.',
+  },
+  {
+    examId:        'oklahoma-permit-mock-2',
+    label:         'Oklahoma Written Knowledge Test Mock Exam #2',
+    shortLabel:    'Mock Exam #2',
+    baseTestId:    'oklahoma-permit',
+    questionCount: 20,
+    seed:          2,
+    timeLimitSecs: 60 * 60,
+    description:   'A unique second simulation with a different question mix.',
+  },
+  {
+    examId:        'oklahoma-permit-mock-3',
+    label:         'Oklahoma Written Knowledge Test Mock Exam #3',
+    shortLabel:    'Mock Exam #3',
+    baseTestId:    'oklahoma-permit',
+    questionCount: 20,
+    seed:          3,
+    timeLimitSecs: 60 * 60,
+    description:   'Third exam simulation — no repeated questions from #1 or #2.',
+  },
+  // ── Connecticut ───────────────────────────────────────────────────────────
+  {
+    examId:        'connecticut-permit-mock-1',
+    label:         'Connecticut DMV Permit Mock Exam #1',
+    shortLabel:    'Mock Exam #1',
+    baseTestId:    'connecticut-permit',
+    questionCount: 25,
+    seed:          1,
+    timeLimitSecs: 25 * 60,
+    description:   'Simulates the real Connecticut DMV knowledge test — 25 questions, 25 min.',
+  },
+  {
+    examId:        'connecticut-permit-mock-2',
+    label:         'Connecticut DMV Permit Mock Exam #2',
+    shortLabel:    'Mock Exam #2',
+    baseTestId:    'connecticut-permit',
+    questionCount: 25,
+    seed:          2,
+    timeLimitSecs: 25 * 60,
+    description:   'A unique second simulation with a different question mix.',
+  },
+  {
+    examId:        'connecticut-permit-mock-3',
+    label:         'Connecticut DMV Permit Mock Exam #3',
+    shortLabel:    'Mock Exam #3',
+    baseTestId:    'connecticut-permit',
+    questionCount: 25,
+    seed:          3,
+    timeLimitSecs: 25 * 60,
+    description:   'Third exam simulation — no repeated questions from #1 or #2.',
+  },
+  // ── Nevada ────────────────────────────────────────────────────────────────
+  {
+    examId:        'nevada-permit-mock-1',
+    label:         'Nevada DMV Knowledge Test Mock Exam #1',
+    shortLabel:    'Mock Exam #1',
+    baseTestId:    'nevada-permit',
+    questionCount: 25,
+    seed:          1,
+    timeLimitSecs: 30 * 60,
+    description:   'Simulates the real Nevada DMV knowledge test — 25 questions, 30 min.',
+  },
+  {
+    examId:        'nevada-permit-mock-2',
+    label:         'Nevada DMV Knowledge Test Mock Exam #2',
+    shortLabel:    'Mock Exam #2',
+    baseTestId:    'nevada-permit',
+    questionCount: 25,
+    seed:          2,
+    timeLimitSecs: 30 * 60,
+    description:   'A unique second simulation with a different question mix.',
+  },
+  {
+    examId:        'nevada-permit-mock-3',
+    label:         'Nevada DMV Knowledge Test Mock Exam #3',
+    shortLabel:    'Mock Exam #3',
+    baseTestId:    'nevada-permit',
+    questionCount: 25,
+    seed:          3,
+    timeLimitSecs: 30 * 60,
     description:   'Third exam simulation — no repeated questions from #1 or #2.',
   },
 ];

@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import PracticeTestPage, { type PracticeTestPageProps } from "@/components/PracticeTestPage";
 
 export const metadata: Metadata = {
-  title: "Nevada DMV Practice Test 2025 – Free DMV Knowledge Exam Prep (50 Questions)",
-  description: "Prepare for the Nevada DMV 50-question knowledge test covering Hoover Dam vehicle restrictions, US-50 Loneliest Road isolation, Las Vegas Strip pedestrian rules, open range laws, DUI thresholds, and Nevada's hands-free device ban. Free 2025 practice test.",
+  title: "Nevada DMV Practice Test 2025 – Free DMV Knowledge Exam Prep",
+  description: "Prepare for the Nevada DMV's adaptive knowledge test (20 correct to pass, 80%) covering Hoover Dam vehicle restrictions, US-50 Loneliest Road isolation, Las Vegas Strip pedestrian rules, open range laws, DUI thresholds, and Nevada's hands-free device ban. Free 2025 practice test.",
   alternates: { canonical: "https://caredmvprep.com/nevada-dmv-practice-test" },
   openGraph: { url: "https://caredmvprep.com/nevada-dmv-practice-test", images: [{ url: "https://caredmvprep.com/opengraph-image", width: 1200, height: 630 }] },
 };
@@ -14,7 +14,7 @@ const data: PracticeTestPageProps = {
   testLabel: "DMV Practice Test",
   slug: "nevada-dmv-practice-test",
   headline: "Nevada DMV Practice Test 2025",
-  intro: "The Nevada Department of Motor Vehicles administers a 50-question knowledge exam — one of the longest in the United States. You must answer 40 questions correctly (80%) to pass. This practice test covers Nevada-specific laws including the Hoover Dam vehicle restrictions, US-50 'Loneliest Road' isolation, Las Vegas Strip pedestrian rules, 80 mph rural interstate speed limit, open range livestock laws, NRS 484B.165 handheld device ban, and DUI thresholds.",
+  intro: "The Nevada Department of Motor Vehicles administers an adaptive knowledge exam: a pool of up to 25 questions that stops early once you reach either 20 correct answers (an automatic pass, 80%) or 6 incorrect answers (an automatic fail). This practice test covers Nevada-specific laws including the Hoover Dam vehicle restrictions, US-50 'Loneliest Road' isolation, Las Vegas Strip pedestrian rules, 80 mph rural interstate speed limit, open range livestock laws, NRS 484B.165 handheld device ban, and DUI thresholds.",
   basedOn: "Nevada Department of Motor Vehicles Nevada Driver's Handbook",
   keyRules: [
     { icon: "🏗️", rule: "Hoover Dam – Commercial Vehicle Prohibition", detail: "Commercial vehicles are prohibited from crossing Hoover Dam on US-93. All commercial traffic must use the Mike O'Callaghan–Pat Tillman Memorial Bridge (the US-93 bypass) that opened in 2010. Personal vehicles may still cross the dam but must pass through a federal security checkpoint. Attempting to drive a commercial vehicle across the dam is prohibited." },
@@ -27,7 +27,7 @@ const data: PracticeTestPageProps = {
     { icon: "🏎️", rule: "80 MPH Rural Interstate", detail: "Nevada's rural interstate speed limit is 80 mph on I-80 and portions of I-15 and I-80. At this speed, following distances and braking distances increase substantially. Nevada's vast desert terrain can create heat mirages that make the road appear wet — this is an optical phenomenon, not actual water." },
   ],
   about: [
-    "The Nevada Department of Motor Vehicles administers one of the longest knowledge exams in the United States — 50 questions requiring 40 correct answers (80%) to pass. Nevada's permit age is 15½ years old. Nevada's hands-free device ban under NRS 484B.165 has been in effect since 2011 — one of the earlier such laws in the nation. Nevada's unique geography, from the Las Vegas metropolitan area to the remote desert corridors of US-50 and US-93, creates a broad range of driving conditions that are all tested on the Nevada DMV exam.",
+    "The Nevada Department of Motor Vehicles administers an adaptive knowledge exam — a pool of up to 25 multiple-choice questions, with 80% (20 correct) needed to pass. The test stops early once either outcome is decided: 20 correct answers ends it as a pass, or 6 incorrect answers ends it as a fail (since at most 19 of 25 could then be correct). Nevada's permit age is 15½ years old. Nevada's hands-free device ban under NRS 484B.165 has been in effect since 2011 — one of the earlier such laws in the nation. Nevada's unique geography, from the Las Vegas metropolitan area to the remote desert corridors of US-50 and US-93, creates a broad range of driving conditions that are all tested on the Nevada DMV exam.",
     "The most unusual Nevada driving fact tested on the DMV exam involves Hoover Dam on US-93. All commercial vehicles are prohibited from crossing Hoover Dam itself and must use the Mike O'Callaghan–Pat Tillman Memorial Bridge (the US-93 bypass) that spans the Colorado River downstream of the dam. Personal vehicles may cross the dam but must pass through a mandatory federal security checkpoint. US-50 through Nevada — the '287-mile Loneliest Road in America' — runs across the Great Basin with gas stations separated by 100 or more miles, tested as an example of remote road planning requirements.",
     "Nevada's 80 mph rural interstate speed limit applies on sections of I-80 and I-15 and is among the highest in the nation. Las Vegas Boulevard (the Strip) has unique pedestrian crosswalk rules including 'scramble' intersections where all vehicle movement stops simultaneously to allow pedestrians to cross in any direction. Nevada's open range laws apply throughout most of rural Nevada — livestock on highways is a significant nighttime hazard on US-50, US-93, US-95, and Nevada's secondary state routes. Nevada's DUI law (NRS 484C) uses DUI terminology with an 0.08% adult threshold and 0.02% for drivers under 21.",
   ],
@@ -64,9 +64,9 @@ const data: PracticeTestPageProps = {
     },
     {
       question: "Nevada's permit age is 15½. A 15½-year-old Nevada resident wants to apply for a learner's permit. What must they do first?",
-      options: ["Pass the road skills test and then apply for the permit", "Pass the Nevada DMV 50-question knowledge exam and vision test", "Have a parent sign a waiver allowing early permit issuance", "Complete an approved driver education course before taking the knowledge exam"],
+      options: ["Pass the road skills test and then apply for the permit", "Pass the Nevada DMV knowledge exam and vision test", "Have a parent sign a waiver allowing early permit issuance", "Complete an approved driver education course before taking the knowledge exam"],
       correctIndex: 1,
-      explanation: "To obtain a Nevada learner's permit at age 15½, the applicant must first pass the Nevada DMV knowledge exam (50 questions, 80% passing score) and a vision screening test. A parent or guardian must also provide consent for minor applicants. After obtaining the permit, the holder must drive exclusively with a licensed supervising adult (21 or older) in the front passenger seat. Nevada's GDL program then progresses through nighttime restriction and passenger restriction phases before full license eligibility."
+      explanation: "To obtain a Nevada learner's permit at age 15½, the applicant must first pass the Nevada DMV knowledge exam (an adaptive test — up to 25 questions, 80% passing score, stopping early at 20 correct or 6 incorrect) and a vision screening test. A parent or guardian must also provide consent for minor applicants. After obtaining the permit, the holder must drive exclusively with a licensed supervising adult (21 or older, with at least one year of licensed driving experience) in the front passenger seat. Nevada's GDL program then progresses through nighttime restriction and passenger restriction phases before full license eligibility."
     },
     {
       question: "A Nevada driver on a rural US-93 highway strikes a horse standing in the road at night. The road is in open range territory. Who is typically legally responsible?",
@@ -95,8 +95,8 @@ const data: PracticeTestPageProps = {
   ],
   faqs: [
     {
-      question: "Why does Nevada have a 50-question DMV knowledge test?",
-      answer: "Nevada's 50-question knowledge exam is one of the longest in the United States, reflecting the breadth of driving conditions and laws that Nevada drivers must understand. Nevada roads range from Las Vegas Strip urban environments with unique pedestrian crossing rules, to rural desert highways like US-50 and US-93 with open range conditions and extreme isolation, to 80 mph rural interstates, to the unique Hoover Dam security crossing situation. The longer exam allows Nevada to test a wider range of topics than states with 25 or 30 question exams. The passing score is still 80% — requiring 40 correct answers out of 50."
+      question: "How does Nevada's DMV knowledge test actually work?",
+      answer: "Nevada's knowledge test is adaptive, not a fixed-length exam: it draws from a pool of up to 25 multiple-choice questions and stops as soon as the outcome is decided. Reach 20 correct answers and the test ends immediately as a pass (80%); reach 6 incorrect answers and it ends immediately as a fail, since at most 19 of the 25 questions could then be answered correctly. This means most test-takers won't see all 25 questions — the exact number depends on how quickly you build up correct or incorrect answers. The test is available online via KnowToDrive Nevada in English and Spanish."
     },
     {
       question: "Can personal vehicles cross Hoover Dam?",
@@ -128,7 +128,7 @@ const data: PracticeTestPageProps = {
     },
     {
       question: "What is Nevada's permit age and GDL structure?",
-      answer: "Nevada residents may apply for a learner's permit at age 15½. To obtain the permit, applicants must pass the 50-question Nevada DMV knowledge exam (40 correct to pass), pass a vision test, and have a parent or guardian's written consent. Permit holders must drive with a licensed adult supervisor 21 or older in the front passenger seat at all times. After holding the permit for a minimum period and meeting supervised driving hour requirements, the holder advances to a provisional license with nighttime (11 PM to 5 AM) and passenger restrictions. Full license eligibility is available at age 18 (or at 16 with full GDL completion)."
+      answer: "Nevada residents may apply for a learner's permit at age 15½. To obtain the permit, applicants must pass the Nevada DMV's adaptive knowledge exam (up to 25 questions, 80% to pass, stopping early at 20 correct or 6 incorrect), pass a vision test, and have a parent or guardian's written consent. Permit holders must drive with a licensed adult supervisor 21 or older, with at least one year of licensed driving experience, in the front passenger seat at all times. Applicants under 18 must hold the instruction permit at least 6 months before applying for a license. New 16-/17-year-old licensees may not carry passengers under 18 (except immediate family) for their first 6 months of licensure, and a minor may not drive between 10 PM and 5 AM (except when traveling to or from a scheduled event) until turning 18, regardless of when the license was issued."
     },
     {
       question: "What road signs unique to Nevada are tested on the DMV exam?",

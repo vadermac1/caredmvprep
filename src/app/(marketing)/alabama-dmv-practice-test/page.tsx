@@ -4,7 +4,7 @@ import PracticeTestPage, { type PracticeTestPageProps } from "@/components/Pract
 export const metadata: Metadata = {
   title: "Alabama ALEA Practice Test 2025 – Free AL Driver's License Exam Prep",
   description:
-    "Free Alabama driver's license practice test based on the AL DPS Driver Manual. 40 questions, 80% passing. Covers ALEA agency terminology, Alabama's Hands-Free Act (2024), DUI consequences, and state-specific road laws. Pass your Alabama knowledge test first try.",
+    "Free Alabama driver's license practice test based on the AL ALEA Driver Manual. Covers ALEA agency terminology, Alabama's Hands-Free Act (2024), DUI consequences, and state-specific road laws. Pass your Alabama knowledge test first try.",
   alternates: { canonical: "https://caredmvprep.com/alabama-dmv-practice-test" },
   openGraph: { url: "https://caredmvprep.com/alabama-dmv-practice-test", images: [{ url: "https://caredmvprep.com/opengraph-image", width: 1200, height: 630 }] },
 };
@@ -16,7 +16,7 @@ const data: PracticeTestPageProps = {
   slug: "alabama-dmv-practice-test",
   headline: "Alabama Driver's License Practice Test 2025",
   intro:
-    "Alabama driver licensing is administered by the Alabama Law Enforcement Agency (ALEA), Driver License Division — not a traditional DMV. The 40-question knowledge test requires 80% (32/40) to pass. Alabama's Hands-Free Act (Act 2023-382, effective January 1, 2024) applies to all drivers, and Alabama's DUI consequences — including mandatory DUI school and ignition interlock requirements — are among the most comprehensive in the Southeast.",
+    "Alabama driver licensing is administered by the Alabama Law Enforcement Agency (ALEA), Driver License Division — not a traditional DMV. The knowledge test costs $5 and is based entirely on the ALEA Driver Manual. Alabama's Hands-Free Act (Act 2023-382, effective January 1, 2024) applies to all drivers, and Alabama's DUI consequences — including mandatory DUI school and ignition interlock requirements — are among the most comprehensive in the Southeast.",
   basedOn: "Alabama DPS Driver Manual (current ALEA edition)",
   keyRules: [
     { icon: "🚔", rule: "Agency: ALEA (not a DMV)", detail: "Alabama Law Enforcement Agency (ALEA), Driver License Division handles all licensing — Alabama has no traditional DMV. ALEA is a law enforcement agency." },
@@ -25,11 +25,11 @@ const data: PracticeTestPageProps = {
     { icon: "🏫", rule: "ADECA DUI school required for reinstatement", detail: "All Alabama DUI convictions require mandatory completion of the ADECA (Alabama DUI school) program before license reinstatement — regardless of vehicle type." },
     { icon: "⚖️", rule: "3 DUIs = Habitual Offender felony", detail: "Three DUI convictions result in a Habitual Offender designation, Class C felony charge on the third DUI, and minimum 5-year license revocation." },
     { icon: "🧪", rule: "Implied consent: 90-day refusal suspension", detail: "Refusing a chemical test = 90-day suspension (first refusal) or 1-year (second refusal) — in addition to any criminal charges." },
-    { icon: "🚗", rule: "Learner's permit at 16 only", detail: "Alabama does not issue learner's permits before age 16. Permit must be held for a minimum supervised period before a Restricted License is issued." },
+    { icon: "🚗", rule: "Learner permit at 15, supervision rule changes at 16", detail: "Age 15 gets a Learner License requiring a supervising driver 21+ (or certified instructor) in the seat; after the holder turns 16, any licensed driver may supervise instead. A separate Learner License track exists for applicants 16+ from the start." },
     { icon: "🚨", rule: "Move Over: reduce 15 mph below posted limit", detail: "Must move over one lane or reduce speed by at least 15 mph below the posted speed limit when passing stopped emergency, utility, or tow truck vehicles with lights activated." },
   ],
   about: [
-    "Alabama's driver licensing is handled by the Alabama Law Enforcement Agency (ALEA), specifically the Driver License Division. This is distinct from a traditional DMV — the agency is part of Alabama's law enforcement structure, which is why driver licensing offices are often co-located with state trooper posts and law enforcement facilities. The ALEA Driver License Division issues all Class D (standard) operator licenses, learner permits, motorcycle endorsements, and CDL credentials. The knowledge test has 40 questions and requires 32 correct answers (80%) to pass. Alabama allows applicants to test on a computer at driver license examining offices. Applicants who fail may retest after 24 hours. After five failures within a calendar year, ALEA may require a waiting period and proof of additional driver education before retesting is permitted.",
+    "Alabama's driver licensing is handled by the Alabama Law Enforcement Agency (ALEA), specifically the Driver License Division. This is distinct from a traditional DMV — the agency is part of Alabama's law enforcement structure, which is why driver licensing offices are often co-located with state trooper posts and law enforcement facilities. The ALEA Driver License Division issues all Class D (standard) operator licenses, learner permits, motorcycle endorsements, and CDL credentials. The knowledge test costs $5 and is based entirely on material in the ALEA Driver Manual. Alabama allows applicants to test on a computer at driver license examining offices.",
     "Alabama's Hands-Free Act (Act 2023-382, effective January 1, 2024) is one of the most recently enacted comprehensive hands-free laws in the nation. The law prohibits all drivers from physically holding or using a handheld wireless device while operating a motor vehicle. This includes making calls, texting, browsing, watching video, or any other manual interaction with the device. Hands-free Bluetooth, speakerphone on a mounted device, and in-vehicle integrated systems are all permitted. Primary enforcement means law enforcement can stop a driver solely for this violation without needing another traffic violation as a basis. Fines begin at $50 for a first offense, $100 for a second, and $150 for subsequent violations. The Alabama knowledge test has incorporated questions about the Hands-Free Act beginning in 2024.",
     "Alabama's DUI enforcement system is notable for its mandatory education component. Any driver convicted of DUI in Alabama must complete the Alabama DUI school — a program operated through the Alabama Department of Economic and Community Affairs (ADECA) — as a condition of license reinstatement. This DUI school involves assessment, education, and in some cases, treatment referral. Ignition interlock devices (IIDs) are required for certain DUI offenders, including those with high BAC readings and repeat offenders. Alabama's third DUI conviction results in a Class C felony charge, a minimum 5-year revocation, and a Habitual Offender designation. Alabama's implied consent law requires that drivers submit to chemical testing or face an immediate 90-day license suspension for a first refusal — longer than the suspension from many first-offense DUI convictions. This creates a strong legal incentive to submit to testing.",
   ],
@@ -95,16 +95,16 @@ const data: PracticeTestPageProps = {
         "Alabama's third DUI conviction within 10 years is a Class C felony (Code of Ala. 1975 § 32-5A-191). Consequences include: minimum 5-year license revocation, up to 10 years in prison, up to $10,100 in fines, mandatory ignition interlock device upon reinstatement, and Habitual Offender designation. The felony level conviction results in a permanent criminal record, loss of certain civil rights, and significant employment consequences. Alabama takes this escalation seriously — a third DUI means an end to standard driving privileges and major restrictions on future license eligibility.",
     },
     {
-      question: "Alabama's graduated licensing system issues learner's permits at age 16. What supervision requirement applies to permit holders?",
+      question: "Alabama's youngest Learner License holders (age 15) must be supervised by which type of driver?",
       options: [
-        "Permit holders may drive unsupervised after completing 10 hours of supervised driving",
-        "Permit holders must always be accompanied by a licensed driver 21 or older who is seated in the front passenger seat",
-        "Alabama permits holders aged 16 may drive unsupervised during daylight hours only",
-        "The supervising driver must be a parent or legal guardian — no other adults can supervise",
+        "Any licensed driver, regardless of age",
+        "A licensed driver 21 or older, or a licensed/certified driving instructor, seated beside the operator",
+        "Only a parent or legal guardian",
+        "No supervision is required once the permit is issued",
       ],
       correctIndex: 1,
       explanation:
-        "Alabama learner's permit holders must be supervised at all times by a licensed driver who is at least 21 years old and seated in the front passenger seat. Unlike some states that allow older teenagers or any licensed adult to supervise, Alabama sets the age at 21. The supervising driver does not need to be a parent — any licensed adult 21 or older qualifies. Alabama requires permit holders to accumulate at least 30 hours of supervised driving (including 10 hours at night) before applying for the restricted license, though this is a practical guideline reinforced by licensing timelines rather than a separately verified state mandate.",
+        "A 15-year-old Alabama Learner License holder must be accompanied by a licensed driver 21 or older (or a licensed/certified driving instructor) seated beside the operator. This changes once the holder turns 16 — from that point on, any licensed driver may supervise. Alabama's separate Learner License track for applicants who are already 16 or older only ever requires any licensed driver in the seat, not specifically an adult 21+.",
     },
     {
       question: "Alabama's Move Over law requires drivers approaching a stopped emergency vehicle, utility vehicle, or tow truck with activated lights to:",

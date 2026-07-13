@@ -4,7 +4,7 @@ import PracticeTestPage, { type PracticeTestPageProps } from "@/components/Pract
 export const metadata: Metadata = {
   title: "New Jersey DMV Practice Test 2025 – Free NJ MVC Knowledge Exam Prep",
   description:
-    "Free New Jersey MVC practice test based on the 2025 New Jersey Driver Manual. 50 questions across road signs and road rules, 80% passing score per section. Prepare for your NJ Motor Vehicle Commission knowledge test.",
+    "Free New Jersey MVC practice test based on the 2025 New Jersey Driver Manual. 50-question knowledge test, 80% (40/50) overall passing score. Prepare for your NJ Motor Vehicle Commission knowledge test.",
   alternates: { canonical: "https://caredmvprep.com/new-jersey-dmv-practice-test" },
   openGraph: { url: "https://caredmvprep.com/new-jersey-dmv-practice-test", images: [{ url: "https://caredmvprep.com/opengraph-image", width: 1200, height: 630 }] },
 };
@@ -16,18 +16,18 @@ const data: PracticeTestPageProps = {
   slug: "new-jersey-dmv-practice-test",
   headline: "New Jersey MVC Driver's License Practice Test",
   intro:
-    "Prepare for your New Jersey Motor Vehicle Commission (MVC) knowledge test with free practice questions built around NJ-specific laws — jughandle turns, the no-plea-bargain DWI rule under NJSA 39:4-50, the nation's strictest under-21 BAC threshold (0.01%), and the hands-free law that adds license points on a first violation. New Jersey's 50-question exam is one of the longer knowledge tests nationally; these questions cover the laws that are uniquely New Jersey.",
+    "Prepare for your New Jersey Motor Vehicle Commission (MVC) knowledge test with free practice questions built around NJ-specific laws — jughandle turns, the no-plea-bargain DWI rule under NJSA 39:4-50, the nation's strictest under-21 BAC threshold (0.01%), and the hands-free law that adds license points starting on a third conviction. New Jersey's 50-question exam is one of the longer knowledge tests nationally; these questions cover the laws that are uniquely New Jersey.",
   basedOn: "2025 New Jersey Driver Manual",
   about: [
-    "New Jersey driver's licenses are issued by the New Jersey Motor Vehicle Commission (MVC), not a Department of Motor Vehicles. The MVC was created in 2003 to replace the scandal-plagued NJ DMV after a sweeping overhaul of the state's licensing system, and it operates regional service centers throughout New Jersey. The knowledge test consists of two sections: 10 road sign questions and 40 road rules questions — 50 total. You must pass each section independently at 80%: at least 8 of 10 on signs and at least 32 of 40 on road rules. A passing score in one section does not carry over if you fail the other; if you fail, you must wait 7 days before retaking.",
+    "New Jersey driver's licenses are issued by the New Jersey Motor Vehicle Commission (MVC), not a Department of Motor Vehicles. The MVC was created in 2003 to replace the scandal-plagued NJ DMV after a sweeping overhaul of the state's licensing system, and it operates regional service centers throughout New Jersey. Per the official 2025 Driver Manual, the knowledge test consists of 50 scored questions plus one unscored organ-donor survey question, and requires 80% (40 of the 50 questions) correct to pass — a single overall score, not separate sign/rules sections.",
     "New Jersey DWI law under NJSA 39:4-50 includes a provision found in no other eastern state: New Jersey expressly prohibits plea bargaining on DWI charges. Prosecutors cannot reduce a DWI to a lesser traffic offense through a plea deal — a defendant must either plead guilty to DWI or go to trial. The standard BAC limit is 0.08% for adults. New Jersey's under-21 BAC threshold is 0.01% — effectively any measurable alcohol — which is stricter than most states' 0.02% underage limit. A first under-21 DWI in New Jersey results in a 30–90 day license suspension, $250–$400 in fines, a mandatory Intoxicated Driver Resource Center (IDRC) evaluation, and 15–30 days of community service.",
-    "New Jersey's most famous road design is the jughandle turn — and it is not merely a curiosity. Under NJSA 39:4-123, making a direct left turn from the main travel lane when a jughandle is provided is illegal. Jughandles are required on many of New Jersey's divided state highways including Routes 1, 9, 22, and 35: instead of turning left from the main lane, drivers must exit right onto a curved ramp before the intersection, loop around, and cross the main road perpendicularly at a traffic signal. A far-side jughandle (exiting after the intersection) is used for U-turns on these highways. The NJ hands-free law under NJSA 39:4-97.3 (effective March 1, 2024) adds three license points per violation — not just a fine — making NJ's handheld penalty unusually severe. New Jersey's 6-Point ID Verification system is among the strictest document requirements for license applicants nationally.",
+    "New Jersey's most famous road design is the jughandle turn — and it is not merely a curiosity. Under NJSA 39:4-123, making a direct left turn from the main travel lane when a jughandle is provided is illegal. Jughandles are required on many of New Jersey's divided state highways including Routes 1, 9, 22, and 35: instead of turning left from the main lane, drivers must exit right onto a curved ramp before the intersection, loop around, and cross the main road perpendicularly at a traffic signal. A far-side jughandle (exiting after the intersection) is used for U-turns on these highways. Per the official manual, the NJ hands-free law under NJSA 39:4-97.3 adds three license points, but only starting with a third conviction within 10 years of a second conviction, and all fourth-and-subsequent offenses — the first and second convictions carry fines only, no points. New Jersey's 6-Point ID Verification system is among the strictest document requirements for license applicants nationally.",
   ],
   keyRules: [
     { icon: "🔄", rule: "Jughandle turns — direct left turn illegal when jughandle is present", detail: "Under NJSA 39:4-123, when a jughandle ramp is provided on an NJ highway, making a direct left turn from the main travel lane is illegal. Exit right, loop around, and cross at the jughandle signal." },
     { icon: "⚖️", rule: "DWI: no plea bargaining — NJSA 39:4-50", detail: "New Jersey law expressly prohibits prosecutors from plea-bargaining DWI charges down to a lesser offense. Defendants must plead guilty to DWI or go to trial — no other eastern state has this anti-plea-bargain provision." },
     { icon: "🍺", rule: "Under-21 DWI at 0.01% — strictest in the east", detail: "NJ's under-21 BAC threshold is 0.01% — any measurable alcohol above trace levels. First offense: 30–90 day suspension, $250–$400 fine, mandatory IDRC evaluation, 15–30 days community service." },
-    { icon: "📵", rule: "Hands-free law adds 3 license points per violation", detail: "Under NJSA 39:4-97.3 (effective March 1, 2024): first violation $200–$400 + 3 points; second $400–$600 + 3 points; third+ $600–$800 + 3 points + possible 90-day suspension. The point addition (not just a fine) is uniquely severe." },
+    { icon: "📵", rule: "Hands-free law: points apply starting on the third conviction", detail: "Under NJSA 39:4-97.3: first violation $200–$400 fine, no points; second $400–$600 fine, no points; third conviction within 10 years of the second, and all subsequent offenses, add 3 license points plus a possible 90-day suspension." },
     { icon: "🏎️", rule: "Blind intersection: 15 mph when view blocked within 100 feet", detail: "Under NJSA 39:4-90.1, at any intersection where the view is obstructed within 100 feet in any direction, NJ requires a maximum speed of 15 mph even without a posted sign." },
     { icon: "👤", rule: "GDL: 1-passenger restriction for permit/probationary holders", detail: "NJ teen drivers with a Special Learner's Permit or Probationary License may not carry more than 1 additional passenger in the vehicle (other than a parent, guardian, or responsible adult 21+)." },
     { icon: "🌙", rule: "Probationary curfew: 11 PM–5 AM", detail: "NJ Probationary License holders may not drive between 11 PM and 5 AM without a licensed adult 21+ in the front seat — exceptions require written documentation for work, school, or family emergency." },
@@ -71,16 +71,16 @@ const data: PracticeTestPageProps = {
         "New Jersey's under-21 DWI threshold is 0.01% BAC — any measurable alcohol above trace levels. A first offense under this threshold results in a 30–90 day license suspension, $250–$400 fine, mandatory Intoxicated Driver Resource Center (IDRC) evaluation, and 15–30 days of community service. NJ's 0.01% threshold is stricter than most states' 0.02% underage limit and effectively constitutes zero tolerance.",
     },
     {
-      question: "Under New Jersey's hands-free law (NJSA 39:4-97.3, effective March 1, 2024), what happens on a FIRST violation?",
+      question: "Under New Jersey's hands-free law (NJSA 39:4-97.3), what happens on a FIRST violation?",
       options: [
         "$100 fine, no points",
         "$200–$400 fine only — no license points added",
         "$200–$400 fine plus 3 license points",
         "Written warning only for a first violation",
       ],
-      correctIndex: 2,
+      correctIndex: 1,
       explanation:
-        "New Jersey's hands-free law under NJSA 39:4-97.3 (effective March 1, 2024) adds three license points per violation in addition to fines — making it unusually punitive compared to most states that impose only fines. First violation: $200–$400 + 3 points. Second violation: $400–$600 + 3 points. Third and subsequent violations: $600–$800 + 3 points + possible 90-day license suspension. The point addition on a first violation distinguishes NJ from states that treat handheld violations as non-point offenses.",
+        "New Jersey's hands-free law under NJSA 39:4-97.3 carries a $200–$400 fine for a first violation with no license points. Points (3) are only assessed starting with a third conviction within 10 years of a second conviction, and all fourth-and-subsequent offenses, along with a possible 90-day suspension. Fines step up to $400–$600 for a second offense and $600–$800 for a third or subsequent offense.",
     },
     {
       question: "At an uncontrolled New Jersey intersection where a building, fence, or vegetation blocks the view within 100 feet in any direction, what speed does NJSA 39:4-90.1 require?",
@@ -138,16 +138,16 @@ const data: PracticeTestPageProps = {
         "New Jersey Probationary License holders may drive between 11 PM and 5 AM only with a licensed adult 21 or older in the front seat, OR when traveling to/from work, a school activity, or a documented family emergency. For the work exemption, the driver must carry written documentation — such as a work schedule or employer letter — in the vehicle. Verbal claims of a work exemption are not sufficient if stopped by law enforcement.",
     },
     {
-      question: "The NJ MVC knowledge test is 50 questions split into two sections. What passing standard applies to each section?",
+      question: "How many questions are on the New Jersey MVC knowledge test, and what score is required to pass?",
       options: [
-        "A combined 80% on all 50 questions — sections are not scored separately",
-        "75% on each section independently",
-        "80% on each section independently — at least 8/10 on signs and 32/40 on road rules",
-        "90% on road signs and 75% on road rules",
+        "40 questions, 75% to pass",
+        "50 questions, 80% (40 of 50) to pass",
+        "50 questions split into two sections, each requiring 80% independently",
+        "60 questions, 90% to pass",
       ],
-      correctIndex: 2,
+      correctIndex: 1,
       explanation:
-        "New Jersey's knowledge test has two independently scored sections: 10 road sign questions (must score at least 8/10, or 80%) and 40 road rules questions (must score at least 32/40, or 80%). Both sections must be passed at the 80% threshold independently. A failing score in one section means you must retake the entire test — a passing score in the other section does not carry over. If you fail, you must wait 7 days before retesting.",
+        "Per the official 2025 New Jersey Driver Manual, the knowledge test consists of 50 scored questions (plus one unscored organ-donor survey question) and requires a single overall score of 80%, or 40 of the 50 questions correct, to pass.",
     },
   ],
   faqs: [
@@ -169,7 +169,7 @@ const data: PracticeTestPageProps = {
     {
       question: "Why does New Jersey's hands-free law add license points, and how many?",
       answer:
-        "New Jersey's hands-free law under NJSA 39:4-97.3 (effective March 1, 2024) adds three license points per violation — in addition to fines — on every offense including the first. This makes NJ's handheld penalty unusually severe: in most states, handheld violations carry only fines with no points. The point addition can trigger insurance surcharges and accumulate toward license suspension faster than simple fine-only offenses. Fines range from $200–$400 (first offense) to $600–$800 plus possible 90-day suspension for third and subsequent offenses.",
+        "New Jersey's hands-free law under NJSA 39:4-97.3 adds three license points, but only starting with a third conviction within 10 years of a second conviction, and all fourth-and-subsequent offenses. The first and second convictions carry fines only ($200–$400 and $400–$600 respectively) with no points. A third or subsequent conviction adds the 3 points plus a $600–$800 fine and a possible 90-day license suspension.",
     },
     {
       question: "What is NJ's 6-Point ID Verification system?",
@@ -189,7 +189,7 @@ const data: PracticeTestPageProps = {
     {
       question: "How many questions are on the New Jersey MVC knowledge test and what is the passing score?",
       answer:
-        "The NJ MVC knowledge test has 50 questions: 10 road sign questions and 40 road rules questions, taken together in one sitting. You must score at least 80% on each section independently — at least 8/10 on signs and 32/40 on road rules. Failing either section requires retaking the full test after a 7-day waiting period. There is no limit on total retake attempts.",
+        "Per the official 2025 New Jersey Driver Manual, the NJ MVC knowledge test has 50 scored questions (plus one unscored organ-donor survey question), and requires a single overall score of 80%, or 40 of the 50 questions correct, to pass — there is no separate sign/rules section breakdown.",
     },
     {
       question: "Does New Jersey allow right turn on red?",

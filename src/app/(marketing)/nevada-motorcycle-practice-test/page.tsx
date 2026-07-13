@@ -97,7 +97,7 @@ const data: PracticeTestPageProps = {
     },
     {
       question: "What is the Nevada motorcycle endorsement process?",
-      answer: "Nevada motorcycle endorsement (Class M) is added to an existing Nevada driver's license by passing the Nevada DMV motorcycle knowledge exam and a skills road test, or by completing an approved Motorcycle Safety Foundation (MSF) Basic RiderCourse, which may waive the road test. The knowledge exam tests Nevada-specific laws (universal helmet law under NRS 486.231, DUI under NRS 484C, NRS 484B.165 handheld device ban, open range hazards, desert riding safety), motorcycle operation techniques, and hazard identification. Nevada endorsement applicants must hold a valid Nevada driver's license (or obtain one simultaneously). The MSF course is recommended for all new riders as safety training that goes beyond what the road test evaluates."
+      answer: "Nevada motorcycle endorsement (Class M) is added to an existing Nevada driver's license by passing the Nevada DMV motorcycle knowledge exam and a skills road test, OR by completing an approved Motorcycle Safety Foundation (MSF) Basic RiderCourse — Nevada's DMV states that successful completion of a Basic Rider Course \"will waive any further testing at the Department of Motor Vehicles,\" meaning it waives BOTH the knowledge test and the skills test, not just the skills test. The knowledge exam (when required) tests Nevada-specific laws (universal helmet law under NRS 486.231, DUI under NRS 484C, NRS 484B.165 handheld device ban, open range hazards, desert riding safety), motorcycle operation techniques, and hazard identification. Nevada endorsement applicants must hold a valid Nevada driver's license (or obtain one simultaneously)."
     },
     {
       question: "What DUI penalties apply to Nevada motorcycle operators?",
@@ -130,7 +130,7 @@ const data: PracticeTestPageProps = {
     {
       question: "Does completing a motorcycle safety course waive the skills test in Nevada?",
       answer:
-        "In many states, completing an approved Motorcycle Safety Foundation (MSF) Basic RiderCourse or an equivalent state-approved program waives the DMV riding skills test requirement. Some states also waive the knowledge test for course graduates. Nevada DMV policies on course waivers vary — check the DMV website or contact them directly to confirm which approved courses qualify for test waivers and whether any age restrictions apply.",
+        "Yes, and Nevada's waiver is broader than most states: completing an approved Motorcycle Safety Foundation Basic RiderCourse waives BOTH the DMV knowledge test and the skills test, not just the skills test. Nevada's DMV states plainly that successful course completion \"will waive any further testing at the Department of Motor Vehicles.\" Find a course through the Nevada Rider Motorcycle Safety Program at NevadaRider.com or (800) 889-8779.",
     },
   ],
   relatedTests: [

@@ -4,7 +4,7 @@ import PracticeTestPage, { type PracticeTestPageProps } from "@/components/Pract
 export const metadata: Metadata = {
   title: "Connecticut Motorcycle Practice Test 2025 – Free CT DMV Class M Endorsement Exam Prep",
   description:
-    "Free Connecticut motorcycle endorsement practice test. 25 questions, 80% passing. Universal helmet ALL riders, Connecticut OUI applies to motorcycle operators, Merritt Parkway is open to motorcycles (but not trucks), and CT's early 2006 handheld ban applies to riders.",
+    "Free Connecticut motorcycle endorsement practice test. Helmet law for riders under 21, Connecticut OUI applies to motorcycle operators, Merritt Parkway is open to motorcycles (but not trucks), and CT's handheld device ban applies to riders.",
   alternates: { canonical: "https://caredmvprep.com/connecticut-motorcycle-practice-test" },
   openGraph: { url: "https://caredmvprep.com/connecticut-motorcycle-practice-test", images: [{ url: "https://caredmvprep.com/opengraph-image", width: 1200, height: 630 }] },
 };
@@ -16,24 +16,24 @@ const data: PracticeTestPageProps = {
   slug: "connecticut-motorcycle-practice-test",
   headline: "Connecticut Motorcycle Endorsement Practice Test 2025",
   intro:
-    "Connecticut DMV issues a Class M motorcycle endorsement on your Connecticut driver's license. The 25-question test requires 80% (20/25) to pass. Connecticut has a universal helmet law — all riders and passengers must wear approved helmets. Connecticut's OUI law (not DUI) applies to motorcycle operators. The Merritt Parkway (Route 15) is open to motorcycles — unlike trucks and buses. Connecticut's handheld ban has been in effect since 2006.",
+    "Connecticut DMV issues a Class M motorcycle endorsement on your Connecticut driver's license. Connecticut's helmet law requires riders under 21 to wear approved headgear when operating a motorcycle or motor-driven cycle (effective October 1, 2025); there is no requirement for riders 21 and older. Connecticut's OUI law (not DUI) applies to motorcycle operators. The Merritt Parkway (Route 15) is open to motorcycles — unlike trucks and buses. Connecticut's handheld device ban applies to riders.",
   basedOn: "Connecticut DMV Motorcycle Operator Manual (current CT DMV edition)",
   about: [
-    "Connecticut's motorcycle endorsement (Class M) is issued by CT DMV after passing the knowledge test and skills test, OR completing an approved MSF BRC (which waives the skills test). Connecticut has a universal helmet law (CGS § 14-289g): all motorcycle riders and passengers must wear a Connecticut-approved helmet that meets DOT and ANSI Z90.1 standards. Connecticut's OUI law (CGS § 14-227a) — Operating Under the Influence — applies fully to motorcycle operators with the same 0.08% adult BAC threshold, 0.02% for under-21, and mandatory IID upon first-offense reinstatement. Connecticut's handheld device ban (effective July 1, 2006, and expanded in 2022) applies to motorcycle operators as it does to all drivers.",
+    "Connecticut's motorcycle endorsement (Class M) is issued by CT DMV after passing the knowledge test and skills test, OR completing an approved MSF BRC (which waives the skills test only — the knowledge test is still required). Connecticut's helmet law, effective October 1, 2025, requires riders under 21 to wear an approved helmet when operating a motorcycle or motor-driven cycle; riders 21 and older have no helmet requirement. All motorcycle learner's permit holders, however, must wear protective headgear regardless of age. Connecticut's OUI law (CGS § 14-227a) — Operating Under the Influence — applies fully to motorcycle operators with the same 0.08% adult BAC threshold, 0.02% for under-21, and mandatory IID upon first-offense reinstatement. Connecticut's handheld device ban applies to motorcycle operators as it does to all drivers.",
     "Connecticut's Merritt Parkway (Route 15) — which prohibits all commercial vehicles, trucks, buses, and RVs due to its historic low bridge clearances — IS open to motorcycle riders. Motorcycles are passenger vehicles and are not subject to the Merritt's commercial vehicle restrictions. The Merritt is a scenic, winding 37-mile parkway that makes an excellent motorcycle route through Fairfield County; however, riders should be aware of: low-clearance bridge sections (irrelevant to motorcycles, but the bridges' decorative stone facades make the road feel narrower than it is); variable speed from 45–55 mph creating mixed-speed traffic; and cross-traffic from long-closed entrance ramps that may have been locally re-opened. Connecticut's Berkshire region (northwest) and Quiet Corner (northeast) offer scenic two-lane routes in a compact geography.",
   ],
   sampleQuestions: [
     {
-      question: "Connecticut's universal motorcycle helmet law applies to which riders?",
+      question: "Connecticut's motorcycle helmet law applies to which riders?",
       options: [
         "Riders under 18 only",
-        "Riders under 21",
+        "Riders under 21 (effective October 1, 2025) — no requirement for riders 21 and older",
         "All riders and passengers of any age on public roads",
         "Only permit holders",
       ],
-      correctIndex: 2,
+      correctIndex: 1,
       explanation:
-        "CGS § 14-289g requires all motorcycle operators and passengers on Connecticut public roads to wear a Connecticut-approved helmet (meeting DOT and ANSI Z90.1 standards) — regardless of age, experience, or endorsement status. Connecticut's universal law has been in effect for decades. Eye protection (face shield, goggles, or approved safety glasses) is also required unless the motorcycle is equipped with a windscreen. The combination of helmet and eye protection requirements is directly tested on the Connecticut motorcycle endorsement exam.",
+        "Effective October 1, 2025, Connecticut law requires riders under 21 to wear protective headgear when operating a motorcycle or motor-driven cycle. There is no helmet requirement for riders 21 and older. Separately, anyone holding a motorcycle learner's permit must wear protective headgear regardless of age while on the permit. Eye protection is required for the operator unless the motorcycle has an adequate windscreen.",
     },
     {
       question: "Connecticut uses 'OUI' (Operating Under the Influence) for impaired riding. The first-offense OUI conviction for a motorcycle operator requires what upon license reinstatement?",
@@ -128,7 +128,7 @@ const data: PracticeTestPageProps = {
     {
       question: "Does Connecticut require helmets for all motorcycle riders?",
       answer:
-        "Yes. CGS § 14-289g requires all motorcycle operators and passengers to wear Connecticut-approved helmets (meeting DOT and ANSI Z90.1 standards) on public roads. There are no exceptions for age or experience. Eye protection is also required. Connecticut's universal helmet requirement is tested on the endorsement knowledge exam. Both operators and passengers — including passengers on the back of large touring motorcycles — must be helmeted.",
+        "No — Connecticut's helmet law is not universal. Effective October 1, 2025, riders under 21 must wear protective headgear when operating a motorcycle or motor-driven cycle; there is no requirement for riders 21 and older. Anyone holding a motorcycle learner's permit must wear protective headgear regardless of age, however. Eye protection is required for the operator unless the motorcycle has an adequate windscreen.",
     },
     {
       question: "Are motorcycles allowed on the Merritt Parkway (Route 15)?",
@@ -138,7 +138,7 @@ const data: PracticeTestPageProps = {
     {
       question: "How does Connecticut DMV issue a motorcycle endorsement?",
       answer:
-        "Connecticut Class M endorsement: (1) Pass the motorcycle knowledge test (25 questions, 80%) at any CT DMV office; (2) Pass the CT DMV motorcycle road skills test OR complete an MSF Basic RiderCourse (BRC) — BRC completion waives the skills test; (3) Pay the endorsement fee. Connecticut DMV requires both passing the knowledge test AND either the skills test or BRC. The knowledge test and skills test can typically be scheduled on the same day at Connecticut DMV offices that offer motorcycle testing.",
+        "Connecticut Class M endorsement: (1) Pass the motorcycle knowledge test (16 questions, drawn from this manual and the Connecticut Driver's Manual for New Drivers) at any CT DMV office; (2) Pass the CT DMV motorcycle road skills test OR complete an MSF Basic RiderCourse (BRC) — BRC completion waives the skills test only, the knowledge test is still required; (3) Pay the endorsement fee. The knowledge test and skills test can typically be scheduled on the same day at Connecticut DMV offices that offer motorcycle testing.",
     },
     {
       question: "Does Connecticut's OUI law treat motorcycle operation the same as car operation?",
@@ -173,7 +173,7 @@ const data: PracticeTestPageProps = {
     {
       question: "Does completing a motorcycle safety course waive the skills test in Connecticut?",
       answer:
-        "In many states, completing an approved Motorcycle Safety Foundation (MSF) Basic RiderCourse or an equivalent state-approved program waives the DMV riding skills test requirement. Some states also waive the knowledge test for course graduates. Connecticut DMV policies on course waivers vary — check the DMV website or contact them directly to confirm which approved courses qualify for test waivers and whether any age restrictions apply.",
+        "Yes, but only the skills test — completing an approved Motorcycle Safety Foundation (MSF) Basic RiderCourse waives the CT DMV riding skills test. The knowledge test is still required regardless of course completion.",
     },
   ],
   relatedTests: [

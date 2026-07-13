@@ -4,7 +4,7 @@ import PracticeTestPage, { type PracticeTestPageProps } from "@/components/Pract
 export const metadata: Metadata = {
   title: "Kentucky DMV Practice Test 2025 – Free KY Driver's License Exam Prep | Road Signs & Traffic Laws",
   description:
-    "Free Kentucky driver's license practice test based on the KY TC Driver Manual. 40 questions in two sections (road signs + traffic laws) — must pass each section at 80%. Horse-drawn vehicle laws, Brent's Law DUI provisions, and SB 332 hands-free rules.",
+    "Free Kentucky driver's license practice test based on the official Kentucky State Police Driver's Manual. 80% passing score required. Horse-drawn vehicle laws, Brent's Law DUI provisions, and SB 332 hands-free rules.",
   alternates: { canonical: "https://caredmvprep.com/kentucky-dmv-practice-test" },
   openGraph: { url: "https://caredmvprep.com/kentucky-dmv-practice-test", images: [{ url: "https://caredmvprep.com/opengraph-image", width: 1200, height: 630 }] },
 };
@@ -16,36 +16,36 @@ const data: PracticeTestPageProps = {
   slug: "kentucky-dmv-practice-test",
   headline: "Kentucky Driver's License Practice Test 2025",
   intro:
-    "Kentucky's driver knowledge test is administered by the Kentucky Transportation Cabinet (KYTC) / Division of Driver Licensing. The test has 40 questions split into two independent sections — 20 road sign questions and 20 traffic law questions — and you must score at least 80% (16/20) on EACH section separately. Kentucky also has unique laws for horse-drawn vehicles and Amish community traffic, and 'Brent's Law' (2020) — enhanced DUI penalties when a child is in the vehicle.",
-  passingScore: "80% on EACH section (16/20 road signs AND 16/20 traffic laws)",
-  basedOn: "Kentucky Transportation Cabinet Driver Manual (current KRS edition)",
+    "Kentucky's driver knowledge test is administered by the Kentucky State Police (KSP) Driver Testing Branch, based on the manual issued by the Kentucky Transportation Cabinet (KYTC) / Division of Driver Licensing. You must score at least 80% to pass. Kentucky also has unique laws for horse-drawn vehicles and Amish community traffic, and 'Brent's Law' (2020) — enhanced DUI penalties when a child is in the vehicle.",
+  passingScore: "80%",
+  basedOn: "Kentucky Driver's Manual (Kentucky State Police)",
   keyRules: [
-    { icon: "📝", rule: "Two-section test: 80% on EACH section", detail: "40 questions split into two independent sections (20 road signs + 20 traffic laws). Must score 80% (16/20) on EACH section independently — passing one does not offset a failing score on the other." },
+    { icon: "📝", rule: "Tested by KSP, not a \"DMV\"", detail: "Kentucky State Police (KSP) administers the driver knowledge test, road skills test, and motorcycle test at Driver Testing Branch locations — KYTC (drive.ky.gov) handles applications and issues the actual license." },
     { icon: "🐴", rule: "Horse-drawn vehicles need lights after dark", detail: "KRS 189.050 requires horse-drawn vehicles and riders on horseback to display lights or reflective material after dark. Kentucky's Amish community roads are specifically tested." },
     { icon: "👶", rule: "Brent's Law: DUI + child under 12 = felony", detail: "Brent's Law (HB 452, 2020): DUI with a passenger under 12 in the vehicle elevates the charge to a minimum Class D felony (1–5 years) and requires an IID upon license reinstatement." },
     { icon: "📱", rule: "Hands-free required (SB 332, July 2022)", detail: "Effective July 8, 2022 — all drivers banned from holding a wireless device while operating a vehicle. Hands-free Bluetooth and single-button earpieces are permitted." },
     { icon: "🍺", rule: "DUI: 0.08% adults; 0.02% under-21", detail: "0.08% for adults; 0.02% for drivers under 21; 0.04% for CDL holders in a CMV. Kentucky is a no-fault insurance state — CDL commercial insurance follows federal FMCSA standards." },
     { icon: "🧪", rule: "Implied consent: 90-day refusal suspension", detail: "Chemical test refusal = 90-day suspension (first refusal); prior refusals within 5 years = 12-month suspension. Suspension is in addition to any criminal DUI charges." },
     { icon: "🚗", rule: "Instruction permit at 16 (60 supervised hours)", detail: "Instruction permit at 16; must hold for 180 days and complete at least 60 hours supervised driving (10 at night) before an Intermediate License can be issued." },
-    { icon: "🌙", rule: "Intermediate: midnight–6AM curfew", detail: "Under 18: no driving midnight–6AM unless accompanied by adult 21+; maximum 1 non-family passenger under 20 for the first 6 months of the Intermediate License." },
+    { icon: "🌙", rule: "Intermediate: midnight–6AM curfew", detail: "Under 18: no driving midnight–6AM unless the driver can show good cause (school, work, emergency); maximum 1 non-family passenger under 20, for the entire Intermediate License stage — not just an initial period." },
   ],
   about: [
-    "Kentucky's knowledge test is split into two independently scored sections: 20 road sign questions and 20 traffic law questions. You must answer at least 16 questions correctly in EACH section — a high score on one section does not compensate for a low score on the other. If you fail one section but pass the other, you will need to retake only the failed section at the next attempt (within the same testing visit). This two-section structure is shared by Virginia and New Jersey and is more demanding than a single-pool test because it requires balanced competence in both sign recognition and legal knowledge. The Division of Driver Licensing (part of the Kentucky Transportation Cabinet, or KYTC) administers tests at driver licensing regional offices statewide. Tests are available on computer at most locations. The permit application fee and knowledge test fee are paid at the time of application.",
+    "Kentucky's knowledge test is administered by the Kentucky State Police (KSP) Driver Testing Branch, not a traditional \"DMV\" — the Kentucky Transportation Cabinet (KYTC)/Division of Driver Licensing handles applications and issues the physical license, but KSP runs the actual written, vision, and road tests. The manual confirms a minimum score of 80% is required to pass the written test. A short sample quiz is included at the back of the official manual covering a mix of road signs and traffic laws together (not scored as separate sections). Tests are available on computer at most Driver Testing Branch locations. The permit application fee and knowledge test fee are paid at the time of application.",
     "Kentucky is the thoroughbred horse capital of the world, and this reality is reflected in its traffic laws. Kentucky Revised Statutes (KRS 189.050) specifically address horse-drawn vehicles, riders on horseback, and the movement of livestock and farm animals on public roads. After dark, horse-drawn vehicles must display a white or amber light visible from the front and a red light or reflective material visible from the rear. Riders on horseback at night must similarly use reflective gear or lights. These rules are particularly relevant in central Kentucky (the Bluegrass region) and in rural communities where Amish residents use horse-drawn buggies as primary transportation. Kentucky's Amish population is among the largest in the United States, concentrated in northern and south-central Kentucky, and horse-drawn buggies on county roads are a genuine traffic hazard that the knowledge test directly addresses. Drivers must slow, signal, and give wide berth to horse-drawn vehicles — horses can be startled by vehicles even when not at close range.",
     "Kentucky's 'Brent's Law' (HB 452, 2020) was named for Brent Souder, a 9-year-old killed by a drunk driver. The law elevated DUI penalties when a passenger under 12 years old is in the vehicle: what would otherwise be a DUI misdemeanor becomes a minimum Class D felony, carrying 1–5 years in prison. Upon reinstatement, an ignition interlock device (IID) is mandatory. Kentucky SB 332 (hands-free law, effective July 8, 2022) prohibits all drivers from holding a wireless device while driving. Prior to this law, Kentucky had a texting ban for drivers under 18 but no general adult handheld ban. The full adult hands-free law was a significant change. Kentucky DUI law (KRS Chapter 189A) sets the standard at 0.08% for adults, 0.02% for drivers under 21, and 0.04% for CDL holders in a commercial vehicle. Implied consent refusal carries a 90-day administrative suspension for a first refusal.",
   ],
   sampleQuestions: [
     {
-      question: "Kentucky's knowledge test is divided into two independent sections. What is the passing requirement for each section?",
+      question: "Who administers Kentucky's driver knowledge test and road skills test?",
       options: [
-        "You need a combined score of 80% across all 40 questions — section scores don't matter individually",
-        "You must score at least 75% on each section — road signs and traffic laws are scored separately",
-        "You must score at least 80% (16 out of 20) on EACH section independently — failing one section requires retaking only that section",
-        "You must answer all 20 road sign questions correctly; traffic laws require only 70%",
+        "The Kentucky Transportation Cabinet (KYTC) directly, at any drive.ky.gov office",
+        "The Kentucky State Police (KSP) Driver Testing Branch — KYTC handles applications and issues the license",
+        "A third-party private testing company under contract with the state",
+        "County sheriff's offices, which vary their own testing procedures by county",
       ],
-      correctIndex: 2,
+      correctIndex: 1,
       explanation:
-        "Kentucky's knowledge test has two independently scored sections: 20 road sign questions and 20 traffic law questions. You must answer at least 16 correctly (80%) in EACH section. A perfect score on the traffic law section cannot compensate for failing the road sign section — both must meet the 80% minimum. If you pass one section but fail the other in the same testing session, Kentucky typically allows you to retake only the failed section at the next attempt. This structure requires broad competence in both sign recognition and legal knowledge — study both thoroughly before testing.",
+        "Kentucky is unusual in that its knowledge and road skills tests are administered by the Kentucky State Police (KSP) Driver Testing Branch, not by a traditional \"DMV.\" The Kentucky Transportation Cabinet (KYTC), through its Division of Driver Licensing (drive.ky.gov), handles the application, documentation, and eventual issuance of the physical license — but the actual vision test, written knowledge test, and road/skills test are conducted by KSP examiners at Driver Testing Branch locations. A minimum score of 80% is required to pass the written test.",
     },
     {
       question: "Under Kentucky law (KRS 189.050), what must a horse-drawn buggy display when traveling on a public road after dark?",
@@ -158,9 +158,9 @@ const data: PracticeTestPageProps = {
   ],
   faqs: [
     {
-      question: "Why does Kentucky's knowledge test have two separate sections, and what happens if I fail one?",
+      question: "Who actually administers the Kentucky driver's test, and where do I go?",
       answer:
-        "Kentucky's two-section structure (20 road signs + 20 traffic laws) ensures drivers demonstrate competency in both sign recognition and legal knowledge independently. A driver who knows all traffic laws but can't identify signs is genuinely unsafe — and vice versa. If you fail one section but pass the other, the Division of Driver Licensing typically records the passing section and requires you to retake only the failed section. However, policies on same-day retesting and scheduling the partial retest vary by office. Ask the examiner specifically about next steps when you receive your results. Both sections must be passed within the same application cycle.",
+        "The Kentucky State Police (KSP) Driver Testing Branch administers the vision test, written knowledge test, and road/skills test — not the Kentucky Transportation Cabinet (KYTC) directly, and not a traditional \"DMV.\" KYTC's Division of Driver Licensing (drive.ky.gov) handles your application paperwork and issues the physical license after you pass. Appointments and regional testing locations are managed through the KSP Driver Testing Branch. A minimum score of 80% is required on the written test to pass.",
     },
     {
       question: "What does Kentucky law require for horse-drawn vehicles on public roads?",
@@ -175,7 +175,7 @@ const data: PracticeTestPageProps = {
     {
       question: "What are Kentucky's graduated licensing stages and requirements?",
       answer:
-        "Kentucky's three-stage GDL: (1) Instruction Permit at 16 — supervised by licensed adult 21+ in front seat at all times, 180-day minimum hold, 60 hours supervised (10 night); (2) Intermediate License — curfew midnight–6AM without adult 21+ (except work/school/emergency), max 1 non-family passenger under 20 for first 6 months; (3) Full license at 18. Violations during intermediate stage can extend the restriction period. If a permit holder is convicted of a moving violation, the 180-day clock may restart depending on the severity of the violation.",
+        "Kentucky's three-stage GDL: (1) Instruction Permit at 16 — supervised by licensed adult 21+ in front seat at all times, 180-day minimum hold, 60 hours supervised (10 night); (2) Intermediate License — obtained by passing the road skills test, curfew midnight–6AM without adult 21+ (except work/school/emergency), max 1 non-family passenger under 20; (3) Full Unrestricted License — issued after holding the intermediate license for a full 180 days AND completing an approved driver training program (required before the 18th birthday for those under 18). There's no separate fixed age for the full license — it's earned by completing all three steps, which for most 16-year-old starters lands around age 17-18. If a permit holder under 18 is convicted of certain moving or DUI violations, an additional 180 days is added before intermediate-license eligibility.",
     },
     {
       question: "Does the Kentucky hands-free law (SB 332) apply to hands-free GPS navigation?",

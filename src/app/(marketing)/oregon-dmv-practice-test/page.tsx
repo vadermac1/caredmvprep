@@ -24,8 +24,8 @@ const data: PracticeTestPageProps = {
     { icon: "❄️", rule: "Studded tires: November 1 – March 31", detail: "Studded snow tires permitted November 1 through March 31. Mountain passes may require chains via ODOT chain control orders. Remove studs outside the permitted season." },
     { icon: "📱", rule: "Hands-free required since 2017 (HB 2597)", detail: "Oregon banned physically holding a wireless device while driving in 2017 — one of the earliest states. Any physical contact with a held device while moving is prohibited." },
     { icon: "🍺", rule: "DUII: 0.08% adults; 0.00% under-21", detail: "Oregon uses DUII (Driving Under the Influence of Intoxicants). 0.08% BAC for adults; 0.00% per se impairment for drivers under 21; 0.04% for CDL holders in a CMV." },
-    { icon: "🚗", rule: "Instruction permit at 15 (50 supervised hours)", detail: "Instruction permit at 15; must hold for 6 months and complete 50 hours supervised driving (10 at night) before a Provisional License at 16." },
-    { icon: "🌙", rule: "Provisional License: midnight–5AM curfew", detail: "Under 18: no driving midnight–5AM; no more than 3 non-family passengers under 20 during the first 6 months of a Provisional License." },
+    { icon: "🚗", rule: "Instruction permit at 15, license at 16", detail: "Instruction permit at 15; must hold for at least 6 months, then complete 100 hours of supervised driving (or 50 hours plus an ODOT-approved traffic safety course), supervised only by a licensed driver 21+ with at least 3 years of driving experience, before applying for a license at 16." },
+    { icon: "📋", rule: "Under-18 licensing is application-based, not a separate stage", detail: "Oregon's Driver Manual doesn't describe a distinct 'Provisional License' stage with its own curfew or passenger cap — the requirement is a one-time permit-hold-and-hours gate before the regular license is issued." },
     { icon: "🚨", rule: "Move Over: covers amber flashing vehicles too", detail: "Oregon's Move Over law (ORS 811.147) applies to emergency, utility, tow trucks, AND vehicles with amber flashing lights — broader than most state Move Over laws." },
   ],
   about: [
@@ -131,16 +131,16 @@ const data: PracticeTestPageProps = {
         "When Oregon ODOT posts a 'Chains Required' order on a mountain pass, all vehicles without adequate traction (deep-tread snow tires or AWD/4WD with M+S rated tires) must have tire chains installed before proceeding. Passenger vehicles are not exempt — if your vehicle lacks the required traction, chains are mandatory. Oregon's chain stations operate on highway approaches to the major Cascades passes (Santiam Pass on US 20, McKenzie Pass, Crater Lake Highway). A driver who proceeds past a 'Chains Required' sign without chains can be stopped and turned back by law enforcement or the Oregon National Guard. Studded tires do not satisfy chain control requirements.",
     },
     {
-      question: "Oregon's provisional license (for drivers under 18) restricts passengers to what maximum during the first 6 months?",
+      question: "An Oregon instruction permit holder under 18 wants to apply for a license at 16. What must they show before DMV will issue it?",
       options: [
-        "No passengers under 20 are allowed in the vehicle during the first 6 months — all passengers must be adults",
-        "A maximum of 1 non-family passenger under 20 during the first 6 months",
-        "A maximum of 3 non-family passengers under 20 during the first 6 months",
-        "Oregon's provisional license has no passenger restriction — only the midnight curfew applies",
+        "Nothing beyond passing the knowledge and road tests — Oregon has no separate supervised-hours requirement",
+        "Held the permit at least 6 months AND completed 100 hours of supervised driving (or 50 hours plus an ODOT-approved traffic safety course), supervised by someone 21+ with at least 3 years of driving experience",
+        "Held the permit at least 12 months with no supervised-hours requirement at all",
+        "Completed a mandatory driver's education class — supervised driving hours are optional in Oregon",
       ],
-      correctIndex: 2,
+      correctIndex: 1,
       explanation:
-        "Oregon's Provisional License (the intermediate stage in the GDL program) restricts non-family passenger count to a maximum of 3 passengers under 20 during the first 6 months of holding the license. Oregon's passenger restriction is more permissive than many states, which limit to 1 non-family passenger. Oregon's midnight–5AM curfew applies separately. Immediate family members (parents, siblings, grandparents) do not count toward the 3-passenger limit. After the initial 6-month period, both the passenger restriction and the curfew continue until the driver turns 18. Licensed adults 25 or older in the vehicle override both restrictions.",
+        "Oregon requires an under-18 first-time applicant to have held an instruction permit for at least 6 months and to have completed 100 hours of supervised driving experience — or 50 hours plus an ODOT-approved traffic safety education course (with proof of completion) — before applying for a license. The supervising driver must be at least 21 years old and must have held valid driving privileges for at least 3 years; a parent or general adult doesn't automatically qualify if they don't meet the experience requirement. This is a real gate on issuance, not a recommendation.",
     },
     {
       question: "In Oregon, what is the required minimum following distance when driving on highways posted above 45 mph?",
@@ -172,9 +172,9 @@ const data: PracticeTestPageProps = {
         "Studded snow tires are permitted in Oregon from November 1 through March 31. Using them outside this season is a traffic infraction. Chains are separate — they may be required by ODOT chain control postings on mountain passes at any point during winter and are not subject to the studded tire seasonal restriction. During chain control, studded tires do NOT satisfy the chain requirement. Many Oregon mountain drivers carry chains in the trunk from October through April even if they're using studs, because ODOT can post chain control requirements that mandate chains specifically.",
     },
     {
-      question: "How does Oregon's graduated licensing work for drivers under 18?",
+      question: "What does Oregon actually require for drivers under 18 to get licensed?",
       answer:
-        "Oregon's three-stage GDL: (1) Instruction Permit at 15 — supervised by adult 21+ in front seat, no minimum hours specified by statute but 50 supervised hours recommended, minimum 6-month hold; (2) Provisional License at 16 — midnight–5AM curfew, max 3 non-family passengers under 20 for first 6 months; (3) Full license at 18. An approved driver education course can accelerate some portions of the GDL timeline. Oregon recommends (but does not legally mandate at the state level) that permit holders complete 50 hours of supervised driving including 10 at night before the Provisional License road test.",
+        "Oregon's Driver Manual describes a permit-and-hours requirement rather than a multi-stage program with its own curfew or passenger limits. To apply for a license, an applicant must be at least 16, must have held an instruction permit (available at 15) for at least 6 months, and must complete 100 hours of supervised driving experience — or 50 hours plus an ODOT-approved traffic safety education course, with proof of completion. The supervising driver must be at least 21 years old and must have held valid driving privileges for at least 3 years. There is no separate nighttime curfew or passenger-count restriction documented for young Oregon drivers once licensed.",
     },
     {
       question: "What is Oregon's DUI penalty for a first offense?",
@@ -184,7 +184,7 @@ const data: PracticeTestPageProps = {
     {
       question: "What does Oregon law require at railroad crossings?",
       answer:
-        "Oregon requires all drivers to stop when: red lights or gates activate at a crossing; a crossing signal activates; or a crossing gate begins to move. Stop at least 15 feet from the tracks — not at the signal. Do not pull onto the tracks unless you can clear completely without stopping (enough space ahead to accommodate your vehicle's full length plus 15 feet on the other side). Never stop on or within 15 feet of railroad tracks under any circumstances. Oregon law prohibits driving around a lowered crossing gate. Emergency vehicles must stop at all non-signalized railroad crossings by law.",
+        "Oregon requires drivers to stop when flashing red lights are activated, a train is visible or close enough to be hazardous, a stop sign is posted at the crossing (even with no visible train), or a flagger signals to stop. Stop at the stop line if there is one; otherwise stop at least 15 feet from the nearest rail. Never stop on the tracks, and never drive around or under a crossing gate while it's down, or while it's being raised or lowered. School buses, hazmat vehicles, and some school activity vehicles are required to stop at railroad tracks regardless of signals — be ready to stop behind one.",
     },
     {
       question: "Does Oregon require a road skills test for all new drivers?",

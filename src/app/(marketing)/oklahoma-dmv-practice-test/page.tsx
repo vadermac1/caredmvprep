@@ -4,7 +4,7 @@ import PracticeTestPage, { type PracticeTestPageProps } from "@/components/Pract
 export const metadata: Metadata = {
   title: "Oklahoma DPS Practice Test 2025 – Free OK Driver's License Exam Prep",
   description:
-    "Free Oklahoma driver's license practice test based on the OK DPS Driver Manual. 50 questions, 80% passing. Oklahoma DPS (not DMV), tornado/severe weather driving rules, zero tolerance under-21, and SB 1161 hands-free law. Pass your Oklahoma knowledge test first try.",
+    "Free Oklahoma driver's license practice test based on the official Oklahoma Driver Manual. 20 questions, 75% passing (15/20). Oklahoma DPS (not DMV), tornado/severe weather driving rules, zero tolerance under-21, and SB 1161 hands-free law. Pass your Oklahoma knowledge test first try.",
   alternates: { canonical: "https://caredmvprep.com/oklahoma-dmv-practice-test" },
   openGraph: { url: "https://caredmvprep.com/oklahoma-dmv-practice-test", images: [{ url: "https://caredmvprep.com/opengraph-image", width: 1200, height: 630 }] },
 };
@@ -16,7 +16,7 @@ const data: PracticeTestPageProps = {
   slug: "oklahoma-dmv-practice-test",
   headline: "Oklahoma Driver's License Practice Test 2025",
   intro:
-    "Oklahoma driver licensing is administered by the Oklahoma Department of Public Safety (DPS) — not a DMV. The 50-question knowledge test requires 40 correct (80%) to pass. Oklahoma sits at the center of Tornado Alley, and knowing what to do when severe weather strikes while you're driving is both a life-safety skill and a testable exam topic. Oklahoma's SB 1161 (effective November 1, 2023) banned all handheld device use while driving.",
+    "Oklahoma driver licensing is administered by the Oklahoma Department of Public Safety (DPS) — not a DMV. The knowledge test has 20 questions and requires 15 correct (75%) to pass, per the official Service Oklahoma written-test page. Oklahoma sits at the center of Tornado Alley, and knowing what to do when severe weather strikes while you're driving is both a life-safety skill and a testable exam topic. Oklahoma's SB 1161 (effective November 1, 2023) banned all handheld device use while driving.",
   basedOn: "Oklahoma DPS Driver's Manual (current edition)",
   keyRules: [
     { icon: "🚔", rule: "Agency: Oklahoma DPS (not DMV)", detail: "Oklahoma Department of Public Safety (DPS) administers all driver licensing, testing, and traffic enforcement. Look for DPS Driver License Testing Stations, not DMV offices." },
@@ -24,12 +24,12 @@ const data: PracticeTestPageProps = {
     { icon: "🚫", rule: "Zero tolerance under-21: 0.00% BAC", detail: "Oklahoma has true zero tolerance for drivers under 21: any detectable BAC is a DUI violation. 0.00% is the legal BAC limit — any detectable amount triggers an automatic DUI charge." },
     { icon: "📱", rule: "Hands-free required (SB 1161, November 2023)", detail: "Oklahoma SB 1161 (effective November 1, 2023) bans all drivers from holding a wireless device while operating a motor vehicle. Primary enforcement. First violation: $100 fine." },
     { icon: "🍺", rule: "DUI: 0.08% adults; 0.04% CMV", detail: "0.08% BAC for adults; 0.00% for under-21; 0.04% for CDL holders in a CMV. First DUI = 30-day license suspension + mandatory alcohol assessment." },
-    { icon: "🚗", rule: "Learner permit at 15½ (6-month hold)", detail: "Oklahoma learner permit issued at 15½; must hold for 6 months with 40 hours of supervised driving before an Intermediate License at 16." },
-    { icon: "🌙", rule: "Intermediate License: midnight–5AM curfew", detail: "Under 18: no driving midnight–5AM; maximum 1 non-family passenger under 20 during the first 6 months of the Intermediate License." },
+    { icon: "🚗", rule: "Learner permit at 15 (with driver ed) or 16", detail: "Oklahoma's Class D Learner Permit is available at 15 if enrolled in or completed an approved driver education course, or at 16 without driver education." },
+    { icon: "📋", rule: "180-day permit hold before the drive test", detail: "Under-18 applicants must hold the Learner Permit at least 180 days, log at least 50 hours of behind-the-wheel training (10 at night), have no traffic convictions, and complete the free Work Zone Safe course before taking the drive test — Service Oklahoma does not publish a separate nighttime curfew or passenger cap." },
     { icon: "🧪", rule: "Implied consent: 180-day refusal suspension", detail: "Refusing a chemical test = 180-day suspension (first refusal); second refusal within 3 years = 3-year suspension. Longer than most states' first-refusal penalties." },
   ],
   about: [
-    "Oklahoma driver licensing is handled by the Department of Public Safety (DPS) — not a traditional DMV. Oklahoma DPS offices (called 'Driver License Testing Stations' or 'Tag Agent offices') are located throughout the state. The 50-question knowledge test is available on computer at most testing stations. A score of at least 40 (80%) is required to pass. Oklahoma does not offer online knowledge testing for initial license applicants. If you fail the knowledge test, you may retest after 3 business days. Oklahoma's learner permit is issued at age 15½, with a mandatory 6-month hold and 40 hours of supervised driving before an Intermediate License can be issued. Oklahoma's Intermediate License (ages 16–17) restricts driving to midnight–5AM curfew and no more than 1 non-family passenger under 20 during the first 6 months.",
+    "Oklahoma driver licensing is handled by the Department of Public Safety (DPS) — not a traditional DMV. Oklahoma DPS offices (called 'Driver License Testing Stations' or 'Tag Agent offices') are located throughout the state. Service Oklahoma also offers the knowledge test online (60 minutes, webcam-proctored). The test has 20 questions and requires 15 correct (75%) to pass, per the official Service Oklahoma written-test page. If you fail the knowledge test, you may retest after 1 day. Oklahoma's Learner Permit is issued at age 15 if the applicant is enrolled in or has completed an approved driver education course, or at 16 without driver education. Under-18 applicants must hold the permit at least 180 days, log at least 50 hours of behind-the-wheel training (including 10 hours at night), have no traffic convictions on record, and complete the free Work Zone Safe online course before the drive test — Service Oklahoma does not publish a separate nighttime curfew or passenger-count restriction. Adults 18 and older do not need a Learner Permit at all to take the drive test; if they get one anyway for practice, they must hold it 30 days before applying for an unrestricted license.",
     "Oklahoma is at the heart of Tornado Alley — the geographic region of the central United States where atmospheric conditions create some of the world's most frequent and intense tornadoes. Moore, Oklahoma; El Reno, Oklahoma; and the Oklahoma City metro area have been struck by multiple catastrophic tornadoes in recorded history. For this reason, Oklahoma DPS includes tornado and severe weather driving safety in the driver's manual as a distinct, testable topic. The key rules: (1) Do NOT try to outrun a tornado by driving perpendicular to its path on a highway — most tornadoes move at 30–60 mph and can change direction suddenly, making outrunning them dangerous; (2) Do NOT shelter under an overpass — highway overpasses create a venturi effect (wind accelerates through the confined space), creating deadly flying debris conditions; (3) If caught in the open with no building shelter, abandon the vehicle, get into a low-lying ditch, culvert, or depression in the earth, cover your head, and lie flat. These rules are covered in Oklahoma's driver manual and may appear on the knowledge test.",
     "Oklahoma's zero-tolerance DUI law for drivers under 21 sets a BAC limit of 0.00% — any detectable alcohol is a per se DUI, unlike most states that use a 0.02% 'effective zero' standard. Oklahoma's SB 1161 (hands-free law, effective November 1, 2023) prohibits all drivers from holding a wireless device while operating a motor vehicle — one of the most recently enacted comprehensive handheld bans. Oklahoma's implied consent law carries a 180-day suspension for a first refusal (above the typical 90-day standard of many states), and a 3-year suspension for a second refusal within 10 years. Oklahoma DUI law (47 O.S. § 11-902) provides that adult DUI (BAC 0.08%+) on a first offense results in a minimum 10-day license revocation (with restricted driving privilege available after 30 days) and mandatory alcohol assessment. Oklahoma's Habitual Offender law activates after multiple DUI convictions with escalating revocation and IID requirements.",
   ],
@@ -107,16 +107,16 @@ const data: PracticeTestPageProps = {
         "Oklahoma's implied consent law (47 O.S. § 753) provides that refusing a chemical test after a lawful DUI arrest results in a 180-day administrative license revocation for a first refusal — double the 90-day standard of many states. A second refusal within 10 years: 3-year revocation. The administrative revocation runs separately from any criminal DUI case. The refusal is also admissible as evidence in the criminal DUI trial. Oklahoma's 180-day first-refusal suspension is designed to make refusal less attractive as a strategy — a driver might calculate that avoiding the BAC evidence justifies a suspension, but 180 days is substantially longer than the minimum first-DUI suspension.",
     },
     {
-      question: "What is Oklahoma's graduated licensing curfew for Intermediate License holders under 18?",
+      question: "Before an Oklahoma applicant under 18 can take the drive test, what must they complete?",
       options: [
-        "No curfew — Oklahoma Intermediate Licenses have no time restrictions",
-        "No driving 11PM–5AM except for work, school, or emergencies",
-        "No driving midnight–5AM unless accompanied by a licensed adult 21+, except for work, school, or medical emergencies",
-        "No driving after 9PM for the first 6 months, then midnight–5AM thereafter until age 18",
+        "Nothing beyond passing the written test — Oklahoma has no additional under-18 requirements",
+        "Hold the Learner Permit at least 180 days, log at least 50 hours of behind-the-wheel training (10 at night), have no traffic convictions, and complete the free Work Zone Safe course",
+        "Hold the Learner Permit at least 12 months with no behind-the-wheel hours requirement",
+        "Complete a mandatory driver's education class only — behind-the-wheel hours are optional",
       ],
-      correctIndex: 2,
+      correctIndex: 1,
       explanation:
-        "Oklahoma's Intermediate License (issued between ages 16 and 17) includes a curfew: no driving between midnight and 5AM unless accompanied by a licensed adult 21 or older in the front passenger seat, or unless the driving is to/from work, school, or a medical emergency (with documentation). The midnight curfew applies regardless of day of week. Oklahoma also restricts the Intermediate License to a maximum of 1 non-family passenger under 20 during the first 6 months of the license. Both restrictions continue until the driver turns 18. A licensed adult 21+ present in the vehicle overrides both restrictions.",
+        "Oklahoma requires an under-18 applicant to hold their Learner Permit for at least 180 days, complete at least 50 hours of behind-the-wheel training (including 10 hours at night), have no traffic convictions on their driving record, and complete the free Work Zone Safe online course before taking the drive test — confirmed on the official Service Oklahoma written-test page. Adults 18 and older don't need a Learner Permit at all to take the drive test.",
     },
     {
       question: "Oklahoma's road rules require drivers to use which light in their vehicles when driving in rain that reduces visibility?",
@@ -179,7 +179,7 @@ const data: PracticeTestPageProps = {
     {
       question: "What documents does Oklahoma DPS require for a learner's permit?",
       answer:
-        "Oklahoma uses REAL ID documentation. Required: (1) proof of U.S. citizenship or legal presence (birth certificate, passport, or immigration documents); (2) proof of Social Security Number; (3) two proofs of Oklahoma residency within 60 days (utility bills, bank statements, school records); (4) parental consent form if under 18. Oklahoma DPS requires original documents — photocopies are not accepted. A vision screening is conducted at the testing station. Applicants under 15½ (the minimum permit age) will not be tested regardless of documentation.",
+        "Oklahoma uses REAL ID documentation. Required: (1) proof of U.S. citizenship or legal presence (birth certificate, passport, or immigration documents); (2) proof of Social Security Number; (3) two proofs of Oklahoma residency within 60 days (utility bills, bank statements, school records); (4) parental consent form if under 18. Oklahoma DPS requires original documents — photocopies are not accepted. A vision screening is conducted at the testing station. The Learner Permit is available at 15 with an approved driver education course (in progress or completed) or 16 without.",
     },
     {
       question: "What is Oklahoma's minimum auto insurance requirement?",
@@ -189,7 +189,7 @@ const data: PracticeTestPageProps = {
     {
       question: "How does Oklahoma's graduated licensing work for drivers under 18?",
       answer:
-        "Oklahoma's GDL: (1) Learner Permit at 15½ — supervised by licensed adult 21+ in front seat, 40 hours minimum supervised driving (10 at night), 6-month hold; (2) Intermediate License at 16 — midnight–5AM curfew (exceptions for work/school/emergency with adult 21+ or documentation), max 1 non-family passenger under 20 for first 6 months; (3) Full license at 16½ after holding Intermediate License for 6 months without violations, or at 18 regardless. Oklahoma allows early progression to full license at 16½ if all intermediate requirements are satisfied.",
+        "Oklahoma's under-18 licensing path: a Learner Permit is available at 15 with an approved driver education course (in progress or completed) or 16 without. Before the drive test, the applicant must have held the permit at least 180 days, logged at least 50 hours of behind-the-wheel training (including 10 at night), have no traffic convictions on record, and completed the free Work Zone Safe online course — confirmed on the official Service Oklahoma written-test page. Adults 18 and older can skip the Learner Permit entirely and go straight to the drive test after passing the written test. Service Oklahoma does not publish a separate nighttime curfew or passenger-count restriction for young drivers once licensed.",
     },
     {
       question: "Are there special rules for Oklahoma drivers during ice and winter weather events?",

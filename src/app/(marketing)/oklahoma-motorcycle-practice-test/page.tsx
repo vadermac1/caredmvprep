@@ -4,7 +4,7 @@ import PracticeTestPage, { type PracticeTestPageProps } from "@/components/Pract
 export const metadata: Metadata = {
   title: "Oklahoma Motorcycle Practice Test 2025 – Free OK DPS Class M Endorsement Exam Prep",
   description:
-    "Free Oklahoma motorcycle endorsement practice test. 25 questions, 80% passing. Universal helmet ALL riders, Oklahoma DPS agency, tornado/severe weather on a motorcycle, zero-tolerance under-21, and SB 1161 hands-free for riders.",
+    "Free Oklahoma motorcycle endorsement practice test. Helmet law for riders under 18, Oklahoma DPS agency, tornado/severe weather on a motorcycle, zero-tolerance under-21, and SB 1161 hands-free for riders.",
   alternates: { canonical: "https://caredmvprep.com/oklahoma-motorcycle-practice-test" },
   openGraph: { url: "https://caredmvprep.com/oklahoma-motorcycle-practice-test", images: [{ url: "https://caredmvprep.com/opengraph-image", width: 1200, height: 630 }] },
 };
@@ -16,10 +16,10 @@ const data: PracticeTestPageProps = {
   slug: "oklahoma-motorcycle-practice-test",
   headline: "Oklahoma Motorcycle Endorsement Practice Test 2025",
   intro:
-    "Oklahoma's Department of Public Safety (DPS) issues a Class M motorcycle endorsement. The 25-question test requires 80% (20/25) to pass. Oklahoma has a universal helmet law — all riders and passengers must wear DOT-approved helmets. Tornado Alley location creates life-safety riding scenarios unique to Oklahoma. Oklahoma's zero-tolerance under-21 BAC (0.00%) applies to motorcycle operators.",
+    "Oklahoma's Department of Public Safety (DPS) issues a Class M motorcycle endorsement. Oklahoma's helmet law requires a DOT-approved helmet for riders under 18 — riders 18 and older may ride without one. Tornado Alley location creates life-safety riding scenarios unique to Oklahoma. Oklahoma's zero-tolerance under-21 BAC (0.00%) applies to motorcycle operators.",
   basedOn: "Oklahoma DPS Motorcycle Operator Manual (current edition)",
   about: [
-    "Oklahoma's motorcycle endorsement (Class M) is issued by the Department of Public Safety (DPS). Applicants must pass the knowledge test (25 questions, 80%) and the motorcycle skills test, OR complete an approved MSF BRC which waives the skills test. Oklahoma has a universal helmet law (47 O.S. § 12-609): all motorcycle riders and passengers must wear DOT-approved helmets on public roads — no age or experience exceptions. Oklahoma's zero-tolerance DUI law for riders under 21 (0.00% BAC) applies to motorcycle operators. SB 1161 (effective November 1, 2023) applies to motorcycle operators — holding a device while riding is prohibited.",
+    "Oklahoma's motorcycle endorsement (Class M) is issued by the Department of Public Safety (DPS). Applicants must pass the knowledge test and the motorcycle skills test, OR show proof of completing an approved Motorcycle Safety Foundation course — Service Oklahoma may waive BOTH the knowledge and skills tests for a course graduate, not just the skills test. Oklahoma's helmet law requires anyone under 18 to wear a helmet; there is no requirement for riders 18 and older. Oklahoma's zero-tolerance DUI law for riders under 21 (0.00% BAC) applies to motorcycle operators. SB 1161 (effective November 1, 2023) applies to motorcycle operators — holding a device while riding is prohibited.",
     "Oklahoma's position in Tornado Alley creates a unique safety consideration that the Oklahoma DPS motorcycle manual addresses: what should a motorcycle rider do when severe weather or a tornado threatens? Because motorcycles provide zero weather protection, severe weather encounters create extreme life-safety risk for riders. Oklahoma's Ouachita Mountain region in southeast Oklahoma offers scenic riding on US 270, US 271, and state routes through Talimena Scenic Drive — with tight curves, forest-shaded surfaces, and varying road conditions. Oklahoma's Red Dirt country roads in the northwest can have crosswind conditions from open-plain weather patterns. Oklahoma's spring and fall are the safest riding seasons; summer heat in the 100–110°F range across western Oklahoma requires heat management strategies.",
   ],
   sampleQuestions: [
@@ -48,16 +48,16 @@ const data: PracticeTestPageProps = {
         "Oklahoma's zero-tolerance law (47 O.S. § 6-107.3) sets the BAC limit at 0.00% for all operators under 21 — including motorcycle riders. Any detectable amount of alcohol is a per se DUI violation. This is stricter than states that use 0.02% (which allows for trace amounts from non-beverage sources). A first under-21 DUI on a motorcycle: 6-month license suspension, mandatory alcohol assessment, and potential criminal charges. Alcohol significantly impairs the balance and fine motor control that motorcycle operation requires — even at very low BAC levels below the adult 0.08% threshold.",
     },
     {
-      question: "Oklahoma's universal helmet law requires DOT-approved helmets for which motorcycle riders?",
+      question: "Oklahoma's helmet law requires a DOT-approved helmet for which motorcycle riders?",
       options: [
-        "Riders under 18 only",
-        "Riders under 21 — Oklahoma's drinking age mirrors its helmet requirement",
+        "Riders under 18 only — no requirement for riders 18 and older",
+        "Riders under 21",
         "All riders and passengers of any age — Oklahoma has universal helmet coverage",
         "Only permit holders — endorsed riders 18+ have a choice",
       ],
-      correctIndex: 2,
+      correctIndex: 0,
       explanation:
-        "Oklahoma Statute 47 O.S. § 12-609 requires all motorcycle riders and passengers on public roads to wear a DOT-approved helmet — regardless of age, endorsement status, or experience. Oklahoma's universal helmet law has no exceptions. The helmet must be DOT-certified, not a novelty helmet. Oklahoma also requires eye protection — an approved face shield, safety glasses, or goggles — unless the motorcycle has an adequate windscreen. Oklahoma's knowledge test covers both the helmet and eye protection requirements.",
+        "The official Oklahoma Driver Manual states verbatim: \"A helmet is required for anyone under 18 years of age.\" There is no requirement for riders 18 and older. Oklahoma does not have a universal helmet law. Riders should still consider a DOT-compliant helmet regardless of legal requirement, since head injuries account for the largest share of fatal motorcycle crashes.",
     },
     {
       question: "Oklahoma's Talimena Scenic Drive in the Ouachita Mountains offers challenging motorcycle riding. What specific hazard is most common on this route?",
@@ -128,7 +128,7 @@ const data: PracticeTestPageProps = {
     {
       question: "Does Oklahoma require helmets for all motorcycle riders?",
       answer:
-        "Yes. Oklahoma's universal helmet law (47 O.S. § 12-609) requires all motorcycle riders and passengers to wear DOT-approved helmets on public roads — no age or experience exceptions. Eye protection (face shield, goggles, or approved safety glasses) is also required unless the motorcycle has a windscreen. Oklahoma's universal requirement applies to both residents and visitors riding in the state.",
+        "No. Oklahoma's Driver Manual states a helmet is required only for riders under 18 years of age — there is no helmet requirement for riders 18 and older. Eye protection is required for the operator regardless of age: a windshield sufficient to protect against foreign objects, or ANSI-approved goggles or a face shield if the motorcycle lacks one.",
     },
     {
       question: "What should Oklahoma motorcycle riders do when a tornado warning is issued?",
@@ -138,7 +138,7 @@ const data: PracticeTestPageProps = {
     {
       question: "How does Oklahoma DPS issue a motorcycle endorsement?",
       answer:
-        "Oklahoma Class M endorsement: (1) Pass the motorcycle knowledge test (25 questions, 80%) at an Oklahoma DPS testing station; (2) Pass the DPS motorcycle skills test OR complete an MSF BRC — BRC completion waives the skills test; (3) Pay the fee and have the endorsement added to the license. Oklahoma motorcycle permit holders may practice riding while supervised by an endorsed rider 21+. Oklahoma's endorsement process is handled at DPS testing stations statewide.",
+        "Oklahoma Class M endorsement: pass the motorcycle knowledge test and skills test at an Oklahoma DPS testing station, OR show proof of completing an approved Motorcycle Safety Foundation course — Service Oklahoma may waive BOTH the knowledge and skills tests for a course graduate. Oklahoma motorcycle permit holders may practice riding while supervised by a parent, legal guardian, or any person 21+ with a valid Oklahoma license with a motorcycle endorsement, who maintains visual contact with the rider. Oklahoma's endorsement process is handled at DPS testing stations statewide.",
     },
     {
       question: "Is lane splitting legal in Oklahoma?",
@@ -173,7 +173,7 @@ const data: PracticeTestPageProps = {
     {
       question: "Does completing a motorcycle safety course waive the skills test in Oklahoma?",
       answer:
-        "In many states, completing an approved Motorcycle Safety Foundation (MSF) Basic RiderCourse or an equivalent state-approved program waives the DMV riding skills test requirement. Some states also waive the knowledge test for course graduates. Oklahoma DMV policies on course waivers vary — check the DMV website or contact them directly to confirm which approved courses qualify for test waivers and whether any age restrictions apply.",
+        "Yes — and in Oklahoma's case, it can waive more than just the skills test. Service Oklahoma may waive BOTH the knowledge test AND the skills test for an applicant who shows proof of successfully completing an approved Motorcycle Safety Foundation course. This is broader than many states, where a safety course typically waives only the skills test.",
     },
   ],
   relatedTests: [

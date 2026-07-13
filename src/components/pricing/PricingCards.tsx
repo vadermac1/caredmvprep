@@ -35,6 +35,14 @@ const STATES = [
   { abbr: "TN", name: "Tennessee"      },
   { abbr: "VA", name: "Virginia"       },
   { abbr: "WA", name: "Washington"     },
+  { abbr: "NJ", name: "New Jersey"     },
+  { abbr: "MD", name: "Maryland"       },
+  { abbr: "MA", name: "Massachusetts"  },
+  { abbr: "WI", name: "Wisconsin"      },
+  { abbr: "OR", name: "Oregon"         },
+  { abbr: "OK", name: "Oklahoma"       },
+  { abbr: "CT", name: "Connecticut"    },
+  { abbr: "NV", name: "Nevada"         },
 ];
 
 type AccessState =

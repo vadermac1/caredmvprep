@@ -4,7 +4,7 @@ import PracticeTestPage, { type PracticeTestPageProps } from "@/components/Pract
 export const metadata: Metadata = {
   title: "South Carolina Motorcycle Practice Test 2025 – Free SCDMV Class M Endorsement Exam Prep",
   description:
-    "Free South Carolina motorcycle endorsement practice test. 25 questions, 80% passing. Universal helmet law ALL riders, Emma's Law IID applies to motorcycle OUI, SC golf cart roads affect lane positioning, SCDMV endorsement process and MSF waiver.",
+    "Free South Carolina motorcycle endorsement practice test. Helmet required for riders and passengers under 21, Emma's Law IID applies to motorcycle DUI, SC golf cart roads affect lane positioning, SCDMV endorsement process and MSF waiver.",
   alternates: { canonical: "https://caredmvprep.com/south-carolina-motorcycle-practice-test" },
   openGraph: { url: "https://caredmvprep.com/south-carolina-motorcycle-practice-test", images: [{ url: "https://caredmvprep.com/opengraph-image", width: 1200, height: 630 }] },
 };
@@ -16,24 +16,24 @@ const data: PracticeTestPageProps = {
   slug: "south-carolina-motorcycle-practice-test",
   headline: "South Carolina Motorcycle Endorsement Practice Test 2025",
   intro:
-    "The South Carolina DMV (SCDMV) issues a Class M motorcycle endorsement. The 25-question test requires 80% (20/25) to pass. South Carolina has a universal helmet law — all riders and passengers must wear DOT-approved helmets. Emma's Law IID requirements apply to motorcyclists convicted of DUI. Coastal SC roads are shared with golf carts — a unique road-sharing hazard.",
-  basedOn: "South Carolina DMV Motorcycle Operator's Manual (current edition)",
+    "The South Carolina DMV (SCDMV) issues a Class M motorcycle endorsement after a knowledge test and skills test, requiring an 80% passing score. South Carolina's helmet law applies to riders and passengers under 21 — there is no helmet requirement for operators 21 and older. Emma's Law IID requirements apply to motorcyclists convicted of DUI. Coastal SC roads are shared with golf carts — a unique road-sharing hazard.",
+  basedOn: "South Carolina Motorcycle & Moped Operator's Manual (current edition)",
   about: [
-    "South Carolina's motorcycle endorsement (Class M) is issued by SCDMV after passing the knowledge test and skills test, or by completing an approved MSF BRC which waives the skills test. South Carolina has a universal helmet law — all riders and passengers of any age must wear DOT-approved helmets on public roads (SC Code § 56-5-3660). Emma's Law (2014) applies to motorcycle DUI offenders: a first-offense DUI with BAC 0.15%+ requires an ignition interlock device upon reinstatement. The Hands-Free Act (Act R-134, May 2023) applies to all vehicle operators including motorcyclists.",
+    "South Carolina's motorcycle endorsement (Class M) is issued by SCDMV after passing the knowledge test and skills test, or by completing an approved MSF BRC which waives the skills test. South Carolina's helmet law requires operators and passengers under 21 years of age to wear an approved protective helmet with a neck or chin strap, reflectorized on both sides, plus goggles or a face shield for eye protection — riders 21 and older face no state helmet requirement. Emma's Law (2014) applies to motorcycle DUI offenders: a first-offense DUI with BAC 0.15%+ requires an ignition interlock device upon reinstatement. The Hands-Free Act (Act R-134, May 2023) applies to all vehicle operators including motorcyclists.",
     "South Carolina motorcycle riders face a unique road-sharing challenge in coastal communities: golf carts. In areas like Hilton Head Island, Myrtle Beach, Kiawah Island, and Pawleys Island, golf carts are legally permitted on roads posted 35 mph or less and travel significantly slower than motorcycles. Riders must be prepared to encounter golf carts at intersections, on narrow coastal lanes, and crossing between beach access points. Golf carts are low, small, and may not be visible from a motorcycle's headlight at night at the same distance as a car. South Carolina's Blue Ridge Escarpment (SC 11 — Cherokee Foothills Scenic Highway) offers mountain motorcycle routes with tight curves and variable road surfaces.",
   ],
   sampleQuestions: [
     {
       question: "South Carolina's helmet law requires DOT-approved helmets for which motorcycle riders?",
       options: [
-        "Riders under 21 — adult riders have a choice in South Carolina",
-        "Only permit holders — endorsed riders may choose not to wear a helmet",
+        "Riders and passengers under 21 — riders 21 and older face no state helmet requirement",
+        "Only permit holders, regardless of age",
         "All riders and passengers of any age — South Carolina has a universal helmet law",
-        "Riders under 18 only — South Carolina uses the common underage cutoff",
+        "Riders under 16 only",
       ],
-      correctIndex: 2,
+      correctIndex: 0,
       explanation:
-        "SC Code § 56-5-3660 requires all motorcycle riders and passengers on public roads to wear a DOT-approved helmet — regardless of age or endorsement status. There are no exceptions based on rider experience. South Carolina's universal helmet law is one of its most important motorcycle safety requirements. Novelty helmets without DOT certification do not legally satisfy the requirement. Eye protection (face shield, goggles, or approved safety glasses) is also required unless the motorcycle has a windscreen.",
+        "South Carolina's Motorcycle & Moped Operator's Manual states the helmet requirement applies to operators and passengers under 21 years of age, who must wear an approved protective helmet with a neck or chin strap, reflectorized on both sides, plus goggles or a face shield for eye protection. Riders 21 and older have no state helmet requirement.",
     },
     {
       question: "A South Carolina motorcyclist encounters a golf cart crossing a coastal road near Hilton Head. What should the rider do?",
@@ -128,12 +128,12 @@ const data: PracticeTestPageProps = {
     {
       question: "Does South Carolina require helmets for all motorcycle riders?",
       answer:
-        "Yes. SC Code § 56-5-3660 is a universal helmet law — all riders and passengers of any age must wear DOT-approved helmets on public roads. There are no exceptions for age, experience, or endorsement status. South Carolina also requires eye protection (face shield, goggles, or approved safety glasses) unless the motorcycle has a windscreen. The combination of helmet and eye protection requirements makes South Carolina one of the more comprehensively protected states for motorcycle riders.",
+        "No. South Carolina's Motorcycle & Moped Operator's Manual requires only operators and passengers under 21 years of age to wear a DOT-approved protective helmet (with a neck or chin strap, reflectorized on both sides) plus goggles or a face shield for eye protection. Riders 21 and older face no state helmet requirement.",
     },
     {
       question: "How do I get a South Carolina Class M motorcycle endorsement?",
       answer:
-        "South Carolina Class M endorsement: (1) Pass the SCDMV motorcycle knowledge test (25 questions, 80%); (2) Pass the SCDMV motorcycle skills test OR complete an approved MSF Basic RiderCourse (BRC) — the BRC completion card waives the skills test; (3) Present documentation and pay the fee at any SCDMV office. The BRC is offered at approved sites throughout South Carolina. New riders are strongly encouraged to complete the BRC for its safety training value in addition to the skills test waiver.",
+        "South Carolina Class M endorsement: (1) Pass the SCDMV motorcycle knowledge test (80% passing score); (2) Pass the SCDMV motorcycle skills test OR complete an approved MSF Basic RiderCourse (BRC) — the BRC completion card waives the skills test; (3) Present documentation and pay the fee at any SCDMV office. The BRC is offered at approved sites throughout South Carolina. New riders are strongly encouraged to complete the BRC for its safety training value in addition to the skills test waiver.",
     },
     {
       question: "Are there golf carts on roads near Hilton Head and Myrtle Beach that motorcyclists need to be aware of?",

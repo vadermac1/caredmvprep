@@ -21,15 +21,15 @@ const data: PracticeTestPageProps = {
   keyRules: [
     { icon: "⚖️", rule: "First OWI = civil infraction only (WI only)", detail: "Wisconsin is the ONLY state where a first-offense OWI is a civil infraction — not criminal. Fine: $150–$300, no jail, no criminal record (unless a minor under 16 is in the vehicle)." },
     { icon: "🚔", rule: "Second OWI = criminal misdemeanor", detail: "A second OWI within 10 years is a criminal misdemeanor; third OWI = felony. Criminal record follows from the second offense onward." },
-    { icon: "🍺", rule: "OWI threshold: 0.08% adults", detail: "0.08% BAC for most adults; 0.00% (absolute sobriety) for commercial drivers who have had a prior OWI; 0.02% for drivers under 21. Wisconsin uses OWI, not DUI." },
+    { icon: "🍺", rule: "Absolute sobriety: 0.00% for drivers under 21", detail: "Wisconsin's Motorists' Handbook states the legal alcohol concentration allowed for drivers under 21 is 0.00% — no detectable alcohol at all. Wisconsin uses OWI, not DUI." },
     { icon: "📱", rule: "Hands-free required (Act 12, 2023)", detail: "Wisconsin Act 12 (effective April 26, 2023) bans all drivers from holding a wireless device while operating a vehicle. Hands-free Bluetooth and mounted devices permitted." },
     { icon: "🚜", rule: "Farm equipment needs SMV emblem", detail: "Farm equipment traveling under 25 mph on public roads must display a slow-moving vehicle (SMV) orange triangle emblem. Overwidth equipment may only travel during daylight." },
     { icon: "🚗", rule: "Move It or Lose It: $200 fine", detail: "Wisconsin requires drivers in no-injury accidents to move operable vehicles out of travel lanes — $200 fine for leaving a drivable vehicle blocking traffic." },
-    { icon: "🌙", rule: "Instruction permit at 15½", detail: "Instruction permit at 15½; must hold for 6 months with supervised driving (30 hours required, 10 at night) before an Intermediate License at 16." },
+    { icon: "🌙", rule: "Instruction permit at 15½", detail: "Instruction permit at 15½; must hold for 6 months with at least 50 hours of supervised driving (40 during daylight, 10 during darkness) before a Probationary License at 16." },
     { icon: "❄️", rule: "Tire chains: permitted when conditions require", detail: "Wisconsin permits tire chains when traction conditions require them. Chains must be removed when roads are clear — chains damage dry pavement and are prohibited on clear roads." },
   ],
   about: [
-    "Wisconsin's first OWI offense is a civil infraction — not a crime — making Wisconsin the only state in the United States with this legal structure. A first OWI conviction results in a $150–$300 fine, a 6- to 9-month license revocation, and mandatory alcohol assessment — but no jail time and no criminal record. The only exception: if a passenger under 16 is in the vehicle during a first OWI, the charge immediately becomes a criminal misdemeanor. This unique legal framework is heavily tested on the Wisconsin DMV knowledge exam. Second OWI offense (within 10 years): criminal misdemeanor, 5 days to 6 months jail, $350–$1,100 fine, and up to 18 months revocation. Third OWI: felony. Wisconsin uses 'OWI' (Operating While Intoxicated) terminology; 'DUI' is not used in state law. The BAC threshold is 0.08% for adults, 0.02% for drivers under 21.",
+    "Wisconsin's first OWI offense is a civil infraction — not a crime — making Wisconsin the only state in the United States with this legal structure. A first OWI conviction results in a $150–$300 fine, a 6- to 9-month license revocation, and mandatory alcohol assessment — but no jail time and no criminal record. The only exception: if a passenger under 16 is in the vehicle during a first OWI, the charge immediately becomes a criminal misdemeanor. This unique legal framework is heavily tested on the Wisconsin DMV knowledge exam. Second OWI offense (within 10 years): criminal misdemeanor, 5 days to 6 months jail, $350–$1,100 fine, and up to 18 months revocation. Third OWI: felony. Wisconsin uses 'OWI' (Operating While Intoxicated) terminology; 'DUI' is not used in state law. Wisconsin's Motorists' Handbook states an absolute sobriety standard for drivers under 21: the legal alcohol concentration allowed is 0.00%, meaning no detectable alcohol at all is permitted while driving.",
     "Wisconsin's agricultural economy creates a highway environment unique to the state. Farm tractors, combines, and other large agricultural equipment operate on public roads throughout the state during planting and harvest seasons. Wisconsin law (Wis. Stat. 347.24) requires slow-moving vehicle (SMV) emblems — the distinctive orange-and-red reflective triangle — on any vehicle traveling at less than 25 mph. Farm equipment exceeding legal width limits may only travel during daylight hours without a special permit, and may require an escort vehicle for certain oversize configurations. Drivers encountering slow farm equipment on rural Wisconsin roads must exercise extra caution — farm equipment can stop suddenly, make wide turns, and obstruct sight lines significantly. The DMV knowledge test includes questions on how to safely share the road with farm vehicles. Wisconsin also has specific regulations for snowmobiles crossing public highways at designated crossing points.",
     "Wisconsin's DMV (technically the Division of Motor Vehicles within WisDOT) administers the 50-question knowledge test, which must be passed with a score of at least 80% (40 correct). Tests are available at DMV service centers statewide. Wisconsin's hands-free law (Act 12, effective April 26, 2023) bans all drivers from holding a wireless device while operating a motor vehicle — one of the more recent comprehensive bans. Hands-free Bluetooth and dashboard mounts are permitted. Wisconsin's 'Move It or Lose It' law requires drivers involved in accidents with no injuries to move their vehicles out of travel lanes if operable — leaving a drivable vehicle blocking traffic results in a $200 fine. Wisconsin's graduated licensing requires an instruction permit at 15½, a minimum 6-month supervised driving period, and an intermediate license at 16 with passenger and curfew restrictions until 18.",
   ],
@@ -85,14 +85,14 @@ const data: PracticeTestPageProps = {
     {
       question: "A driver under 21 in Wisconsin is stopped and found to have a BAC of 0.04%. What is the legal consequence under Wisconsin's underage OWI law?",
       options: [
-        "No action — 0.04% is below Wisconsin's 0.08% threshold and no special under-21 law applies",
+        "No action — a special under-21 law only applies at 0.08% or higher",
         "An informal warning — Wisconsin requires at least 0.05% for any consequence under 21",
-        "Wisconsin's under-21 BAC limit is 0.02%, so 0.04% exceeds it — OWI consequences apply including license revocation",
+        "Wisconsin's \"absolute sobriety\" law sets the under-21 limit at 0.00% — any detectable alcohol is a violation, so 0.04% triggers OWI consequences including license revocation",
         "A $500 fine but no license action since the driver is not legally intoxicated at 0.04%",
       ],
       correctIndex: 2,
       explanation:
-        "Wisconsin's underage drinking and driving law (Wis. Stat. 346.63(2m)) sets the BAC limit at 0.02% for drivers under 21 — effectively prohibiting any detectable alcohol. A BAC of 0.04% substantially exceeds this threshold. Wisconsin's underage OWI: first offense is a civil forfeiture ($200–$400 fine), 3-month license suspension, and alcohol assessment. Unlike an adult first OWI (which is also civil at $150–$300), the underage law applies at a much lower BAC. After the third underage OWI offense, criminal consequences apply. The 0.02% threshold means even a small amount of alcohol before driving is prohibited for Wisconsin drivers under 21.",
+        "Wisconsin's Motorists' Handbook states the legal alcohol concentration allowed for drivers under 21 is 0.00% — meaning no measurable amount of alcohol is permitted while driving. A BAC of 0.04% is well above this threshold and triggers Wisconsin's absolute sobriety law, which is separate from and much stricter than the ordinary OWI process, since it prohibits any detectable alcohol rather than requiring proof of impairment at a higher threshold.",
     },
     {
       question: "In Wisconsin, a driver with a previous OWI conviction is stopped and found to have ANY detectable alcohol in their system while driving, even below 0.08%. What law applies?",
@@ -145,14 +145,14 @@ const data: PracticeTestPageProps = {
     {
       question: "Wisconsin's intermediate license for drivers under 18 includes which curfew restriction?",
       options: [
-        "No curfew — Wisconsin does not restrict when intermediate license holders may drive",
+        "No curfew — Wisconsin does not restrict when probationary license holders may drive",
         "No driving between 11PM and 5AM during the school year; no restriction during summer",
-        "No driving between midnight and 5AM unless accompanied by a licensed adult 25 or older, except for work, school, or emergencies",
+        "From midnight to 5AM, may drive alone only between home/school/work, or with a qualifying supervisor",
         "No driving after 9PM for the first 6 months; no driving after midnight for the remaining period until age 18",
       ],
       correctIndex: 2,
       explanation:
-        "Wisconsin's Intermediate License curfew (Wis. Stat. 343.085) prohibits drivers under 18 from driving between midnight and 5AM unless: accompanied by a licensed driver 25 or older in the front seat; traveling to or from work; traveling to or from school-related activities; or responding to an emergency. The curfew applies year-round regardless of season or school schedule. Wisconsin's intermediate license also restricts passengers during the first 9 months: no more than one passenger under 20 who is not an immediate family member, unless a licensed adult 25+ is present. Both restrictions lift when the driver turns 18.",
+        "Wisconsin's Probationary License restrictions apply for the first 9 months (or until age 18, if sooner). From midnight to 5 a.m., a driver under 18 may only drive alone if going directly between home, school, and/or work; otherwise they must be accompanied by a qualifying supervisor — a licensed driver with 2+ years' experience who is either a qualified instructor/spouse 19 or older, or any person 21 or older. From 5 a.m. to midnight, the driver may go anywhere alone, with any number of immediate family members, or with one qualifying supervisor plus one other passenger. These restrictions extend an additional 6 months if the driver is convicted of a moving violation, violates a restriction, or has their license suspended/revoked. Both restrictions lift entirely at age 18.",
     },
   ],
   faqs: [
@@ -174,7 +174,7 @@ const data: PracticeTestPageProps = {
     {
       question: "How does Wisconsin's graduated licensing system work for drivers under 18?",
       answer:
-        "Wisconsin's GDL: (1) Instruction Permit at 15½ — must be supervised by a licensed driver 25+ in the front seat at all times; minimum hold time is 6 months; (2) Intermediate License at 16 after passing road skills test — curfew: no driving midnight–5AM without adult 25+, except for work/school/emergency; passenger restriction: max 1 passenger under 20 (non-family) during first 9 months; (3) Full license at 18, or when intermediate license restrictions have been satisfied. A traffic conviction during the intermediate period extends the restriction period.",
+        "Wisconsin's GDL: (1) Instruction Permit — requires a completed driver-ed document and at least 50 hours of supervised driving (40 daylight + 10 darkness) with a qualifying supervisor (a licensed driver with 2+ years' experience who is either a qualified instructor/spouse 19+, or any person 21+); (2) Probationary License at 16, after holding the instruction permit at least 6 months and passing the road test — for the first 9 months, driving between midnight and 5 a.m. is restricted to trips between home/school/work unless a qualifying supervisor is present, and demerit points are doubled (doubled again on repeat convictions); (3) restrictions lift entirely at 18. A moving-violation conviction, restriction violation, or license suspension/revocation during the probationary period extends these restrictions by 6 months.",
     },
     {
       question: "What is Wisconsin's absolute sobriety requirement for drivers with prior OWI convictions?",

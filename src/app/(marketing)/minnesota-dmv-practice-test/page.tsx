@@ -4,7 +4,7 @@ import PracticeTestPage, { type PracticeTestPageProps } from "@/components/Pract
 export const metadata: Metadata = {
   title: "Minnesota DMV Practice Test 2025 – Free MN Driver and Vehicle Services Knowledge Exam Prep",
   description:
-    "Free Minnesota DVS practice test based on the 2025 Minnesota Driver's Manual. 40 questions, 80% passing score. Covers MN's wipers-on headlights law, Move It or Lose It rule, DWI tiers, and DVS hands-free law. Pass your MN permit test.",
+    "Free Minnesota DVS practice test based on the 2026 Minnesota Driver's Manual. 80% passing score. Covers MN's wipers-on headlights law, Move It or Lose It rule, DWI tiers, and DVS hands-free law. Pass your MN permit test.",
   alternates: { canonical: "https://caredmvprep.com/minnesota-dmv-practice-test" },
   openGraph: { url: "https://caredmvprep.com/minnesota-dmv-practice-test", images: [{ url: "https://caredmvprep.com/opengraph-image", width: 1200, height: 630 }] },
 };
@@ -16,10 +16,10 @@ const data: PracticeTestPageProps = {
   slug: "minnesota-dmv-practice-test",
   headline: "Minnesota DVS Practice Test – Driver and Vehicle Services Knowledge Exam",
   intro:
-    "Minnesota driver's licenses are issued by Driver and Vehicle Services (DVS), a division of the Minnesota Department of Public Safety — not a DMV. The DVS administers a 40-question test requiring 80% (32/40) to pass. This free practice test targets the laws most likely to appear on your MN knowledge exam: the wipers-on headlights mandate under Minn. Stat. § 169.48, the 'Move It or Lose It' crash relocation rule under § 169.32, Minnesota's unique four-tier DWI classification system with a 10-year lookback for felony escalation, the hands-free driving law effective August 1, 2019, and the instruction permit age of 15.",
+    "Minnesota driver's licenses are issued by Driver and Vehicle Services (DVS), a division of the Minnesota Department of Public Safety — not a DMV. The DVS administers a written test requiring 80% to pass (per the official Driver's Manual). This free practice test targets the laws most likely to appear on your MN knowledge exam: the wipers-on headlights mandate under Minn. Stat. § 169.48, the 'Move It or Lose It' crash relocation rule under § 169.32, Minnesota's unique four-tier DWI classification system with a 10-year lookback for felony escalation, the hands-free driving law effective August 1, 2019, and the instruction permit age of 15.",
   basedOn: "2025 Minnesota Driver's Manual",
   about: [
-    "Minnesota driver's licenses are issued by Driver and Vehicle Services (DVS), a division of the Minnesota Department of Public Safety (DPS) — not a Department of Motor Vehicles. DVS offices are located throughout the state and are sometimes informally called the 'Minnesota DMV,' but the correct agency name is Driver and Vehicle Services. The knowledge test consists of 40 multiple-choice questions covering road signs, traffic laws, and safe driving principles specific to Minnesota. You must answer at least 32 questions correctly — an 80% passing score. The test is based on the current Minnesota Driver's Manual, available at dps.mn.gov/dvs.",
+    "Minnesota driver's licenses are issued by Driver and Vehicle Services (DVS), a division of the Minnesota Department of Public Safety (DPS) — not a Department of Motor Vehicles. DVS offices are located throughout the state and are sometimes informally called the 'Minnesota DMV,' but the correct agency name is Driver and Vehicle Services. The written test includes multiple choice and true-or-false questions covering road signs, traffic laws, and safe driving principles specific to Minnesota, and may be taken on paper or by computer. You must score 80 percent to pass, per the official Driver's Manual. The test is based on the current Minnesota Driver's Manual, available at dps.mn.gov/dvs.",
     "Minnesota's DWI classification system is one of the most structured in the nation. The state uses four degrees: 4th-degree DWI (standard misdemeanor, first offense at 0.08%–0.15%), 3rd-degree DWI (gross misdemeanor with aggravating factors such as a BAC of 0.16%+, a child in the vehicle, or a prior DWI within 10 years), 2nd-degree DWI (gross misdemeanor with two or more aggravating factors), and 1st-degree DWI (felony — three or more DWI offenses within 10 years, or a prior felony DWI conviction). The 10-year lookback period for escalating to a felony is specific to Minnesota and is directly tested on the knowledge exam.",
     "Minnesota has two traffic laws that are distinctly state-specific and appear on the knowledge test. First, Minn. Stat. § 169.48 requires headlights to be on whenever windshield wipers are in use due to rain, snow, sleet, or other precipitation — not just in low-visibility conditions, but any time the wipers are running for weather. Second, Minn. Stat. § 169.32 ('Move It or Lose It') requires drivers involved in a crash where no one is injured and the vehicle is operable to move the vehicle out of the travel lane to the shoulder or a nearby safe location before exchanging information. Leaving a drivable vehicle blocking traffic when it is safe to move creates an additional violation.",
   ],
@@ -29,7 +29,7 @@ const data: PracticeTestPageProps = {
     { icon: "🍺", rule: "DWI four-tier system / 10-year lookback for felony", detail: "MN uses DWI. Four degrees: 4th (misdemeanor) → 1st (felony at 3+ DWIs in 10 years). Adult BAC: 0.08%. Under 21: any detectable alcohol — effectively zero tolerance." },
     { icon: "📵", rule: "Hands-Free Law — ALL drivers (Minn. Stat. § 169.475)", detail: "Effective August 1, 2019: all drivers prohibited from holding or manually using a wireless device while driving. Even holding the phone in speaker mode is a violation. First offense: $50. Second+: $275." },
     { icon: "👦", rule: "Instruction permit at 15 — 6 months supervised minimum", detail: "MN instruction permit available at age 15 after passing the knowledge test. Permit must be held for at least 6 months with specific supervised driving requirements before taking the road skills test." },
-    { icon: "🌙", rule: "Provisional curfew: midnight–5 AM until age 18", detail: "MN provisional license holders cannot drive midnight to 5 AM for 12 months or until the driver turns 18 — whichever comes LATER. This is one of the most extended curfew windows in the U.S." },
+    { icon: "🌙", rule: "Provisional curfew: midnight–5 AM for first 6 months", detail: "MN provisional license holders cannot drive midnight to 5 AM during the first six months of the provisional period, unless accompanied by a licensed driver 25+, or driving to/from work, school events without provided transportation, or for employment." },
     { icon: "🚨", rule: "Move Over — emergency and tow vehicles", detail: "Minnesota Move Over law requires moving one lane away from emergency, highway maintenance, and tow vehicles with activated lights on multi-lane roads. If a lane change is not possible, slow down." },
     { icon: "❄️", rule: "Black ice and winter driving — 511MN road conditions", detail: "Minnesota's handbook specifically addresses black ice (looks like wet pavement), whiteout conditions, and the MnDOT 511MN system for checking road conditions before winter travel on state highways." },
   ],
@@ -99,7 +99,7 @@ const data: PracticeTestPageProps = {
       options: ["14 years old", "15 years old", "15 years, 6 months", "16 years old"],
       correctIndex: 1,
       explanation:
-        "Minnesota residents may apply for an instruction permit at age 15 after passing the DVS knowledge test and vision screening. The permit requires a minimum 6-month holding period and specific supervised driving requirements — including at least 30 hours of behind-the-wheel instruction with a licensed adult — before the applicant can take the road skills test for a provisional license. Minnesota DVS, not a DMV, issues the permit.",
+        "Minnesota residents may apply for an instruction permit at age 15 after passing the DVS knowledge test and vision screening. The permit requires a minimum 6-month holding period with no moving or alcohol/controlled-substance convictions, plus a supervised driving log — at least 40 hours (including 15 at night) if a parent/guardian completes a DVS-approved parent class, or at least 50 hours (including 15 at night) without it — before the applicant can take the road skills test for a provisional license. Minnesota DVS, not a DMV, issues the permit.",
     },
     {
       question: "What does Minnesota's MnDOT 511MN system provide for drivers?",
@@ -116,26 +116,26 @@ const data: PracticeTestPageProps = {
     {
       question: "Minnesota's provisional license restricts nighttime driving between what hours, and for how long?",
       options: [
-        "10 PM to 5 AM for the first 6 months only",
+        "Midnight to 5 AM for the first six months only",
         "11 PM to 5 AM until the driver turns 17",
         "Midnight to 5 AM for 12 months or until the driver turns 18 — whichever comes LATER",
         "1 AM to 6 AM for 12 months after getting the provisional license",
       ],
-      correctIndex: 2,
+      correctIndex: 0,
       explanation:
-        "Minnesota provisional license holders may not drive between midnight and 5 AM for 12 months or until they turn 18 — whichever comes LATER. This means a driver who gets a provisional license at 16 years and 11 months still faces the curfew until turning 18, even if 12 months pass before then. Exceptions exist for employment, school, or religious activities with documentation. Minnesota's 'whichever comes later' rule is one of the more extended curfew standards in the country.",
+        "Minnesota provisional license holders may not drive between midnight and 5 AM during the first six months of the provisional period, unless accompanied by a licensed driver at least 25 years old, or driving between home and work, home and a school event without provided transportation, or for employment purposes. The restriction lifts after the first six months.",
     },
     {
       question: "Minnesota's provisional license limits non-family passengers under 20 to:",
       options: [
         "No passenger limit — passengers under 20 are unrestricted",
-        "A maximum of 1 non-family passenger under 20 for the first 12 months",
+        "A maximum of 1 non-family passenger under 20 for the first six months, rising to 3 for the second six months",
         "No non-family passengers under 20 for the first 6 months, then up to 2",
         "A maximum of 3 non-family passengers under 20 at any time during the provisional period",
       ],
       correctIndex: 1,
       explanation:
-        "Minnesota provisional license holders may carry no more than 1 non-family passenger under age 20 during the first 12 months of the provisional period. Immediate family members are excluded from this limit. The passenger restriction is designed to reduce the distraction risk for new drivers — research consistently shows that teen driver crash risk increases significantly with each additional young passenger in the vehicle.",
+        "Minnesota provisional license holders may carry no more than 1 non-family passenger under age 20 during the first six months of the provisional period, rising to no more than 3 during the second six months — both limits are waived if accompanied by a parent or guardian. Immediate family members under 20 don't count toward either limit. The passenger restriction is designed to reduce the distraction risk for new drivers — research consistently shows that teen driver crash risk increases significantly with each additional young passenger in the vehicle.",
     },
     {
       question: "Minnesota children under 8 must use what type of restraint when riding in a vehicle?",
@@ -179,7 +179,7 @@ const data: PracticeTestPageProps = {
     {
       question: "What are the Minnesota GDL stages for teen drivers?",
       answer:
-        "Minnesota GDL: (1) Instruction permit at 15 — 6-month minimum hold, supervised driving requirements including 30 hours of instruction; (2) Provisional license at 16 — midnight to 5 AM curfew (for 12 months or until 18, whichever is later), max 1 non-family passenger under 20 for 12 months; (3) Full license after all restrictions expire. All stages require a clean driving record to advance.",
+        "Minnesota GDL: (1) Instruction permit at 15 — 6-month minimum hold, a supervised driving log of 40 hours (with a parent class) or 50 hours (without), including 15 nighttime hours; (2) Provisional license at 16, valid 2 years — midnight to 5 AM curfew for the first six months only (with exceptions for work, school activities, and employment), plus a passenger limit of 1 non-family passenger under 20 for the first six months, rising to 3 for the second six months; (3) Full license once restrictions are satisfied. All stages require a clean driving record to advance.",
     },
     {
       question: "What is black ice and why does Minnesota's test cover it?",

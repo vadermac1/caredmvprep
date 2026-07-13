@@ -4,7 +4,7 @@ import PracticeTestPage, { type PracticeTestPageProps } from "@/components/Pract
 export const metadata: Metadata = {
   title: "Kentucky Motorcycle Practice Test 2025 – Free KY KYTC Class M Endorsement Exam Prep",
   description:
-    "Free Kentucky motorcycle endorsement practice test. 25 questions, 80% passing. Universal helmet ALL riders, Brent's Law applies to motorcycle DUI with child passenger, horse-drawn vehicle road-sharing in KY, and SB 332 hands-free for riders.",
+    "Free Kentucky motorcycle endorsement practice test. Helmet law for riders under 21 or newly licensed, Brent's Law applies to motorcycle DUI with child passenger, horse-drawn vehicle road-sharing in KY, and SB 332 hands-free for riders.",
   alternates: { canonical: "https://caredmvprep.com/kentucky-motorcycle-practice-test" },
   openGraph: { url: "https://caredmvprep.com/kentucky-motorcycle-practice-test", images: [{ url: "https://caredmvprep.com/opengraph-image", width: 1200, height: 630 }] },
 };
@@ -16,10 +16,10 @@ const data: PracticeTestPageProps = {
   slug: "kentucky-motorcycle-practice-test",
   headline: "Kentucky Motorcycle Endorsement Practice Test 2025",
   intro:
-    "Kentucky's Transportation Cabinet (KYTC) Division of Driver Licensing issues a Class M motorcycle endorsement. The 25-question test requires 80% (20/25) to pass. Kentucky has a universal helmet law — all riders and passengers must wear DOT-approved helmets. Brent's Law (2020) elevated DUI penalties for motorcycle operators carrying child passengers. Kentucky Appalachian mountain roads and horse-drawn vehicle encounters are unique riding considerations.",
+    "Kentucky State Police (KSP) administers the Class M motorcycle knowledge and skills tests; the Transportation Cabinet (KYTC) Division of Driver Licensing issues the endorsement. Kentucky's helmet law requires a helmet for any rider under 21, and for any operator who has held a motorcycle license less than one year regardless of age — riders 21+ who have been licensed a year or more, and passengers 21+, may ride without a helmet. Brent's Law (2020) elevated DUI penalties for motorcycle operators carrying child passengers. Kentucky Appalachian mountain roads and horse-drawn vehicle encounters are unique riding considerations.",
   basedOn: "Kentucky Transportation Cabinet Motorcycle Operator's Manual (current KRS edition)",
   about: [
-    "Kentucky's Class M motorcycle endorsement is issued by the Division of Driver Licensing (part of KYTC). Applicants must pass the knowledge test (25 questions, 80%) and skills test, OR complete an approved MSF BRC (which waives the skills test). Kentucky has a universal helmet law (KRS 189.285): all motorcycle operators and passengers must wear DOT-approved helmets regardless of age or experience. Brent's Law (HB 452, 2020) applies to motorcycle DUI with a child passenger — if a child under 12 is on the motorcycle when the operator is impaired, the charge escalates to a minimum Class D felony, the same as for car drivers. Kentucky's SB 332 (hands-free law, effective July 8, 2022) applies to all motorcycle operators.",
+    "Kentucky's Class M motorcycle endorsement is issued by the Division of Driver Licensing (part of KYTC), though the actual knowledge and skills tests are administered by Kentucky State Police. Applicants must pass the knowledge test and skills test, OR complete an approved rider training course (such as an MSF BRC), which waives the skills test only — the knowledge test is still required either way. Kentucky's helmet law requires a DOT-approved helmet for any rider under 21, or any operator licensed less than one year regardless of age; operators 21+ with a year or more of licensure, and passengers 21+, are exempt. Brent's Law (HB 452, 2020) applies to motorcycle DUI with a child passenger — if a child under 12 is on the motorcycle when the operator is impaired, the charge escalates to a minimum Class D felony, the same as for car drivers. Kentucky's SB 332 (hands-free law, effective July 8, 2022) applies to all motorcycle operators.",
     "Kentucky's Appalachian mountain region offers world-class motorcycle touring: the Pine Mountain Road (US 119), the Kingdom Come state park approach, and the Red River Gorge access roads (KY 77, KY 715) feature tight curves, elevation changes, and forested environments that create authentic challenge for skilled riders. However, these roads also have: occasional loose surface material from rockfalls; sections with reduced banking (flat curves that require careful line selection); and significant wildlife crossing activity (deer, turkey, fox) especially at dawn and dusk. Kentucky is also home to the Daniel Boone National Forest network of riding roads in the eastern half of the state. Unique to Kentucky: horse-drawn vehicles from Amish communities — particularly in northern and south-central Kentucky — appear on county roads and require motorcyclists to approach with extra caution, reduced speed, and without horn use.",
   ],
   sampleQuestions: [
@@ -60,16 +60,16 @@ const data: PracticeTestPageProps = {
         "For steep mountain descents (such as those on Kentucky's Pine Mountain, the Appalachian ridges on US 119, or Red River Gorge access roads), the correct technique mirrors the MSF's recommendation: (1) Choose the appropriate low gear before the descent begins — downshift BEFORE the grade, not on it; (2) Rely on engine compression braking as the primary speed control — it reduces heat buildup in brakes; (3) Apply brakes briefly and intermittently when needed (snub braking) — short firm applications followed by release; (4) Do not ride with the brake lever continuously pressed — this causes brake fade from heat buildup. Continuous brake application on a long descent can cause brake fade, leading to loss of stopping ability.",
     },
     {
-      question: "Kentucky's universal helmet law requires helmets for which motorcycle riders?",
+      question: "Kentucky's helmet law requires a helmet for which motorcycle riders?",
       options: [
         "Only riders under 18 — Kentucky allows adult discretion on helmet use",
-        "All riders under 21 — Kentucky's age-based cutoff",
+        "Any rider under 21, and any operator who has held a motorcycle license less than one year, regardless of age",
         "All riders and passengers of any age — Kentucky has a universal helmet law with no exceptions",
         "Only permit holders — endorsed riders may choose to ride without a helmet",
       ],
-      correctIndex: 2,
+      correctIndex: 1,
       explanation:
-        "KRS 189.285 requires all motorcycle operators and passengers on public roads to wear a DOT-approved helmet — regardless of age or endorsement status. Kentucky's universal helmet law applies to all riders including adults with decades of riding experience. Eye protection (face shield, goggles, or approved safety glasses) is also required unless the motorcycle has an adequate windscreen. The universal requirement is tested on the Kentucky motorcycle endorsement knowledge exam.",
+        "Kentucky's helmet law is a two-part test: a rider must wear a DOT-approved helmet if they are under 21, OR if they have held a motorcycle license less than one year — whichever applies. An operator who is 22 years old but has only had their motorcycle license for six months still must wear a helmet, because the 1-year-licensed condition hasn't been met. Only an operator who is 21+ AND has held a motorcycle license for a full year or more may ride without a helmet; the same 21+ threshold applies to passengers. Eye protection (face shield, goggles, or approved safety glasses) is also required for the operator at all times the vehicle is in motion.",
     },
     {
       question: "Kentucky's SB 332 hands-free law (effective July 8, 2022) applies to motorcycle operators. What was the change from prior Kentucky law?",
@@ -128,7 +128,7 @@ const data: PracticeTestPageProps = {
     {
       question: "Does Kentucky require helmets for all motorcycle riders?",
       answer:
-        "Yes. Kentucky's helmet law (KRS 189.285) is universal — all riders and passengers must wear DOT-approved helmets on public roads, regardless of age or experience. Eye protection is also required unless the motorcycle has a windscreen. Kentucky's universal law is one of approximately 18 states with this standard. The MSF endorses helmet use for all riders regardless of legal requirement, citing data showing significant reduction in fatal head injuries.",
+        "No — Kentucky's helmet law is conditional, not universal. A helmet is required for any rider under 21, and for any operator who has held a motorcycle license less than one year regardless of age. An operator who is 21 or older AND has held a motorcycle license for a year or more may ride without a helmet; the same applies to passengers 21 and older. Eye protection is required for the operator at all times the vehicle is in motion, regardless of helmet status, unless the motorcycle has an adequate windscreen.",
     },
     {
       question: "What makes Kentucky's Appalachian motorcycle roads uniquely challenging?",
@@ -138,7 +138,7 @@ const data: PracticeTestPageProps = {
     {
       question: "How does the Kentucky KYTC motorcycle endorsement work?",
       answer:
-        "Kentucky Class M endorsement: (1) Pass the motorcycle knowledge test (25 questions, 80%) at a Division of Driver Licensing regional office; (2) Pass the motorcycle skills test OR complete an MSF BRC (waives skills test); (3) Pay endorsement fee. The MSF BRC is offered at multiple Kentucky sites from spring through fall. Kentucky permit holders may practice riding while supervised by an endorsed adult on a public road with a permit in their possession.",
+        "Kentucky Class M endorsement: (1) Pass the motorcycle knowledge test, administered by Kentucky State Police; (2) Pass the motorcycle skills test OR complete an approved rider training course (such as an MSF BRC), which waives the skills test only — the knowledge test is still required; (3) Pay endorsement fee through the Division of Driver Licensing. Approved rider training courses are offered at multiple Kentucky sites from spring through fall. Kentucky permit holders may practice riding while supervised by an endorsed adult on a public road with a permit in their possession.",
     },
     {
       question: "What is the horse-drawn vehicle risk for motorcycle riders in Kentucky?",
@@ -173,7 +173,7 @@ const data: PracticeTestPageProps = {
     {
       question: "Does completing a motorcycle safety course waive the skills test in Kentucky?",
       answer:
-        "In many states, completing an approved Motorcycle Safety Foundation (MSF) Basic RiderCourse or an equivalent state-approved program waives the DMV riding skills test requirement. Some states also waive the knowledge test for course graduates. Kentucky DMV policies on course waivers vary — check the DMV website or contact them directly to confirm which approved courses qualify for test waivers and whether any age restrictions apply.",
+        "Yes, but only partially: completing an approved Motorcycle Safety Foundation (MSF) Basic RiderCourse, or Kentucky's own Motorcycle Safety Education Program rider training course, exempts a graduate from the motorcycle riding skills test. It does NOT waive the written knowledge test — every applicant must still pass the knowledge test regardless of course completion. For more information, contact the Kentucky Motorcycle Safety Program at 1-800-396-3234.",
     },
   ],
   relatedTests: [

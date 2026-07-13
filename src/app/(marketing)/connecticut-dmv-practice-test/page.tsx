@@ -16,7 +16,7 @@ const data: PracticeTestPageProps = {
   slug: "connecticut-dmv-practice-test",
   headline: "Connecticut DMV Practice Test – CT DMV Knowledge Exam",
   intro:
-    "Connecticut's Department of Motor Vehicles is one of the original 'DMV' agencies nationally. The CT DMV administers a 25-question test requiring 80% (20/25) to pass. Connecticut has three nationally distinctive driving laws: it enacted the nation's first statewide handheld phone ban in 2001 under CGS § 14-296aa, six years before most states; the Merritt Parkway (Route 15) absolutely prohibits all commercial vehicles due to bridge clearances as low as 9 feet; and Connecticut mandates an ignition interlock device for ALL OUI convictions including first offenses. This free practice test covers all three topics plus the OUI terminology (not DUI), the dual implied consent penalty (suspension AND IID from a single refusal), and Connecticut's 22-hour nighttime supervised driving requirement.",
+    "Connecticut's Department of Motor Vehicles is one of the original 'DMV' agencies nationally. The CT DMV administers a 25-question test requiring 80% (20/25) to pass. Connecticut has three nationally distinctive driving laws: it enacted the nation's first statewide handheld phone ban in 2001 under CGS § 14-296aa, six years before most states; the Merritt Parkway (Route 15) absolutely prohibits all commercial vehicles due to bridge clearances as low as 9 feet; and Connecticut mandates an ignition interlock device for ALL OUI convictions including first offenses. This free practice test covers all three topics plus the OUI terminology (not DUI), the dual implied consent penalty (suspension AND IID from a single refusal), and Connecticut's 40-hour supervised driving requirement for teen permit holders.",
   basedOn: "Connecticut DMV Driver's Manual (current CT DMV edition)",
   keyRules: [
     { icon: "📱", rule: "Nation's first handheld ban: 2001 (CGS § 14-296aa)", detail: "Connecticut enacted the first statewide handheld phone ban in the U.S. in 2001 — six years before most states. Updated in 2021 to cover all electronic devices. First offense: $150; second: $300; third+: $500." },
@@ -24,8 +24,8 @@ const data: PracticeTestPageProps = {
     { icon: "🍺", rule: "OUI (not DUI): 0.08% adults / 0.02% under-21 (CGS § 14-227a)", detail: "Connecticut uses OUI (Operating Under the Influence). 0.08% BAC for adults; 0.02% for under-21; 0.04% for CDL holders in a commercial vehicle. Same OUI terminology as Massachusetts." },
     { icon: "🔑", rule: "IID mandatory for ALL OUI convictions including first offense", detail: "Connecticut requires an ignition interlock device for every OUI conviction — even first offense. Minimum 45-day IID before license reinstatement after first OUI. Second OUI: 1-year IID. Third OUI: 3-year IID." },
     { icon: "⚖️", rule: "Implied consent: refusal = 45-day suspension AND 1-year IID", detail: "Connecticut's implied consent law (CGS § 14-227b): first refusal triggers BOTH a 45-day license suspension AND a 1-year IID requirement — both consequences from the refusal alone, before any criminal conviction." },
-    { icon: "👦", rule: "Learner's permit at 16 — 120 days + 40 hours (22 at night)", detail: "CT learner's permit at 16. Must hold 120 days minimum. Must log 40 supervised hours including 22 hours of nighttime driving — one of the highest nighttime hour requirements in the nation." },
-    { icon: "🌙", rule: "Under-18 operator's license: midnight–5 AM curfew (first 6 months)", detail: "CT operators under 18 cannot drive midnight–5 AM during the first 6 months after getting an Operator's License. Also limited to 1 non-family passenger under 18 during the first 6 months." },
+    { icon: "👦", rule: "Learner's permit at 16 — 120 or 180 days + 40 hours", detail: "CT learner's permit at 16. Applicants who complete a full driver-ed program (commercial/secondary school) may test after 120 days; all other applicants must hold the permit 180 days. Must log 40 hours of behind-the-wheel training." },
+    { icon: "🌙", rule: "Under-18 driver: 11PM–5AM curfew (first 6 months)", detail: "CT drivers under 18 cannot drive 11PM–5AM during the first 6 months after licensing, except for employment, school, religious activities, medical necessity, or as an assigned Safe Ride Program driver. Also limited to 1 non-family passenger under 18 during the first 6 months." },
     { icon: "🛣️", rule: "I-95 / I-91 HOV lanes: 6–9 AM and 4–7 PM weekdays", detail: "Connecticut I-95 and I-91 have HOV-2 lanes during peak hours (6–9 AM and 4–7 PM on weekdays). Violations carry $150 fines. Connecticut strictly enforces HOV lane rules on its congested interstate corridors." },
   ],
   about: [
@@ -95,28 +95,28 @@ const data: PracticeTestPageProps = {
         "Connecticut's implied consent law (CGS § 14-227b) is one of the strictest in the nation: a first test refusal triggers BOTH a 45-day administrative license suspension AND a 1-year IID requirement upon reinstatement — both consequences flowing entirely from the refusal, separate from any criminal OUI charges. A second refusal within 10 years results in a 45-day suspension PLUS a 3-year IID. The dual penalty (suspension plus IID) for a first refusal means refusing a chemical test may be more damaging than cooperating with testing.",
     },
     {
-      question: "Connecticut's learner's permit requires how many supervised nighttime driving hours?",
+      question: "How many hours of behind-the-wheel training must a Connecticut 16-/17-year-old permit holder complete before the road test?",
       options: [
-        "5 nighttime hours out of 20 total — the standard requirement",
-        "10 nighttime hours out of 40 total — same as most states",
-        "22 nighttime hours out of 40 total — one of the highest nighttime requirements in the U.S.",
-        "No nighttime requirement — Connecticut only requires total supervised hours",
-      ],
-      correctIndex: 2,
-      explanation:
-        "Connecticut's graduated licensing program requires learner's permit holders to complete 40 supervised driving hours, including a notable minimum of 22 hours of nighttime driving — among the highest nighttime requirements in the country. Most states that require nighttime driving specify only 10 hours. The 120-day minimum permit hold also applies. Connecticut's emphasis on nighttime practice reflects research showing that new driver crashes disproportionately occur at night. The supervisor must be a licensed driver at least 20 years old (not 21+, as in some states).",
-    },
-    {
-      question: "Connecticut's Operator's License restrictions for drivers under 18 during the first 6 months include:",
-      options: [
-        "No passenger restrictions; only a midnight–5 AM curfew applies",
-        "No driving midnight–5 AM; maximum 1 non-family passenger under 18",
-        "No driving after 10 PM; no passengers under 21 at any time",
-        "No driving after 11 PM; maximum 3 non-family passengers under 21",
+        "20 hours — Connecticut's requirement is below the national average",
+        "40 hours, accomplished through professional driving-school instruction, home training, or a combination of both",
+        "100 hours — Connecticut has one of the highest behind-the-wheel requirements nationally",
+        "No specific hour requirement — only the permit-hold period matters",
       ],
       correctIndex: 1,
       explanation:
-        "Connecticut's Operator's License for drivers under 18 (the intermediate GDL stage) restricts: (1) Curfew — no driving between midnight and 5 AM without a licensed adult 18+ in the front seat, except for work, school, or medical emergencies with documentation; (2) Passenger restriction for the first 6 months — maximum of 1 non-family passenger under 18 (family members of any age are excluded from this limit). Both restrictions apply until the driver turns 18 or has held the Operator's License for 6 months, whichever is later.",
+        "Connecticut requires 16-/17-year-old applicants to complete at least 40 hours of behind-the-wheel, on-the-road training, which may be accomplished through any combination of professional driving-school instruction and home training. The person supervising this training — whether a commercial instructor or a qualifying family member for home training — must be at least 20 years old and have held a license for 4 or more consecutive years with no suspensions in that period.",
+    },
+    {
+      question: "Connecticut's driving restrictions for licensed drivers under 18 include:",
+      options: [
+        "No passenger restrictions; only a curfew applies",
+        "No driving 11PM–5AM (with exceptions for employment, school, religious activities, medical necessity, or the Safe Ride Program); passenger limits in the first year",
+        "No driving after 10 PM; no passengers under 21 at any time",
+        "No driving after midnight; maximum 3 non-family passengers under 21",
+      ],
+      correctIndex: 1,
+      explanation:
+        "Connecticut restricts drivers under 18: a curfew of 11PM–5AM, with specific exceptions for employment, school, religious activities, medical necessity, or being an assigned driver in the Safe Ride Program (volunteer fire/ambulance/EMS members responding to emergencies are also exempt). Passenger restrictions run in two tiers over the first year: for the first 6 months, no passengers except a licensed instructor, a parent/guardian (at least one licensed), or one person 20+ with 4+ consecutive years licensed and no suspensions; for months 7-12, immediate family members are additionally allowed.",
     },
     {
       question: "What are Connecticut's HOV lane requirements on I-95 and I-91?",
@@ -179,7 +179,7 @@ const data: PracticeTestPageProps = {
     {
       question: "What is Connecticut's GDL program for teen drivers?",
       answer:
-        "Connecticut GDL: (1) Learner's permit at 16 — 120-day minimum hold, 40 supervised hours (22 at night) with a licensed driver 20+ years old in the front seat; (2) Operator's License (intermediate) — midnight to 5 AM curfew, max 1 non-family passenger under 18 for first 6 months; (3) Full Operator's License restrictions lift at age 18 or after 6 months without violations. Connecticut's 22-hour nighttime driving requirement is one of the highest in the nation.",
+        "Connecticut GDL: (1) Learner's permit at 16 — 120-day minimum hold if completing a full driver-ed program (commercial/secondary school), or 180 days otherwise; 40 hours of behind-the-wheel training with an instructor or qualifying family member at least 20 years old with 4+ years licensed; while holding the permit, a 16-/17-year-old may not have any passengers except the instructor or a qualifying trainer. (2) After licensing — an 11PM–5AM curfew (exceptions for employment, school, religious activities, medical necessity, Safe Ride Program) and a two-tier passenger restriction: first 6 months limited to an instructor, parent/guardian, or one qualifying person 20+; months 7-12 additionally allow immediate family. (3) Restrictions lift at age 18.",
     },
     {
       question: "What is Connecticut's right-of-way rule at an uncontrolled intersection?",
@@ -194,7 +194,7 @@ const data: PracticeTestPageProps = {
     {
       question: "How long must a Connecticut learner's permit be held and what supervision is required?",
       answer:
-        "A Connecticut learner's permit must be held for at least 120 days (approximately 4 months) before the permit holder can apply for an Operator's License. The permit holder must also complete 40 supervised driving hours including at least 22 hours of nighttime driving. The supervising driver must be a licensed driver at least 20 years old seated in the front passenger seat at all times while the permit holder is driving. Connecticut's 22-hour nighttime requirement is notably higher than most states' 10-hour standard.",
+        "A Connecticut learner's permit must be held for at least 120 days if the applicant completes a full driver-ed program through a licensed commercial driving school or secondary school program (30 hours classroom + 8 hours behind-the-wheel minimum); all other 16-/17-year-old applicants must hold the permit at least 180 days. Either way, the applicant must complete at least 40 hours of behind-the-wheel, on-the-road training. The instructor — whether a commercial driving school professional or a qualifying home-training family member — must be a licensed driver at least 20 years old with 4 or more consecutive years of licensure and no suspensions in that period, seated in the front passenger seat while the permit holder drives.",
     },
     {
       question: "What is Connecticut's maximum highway speed limit and where does it apply?",

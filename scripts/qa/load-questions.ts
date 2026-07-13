@@ -23,6 +23,20 @@ export async function loadAllQuestions(): Promise<Question[]> {
   modules.push(await import("../../src/data/questions/dmv/tennessee"));
   modules.push(await import("../../src/data/questions/dmv/virginia"));
   modules.push(await import("../../src/data/questions/dmv/washington"));
+  modules.push(await import("../../src/data/questions/dmv/new-jersey"));
+  modules.push(await import("../../src/data/questions/dmv/maryland"));
+  modules.push(await import("../../src/data/questions/dmv/south-carolina"));
+  modules.push(await import("../../src/data/questions/dmv/massachusetts"));
+  modules.push(await import("../../src/data/questions/dmv/alabama"));
+  modules.push(await import("../../src/data/questions/dmv/colorado"));
+  modules.push(await import("../../src/data/questions/dmv/wisconsin"));
+  modules.push(await import("../../src/data/questions/dmv/minnesota"));
+  modules.push(await import("../../src/data/questions/dmv/louisiana"));
+  modules.push(await import("../../src/data/questions/dmv/kentucky"));
+  modules.push(await import("../../src/data/questions/dmv/oregon"));
+  modules.push(await import("../../src/data/questions/dmv/oklahoma"));
+  modules.push(await import("../../src/data/questions/dmv/connecticut"));
+  modules.push(await import("../../src/data/questions/dmv/nevada"));
 
   // ── CDL questions ────────────────────────────────────────────────────────
   modules.push(await import("../../src/data/questions/cdl/federal"));
@@ -47,6 +61,19 @@ export async function loadAllQuestions(): Promise<Question[]> {
   modules.push(await import("../../src/data/questions/motorcycle/arizona"));
   modules.push(await import("../../src/data/questions/motorcycle/missouri"));
   modules.push(await import("../../src/data/questions/motorcycle/virginia"));
+  modules.push(await import("../../src/data/questions/motorcycle/maryland"));
+  modules.push(await import("../../src/data/questions/motorcycle/south-carolina"));
+  modules.push(await import("../../src/data/questions/motorcycle/massachusetts"));
+  modules.push(await import("../../src/data/questions/motorcycle/alabama"));
+  modules.push(await import("../../src/data/questions/motorcycle/colorado"));
+  modules.push(await import("../../src/data/questions/motorcycle/wisconsin"));
+  modules.push(await import("../../src/data/questions/motorcycle/minnesota"));
+  modules.push(await import("../../src/data/questions/motorcycle/louisiana"));
+  modules.push(await import("../../src/data/questions/motorcycle/kentucky"));
+  modules.push(await import("../../src/data/questions/motorcycle/oregon"));
+  modules.push(await import("../../src/data/questions/motorcycle/oklahoma"));
+  modules.push(await import("../../src/data/questions/motorcycle/connecticut"));
+  modules.push(await import("../../src/data/questions/motorcycle/nevada"));
 
   return modules.flatMap(m => m.default);
 }

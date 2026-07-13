@@ -24,6 +24,14 @@ const STATES = [
   { abbr: 'TN', name: 'Tennessee', available: true },
   { abbr: 'VA', name: 'Virginia', available: true },
   { abbr: 'WA', name: 'Washington', available: true },
+  { abbr: 'NJ', name: 'New Jersey', available: true },
+  { abbr: 'MD', name: 'Maryland', available: true },
+  { abbr: 'MA', name: 'Massachusetts', available: true },
+  { abbr: 'WI', name: 'Wisconsin', available: true },
+  { abbr: 'OR', name: 'Oregon', available: true },
+  { abbr: 'OK', name: 'Oklahoma', available: true },
+  { abbr: 'CT', name: 'Connecticut', available: true },
+  { abbr: 'NV', name: 'Nevada', available: true },
 ];
 
 const LICENSE_TYPES = [

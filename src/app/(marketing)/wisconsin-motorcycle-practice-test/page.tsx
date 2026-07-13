@@ -4,7 +4,7 @@ import PracticeTestPage, { type PracticeTestPageProps } from "@/components/Pract
 export const metadata: Metadata = {
   title: "Wisconsin Motorcycle Practice Test 2025 – Free WisDOT Class M Endorsement Exam Prep",
   description:
-    "Free Wisconsin motorcycle endorsement practice test. 25 questions, 80% passing. Wisconsin's first OWI is civil (not criminal) — same applies to motorcycle operators. Helmet required under 18 only. WisDOT MSF BRC waiver and farm vehicle road-sharing rules.",
+    "Free Wisconsin motorcycle endorsement practice test. Wisconsin's first OWI is civil (not criminal) — same applies to motorcycle operators. Helmet required under 18 only. WisDOT MSF BRC waiver and farm vehicle road-sharing rules.",
   alternates: { canonical: "https://caredmvprep.com/wisconsin-motorcycle-practice-test" },
   openGraph: { url: "https://caredmvprep.com/wisconsin-motorcycle-practice-test", images: [{ url: "https://caredmvprep.com/opengraph-image", width: 1200, height: 630 }] },
 };
@@ -16,7 +16,7 @@ const data: PracticeTestPageProps = {
   slug: "wisconsin-motorcycle-practice-test",
   headline: "Wisconsin Motorcycle Endorsement Practice Test 2025",
   intro:
-    "Wisconsin's Division of Motor Vehicles (WisDOT) issues a Class M motorcycle endorsement. The 25-question test requires 80% (20/25) to pass. Wisconsin's unique OWI law — where a first offense is a civil infraction, not criminal — applies equally to motorcycle operators. Helmets are required only for riders under 18. Wisconsin's rural roads feature farm equipment, sand patches, and severe winter conditions.",
+    "Wisconsin's Division of Motor Vehicles (WisDOT) issues a Class M motorcycle endorsement after passing the motorcycle knowledge test and skills test. Wisconsin's unique OWI law — where a first offense is a civil infraction, not criminal — applies equally to motorcycle operators. Helmets are required only for riders under 18. Wisconsin's rural roads feature farm equipment, sand patches, and severe winter conditions.",
   basedOn: "Wisconsin DOT Motorcycle Operator's Manual (current edition)",
   about: [
     "Wisconsin's Class M endorsement is added to the standard operator's license by WisDOT after passing the motorcycle knowledge test and skills test, or by completing an approved MSF Basic RiderCourse (BRC) which waives the skills test. Wisconsin's helmet law requires helmets only for riders under 18 and for permit holders; riders 18+ with a valid endorsement are not legally required to wear a helmet. Wisconsin's nationally unique OWI law — where a first OWI offense is a civil infraction with no criminal record — applies to motorcycle operators exactly as it does to car drivers. A first OWI on a motorcycle: $150–$300 fine, 6–9 month license revocation, and mandatory alcohol assessment. But no jail and no criminal record unless a passenger under 16 was present.",
@@ -133,7 +133,7 @@ const data: PracticeTestPageProps = {
     {
       question: "How do I get a Wisconsin Class M motorcycle endorsement?",
       answer:
-        "Wisconsin Class M endorsement process: (1) Pass the motorcycle knowledge test (25 questions, 80%) at any WisDOT service center; (2) Complete an approved MSF Basic RiderCourse (BRC) — this waives the road skills test; OR pass WisDOT's motorcycle road skills test. The BRC includes classroom and range exercises. After completing steps 1 and 2, present documentation at a WisDOT service center to have the Class M added to your license. Wisconsin offers MSF BRC courses at multiple locations statewide through approved training sites.",
+        "Wisconsin Class M endorsement process: (1) Pass the motorcycle knowledge test at any WisDOT service center; (2) Complete an approved MSF Basic RiderCourse (BRC) — this waives the road skills test; OR pass WisDOT's motorcycle road skills test. The BRC includes classroom and range exercises. After completing steps 1 and 2, present documentation at a WisDOT service center to have the Class M added to your license. Wisconsin offers MSF BRC courses at multiple locations statewide through approved training sites.",
     },
     {
       question: "What are Wisconsin's spring motorcycle riding hazards?",
