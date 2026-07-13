@@ -39,6 +39,7 @@ import orMotoQuestions               from './motorcycle/oregon';
 import okDmvQuestions                from './dmv/oklahoma';
 import ctDmvQuestions                from './dmv/connecticut';
 import nvDmvQuestions                from './dmv/nevada';
+import utDmvQuestions                from './dmv/utah';
 import cdlFederalQuestions           from './cdl/federal';
 import cdlSchoolBusQuestions         from './cdl/school-bus';
 import cdlTankVehicleQuestions       from './cdl/tank-vehicles';
@@ -602,6 +603,26 @@ export const quizRegistry: Record<string, QuizConfig> = {
     testId:      'nevada-cdl-general',
     label:       'Nevada CDL General Knowledge Practice Test',
     state:       'nevada',
+    licenseType: 'cdl_general',
+    questions:   verified(cdlFederalQuestions),
+    passingScore: 0.80,
+  },
+
+  // ── Utah (DL + CDL only — motorcycle passing score not officially confirmed) ──
+  // 50Q/40-correct/80% confirmed on dld.utah.gov/written-knowledge-test/ + Driver Handbook Rev 3.2026, Section 6.A, p.22.
+  // Motorcycle: 25Q confirmed but passing score/number-correct not stated on official motorcycle pages — queued per VERIFICATION.md.
+  'utah-permit': {
+    testId:      'utah-permit',
+    label:       'Utah DLD Knowledge Test Practice',
+    state:       'utah',
+    licenseType: 'permit',
+    questions:   verified(utDmvQuestions),
+    passingScore: 0.80,  // 40 of 50 — confirmed on dld.utah.gov/written-knowledge-test/ + Driver Handbook Rev 3.2026, Section 6.A, p.22
+  },
+  'utah-cdl-general': {
+    testId:      'utah-cdl-general',
+    label:       'Utah CDL General Knowledge Practice Test',
+    state:       'utah',
     licenseType: 'cdl_general',
     questions:   verified(cdlFederalQuestions),
     passingScore: 0.80,
@@ -1414,6 +1435,38 @@ export const MOCK_EXAM_DEFS: MockExamDef[] = [
     questionCount: 25,
     seed:          3,
     timeLimitSecs: 30 * 60,
+    description:   'Third exam simulation — no repeated questions from #1 or #2.',
+  },
+
+  // ── Utah ─────────────────────────────────────────────────────────────────
+  {
+    examId:        'utah-permit-mock-1',
+    label:         'Utah DLD Knowledge Test Mock Exam #1',
+    shortLabel:    'Mock Exam #1',
+    baseTestId:    'utah-permit',
+    questionCount: 50,
+    seed:          1,
+    timeLimitSecs: 45 * 60,
+    description:   'Simulates the real Utah DLD knowledge test — 50 questions, 45 min.',
+  },
+  {
+    examId:        'utah-permit-mock-2',
+    label:         'Utah DLD Knowledge Test Mock Exam #2',
+    shortLabel:    'Mock Exam #2',
+    baseTestId:    'utah-permit',
+    questionCount: 50,
+    seed:          2,
+    timeLimitSecs: 45 * 60,
+    description:   'A unique second simulation with a different question mix.',
+  },
+  {
+    examId:        'utah-permit-mock-3',
+    label:         'Utah DLD Knowledge Test Mock Exam #3',
+    shortLabel:    'Mock Exam #3',
+    baseTestId:    'utah-permit',
+    questionCount: 50,
+    seed:          3,
+    timeLimitSecs: 45 * 60,
     description:   'Third exam simulation — no repeated questions from #1 or #2.',
   },
 ];

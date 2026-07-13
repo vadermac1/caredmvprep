@@ -137,6 +137,7 @@ const LIVE_STATE_SLUGS = [
   'oklahoma',
   'connecticut',
   'nevada',
+  'utah',
 ] as const;
 
 // Subset of LIVE_STATE_SLUGS that also has a motorcycle question bank wired
@@ -163,7 +164,7 @@ export const LIVE_MOTORCYCLE_STATE_SLUGS = [
 // Abbr-keyed equivalents for callers (checkout, onboarding, pricing state
 // pickers) that work with two-letter state codes instead of URL slugs.
 export const LIVE_STATE_ABBRS = new Set<string>([
-  'CA', 'TX', 'FL', 'NY', 'PA', 'IL', 'OH', 'GA', 'NC', 'AZ', 'MI', 'MO', 'TN', 'VA', 'WA', 'NJ', 'MD', 'MA', 'WI', 'OR', 'OK', 'CT', 'NV',
+  'CA', 'TX', 'FL', 'NY', 'PA', 'IL', 'OH', 'GA', 'NC', 'AZ', 'MI', 'MO', 'TN', 'VA', 'WA', 'NJ', 'MD', 'MA', 'WI', 'OR', 'OK', 'CT', 'NV', 'UT',
 ]);
 export const LIVE_MOTORCYCLE_STATE_ABBRS = new Set<string>([
   'CA', 'TX', 'FL', 'NY', 'PA', 'IL', 'OH', 'GA', 'NC', 'AZ', 'MO', 'VA', 'MD', 'MA', 'OR',

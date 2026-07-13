@@ -4,7 +4,7 @@ import PracticeTestPage, { type PracticeTestPageProps } from "@/components/Pract
 export const metadata: Metadata = {
   title: "Utah Motorcycle Practice Test 2025 – Free UT Endorsement Exam Prep",
   description:
-    "Prepare for your Utah motorcycle endorsement test with free practice questions covering the 0.05% DUI threshold for riders, Parley's Canyon grade technique, Great Salt Lake road conditions, universal helmet law, and Utah canyon road riding.",
+    "Prepare for your Utah motorcycle endorsement test with free practice questions covering the 0.05% DUI threshold for riders, Parley's Canyon grade technique, Great Salt Lake road conditions, the under-21 helmet law, and Utah canyon road riding.",
   alternates: { canonical: "https://caredmvprep.com/utah-motorcycle-practice-test" },
   openGraph: {
     url: "https://caredmvprep.com/utah-motorcycle-practice-test",
@@ -19,10 +19,10 @@ const data: PracticeTestPageProps = {
   slug: "utah-motorcycle-practice-test",
   headline: "Utah Motorcycle Practice Test 2025",
   intro:
-    "Earning a Utah motorcycle endorsement requires passing a knowledge test at a Driver License Division office and a skills test, or completing an approved safety course. This free practice test covers Utah-specific motorcycle topics: the 0.05% DUI threshold that applies to all Utah riders, safe technique on Parley's Canyon grade and other steep canyon roads, universal helmet requirements under Utah Code § 41-6a-1506, and Great Salt Lake area road conditions.",
+    "Earning a Utah motorcycle endorsement requires passing a knowledge test at a Driver License Division office and a skills test — or completing an approved safety course that waives the skills test. This free practice test covers Utah-specific motorcycle topics: the 0.05% DUI threshold that applies to all Utah riders, safe technique on Parley's Canyon grade and other steep canyon roads, Utah's helmet law (mandatory for riders under 21 under Utah Code § 41-6a-1505), and Great Salt Lake area road conditions.",
   basedOn: "Utah Motorcycle Operator Manual (Driver License Division, Utah DPS)",
   about: [
-    "The Utah Driver License Division requires all motorcycle operators to hold a valid motorcycle endorsement on their Utah driver's license. To earn the endorsement, applicants must pass a knowledge test based on the Utah Motorcycle Operator Manual and a skills test — or complete an approved Motorcycle Safety Foundation (MSF) course that satisfies both requirements. Utah Code § 41-6a-1506 requires ALL motorcycle riders and passengers to wear a DOT-approved helmet, regardless of age. There is no adult exemption from the helmet requirement in Utah. Eye protection is also required for all riders unless the motorcycle has a windshield.",
+    "The Utah Driver License Division requires all motorcycle operators to hold a valid motorcycle endorsement on their Utah driver's license. To earn the endorsement, applicants must pass a knowledge test based on the Utah Motorcycle Operator Manual and a riding skills test. Completing an approved Motorcycle Safety Foundation (MSF) Basic RiderCourse (BRC) waives the skills test — but the knowledge test is always required regardless of whether you complete a safety course. Utah Code § 41-6a-1505 requires motorcycle riders and passengers under the age of 21 to wear a DOT-approved helmet. Riders 21 and older are not legally required to wear a helmet, though doing so is strongly recommended. Eye protection (goggles or face shield) is required for all riders unless the motorcycle has a windshield.",
     "Utah's motorcycle riding environment is defined by spectacular canyon roads and a unique legal landscape. The 0.05% DUI threshold that makes Utah national news applies equally to motorcycle riders — a rider at 0.05% BAC (legal to ride in 49 other states) faces a full DUI charge in Utah, with mandatory license suspension, fines, and possible ignition interlock requirements. Canyon roads including US-189 (Provo Canyon), US-89 (Logan Canyon), and I-80 through Parley's Canyon present grade, curve, and chain-control challenges for motorcycle riders. The Great Salt Lake area on I-80 west of Salt Lake City has crosswind, flooding, and unique surface traction conditions. Utah's 80 mph Interstate speed limit means riders must manage significant wind exposure on long open highway segments.",
   ],
   sampleQuestions: [
@@ -41,16 +41,16 @@ const data: PracticeTestPageProps = {
     },
     {
       question:
-        "Utah Code § 41-6a-1506 requires motorcycle helmets for which Utah riders?",
+        "Utah Code § 41-6a-1505 requires motorcycle helmets for which Utah riders and passengers?",
       options: [
         "Riders under 18 only",
-        "Riders under 21 only",
+        "Riders and passengers under 21 years of age",
         "All motorcycle riders and passengers regardless of age",
-        "Helmet use is voluntary for adults 21 and older in Utah",
+        "Helmet use is entirely voluntary in Utah for all ages",
       ],
-      correctIndex: 2,
+      correctIndex: 1,
       explanation:
-        "Utah Code § 41-6a-1506 requires ALL motorcycle operators and passengers to wear a DOT-approved helmet — there is no age-based exemption. Utah has a universal helmet law. Eye protection (goggles or face shield) is also required for all riders unless the motorcycle has a windshield. Utah's helmet requirement applies to the operator and any passenger. Violations are primary offenses — law enforcement can stop riders solely for not wearing a helmet.",
+        "Utah Code § 41-6a-1505 requires motorcycle operators and passengers who are under 21 years of age to wear a DOT-approved protective helmet. Riders and passengers who are 21 or older are not legally required to wear a helmet under Utah law, though it is strongly recommended. Eye protection (goggles or face shield) is also required for all riders unless the motorcycle has a windshield. Utah's helmet requirement for under-21 riders is a primary offense — law enforcement can stop a rider solely for not wearing a helmet.",
     },
     {
       question:
@@ -135,9 +135,9 @@ const data: PracticeTestPageProps = {
   ],
   faqs: [
     {
-      question: "Does Utah require all motorcycle riders to wear helmets?",
+      question: "Does Utah require motorcycle riders to wear helmets?",
       answer:
-        "Yes. Utah Code § 41-6a-1506 requires ALL motorcycle operators and passengers to wear a DOT-approved helmet, regardless of age. Utah has a universal helmet law with no adult exemption. Eye protection (goggles or face shield) is also required for all riders unless the motorcycle has a windshield. Helmet violations are primary offenses — law enforcement can stop riders solely for not wearing a helmet. Approved helmets must meet Department of Transportation (DOT) safety standards.",
+        "Utah Code § 41-6a-1505 requires motorcycle operators and passengers under the age of 21 to wear a DOT-approved helmet. Riders and passengers who are 21 or older are not legally required to wear a helmet under Utah law. Eye protection (goggles or face shield) is required for all riders unless the motorcycle has a windshield. For under-21 riders, helmet violations are primary offenses — law enforcement can stop a rider solely for not wearing a helmet. Regardless of the legal requirement, helmet use is strongly recommended for all riders of any age.",
     },
     {
       question: "How does Utah's 0.05% DUI law affect motorcycle riders specifically?",
@@ -147,7 +147,7 @@ const data: PracticeTestPageProps = {
     {
       question: "What is required to get a motorcycle endorsement in Utah?",
       answer:
-        "To earn a Utah motorcycle endorsement, you must hold a valid Utah driver's license, pass a motorcycle knowledge test at a Driver License Division office, and pass a motorcycle skills test. Alternatively, completing an approved Motorcycle Safety Foundation (MSF) course satisfies both the knowledge and skills test requirements. Riders under 18 must complete an approved safety course. The motorcycle knowledge test is based on the Utah Motorcycle Operator Manual and includes Utah-specific content about the 0.05% DUI threshold, canyon road technique, and helmet requirements.",
+        "To earn a Utah motorcycle endorsement, you must hold a valid Utah driver's license, pass a motorcycle knowledge test at a Driver License Division office, and pass a motorcycle skills test. Completing an approved MSF Basic RiderCourse (BRC) within six months of applying waives the riding skills test — but the knowledge test is always required regardless of whether you complete a safety course. The motorcycle knowledge test is based on the Utah Motorcycle Operator Manual and includes Utah-specific content about the 0.05% DUI threshold, canyon road technique, and the under-21 helmet requirement.",
     },
     {
       question: "What canyon road challenges do Utah motorcycle riders face?",
@@ -182,7 +182,7 @@ const data: PracticeTestPageProps = {
     {
       question: "Does completing a motorcycle safety course waive the skills test in Utah?",
       answer:
-        "In many states, completing an approved Motorcycle Safety Foundation (MSF) Basic RiderCourse or an equivalent state-approved program waives the DMV riding skills test requirement. Some states also waive the knowledge test for course graduates. Utah DMV policies on course waivers vary — check the DMV website or contact them directly to confirm which approved courses qualify for test waivers and whether any age restrictions apply.",
+        "Yes — completing an approved MSF Basic RiderCourse (BRC) waives the riding skills test at the Driver License Division, provided you apply for your endorsement within six months of completing the course. The knowledge test is NOT waived by the course — it is always required. Additionally, if the motorcycle used in the BRC was under 650cc, you may need to take a separate skills test on a 650cc+ motorcycle if you intend to ride larger bikes. The BRC2 (Experienced Rider Course) also qualifies for the skills-test waiver under the same six-month window.",
     },
   ],
   relatedTests: [

@@ -70,6 +70,8 @@ export function getDefaultTestId(
     'CT-cdl_general': 'connecticut-cdl-general',
     'NV-permit':      'nevada-permit',
     'NV-cdl_general': 'nevada-cdl-general',
+    'UT-permit':      'utah-permit',
+    'UT-cdl_general': 'utah-cdl-general',
   };
   return MAP[key] ?? 'california-permit';
 }
