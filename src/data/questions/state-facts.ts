@@ -501,19 +501,20 @@ const stateFacts: StateFacts[] = [
     permitPassingPct: "80%",
     permitMinAge: 15,
     motoHandbookUrl: "https://www.maine.gov/sos/bmv/driver-licenses-and-ids/motorcycle-atvs",
-    motoQuestions: 25,
-    motoToPass: 20,
-    motoPassingPct: "80%",
-    motoHelmetLaw: "under-18",
+    motoQuestions: 25,        // NEEDS_VERIFICATION — widely reported but not confirmed from official Maine BMV page
+    motoToPass: 20,           // NEEDS_VERIFICATION — same
+    motoPassingPct: "80%",    // NEEDS_VERIFICATION — same
+    motoHelmetLaw: "under-18", // NEEDS_VERIFICATION — conservative estimate; also required for permit holders and first-year licensees of any age
     motoLaneSplittingLegal: false,
     motoCourseWaivesSkillsTest: true,
     cdlHandbookUrl: "https://www.maine.gov/sos/sites/maine.gov.sos/files/inline-files/CDL%20Manual%20Rev.%207-24.pdf",
     cdlGeneralKnowledgeQuestions: 50,
     cdlGeneralKnowledgeToPass: 40,
     cdlGeneralKnowledgePassingPct: "80%",
-    lastVerifiedAt: VERIFIED,
+    lastVerifiedAt: "2026-07-15",
+    verifiedBy: "Agent 4 Final Editorial Review 2026-07-15; DL: 30Q/24-correct/80% confirmed from Maine BMV; OUI statutes verified from 29-A M.R.S. § 2411 and § 2521; moto test counts NEEDS_VERIFICATION",
     notes:
-      "Maine DMV operates under the Secretary of State. Helmet required for riders/passengers under 18 and for permit holders and first-year licensees of any age. Course waiver: MSF BRC or state-equivalent waives BOTH knowledge and skills tests at DMV.",
+      "Maine BMV operates under the Secretary of State. OUI (not DUI/DWI) under 29-A M.R.S. § 2411. Adult BAC: 0.08%; under-21: 0.00% (zero tolerance); aggravated OUI at 0.15%+. First OUI conviction: 150-day suspension (§ 2411(5)(A)). Implied consent refusals: 275 days (1st), 18 months (2nd), 4 years (3rd), 6 years (4th+); refusal admissible as evidence. GDL: permit at age 15 (with driver ed); 70 supervised hours (10 at night); 6-month holding period; midnight-5am curfew. School bus: first offense $250 fine. Seat belt fines cannot be suspended by court. Headlights required when wipers in use. Motorcycle: headlights on at all times (§ 2062); wheelies prohibited on public ways (§ 2062 — Maine-distinctive); lane splitting illegal (§ 2062); two motorcycles may ride abreast. Helmet required for riders/passengers under 18 AND for permit holders and first-year licensees of any age — conservative estimate flagged as NEEDS_VERIFICATION. Course waiver: MSF BRC or state-equivalent waives BOTH knowledge and skills tests at DMV. Interstate: 75 mph; business/residential: 25 mph; rural: 45 mph; school zone: 15 mph. Moto test count NEEDS_VERIFICATION — call Maine BMV (207) 624-9000.",
   },
   {
     state: "Maryland",

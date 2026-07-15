@@ -3,7 +3,7 @@ import PracticeTestPage, { type PracticeTestPageProps } from "@/components/Pract
 
 export const metadata: Metadata = {
   title: "Maine DMV Practice Test 2025 – Free BMV Knowledge Exam Prep",
-  description: "Prepare for the Maine BMV knowledge test with 29 state-specific questions covering OUI laws, moose collision risks, studded tire rules, and Maine road conditions. Free practice test for 2025.",
+  description: "Prepare for the Maine BMV 30-question knowledge test (24 correct to pass, 80%). Covers OUI law, implied consent, zero tolerance under 21, GDL curfew, school bus rules, and Maine speed limits.",
   alternates: { canonical: "https://caredmvprep.com/maine-dmv-practice-test" },
   openGraph: { url: "https://caredmvprep.com/maine-dmv-practice-test", images: [{ url: "https://caredmvprep.com/opengraph-image", width: 1200, height: 630 }] },
 };
@@ -14,125 +14,125 @@ const data: PracticeTestPageProps = {
   testLabel: "DMV Practice Test",
   slug: "maine-dmv-practice-test",
   headline: "Maine BMV Practice Test 2025",
-  intro: "The Maine Bureau of Motor Vehicles (BMV), under the Secretary of State, administers a 29-question knowledge exam. You must answer at least 23 questions correctly (80%) to pass. This practice test covers Maine-specific laws including OUI statutes, moose collision hazards, studded tire regulations, and winter driving on Maine roads.",
+  intro: "The Maine Bureau of Motor Vehicles (BMV), under the Secretary of State, administers a 30-question knowledge exam. You must answer at least 24 questions correctly (80%) to pass. This practice test covers Maine-specific laws including OUI statutes, implied consent, GDL requirements, speed limits, school bus rules, and seat belt law.",
   basedOn: "Maine Secretary of State BMV Driver's Manual",
   keyRules: [
-    { icon: "🫎", rule: "Moose Collision Hazard", detail: "Maine has the highest moose-vehicle collision rate per road mile in the U.S. Moose weigh 800–1,500 lbs and their legs are tall enough that the body clears vehicle headlights — eyes may not reflect and the animal may be invisible until directly in your path. Hitting a moose often shears the vehicle roof. Reduce speed and use high beams on rural roads at dawn, dusk, and night." },
-    { icon: "🍺", rule: "OUI – Not DUI", detail: "Maine uses the term OUI (Operating Under the Influence) under 29-A MRSA § 2411 — not DUI. The legal limit is 0.08% BAC for adults. Under-21 drivers face a true zero-tolerance threshold of 0.00% BAC — any detectable alcohol results in an OUI charge for drivers under 21." },
-    { icon: "❄️", rule: "Studded Tire Season", detail: "Studded snow tires are permitted in Maine from October 1 through April 30. Using studded tires outside this window damages road surfaces and is prohibited. Maine's long winters and ice storms make studded tires a common and legal choice during the permitted season." },
-    { icon: "🧊", rule: "Black Ice (Verglas)", detail: "Black ice, sometimes called verglas, forms on Maine roads when temperatures hover near 32°F with light rain or freezing drizzle. It is nearly invisible and creates extremely low-friction surfaces. Maine DOT uses sand rather than salt on some roads to protect watershed areas, so ice may persist longer on those routes." },
-    { icon: "🏍️", rule: "Permit Age: 15", detail: "Maine allows residents to apply for a learner's permit at age 15 — earlier than many states. Permit holders must drive with a licensed supervising driver age 20 or older who has held a license for at least 2 years." },
-    { icon: "🛷", rule: "Snowmobile Crossing Signs", detail: "Maine has the highest snowmobile trail density in the eastern United States. Yellow diamond snowmobile crossing signs appear on many Maine rural roads. Drivers must watch for snowmobiles crossing the roadway, particularly at dawn and dusk during winter months." },
-    { icon: "🚫", rule: "Zero Tolerance Under 21", detail: "Maine's zero-tolerance law for drivers under 21 means any measurable BAC — even 0.01% — can result in an OUI charge and license suspension. There is no minimum threshold for underage drivers. This is stricter than the 0.02% limit used by many other states." },
-    { icon: "🛣️", rule: "Moose Alley – US-201", detail: "The section of US-201 between Jackman and the Quebec border is known as 'Moose Alley' and has some of the highest moose-vehicle collision rates in Maine. Drivers on this route should reduce speed significantly after dark, use high beams when no oncoming traffic is present, and be prepared to stop for moose standing in the road." },
+    { icon: "🍺", rule: "OUI – Not DUI", detail: "Maine uses the term OUI (Operating Under the Influence) under 29-A M.R.S. § 2411 — not DUI or DWI. The legal BAC limit is 0.08% for adults 21+. Under-21 drivers face true zero-tolerance: 0.00% BAC (any detectable alcohol). CDL holders face 0.04% while operating commercial vehicles. Aggravated OUI triggers at 0.15%+ BAC." },
+    { icon: "📋", rule: "Implied Consent — Escalating Refusal Penalties", detail: "By driving in Maine you consent to chemical testing if arrested for OUI. Refusing triggers license suspension: 1st refusal = 275 days, 2nd = 18 months, 3rd = 4 years, 4th = 6 years. A refusal is also admissible as evidence in any OUI proceeding — a Maine-distinctive rule." },
+    { icon: "🧑‍🎓", rule: "Permit Age: 15 (With Driver Education)", detail: "Maine allows applicants to obtain a learner's permit at age 15 — earlier than many states — provided they are enrolled in driver education. For applicants under 18, driver education is required. Permit holders must drive only with a licensed driver age 18 or older seated in the front passenger seat." },
+    { icon: "🚌", rule: "School Bus — $250 First-Offense Fine", detail: "Stop before reaching a stopped school bus with red lights flashing. Wait until the red lights stop flashing and it is safe to proceed. The only exception is on a divided highway (only vehicles directly behind the bus must stop). First offense: $250 minimum fine." },
+    { icon: "🪑", rule: "Seat Belt Fines Cannot Be Suspended", detail: "All front-seat occupants and all passengers under 18 must wear seat belts. Maine has a distinctive rule: seat belt fines CANNOT be suspended by the court. A judge has no discretion to waive or reduce the penalty once a violation is found." },
+    { icon: "💡", rule: "Headlights When Wipers Are In Use", detail: "Headlights are required from sunset to sunrise, when visibility is less than 1,000 feet, AND when windshield wipers are in constant or intermittent use. The wiper-use trigger is directly tested on the exam." },
+    { icon: "🕛", rule: "GDL Curfew: Midnight to 5 a.m.", detail: "Maine drivers under 18 cannot drive between midnight and 5 a.m. unless accompanied by a licensed adult driver. GDL requirements include 70 supervised driving hours (10 at night) and a 6-month holding period before the road test." },
+    { icon: "🏎️", rule: "Speed Limits", detail: "Interstate: 75 mph. Business/residential areas: 25 mph. Rural roads (no sign posted): 45 mph. School zone when children are present: 15 mph. Drivers can also be cited under the basic speed rule even while traveling at or below the posted limit if conditions make that speed unsafe." },
   ],
   about: [
-    "The Maine Bureau of Motor Vehicles (BMV) operates under the Maine Secretary of State's office and administers the state's driver licensing program. The knowledge exam consists of 29 questions drawn from the Maine Driver's Manual, and applicants must answer at least 23 correctly to earn an 80% passing score. Maine's permit age of 15 means many first-time test-takers are high school freshmen — the state's graduated driver license (GDL) program requires permit holders to log supervised driving hours before advancing to a full license.",
-    "Maine's roads present challenges that are unique among New England states. The state has the highest moose-vehicle collision rate per road mile in the United States. Unlike deer, moose are so tall that their legs place the body above typical headlight beams — the animal's eyes may not catch light and reflect, making a 1,000-pound moose virtually invisible until it is directly in front of a vehicle. Collisions with moose are frequently fatal and often result in the vehicle roof being sheared off. The BMV knowledge exam tests awareness of this hazard, especially on US-201 through the Jackman corridor and on US-2, US-302, and other rural routes.",
-    "Maine law uses OUI (Operating Under the Influence) under 29-A MRSA § 2411 rather than the DUI terminology used in most states. The adult threshold is 0.08% BAC, but Maine enforces true zero tolerance for drivers under 21 — any detectable alcohol is a violation. Studded tires are permitted October 1 through April 30, and black ice (verglas) is a specific hazard when temperatures hover near freezing. The BMV knowledge exam frequently tests these winter driving laws, the snowmobile crossing signs common on rural roads, and proper behavior when approaching moose on the roadway.",
+    "The Maine Bureau of Motor Vehicles (BMV) operates under the Maine Secretary of State's office and administers the state's driver licensing program. The knowledge exam consists of 30 questions drawn from the Maine Driver's Manual, and applicants must answer at least 24 correctly to earn an 80% passing score. Maine uses the term OUI (Operating Under the Influence) under 29-A M.R.S. § 2411 rather than DUI — this is one of the most distinctive aspects of Maine traffic law and is directly tested on the exam.",
+    "Maine's implied consent law (29-A M.R.S. § 2521) means that by driving on Maine roads, every driver automatically consents to a chemical test if lawfully arrested for OUI. Refusing this test triggers escalating suspension periods: 275 days for a first refusal, 18 months for a second, 4 years for a third, and 6 years for a fourth or subsequent refusal. Maine also allows the refusal itself to be admitted as evidence in an OUI criminal proceeding — a Maine-distinctive rule. A first OUI conviction results in a 150-day license suspension plus mandatory alcohol screening and treatment.",
+    "Maine's GDL program requires permit holders to be at least 15 years old with driver education enrollment. Before taking the road test, permit holders must complete 70 supervised driving hours (10 at night) and hold the permit for at least 6 months. Drivers under 18 face a midnight-to-5-a.m. curfew. All front-seat occupants and all passengers under 18 must wear seat belts — and Maine's seat belt fines cannot be suspended by the court. Interstate speed limit is 75 mph, business/residential areas are 25 mph, rural roads default to 45 mph, and school zones require 15 mph when children are present.",
   ],
   sampleQuestions: [
     {
-      question: "Maine law refers to impaired driving as OUI. What does OUI stand for under Maine statute 29-A MRSA § 2411?",
+      question: "Maine law refers to impaired driving as OUI. What does OUI stand for under Maine statute 29-A M.R.S. § 2411?",
       options: ["Operating Under Influence", "Operating While Intoxicated", "Operating Under the Influence", "Operating with Impairment"],
       correctIndex: 2,
-      explanation: "OUI stands for Operating Under the Influence, which is the exact term used in Maine statute 29-A MRSA § 2411. Maine does not use the DUI or DWI terminology found in other states. This distinction matters on the knowledge exam because Maine-specific OUI questions use the correct statutory name. OUI charges can result from alcohol, drugs, or a combination of both impairing substances."
+      explanation: "OUI stands for 'Operating Under the Influence,' which is the exact term used in Maine statute 29-A M.R.S. § 2411. Maine does not use the DUI or DWI terminology found in other states. OUI charges can result from impairment by alcohol, drugs, or a combination of both substances."
     },
     {
-      question: "A driver under age 21 in Maine is found to have a BAC of 0.01% during a traffic stop. What is the legal consequence under Maine's zero-tolerance law?",
-      options: ["No penalty — 0.01% is below the 0.02% threshold", "A warning only", "An OUI charge and potential license suspension", "A fine but no license action"],
+      question: "What is the mandatory license suspension for a first OUI conviction in Maine?",
+      options: ["150 days", "90 days", "6 months", "1 year"],
+      correctIndex: 0,
+      explanation: "A first OUI conviction in Maine results in a 150-day license suspension under 29-A M.R.S. § 2411(5)(A), along with mandatory alcohol screening and treatment. This is separate from — and shorter than — the 275-day implied consent refusal suspension."
+    },
+    {
+      question: "A driver under age 21 in Maine is found to have a BAC of 0.01%. What is the legal consequence under Maine's zero-tolerance law?",
+      options: ["No penalty — 0.01% is below the 0.02% threshold", "A warning only", "An OUI charge — any detectable alcohol is a violation for under-21 drivers", "A fine but no license action"],
       correctIndex: 2,
-      explanation: "Maine enforces true zero tolerance for drivers under 21, meaning any detectable alcohol — even 0.01% — can result in an OUI charge and license suspension. Unlike states that set a 0.02% threshold for underage drivers, Maine draws the line at zero. This is one of the strictest underage alcohol policies in the nation and is specifically tested on the Maine BMV knowledge exam."
+      explanation: "Maine enforces true zero tolerance for drivers under 21: any detectable alcohol — even 0.01% — constitutes an OUI violation. Maine sets the under-21 threshold at 0.00%, which is stricter than states that use a 0.02% threshold. This is one of the most commonly tested facts on the Maine BMV exam."
     },
     {
-      question: "Why are moose especially dangerous to drivers on Maine roads compared to deer?",
-      options: ["Moose are faster and harder to avoid", "Moose legs are tall enough that the body sits above headlight level, making the animal hard to see at night", "Moose are protected by law and drivers cannot swerve", "Moose only cross roads in daytime hours"],
+      question: "How long is a driver's license suspended for a first refusal to take a chemical test under Maine's implied consent law?",
+      options: ["150 days", "275 days", "6 months", "1 year"],
       correctIndex: 1,
-      explanation: "Moose are uniquely dangerous because their long legs position the body above the typical beam of vehicle headlights. Unlike deer, whose eyes reflect headlight beams and provide advance warning, moose eyes may not catch the light — and the dark body blends into the night. A driver may see nothing until the moose is directly in the headlights. Maine has the highest moose-vehicle collision rate per road mile in the United States, and collisions often result in the vehicle roof being sheared off."
+      explanation: "Maine's implied consent law (29-A M.R.S. § 2521) imposes a 275-day license suspension for a first refusal to submit to a chemical test. This is longer than the 150-day first-offense OUI conviction suspension, making refusal a costly strategy. Maine also allows the refusal to be used as evidence in court."
     },
     {
-      question: "Between which dates are studded snow tires permitted on Maine roads?",
-      options: ["November 1 through March 31", "October 15 through April 15", "October 1 through April 30", "December 1 through March 15"],
+      question: "When approaching a stopped school bus with red lights flashing in Maine, when may you proceed?",
+      options: ["When you can see no children near the bus", "When the bus driver waves you through", "When the red lights stop flashing and it is safe to proceed", "After waiting 30 seconds"],
       correctIndex: 2,
-      explanation: "Maine law permits the use of studded snow tires from October 1 through April 30. Using studded tires outside this window is prohibited because studs damage paved road surfaces when temperatures are above freezing. Maine's extended cold season — which can bring ice and snow from October through late April — makes this a longer window than many other northern states allow."
+      explanation: "Maine law requires you to stop before reaching a stopped school bus with red lights flashing and the stop arm extended. You may not proceed until the red lights stop flashing and it is safe to do so. First offense carries a minimum $250 fine."
     },
     {
-      question: "What is the minimum age to apply for a learner's permit in Maine?",
-      options: ["14 years old", "15 years old", "15½ years old", "16 years old"],
+      question: "In Maine, when must you turn on your headlights besides sunset to sunrise?",
+      options: ["Only when visibility drops below 500 feet", "When your windshield wipers are in constant or intermittent use, or when visibility is less than 1,000 feet", "Only when traveling faster than 55 mph in rain", "When the road surface is wet"],
       correctIndex: 1,
-      explanation: "Maine allows applicants to obtain a learner's permit at age 15, which is earlier than the 15½ or 16 minimum used by many other states. Permit holders must drive only with a supervising licensed driver who is at least 20 years old and has held a license for a minimum of 2 years. Maine's GDL system requires supervised driving hours before the permit holder can advance toward a full license."
+      explanation: "Maine law requires headlights when visibility is less than 1,000 feet AND when windshield wipers are in constant or intermittent use. The wiper-use trigger is a commonly tested Maine-distinctive rule — if it is raining enough to need wipers, headlights must be on."
     },
     {
-      question: "You are driving on a rural Maine road at night and encounter a section of road known as 'Moose Alley' on US-201. What is the recommended action?",
-      options: ["Maintain speed and use your horn if you see a moose", "Reduce speed significantly, use high beams when no oncoming traffic is present, and be prepared to stop", "Turn on hazard lights and accelerate past the area quickly", "Only reduce speed near posted moose warning signs"],
-      correctIndex: 1,
-      explanation: "On Moose Alley (US-201 between Jackman and the Quebec border), the safest approach is to reduce speed substantially, use high beams when there is no oncoming traffic to scan the road margins, and be fully prepared to stop. Moose may be standing in the lane and are nearly invisible at night. Accelerating through the area increases the risk of a fatal collision. Moose warning signs indicate zones of elevated collision risk throughout this corridor."
+      question: "What is the default speed limit on rural roads in Maine when no sign is posted?",
+      options: ["55 mph", "35 mph", "40 mph", "45 mph"],
+      correctIndex: 3,
+      explanation: "The default speed limit on rural roads in Maine (excluding interstates and urban/business zones) is 45 mph when no speed limit sign is posted. Business and residential areas default to 25 mph, and school zones require 15 mph when children are present."
     },
     {
-      question: "Black ice forms on Maine roads when temperatures are near 32°F with light rain or freezing drizzle. Why does it remain on some Maine roads longer than expected?",
-      options: ["Maine law prohibits salt use on all roads", "Maine DOT uses sand instead of salt on some roads to protect watershed areas, so ice may not melt as quickly", "Black ice melts immediately when the sun rises", "Maine roads are designed to drain water away from the surface"],
-      correctIndex: 1,
-      explanation: "On certain Maine roads near sensitive watershed areas, the Maine DOT applies sand rather than salt to control ice. Sand provides traction but does not lower the freezing point of water or accelerate melting the way salt does. As a result, black ice (verglas) may persist on these roads even after temperatures rise slightly. Drivers should be aware that ice conditions can remain hazardous for longer than expected on these treated routes."
+      question: "Which statement about Maine's seat belt fines is correct?",
+      options: ["Courts may suspend seat belt fines for first-time offenders", "Seat belt fines may be waived if the driver completes a safety course", "Seat belt fines CANNOT be suspended by the court", "Seat belt fines are optional at judicial discretion"],
+      correctIndex: 2,
+      explanation: "Maine has a distinctive rule: seat belt fines CANNOT be suspended by the court. A judge has no discretion to waive or reduce the penalty once a seat belt violation is found. This makes Maine's seat belt enforcement unusually firm, reflecting the legislature's intent to make compliance mandatory."
     },
     {
-      question: "What shape and color is a snowmobile crossing warning sign on Maine roads?",
-      options: ["Red octagon", "Yellow diamond", "Orange triangle", "Green rectangle"],
-      correctIndex: 1,
-      explanation: "Snowmobile crossing signs in Maine are yellow diamond-shaped warning signs, following the standard format for advance warning signs used throughout the United States. Maine has the highest snowmobile trail density in the eastern U.S., so these signs appear frequently on rural roads — particularly in northern and western Maine. Drivers must watch for snowmobiles crossing the roadway, especially during low-light hours in winter."
+      question: "Maine drivers under 18 are subject to a nighttime curfew. Which hours are restricted?",
+      options: ["10 p.m. to 5 a.m.", "11 p.m. to 6 a.m.", "Midnight to 5 a.m.", "1 a.m. to 5 a.m."],
+      correctIndex: 2,
+      explanation: "Maine's GDL curfew prohibits drivers under 18 from driving between midnight and 5 a.m. unless accompanied by a licensed adult driver. The exception allows an under-18 driver to operate during curfew hours if a licensed adult is present in the vehicle."
     },
     {
-      question: "A Maine driver is convicted of OUI. Which statute governs this offense?",
-      options: ["29-A MRSA § 1312", "29-A MRSA § 2411", "21-A MRSA § 801", "17-A MRSA § 1252"],
-      correctIndex: 1,
-      explanation: "OUI offenses in Maine are governed by 29-A MRSA § 2411, which is Title 29-A of the Maine Revised Statutes Annotated — the motor vehicle title. This statute sets the 0.08% BAC threshold for adults and establishes the zero-tolerance standard for drivers under 21. Penalties under § 2411 include license suspension, fines, possible imprisonment for repeat offenses, and mandatory participation in substance abuse treatment programs."
-    },
-    {
-      question: "When driving on a rural Maine road at night and a moose is standing in your lane, what is the MOST important reason not to swerve sharply?",
-      options: ["Swerving may confuse the moose and cause it to move into your path", "Sharp swerving can cause a rollover or collision with roadside hazards, which may be more dangerous than braking in place", "Maine law requires drivers to maintain their lane when wildlife is present", "Moose always move out of the way if you maintain your lane"],
-      correctIndex: 1,
-      explanation: "When a large animal like a moose is in the road, sharp swerving at highway speed is extremely dangerous — it can cause a rollover or send the vehicle into a ditch, tree, or guardrail. These secondary outcomes can be just as fatal as a moose collision. The BMV guidance is to brake firmly and in a straight line when possible, reduce speed as much as possible before impact if a collision is unavoidable, and avoid aggressive steering corrections that destabilize the vehicle."
+      question: "What is the maximum statutory speed limit on Maine interstate highways?",
+      options: ["55 mph", "65 mph", "70 mph", "75 mph"],
+      correctIndex: 3,
+      explanation: "Maine's maximum statutory speed limit on interstate highways is 75 mph. Actual posted limits on specific sections may be lower, and drivers must always obey posted signs. Maine's basic speed rule also requires driving at a speed reasonable and prudent for actual conditions, regardless of the posted limit."
     },
   ],
   faqs: [
     {
       question: "What is the passing score for the Maine BMV knowledge test?",
-      answer: "The Maine BMV knowledge exam consists of 29 questions, and you must answer at least 23 correctly to pass. This represents an 80% passing threshold. The exam is administered at Maine BMV offices and covers road signs, traffic laws, OUI statutes, Maine-specific hazards like moose collisions, winter driving rules including studded tire seasons, and general safe driving practices outlined in the Maine Driver's Manual."
+      answer: "The Maine BMV knowledge exam consists of 30 questions, and you must answer at least 24 correctly to pass — an 80% passing threshold. The exam covers road signs, traffic laws, OUI statutes, GDL requirements, implied consent rules, speed limits, school bus laws, and seat belt law from the Maine Driver's Manual."
     },
     {
       question: "Does Maine call it DUI or OUI?",
-      answer: "Maine uses OUI — Operating Under the Influence — under 29-A MRSA § 2411. This is an important distinction because the Maine knowledge exam uses OUI terminology, and understanding the statute matters if you are tested on impaired driving rules. The legal BAC limit is 0.08% for adults and 0.00% (zero tolerance) for drivers under 21. OUI encompasses impairment from alcohol, drugs, or any combination of substances."
+      answer: "Maine uses OUI — Operating Under the Influence — under 29-A M.R.S. § 2411. This is an important distinction because the Maine knowledge exam uses OUI terminology throughout. The legal BAC limit is 0.08% for adults 21+, 0.00% (zero tolerance) for drivers under 21, and 0.04% for CDL holders operating commercial vehicles. Aggravated OUI triggers at 0.15%+ BAC."
     },
     {
       question: "What is the zero-tolerance BAC limit for drivers under 21 in Maine?",
-      answer: "Maine enforces true zero tolerance for drivers under 21 — any detectable alcohol in a driver's system constitutes an OUI violation. There is no minimum threshold; even a BAC of 0.01% is sufficient for an OUI charge. This is stricter than the 0.02% used by many other states. Consequences include license suspension and can affect a young driver's ability to advance through Maine's graduated licensing program."
+      answer: "Maine enforces true zero tolerance for drivers under 21 — any detectable alcohol in a driver's system constitutes an OUI violation. There is no minimum threshold; even a BAC of 0.01% is sufficient for an OUI charge under Maine law. This is stricter than states that set a 0.02% under-21 threshold."
     },
     {
-      question: "When can I use studded snow tires in Maine?",
-      answer: "Studded snow tires are permitted in Maine from October 1 through April 30. Outside of this date range, studded tires are prohibited because the metal studs damage asphalt road surfaces when temperatures are above freezing. Maine's winter season can extend well into April in northern parts of the state, so the five-month window accommodates Maine's climate. All four tires must be studded if you choose to use them — mixing studded and non-studded tires on the same vehicle is not recommended for vehicle stability."
+      question: "What happens if a driver refuses a chemical test in Maine?",
+      answer: "Refusing a chemical test triggers an automatic license suspension under Maine's implied consent law (29-A M.R.S. § 2521): 275 days for a first refusal, 18 months for a second, 4 years for a third, and 6 years for a fourth or subsequent refusal. Maine also allows the refusal itself to be admitted as evidence against you in any OUI criminal proceeding — meaning the prosecution can argue to the jury that you refused because you knew you were over the limit."
     },
     {
-      question: "Why is moose collision risk so high in Maine?",
-      answer: "Maine has the highest moose-vehicle collision rate per road mile in the United States. The state has a large moose population — estimates exceed 60,000 animals — and moose frequently cross rural roads, especially at dawn, dusk, and nighttime. The physical characteristics of moose make them uniquely dangerous: their tall legs position the body above headlight beams, their dark coat provides almost no reflectivity, and their eyes may not catch headlight beams the way deer eyes do. A striking vehicle often hits the moose's legs, sending the massive body through the windshield. US-201 between Jackman and the Canadian border is particularly high-risk and is sometimes called 'Moose Alley.'"
+      question: "What are Maine's GDL supervised driving requirements?",
+      answer: "Maine's Graduated Driver Licensing program requires permit holders to complete 70 hours of supervised driving practice before the road test, with at least 10 of those hours at night. Permit holders must also hold the permit for a minimum of 6 months before they can take the road test. Under-18 drivers are also subject to a midnight-to-5-a.m. curfew and, for the first 6 months after receiving a full license, cannot carry passengers under 20 without a licensed adult present."
+    },
+    {
+      question: "What are Maine's school bus laws?",
+      answer: "Maine law requires all drivers to stop before reaching a stopped school bus with red lights flashing and the stop arm extended. Drivers must remain stopped until the red lights stop flashing and it is safe to proceed. On a divided or limited-access highway, only vehicles in the lane directly behind the bus must stop. The minimum fine for a first offense of illegally passing a stopped school bus is $250."
+    },
+    {
+      question: "What is Maine's seat belt law?",
+      answer: "Maine requires all front-seat occupants to wear a seat belt, regardless of age. All passengers under 18 must wear a seat belt in any seat — front or rear. A distinctive Maine rule is that seat belt fines CANNOT be suspended by the court: once a violation is found, the judge has no discretion to waive or reduce the penalty."
     },
     {
       question: "What age can you get a learner's permit in Maine?",
-      answer: "Maine residents may apply for a learner's permit beginning at age 15. Applicants must pass the BMV knowledge exam and vision test. Permit holders must be accompanied at all times by a supervising driver who is at least 20 years old and has held a valid license for a minimum of 2 years. The supervising driver must occupy the front passenger seat. Maine's GDL requirements include supervised driving hours and a waiting period before advancing to the next licensing stage."
+      answer: "Maine residents may apply for a learner's permit beginning at age 15, provided they are enrolled in driver education. Driver education is required for all applicants under 18. Permit holders must be accompanied at all times by a licensed driver who is 18 or older, seated in the front passenger seat. Applicants 18 and older may obtain a permit without completing a formal driver education course."
     },
     {
-      question: "What is black ice and why is it especially dangerous on Maine roads?",
-      answer: "Black ice (sometimes called verglas) is a thin, nearly transparent layer of ice that forms on road surfaces when temperatures hover near 32°F with light freezing precipitation. It is called 'black' because it appears to be the same color as the road surface and is virtually invisible. Black ice is particularly treacherous on bridges, overpasses, and shaded road sections. In Maine, some roads near watershed areas are treated with sand rather than salt to protect water quality — these roads may retain ice longer because sand does not lower the freezing point of water. Drivers should reduce speed whenever temperatures are near freezing and precipitation is falling or has recently fallen."
+      question: "What does Maine's headlight and wiper law require?",
+      answer: "Maine requires headlights from sunset to sunrise, when visibility is less than 1,000 feet due to weather, AND when windshield wipers are in constant or intermittent use. The wiper-use trigger is an important Maine-specific rule: if conditions require wipers, headlights must also be on to ensure other drivers can see you."
     },
     {
-      question: "What is Maine's snowmobile trail network, and why do signs for it appear on roads?",
-      answer: "Maine has the highest snowmobile trail density in the eastern United States, with over 14,000 miles of groomed trails operated by the Maine Snowmobile Association and local clubs. Many of these trails cross public roads at designated crossing points, which are marked with yellow diamond-shaped snowmobile crossing warning signs. Drivers must watch for snowmobiles crossing the road and yield appropriately. Snowmobile crossings are especially common in northern and western Maine during winter months, and snowmobiles can travel at high speeds, so advance awareness is essential."
-    },
-    {
-      question: "What road signs are typically tested on the Maine BMV knowledge exam?",
-      answer: "The Maine BMV knowledge exam tests both the shape/color conventions for road signs and the specific meaning of signs common in Maine. Standard national sign types — warning signs (yellow diamond), regulatory signs (white rectangle, red circle/octagon), guide signs (green rectangle), and construction signs (orange diamond) — are all tested. Maine-specific signs include snowmobile crossing signs, moose warning signs, logging truck route signs in northern Maine, and seasonal road closure signs. The exam may also test signs for bridge weight limits, which are common on older Maine roads and bridges."
-    },
-    {
-      question: "Does Maine have a hands-free cell phone law for drivers?",
-      answer: "Yes. Maine has banned handheld electronic device use while driving. The law prohibits using a handheld phone or device to text, talk, or access apps while operating a motor vehicle. Maine drivers may use hands-free technology (Bluetooth, speakerphone mounted to dash, etc.) but must not hold the device. Violations result in fines, and the behavior is considered a primary offense — meaning officers can pull you over solely for device use, without needing another traffic violation as justification."
+      question: "What are Maine's speed limits?",
+      answer: "Maine's statutory speed limits: interstate highways — 75 mph; business and residential areas — 25 mph; rural roads (no sign posted) — 45 mph; school zones when children are present — 15 mph. Maine's basic speed rule also requires drivers to travel at a speed that is reasonable and prudent for actual road and weather conditions, meaning drivers can be cited even while traveling at or below the posted limit if conditions make that speed dangerous."
     },
   ],
   relatedTests: [

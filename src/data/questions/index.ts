@@ -60,6 +60,8 @@ import nhDmvQuestions                from './dmv/new-hampshire';
 import nhMotoQuestions               from './motorcycle/new-hampshire';
 import hiDmvQuestions                from './dmv/hawaii';
 import hiMotoQuestions               from './motorcycle/hawaii';
+import meDmvQuestions                from './dmv/maine';
+import meMotoQuestions               from './motorcycle/maine';
 import cdlFederalQuestions           from './cdl/federal';
 import cdlSchoolBusQuestions         from './cdl/school-bus';
 import cdlTankVehicleQuestions       from './cdl/tank-vehicles';
@@ -906,6 +908,36 @@ export const quizRegistry: Record<string, QuizConfig> = {
     testId:      'new-hampshire-cdl-general',
     label:       'New Hampshire CDL General Knowledge Practice Test',
     state:       'new-hampshire',
+    licenseType: 'cdl_general',
+    questions:   verified(cdlFederalQuestions),
+    passingScore: 0.80,  // 40 of 50 — federal FMCSA standard
+  },
+
+  // ── Maine ─────────────────────────────────────────────────────────────────
+  // DL test: 30Q / 24-correct / 80% — Maine BMV
+  // Motorcycle: 25Q / 20-correct / 80% — NEEDS_VERIFICATION
+  // Permit minimum age: 15; OUI terminology; aggravated OUI at 0.15%+
+  // NOT in LIVE_STATE_SLUGS or LIVE_STATE_ABBRS — queued, not activated
+  'maine-permit': {
+    testId:      'maine-permit',
+    label:       'Maine DMV Practice Test',
+    state:       'ME',
+    licenseType: 'permit',
+    questions:   verified(meDmvQuestions),
+    passingScore: 0.80,  // 24 of 30 — Maine BMV standard (80%)
+  },
+  'maine-motorcycle': {
+    testId:      'maine-motorcycle',
+    label:       'Maine Motorcycle Practice Test',
+    state:       'ME',
+    licenseType: 'motorcycle',
+    questions:   verified(meMotoQuestions),
+    passingScore: 0.80,  // 20 of 25 — NEEDS_VERIFICATION
+  },
+  'maine-cdl-general': {
+    testId:      'maine-cdl-general',
+    label:       'Maine CDL Practice Test',
+    state:       'ME',
     licenseType: 'cdl_general',
     questions:   verified(cdlFederalQuestions),
     passingScore: 0.80,  // 40 of 50 — federal FMCSA standard
