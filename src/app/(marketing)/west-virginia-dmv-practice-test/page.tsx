@@ -4,7 +4,7 @@ import PracticeTestPage, { type PracticeTestPageProps } from "@/components/Pract
 export const metadata: Metadata = {
   title: "West Virginia DMV Practice Test 2025 – Free WV Driver's License Exam Prep",
   description:
-    "Prepare for your West Virginia DMV knowledge test with free practice questions covering mountain driving rules, coal truck operations, New River Gorge Bridge, SB 268 hands-free law, spring frost heaves, and WV-specific traffic laws. 25 questions, 80% to pass.",
+    "Prepare for your West Virginia DMV knowledge test with free practice questions covering mountain driving rules, coal truck operations, New River Gorge Bridge, WV hands-free law, spring frost heaves, and WV-specific traffic laws. 25 questions, 19 correct (76%) to pass.",
   alternates: { canonical: "https://caredmvprep.com/west-virginia-dmv-practice-test" },
   openGraph: {
     url: "https://caredmvprep.com/west-virginia-dmv-practice-test",
@@ -19,7 +19,7 @@ const data: PracticeTestPageProps = {
   slug: "west-virginia-dmv-practice-test",
   headline: "West Virginia DMV Practice Test 2025",
   intro:
-    "The Division of Motor Vehicles (DMV), West Virginia Department of Transportation, administers a 25-question knowledge test. You must answer at least 20 questions correctly (80%) to pass. This free practice test covers West Virginia's mountain driving challenges (approximately 90% of the state is mountain terrain), coal truck operations under WV coalfield permits, the New River Gorge Bridge, SB 268 hands-free law, and spring frost heave hazards.",
+    "The Division of Motor Vehicles (DMV), West Virginia Department of Transportation, administers a 25-question knowledge test. You must answer at least 19 questions correctly (76%) to pass. This free practice test covers West Virginia's mountain driving challenges (approximately 90% of the state is mountain terrain), coal truck operations under WV coalfield permits, the New River Gorge Bridge, the WV hands-free law (WV Code § 17C-14-15), and spring frost heave hazards.",
   basedOn: "West Virginia Driver's Licensing Handbook (WV Division of Motor Vehicles)",
   keyRules: [
     {
@@ -42,9 +42,9 @@ const data: PracticeTestPageProps = {
     },
     {
       icon: "📱",
-      rule: "SB 268 (2022): West Virginia Hands-Free Law",
+      rule: "WV Code § 17C-14-15: West Virginia Hands-Free Law",
       detail:
-        "West Virginia's SB 268 (effective 2022) enacted a primary hands-free law banning all handheld device use while driving. Drivers may not hold a phone for any reason while the vehicle is in motion. Bluetooth and hands-free systems are permitted. Violations are primary offenses.",
+        "West Virginia enacted a primary hands-free law (WV Code § 17C-14-15) banning all handheld device use while driving. Drivers may not hold a phone for any reason while the vehicle is in motion. Bluetooth and hands-free systems are permitted. Violations are primary offenses: up to $100 (1st), $200 (2nd), $350 + 3 points (3rd+). Under-18 GDL holders face a complete wireless ban — only 9-1-1 calls permitted.",
     },
     {
       icon: "🧒",
@@ -72,9 +72,9 @@ const data: PracticeTestPageProps = {
     },
   ],
   about: [
-    "The Division of Motor Vehicles (DMV), within the West Virginia Department of Transportation, administers all driver licensing and testing in West Virginia. The knowledge test consists of 25 multiple-choice questions drawn from the West Virginia Driver's Licensing Handbook, covering traffic laws, road signs, and the Mountain State's unique driving conditions. A passing score of 80% — 20 correct answers out of 25 — is required. Permits are issued at age 15, and West Virginia's GDL program requires 50 hours of supervised driving before a Level 2 license is issued.",
+    "The Division of Motor Vehicles (DMV), within the West Virginia Department of Transportation, administers all driver licensing and testing in West Virginia. The knowledge test consists of 25 multiple-choice questions drawn from the West Virginia Driver's Licensing Handbook, covering traffic laws, road signs, and the Mountain State's unique driving conditions. A passing score of 76% — 19 correct answers out of 25 — is required. Permits are issued at age 15, and West Virginia's GDL program requires 50 hours of supervised driving (including 10 hours at night) before a Level 2 license is issued.",
     "West Virginia is the most mountainous state east of the Mississippi River — approximately 90% of the state's terrain is characterized by mountains and ridges, and there are no flat Interstate highways in the state. This terrain shapes virtually every aspect of driving in West Virginia. The steepest grades on US-numbered highways in the eastern United States are in West Virginia, including US-119 in the coalfield area and US-60 in Kanawha County. Runaway truck ramps appear on virtually every major mountain descent. West Virginia's coalfield counties — Logan, Boone, Mingo, McDowell, and Wyoming — operate under WV Code § 17C-17-5 coalfield special permits, which authorize legally overweight coal trucks on designated route systems. Drivers in these counties regularly encounter trucks that legally exceed standard federal weight limits.",
-    "West Virginia's New River Gorge Bridge carries US-19 over the New River at 876 feet — the longest steel arch bridge in the Western Hemisphere. High winds on this exposed bridge span can affect high-profile vehicles, motorcycles, and even standard passenger cars during severe wind events. The bridge is also a major tourist attraction and hosts 'Bridge Day' each October, when the bridge is closed to traffic for an annual festival. West Virginia's SB 268 (2022) enacted a primary hands-free law prohibiting all handheld device use while driving. Spring frost heaves on mountain roads — caused by West Virginia's severe freeze-thaw cycles — create dramatic pavement upheavals on US-250 and other mountain routes that require significantly reduced speeds.",
+    "West Virginia's New River Gorge Bridge carries US-19 over the New River at 876 feet — the longest steel arch bridge in the Western Hemisphere. High winds on this exposed bridge span can affect high-profile vehicles, motorcycles, and even standard passenger cars during severe wind events. The bridge is also a major tourist attraction and hosts 'Bridge Day' each October, when the bridge is closed to traffic for an annual festival. West Virginia's hands-free law (WV Code § 17C-14-15) prohibits all handheld device use while driving; hands-free use is permitted for adults while GDL holders under 18 face a complete wireless ban. Spring frost heaves on mountain roads — caused by West Virginia's severe freeze-thaw cycles — create dramatic pavement upheavals on US-250 and other mountain routes that require significantly reduced speeds.",
   ],
   sampleQuestions: [
     {
@@ -113,7 +113,7 @@ const data: PracticeTestPageProps = {
     },
     {
       question:
-        "West Virginia's SB 268 (effective 2022) regulates what driver behavior?",
+        "West Virginia Code § 17C-14-15 regulates what driver behavior?",
       options: [
         "Minimum safe following distances on mountain roads",
         "Coal truck weight limits in coalfield counties",
@@ -122,7 +122,7 @@ const data: PracticeTestPageProps = {
       ],
       correctIndex: 2,
       explanation:
-        "West Virginia's SB 268, effective in 2022, enacted a primary hands-free law that prohibits all handheld mobile device use while driving a motor vehicle. Drivers may not hold their phone for any purpose while the vehicle is in motion. Hands-free use via Bluetooth headsets or vehicle-integrated systems is permitted. The violation is a primary offense — law enforcement can stop drivers solely for holding a device. First-offense fines apply, with higher penalties for subsequent violations.",
+        "West Virginia Code § 17C-14-15 enacted a primary hands-free law that prohibits all handheld mobile device use while driving a motor vehicle. Drivers may not hold their phone for any purpose while the vehicle is in motion. Hands-free use via Bluetooth headsets or vehicle-integrated systems is permitted. The violation is a primary offense — law enforcement can stop drivers solely for holding a device. Fines are up to $100 (1st offense), $200 (2nd), and $350 plus 3 license points (3rd and subsequent).",
     },
     {
       question:
@@ -202,7 +202,7 @@ const data: PracticeTestPageProps = {
     {
       question: "What is the West Virginia DMV knowledge test format?",
       answer:
-        "West Virginia's knowledge test consists of 25 multiple-choice questions drawn from the West Virginia Driver's Licensing Handbook. A passing score of 80% — at least 20 correct answers — is required. The test covers WV traffic laws, road signs, mountain driving rules, and WV-specific topics including coal truck operations and the hands-free law. If you fail, a waiting period applies before retaking. The handbook is available on the WV DMV website.",
+        "West Virginia's knowledge test consists of 25 multiple-choice questions drawn from the West Virginia Driver's Licensing Handbook. A passing score of 76% — at least 19 correct answers out of 25 — is required. The test covers WV traffic laws, road signs, mountain driving rules, and WV-specific topics including coal truck operations, implied consent, and the hands-free law. If you fail, a waiting period applies before retaking. The handbook is available on the WV DMV website.",
     },
     {
       question: "What are West Virginia's graduated driver licensing stages?",
@@ -222,7 +222,7 @@ const data: PracticeTestPageProps = {
     {
       question: "Does West Virginia have a hands-free driving law?",
       answer:
-        "Yes. West Virginia's SB 268, effective in 2022, enacted a primary hands-free driving law that prohibits all handheld mobile device use while operating a motor vehicle. Drivers may not hold a phone for any purpose while the vehicle is in motion — including at red lights and stop signs. Hands-free use via Bluetooth headsets or vehicle-integrated systems is permitted. Violations are primary offenses with fines that increase for repeat violations. West Virginia's law also has specific provisions addressing increased fines for handheld device use in work zones and school zones.",
+        "Yes. West Virginia Code § 17C-14-15 (WV's primary hands-free law) prohibits all handheld mobile device use while operating a motor vehicle. Drivers may not hold a phone for any purpose while the vehicle is in motion — including at red lights and stop signs. Hands-free use via Bluetooth headsets or vehicle-integrated systems is permitted for adult drivers. GDL holders under 18 face a stricter complete wireless device ban — only 9-1-1 emergency calls are permitted. Fines are up to $100 (1st offense), $200 (2nd), and $350 plus 3 license points (3rd and subsequent).",
     },
     {
       question: "How do WV's mountain grades affect all drivers, not just truck drivers?",

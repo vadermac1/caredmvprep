@@ -19,10 +19,10 @@ const data: PracticeTestPageProps = {
   slug: "west-virginia-motorcycle-practice-test",
   headline: "West Virginia Motorcycle Practice Test 2025",
   intro:
-    "Earning a West Virginia motorcycle endorsement requires passing a knowledge test at the WV Division of Motor Vehicles and a skills test. This free practice test covers West Virginia-specific motorcycle topics: the universal helmet requirement under WV Code § 17C-15-46, coal debris traction hazards on coalfield roads, New River Gorge Bridge crosswind technique, mountain grade riding on WV's extreme grades, and DUI laws for motorcycle operators.",
+    "Earning a West Virginia motorcycle endorsement requires passing a 25-question knowledge test (20 correct, 80%) at the WV Division of Motor Vehicles and a skills test. This free practice test covers West Virginia-specific motorcycle topics: the universal helmet requirement under WV Code § 17C-15-46 (all ages), eye protection requirements (contact lenses alone do NOT qualify), lane splitting (illegal in WV), coal debris traction hazards on coalfield roads, New River Gorge Bridge crosswind technique, mountain grade riding, and DUI laws for motorcycle operators.",
   basedOn: "West Virginia Motorcycle Operator Manual (WV Division of Motor Vehicles)",
   about: [
-    "The West Virginia Division of Motor Vehicles requires all motorcycle operators to hold a valid motorcycle endorsement on their driver's license. To earn the endorsement, applicants must pass a knowledge test based on the West Virginia Motorcycle Operator Manual and complete a skills test, or complete an approved Motorcycle Safety Foundation (MSF) course to waive the skills test. West Virginia Code § 17C-15-46 requires ALL motorcycle operators and passengers to wear a DOT-approved helmet — there is no age-based exemption. Eye protection is also required for all riders unless the motorcycle has a windshield.",
+    "The West Virginia Division of Motor Vehicles requires all motorcycle operators to hold a valid motorcycle endorsement on their driver's license. To earn the endorsement, applicants must pass a 25-question knowledge test (20 correct = 80%) based on the West Virginia Motorcycle Operator Manual and complete a skills test — or complete an approved Motorcycle Safety Foundation (MSF) Basic RiderCourse to waive the skills test only (the knowledge test is always required). West Virginia Code § 17C-15-46 requires ALL motorcycle operators and passengers to wear a DOT-approved helmet, regardless of age — there is no adult exemption. Eye protection (glasses, goggles, or face shield) is required for all riders unless the motorcycle has a windshield; contact lenses alone do NOT satisfy the eye protection requirement. Lane splitting is NOT permitted in West Virginia.",
     "West Virginia is one of the most challenging — and most rewarding — states for motorcycle riding in the eastern United States. The state's mountain terrain produces spectacular riding on US-60 (the Midland Trail), US-33, US-250, and other mountain routes. However, West Virginia's 90% mountain terrain means virtually every road involves significant grades and curves. Riders must master low-gear descent technique to avoid brake fade on long steep grades. Coalfield county roads in Logan, Boone, Mingo, McDowell, and Wyoming counties present a unique traction hazard: loose coal debris deposited by coal trucks creates slippery surfaces, especially when wet. The New River Gorge Bridge (US-19) exposes riders to significant crosswinds at 876 feet above the New River.",
   ],
   sampleQuestions: [
@@ -142,7 +142,7 @@ const data: PracticeTestPageProps = {
     {
       question: "What is required to get a motorcycle endorsement in West Virginia?",
       answer:
-        "To earn a West Virginia motorcycle endorsement, you must hold a valid West Virginia driver's license, pass a motorcycle knowledge test at a WV Division of Motor Vehicles office, and pass a motorcycle skills test on a closed course. Completing an approved Motorcycle Safety Foundation (MSF) Basic RiderCourse can waive the skills test requirement. The knowledge test covers the WV Motorcycle Operator Manual, including state-specific content on mountain riding technique, coal debris hazards, and the New River Gorge Bridge.",
+        "To earn a West Virginia motorcycle endorsement (M), you must hold a valid West Virginia driver's license, pass a 25-question motorcycle knowledge test (20 correct = 80%) at a WV Division of Motor Vehicles office, and pass a motorcycle skills test on a closed course. Completing an approved Motorcycle Safety Foundation (MSF) Basic RiderCourse waives the skills test only — the knowledge test is always required regardless of course completion. The knowledge test covers the WV Motorcycle Operator Manual, including universal helmet law (§ 17C-15-46), eye protection (contact lenses insufficient), lane splitting (illegal), mountain riding technique, coal debris hazards, and the New River Gorge Bridge.",
     },
     {
       question: "What coal debris hazards do motorcycle riders face in WV's coalfield counties?",
@@ -167,12 +167,12 @@ const data: PracticeTestPageProps = {
     {
       question: "How long is the West Virginia motorcycle permit valid, and can I ride alone with it?",
       answer:
-        "Motorcycle learner's permit validity varies by state, typically ranging from 90 days to 2 years. With a permit in West Virginia, you are generally restricted from riding at night, on highways, or carrying passengers. These restrictions ensure new riders gain experience safely before obtaining a full license. Check the West Virginia DMV website for specific permit restrictions and validity periods in your state.",
+        "The West Virginia motorcycle instruction permit is valid for 90 days. Permit holders must wait at least 7 days after receiving the permit before scheduling the skills test. Permit restrictions include: daylight riding only (no night riding), no passengers, and no interstate highway riding. Permit holders under 18 must meet Level 2 GDL requirements before obtaining the full motorcycle endorsement. Check the West Virginia DMV website for any updated permit requirements.",
     },
     {
       question: "Is a motorcycle endorsement required in West Virginia, or is it a separate license?",
       answer:
-        "The structure varies by state. Some states, including West Virginia, add a motorcycle endorsement (typically marked as 'M') to your existing driver's license, while others issue a separate motorcycle license or permit. Either way, you must pass a motorcycle knowledge test and, in most cases, a riding skills test or approved safety course before you can legally operate a motorcycle on public roads.",
+        "West Virginia adds a Motorcycle (M) endorsement to your existing West Virginia driver's license — it is not a separate license card. To legally ride on public roads you must have the M endorsement on your license. Riding without it is a traffic violation. The endorsement requires passing a 25-question knowledge test and either a skills test or completing an MSF Basic RiderCourse (which waives the skills test only).",
     },
     {
       question: "What types of motorcycles require a motorcycle license in West Virginia?",
@@ -182,7 +182,7 @@ const data: PracticeTestPageProps = {
     {
       question: "Does completing a motorcycle safety course waive the skills test in West Virginia?",
       answer:
-        "In many states, completing an approved Motorcycle Safety Foundation (MSF) Basic RiderCourse or an equivalent state-approved program waives the DMV riding skills test requirement. Some states also waive the knowledge test for course graduates. West Virginia DMV policies on course waivers vary — check the DMV website or contact them directly to confirm which approved courses qualify for test waivers and whether any age restrictions apply.",
+        "Yes — completing a WV-approved Motorcycle Safety Foundation (MSF) Basic RiderCourse waives the DMV road skills test for the motorcycle endorsement. However, the 25-question written knowledge test (80% passing score = 20 correct) must still be passed at the DMV regardless of course completion. The MSF BRC does NOT waive the knowledge test. Course graduates receive a completion card to present at the DMV when applying for the endorsement.",
     },
   ],
   relatedTests: [

@@ -743,3 +743,46 @@ All other states have been updated in `state-facts.ts` with official state CDL h
 - QUEUED (not activated) pending phone verification of DL and motorcycle test counts
 - Do not add to LIVE_STATE_SLUGS or LIVE_STATE_ABBRS until verified
 - Current state: Idaho is NOT in LIVE_STATE_SLUGS, LIVE_STATE_ABBRS, LIVE_MOTORCYCLE_STATE_SLUGS, or LIVE_MOTORCYCLE_STATE_ABBRS (confirmed 2026-07-14)
+
+---
+
+## West Virginia (WV) — 2026-07-15
+
+### DL Test Structure
+- Questions: 25 | To pass: 19 correct (76%)
+- STATUS: VERIFIED — verbatim from WV Driver's Licensing Handbook p. 24: "you must answer 19 out of 25 questions correctly"
+
+### Motorcycle Test Structure
+- Questions: 25 | To pass: 20 correct (80%)
+- STATUS: VERIFIED — verbatim from WV Driver's Licensing Handbook p. 14: "Pass a 25-question motorcycle knowledge examination with a grade of 80% or better"
+
+### Helmet Law
+- WV Code § 17C-15-46: Required for ALL riders and passengers, ALL ages (universal)
+- STATUS: VERIFIED (§ 17C-15-46 text confirmed)
+
+### Eye Protection
+- WV Code § 17C-15-46: Required — glasses, goggles, or face shield; contact lenses alone do NOT qualify
+- STATUS: VERIFIED
+
+### Lane Splitting
+- NOT permitted — no enabling statute in WV Code
+- STATUS: VERIFIED (no authorizing statute found)
+
+### Aggravated DUI Threshold
+- 0.15% BAC (WV Code § 17C-5-2) — NOT 0.16%
+- STATUS: VERIFIED
+
+### Implied Consent
+- 1st refusal: 1-year; 2nd refusal: 10-year; 3rd refusal: LIFETIME
+- Hearing request: 30 days from first court appearance
+- STATUS: VERIFIED (§ 17C-5-7a)
+
+### Items Needing Phone Verification
+- Seat belt enforcement type (primary vs. secondary): call WV DMV (304) 926-3801
+- Open container statute section: call WV DMV
+- Move Over Law full text: call WV DMV
+- Phone: (304) 926-3499 / (800) 642-9066
+
+### Activation Status
+- QUEUED (not activated) — DL and moto test counts VERIFIED from handbook; other items above need phone confirmation before activation
+- Do NOT add to LIVE_STATE_SLUGS or LIVE_STATE_ABBRS until seat belt enforcement type confirmed (optional) and activation approved

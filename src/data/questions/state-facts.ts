@@ -1268,10 +1268,10 @@ const stateFacts: StateFacts[] = [
     permitToPass: 19,
     permitPassingPct: "76%",
     permitMinAge: 15,
-    motoHandbookUrl: "https://transportation.wv.gov/DMV/Drivers/Pages/Motorcycle.aspx",
-    motoQuestions: "NEEDS_VERIFICATION",
-    motoToPass: "NEEDS_VERIFICATION",
-    motoPassingPct: "NEEDS_VERIFICATION",
+    motoHandbookUrl: "https://transportation.wv.gov/DMV/DMVFormSearch/Motorcycle_Manual.pdf",
+    motoQuestions: 25,
+    motoToPass: 20,
+    motoPassingPct: "80%",
     motoHelmetLaw: "all-ages",
     motoLaneSplittingLegal: false,
     motoCourseWaivesSkillsTest: true,
@@ -1279,9 +1279,11 @@ const stateFacts: StateFacts[] = [
     cdlGeneralKnowledgeQuestions: 50,
     cdlGeneralKnowledgeToPass: 40,
     cdlGeneralKnowledgePassingPct: "80%",
-    lastVerifiedAt: VERIFIED,
+    lastVerifiedAt: "2026-07-15",
+    verifiedBy:
+      "WV Driver's Licensing Handbook (verbatim: '19 out of 25 questions correctly' = 76%); Motorcycle Operator Manual (verbatim: '25-question motorcycle knowledge examination with a grade of 80% or better' = 20/25); WV Code § 17C-15-46 universal helmet law; no lane-splitting statute found; MSF BRC waives skills test only per WV Motorcycle Operator Manual.",
     notes:
-      "West Virginia has a 76% passing threshold (19/25) — slightly below the national 80% norm. Online testing via KnowToDrive. Helmet required for all riders and passengers. Course waiver: MSF BRC or state-equivalent waives skills test only; knowledge test still required.",
+      "West Virginia has a 76% passing threshold (19/25) — slightly below the national 80% norm. Motorcycle test: 25 questions, 80% = 20 correct. Helmet required for ALL riders and passengers (universal — § 17C-15-46). Eye protection required; contact lenses alone do NOT qualify. Lane splitting ILLEGAL — no enabling statute. MSF BRC waives skills test only; knowledge test always required. Permit: 90-day validity, 7-day hold before skills test, daylight only, no passengers.",
   },
   {
     state: "Wisconsin",

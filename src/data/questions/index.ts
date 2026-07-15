@@ -54,6 +54,8 @@ import neDmvQuestions                from './dmv/nebraska';
 import neMotoQuestions               from './motorcycle/nebraska';
 import idDmvQuestions                from './dmv/idaho';
 import idMotoQuestions               from './motorcycle/idaho';
+import wvDmvQuestions                from './dmv/west-virginia';
+import wvMotoQuestions               from './motorcycle/west-virginia';
 import cdlFederalQuestions           from './cdl/federal';
 import cdlSchoolBusQuestions         from './cdl/school-bus';
 import cdlTankVehicleQuestions       from './cdl/tank-vehicles';
@@ -843,6 +845,35 @@ export const quizRegistry: Record<string, QuizConfig> = {
     licenseType: 'cdl_general',
     questions:   verified(cdlFederalQuestions),
     passingScore: 0.80,
+  },
+
+  // ── West Virginia ─────────────────────────────────────────────────────────
+  // DL test: 25Q / 19-correct / 76% — WV DMV standard; universal helmet law (all ages).
+  // Motorcycle: 25Q / 20-correct / 80%. Aggravated DUI: 0.15% BAC.
+  // GDL curfew: 5 a.m.–10 p.m. for BOTH Level 1 and Level 2. School zone: 15 mph.
+  'west-virginia-permit': {
+    testId:      'west-virginia-permit',
+    label:       'West Virginia DMV Driver Knowledge Test Practice',
+    state:       'west-virginia',
+    licenseType: 'permit',
+    questions:   verified(wvDmvQuestions),
+    passingScore: 0.76,  // 19 of 25 — WV DMV standard
+  },
+  'west-virginia-motorcycle': {
+    testId:      'west-virginia-motorcycle',
+    label:       'West Virginia Motorcycle Knowledge Test Practice',
+    state:       'west-virginia',
+    licenseType: 'motorcycle',
+    questions:   verified(wvMotoQuestions),
+    passingScore: 0.80,  // 20 of 25 — WV DMV standard
+  },
+  'west-virginia-cdl-general': {
+    testId:      'west-virginia-cdl-general',
+    label:       'West Virginia CDL General Knowledge Practice Test',
+    state:       'west-virginia',
+    licenseType: 'cdl_general',
+    questions:   verified(cdlFederalQuestions),
+    passingScore: 0.80,  // 40 of 50 — federal FMCSA standard
   },
 
   // ── CDL Endorsement Banks — federal (state-agnostic) ─────────────────────
