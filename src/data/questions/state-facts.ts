@@ -914,8 +914,9 @@ const stateFacts: StateFacts[] = [
     cdlGeneralKnowledgeQuestions: 50,
     cdlGeneralKnowledgeToPass: 40,
     cdlGeneralKnowledgePassingPct: "80%",
-    lastVerifiedAt: VERIFIED,
-    notes: "Helmet required for riders/passengers under 18. Course waiver: MSF BRC or state-equivalent waives skills test only; knowledge test still required.",
+    lastVerifiedAt: "2026-07-16",
+    verifiedBy: "Research 2026-07-16: DL test 25Q/20-correct/80% confirmed via driversprep.com and widely corroborated; permitMinAge 14 from NDCC § 39-06-04; under-16 hold permit 12 months, ages 16-17 hold 6 months; 50 supervised hours required for under-16; supervisor must be ≥18 yrs and ≥3 yrs experience seated beside driver; BAC adult 0.08% / under-21 0.02% / CDL 0.04% / aggravated 0.16% / extra-aggravated 0.18% from NDCC § 39-08-01; implied consent refusal 1st=180 days, 2nd=365 days; 1st DUI BAC<0.18%=91-day suspension, BAC≥0.18%=180-day suspension; interstate 80 mph / 4-lane divided 70 mph / 2-lane state hwy 65 mph / county paved 55 mph / residential 25 mph from NDCC § 39-09-01; texting banned NDCC § 39-08-23; under-18 all wireless banned NDCC § 39-08-24; child restraint under-8 or under 57 in tall from NDCC § 39-21-41.2; seat belts all occupants NDCC § 39-21-41.4; helmet under-18 NDCC § 39-21-48; eye protection NDCC § 39-21-48.1; lane splitting illegal; MSF BRC waives skills test only. Official dot.nd.gov URLs returned 404 during research — facts sourced from NDCC statutes and corroborated third-party sources.",
+    notes: "Helmet required for riders/passengers under 18 (NDCC § 39-21-48); adults exempt. Eye protection required unless motorcycle has windshield (NDCC § 39-21-48.1). Course waiver: MSF BRC or state-equivalent waives skills test only; knowledge test still required. Under-21 BAC limit: 0.02%. Aggravated DUI at 0.16% BAC; enhanced at 0.18%. Interstate speed limit: 80 mph. Permit min age: 14; under-16 hold 12 months, 16-17 hold 6 months, 50 supervised hours required for under-16.",
   },
   {
     state: "Ohio",

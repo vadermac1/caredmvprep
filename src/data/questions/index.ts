@@ -70,6 +70,8 @@ import deDmvQuestions                from './dmv/delaware';
 import deMotoQuestions               from './motorcycle/delaware';
 import sdDmvQuestions                from './dmv/south-dakota';
 import sdMotoQuestions               from './motorcycle/south-dakota';
+import ndDmvQuestions                from './dmv/north-dakota';
+import ndMotoQuestions               from './motorcycle/north-dakota';
 import cdlFederalQuestions           from './cdl/federal';
 import cdlSchoolBusQuestions         from './cdl/school-bus';
 import cdlTankVehicleQuestions       from './cdl/tank-vehicles';
@@ -1104,6 +1106,32 @@ export const quizRegistry: Record<string, QuizConfig> = {
     testId:      'south-dakota-cdl-general',
     label:       'South Dakota CDL General Knowledge Practice Test',
     state:       'SD',
+    licenseType: 'cdl_general',
+    questions:   verified(cdlFederalQuestions),
+    passingScore: 0.80,  // 40 of 50 — federal FMCSA standard
+  },
+
+  // ── North Dakota ──────────────────────────────────────────────────────────
+  'north-dakota-permit': {
+    testId:      'north-dakota-permit',
+    label:       'North Dakota DOT Driver Knowledge Test Practice',
+    state:       'ND',
+    licenseType: 'permit',
+    questions:   verified(ndDmvQuestions),
+    passingScore: 0.80,  // 20 of 25 correct — NDCC § 39-06-04; widely confirmed
+  },
+  'north-dakota-motorcycle': {
+    testId:      'north-dakota-motorcycle',
+    label:       'North Dakota DOT Motorcycle Knowledge Test Practice',
+    state:       'ND',
+    licenseType: 'motorcycle',
+    questions:   verified(ndMotoQuestions),
+    passingScore: 0.80,  // 20 of 25 correct — NDCC § 39-16-01; widely confirmed
+  },
+  'north-dakota-cdl-general': {
+    testId:      'north-dakota-cdl-general',
+    label:       'North Dakota CDL General Knowledge Practice Test',
+    state:       'ND',
     licenseType: 'cdl_general',
     questions:   verified(cdlFederalQuestions),
     passingScore: 0.80,  // 40 of 50 — federal FMCSA standard
