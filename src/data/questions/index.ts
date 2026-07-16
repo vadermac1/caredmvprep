@@ -66,6 +66,8 @@ import mtDmvQuestions                from './dmv/montana';
 import mtMotoQuestions               from './motorcycle/montana';
 import riDmvQuestions                from './dmv/rhode-island';
 import riMotoQuestions               from './motorcycle/rhode-island';
+import deDmvQuestions                from './dmv/delaware';
+import deMotoQuestions               from './motorcycle/delaware';
 import cdlFederalQuestions           from './cdl/federal';
 import cdlSchoolBusQuestions         from './cdl/school-bus';
 import cdlTankVehicleQuestions       from './cdl/tank-vehicles';
@@ -1034,6 +1036,37 @@ export const quizRegistry: Record<string, QuizConfig> = {
     testId:      'rhode-island-cdl-general',
     label:       'Rhode Island CDL Practice Test',
     state:       'RI',
+    licenseType: 'cdl_general',
+    questions:   verified(cdlFederalQuestions),
+    passingScore: 0.80,  // 40 of 50 — federal FMCSA standard
+  },
+
+  // ── Delaware ──────────────────────────────────────────────────────────────
+  // DL test: 32Q / 26-correct / 81% — from official written license page (NEEDS_VERIFICATION for exact count).
+  // Motorcycle: 25Q / 20-correct / 80% — NEEDS_VERIFICATION.
+  // Helmet law: under-19 AND newly-endorsed riders first 2 years (§ 4185, amended July 30, 2023).
+  // Lane splitting not authorized. Seat belt: PRIMARY enforcement, $25 civil penalty.
+  // NOT in LIVE_STATE_SLUGS or LIVE_STATE_ABBRS — queued, not activated.
+  'delaware-permit': {
+    testId:      'delaware-permit',
+    label:       'Delaware DMV Practice Test',
+    state:       'DE',
+    licenseType: 'permit',
+    questions:   verified(deDmvQuestions),
+    passingScore: 0.80,  // NEEDS_VERIFICATION — 26/32 = 81% per official page; using 0.80 pending confirmation
+  },
+  'delaware-motorcycle': {
+    testId:      'delaware-motorcycle',
+    label:       'Delaware Motorcycle Practice Test',
+    state:       'DE',
+    licenseType: 'motorcycle',
+    questions:   verified(deMotoQuestions),
+    passingScore: 0.80,  // NEEDS_VERIFICATION — 20/25 = 80% assumed
+  },
+  'delaware-cdl-general': {
+    testId:      'delaware-cdl-general',
+    label:       'Delaware CDL Practice Test',
+    state:       'DE',
     licenseType: 'cdl_general',
     questions:   verified(cdlFederalQuestions),
     passingScore: 0.80,  // 40 of 50 — federal FMCSA standard
