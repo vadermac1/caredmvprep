@@ -81,6 +81,7 @@ import wyMotoQuestions               from './motorcycle/wyoming';
 import scDmvQuestions                from './dmv/south-carolina';
 import scMotoQuestions               from './motorcycle/south-carolina';
 import inDmvQuestions                from './dmv/indiana';
+import inMotoQuestions               from './motorcycle/indiana';
 import alDmvQuestions                from './dmv/alabama';
 import alMotoQuestions               from './motorcycle/alabama';
 import coDmvQuestions                from './dmv/colorado';
@@ -1295,6 +1296,14 @@ export const quizRegistry: Record<string, QuizConfig> = {
     state:       'indiana',
     licenseType: 'permit',
     questions:   verified(inDmvQuestions),
+    passingScore: 0.80,
+  },
+  'indiana-motorcycle': {
+    testId:      'indiana-motorcycle',
+    label:       'Indiana BMV Motorcycle Knowledge Test Practice',
+    state:       'indiana',
+    licenseType: 'motorcycle',
+    questions:   verified(inMotoQuestions),
     passingScore: 0.80,
   },
   'indiana-cdl-general': {

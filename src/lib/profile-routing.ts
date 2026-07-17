@@ -77,6 +77,7 @@ export function getDefaultTestId(
     'SC-motorcycle':  'south-carolina-motorcycle',
     'SC-cdl_general': 'south-carolina-cdl-general',
     'IN-permit':      'indiana-permit',
+    'IN-motorcycle':  'indiana-motorcycle',
     'IN-cdl_general': 'indiana-cdl-general',
     'AL-permit':      'alabama-permit',
     'AL-motorcycle':  'alabama-motorcycle',
