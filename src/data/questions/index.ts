@@ -78,6 +78,19 @@ import vtDmvQuestions                from './dmv/vermont';
 import vtMotoQuestions               from './motorcycle/vermont';
 import wyDmvQuestions                from './dmv/wyoming';
 import wyMotoQuestions               from './motorcycle/wyoming';
+import scDmvQuestions                from './dmv/south-carolina';
+import scMotoQuestions               from './motorcycle/south-carolina';
+import inDmvQuestions                from './dmv/indiana';
+import alDmvQuestions                from './dmv/alabama';
+import alMotoQuestions               from './motorcycle/alabama';
+import coDmvQuestions                from './dmv/colorado';
+import coMotoQuestions               from './motorcycle/colorado';
+import kyDmvQuestions                from './dmv/kentucky';
+import kyMotoQuestions               from './motorcycle/kentucky';
+import laDmvQuestions                from './dmv/louisiana';
+import laMotoQuestions               from './motorcycle/louisiana';
+import mnDmvQuestions                from './dmv/minnesota';
+import mnMotoQuestions               from './motorcycle/minnesota';
 import cdlFederalQuestions           from './cdl/federal';
 import cdlSchoolBusQuestions         from './cdl/school-bus';
 import cdlTankVehicleQuestions       from './cdl/tank-vehicles';
@@ -134,24 +147,24 @@ export const quizRegistry: Record<string, QuizConfig> = {
   // ── Arkansas ──────────────────────────────────────────────────────────────
   // DL test: 25Q/20-correct/80% — high confidence but PDF could not be parsed; NEEDS_VERIFICATION.
   // Motorcycle test: same situation. Helmet law: under-21 only (Ark. Code §27-20-104).
-  'ar-permit': {
-    testId:      'ar-permit',
+  'arkansas-permit': {
+    testId:      'arkansas-permit',
     label:       'Arkansas Driver License Knowledge Test Practice',
     state:       'arkansas',
     licenseType: 'permit',
     questions:   verified(arDmvQuestions),
     passingScore: 0.80,
   },
-  'ar-motorcycle': {
-    testId:      'ar-motorcycle',
+  'arkansas-motorcycle': {
+    testId:      'arkansas-motorcycle',
     label:       'Arkansas Motorcycle Knowledge Test Practice',
     state:       'arkansas',
     licenseType: 'motorcycle',
     questions:   verified(arMotoQuestions),
     passingScore: 0.80,
   },
-  'ar-cdl-general': {
-    testId:      'ar-cdl-general',
+  'arkansas-cdl-general': {
+    testId:      'arkansas-cdl-general',
     label:       'Arkansas CDL General Knowledge Practice Test',
     state:       'arkansas',
     licenseType: 'cdl_general',
@@ -1244,6 +1257,195 @@ export const quizRegistry: Record<string, QuizConfig> = {
     passingScore: 0.80,  // 40 of 50 — federal FMCSA standard
   },
 
+  // ── South Carolina ────────────────────────────────────────────────────────
+  // DL test: NEEDS_VERIFICATION (official SCDMV site does not state count); 80% passing pct confirmed.
+  // Motorcycle: NEEDS_VERIFICATION. Helmet law: under-21 only (§ 56-5-3660).
+  'south-carolina-permit': {
+    testId:      'south-carolina-permit',
+    label:       'South Carolina DMV Driver Knowledge Test Practice',
+    state:       'south-carolina',
+    licenseType: 'permit',
+    questions:   verified(scDmvQuestions),
+    passingScore: 0.80,
+  },
+  'south-carolina-motorcycle': {
+    testId:      'south-carolina-motorcycle',
+    label:       'South Carolina DMV Motorcycle Knowledge Test Practice',
+    state:       'south-carolina',
+    licenseType: 'motorcycle',
+    questions:   verified(scMotoQuestions),
+    passingScore: 0.80,
+  },
+  'south-carolina-cdl-general': {
+    testId:      'south-carolina-cdl-general',
+    label:       'South Carolina CDL General Knowledge Practice Test',
+    state:       'south-carolina',
+    licenseType: 'cdl_general',
+    questions:   verified(cdlFederalQuestions),
+    passingScore: 0.80,
+  },
+
+  // ── Indiana ───────────────────────────────────────────────────────────────
+  // DL test: NEEDS_VERIFICATION (BMV site does not state count); 80% passing pct confirmed.
+  // Motorcycle: 20Q/16-correct/80% — confirmed in state-facts.ts. No motorcycle question file yet.
+  // Helmet law: under-18 only. MSF BRC waives skills test.
+  'indiana-permit': {
+    testId:      'indiana-permit',
+    label:       'Indiana BMV Driver Knowledge Test Practice',
+    state:       'indiana',
+    licenseType: 'permit',
+    questions:   verified(inDmvQuestions),
+    passingScore: 0.80,
+  },
+  'indiana-cdl-general': {
+    testId:      'indiana-cdl-general',
+    label:       'Indiana CDL General Knowledge Practice Test',
+    state:       'indiana',
+    licenseType: 'cdl_general',
+    questions:   verified(cdlFederalQuestions),
+    passingScore: 0.80,
+  },
+
+  // ── Alabama ───────────────────────────────────────────────────────────────
+  // DL test: NEEDS_VERIFICATION (ALEA site does not state count); 80% passing pct confirmed.
+  // Motorcycle: NEEDS_VERIFICATION. Helmet law: all-ages universal.
+  'alabama-permit': {
+    testId:      'alabama-permit',
+    label:       'Alabama ALEA Driver Knowledge Test Practice',
+    state:       'alabama',
+    licenseType: 'permit',
+    questions:   verified(alDmvQuestions),
+    passingScore: 0.80,
+  },
+  'alabama-motorcycle': {
+    testId:      'alabama-motorcycle',
+    label:       'Alabama ALEA Motorcycle Knowledge Test Practice',
+    state:       'alabama',
+    licenseType: 'motorcycle',
+    questions:   verified(alMotoQuestions),
+    passingScore: 0.80,
+  },
+  'alabama-cdl-general': {
+    testId:      'alabama-cdl-general',
+    label:       'Alabama CDL General Knowledge Practice Test',
+    state:       'alabama',
+    licenseType: 'cdl_general',
+    questions:   verified(cdlFederalQuestions),
+    passingScore: 0.80,
+  },
+
+  // ── Colorado ──────────────────────────────────────────────────────────────
+  // DL test: NEEDS_VERIFICATION (official Colorado DMV does not state count or passing score).
+  // Motorcycle: NEEDS_VERIFICATION. Helmet law: under-18 only (C.R.S. 42-4-1502).
+  'colorado-permit': {
+    testId:      'colorado-permit',
+    label:       'Colorado DMV Driver Knowledge Test Practice',
+    state:       'colorado',
+    licenseType: 'permit',
+    questions:   verified(coDmvQuestions),
+    passingScore: 0.80,
+  },
+  'colorado-motorcycle': {
+    testId:      'colorado-motorcycle',
+    label:       'Colorado DMV Motorcycle Knowledge Test Practice',
+    state:       'colorado',
+    licenseType: 'motorcycle',
+    questions:   verified(coMotoQuestions),
+    passingScore: 0.80,
+  },
+  'colorado-cdl-general': {
+    testId:      'colorado-cdl-general',
+    label:       'Colorado CDL General Knowledge Practice Test',
+    state:       'colorado',
+    licenseType: 'cdl_general',
+    questions:   verified(cdlFederalQuestions),
+    passingScore: 0.80,
+  },
+
+  // ── Kentucky ──────────────────────────────────────────────────────────────
+  // DL test: NEEDS_VERIFICATION (KSP manual states 80% but not the question count).
+  // Motorcycle: NEEDS_VERIFICATION. Helmet law: under-21 (plus 1-year license waiver for adults).
+  'kentucky-permit': {
+    testId:      'kentucky-permit',
+    label:       'Kentucky State Police Driver Knowledge Test Practice',
+    state:       'kentucky',
+    licenseType: 'permit',
+    questions:   verified(kyDmvQuestions),
+    passingScore: 0.80,
+  },
+  'kentucky-motorcycle': {
+    testId:      'kentucky-motorcycle',
+    label:       'Kentucky Motorcycle Knowledge Test Practice',
+    state:       'kentucky',
+    licenseType: 'motorcycle',
+    questions:   verified(kyMotoQuestions),
+    passingScore: 0.80,
+  },
+  'kentucky-cdl-general': {
+    testId:      'kentucky-cdl-general',
+    label:       'Kentucky CDL General Knowledge Practice Test',
+    state:       'kentucky',
+    licenseType: 'cdl_general',
+    questions:   verified(cdlFederalQuestions),
+    passingScore: 0.80,
+  },
+
+  // ── Louisiana ─────────────────────────────────────────────────────────────
+  // DL test: NEEDS_VERIFICATION (OMV guide states 80% but not the question count).
+  // Motorcycle: NEEDS_VERIFICATION. Helmet law: all-ages universal (R.S. 32:190).
+  'louisiana-permit': {
+    testId:      'louisiana-permit',
+    label:       'Louisiana OMV Driver Knowledge Test Practice',
+    state:       'louisiana',
+    licenseType: 'permit',
+    questions:   verified(laDmvQuestions),
+    passingScore: 0.80,
+  },
+  'louisiana-motorcycle': {
+    testId:      'louisiana-motorcycle',
+    label:       'Louisiana OMV Motorcycle Knowledge Test Practice',
+    state:       'louisiana',
+    licenseType: 'motorcycle',
+    questions:   verified(laMotoQuestions),
+    passingScore: 0.80,
+  },
+  'louisiana-cdl-general': {
+    testId:      'louisiana-cdl-general',
+    label:       'Louisiana CDL General Knowledge Practice Test',
+    state:       'louisiana',
+    licenseType: 'cdl_general',
+    questions:   verified(cdlFederalQuestions),
+    passingScore: 0.80,
+  },
+
+  // ── Minnesota ─────────────────────────────────────────────────────────────
+  // DL test: NEEDS_VERIFICATION (DVS manual states 80% but not the question count).
+  // Motorcycle: NEEDS_VERIFICATION. Helmet law: under-18 and all permit holders.
+  'minnesota-permit': {
+    testId:      'minnesota-permit',
+    label:       'Minnesota DVS Driver Knowledge Test Practice',
+    state:       'minnesota',
+    licenseType: 'permit',
+    questions:   verified(mnDmvQuestions),
+    passingScore: 0.80,
+  },
+  'minnesota-motorcycle': {
+    testId:      'minnesota-motorcycle',
+    label:       'Minnesota DVS Motorcycle Knowledge Test Practice',
+    state:       'minnesota',
+    licenseType: 'motorcycle',
+    questions:   verified(mnMotoQuestions),
+    passingScore: 0.80,
+  },
+  'minnesota-cdl-general': {
+    testId:      'minnesota-cdl-general',
+    label:       'Minnesota CDL General Knowledge Practice Test',
+    state:       'minnesota',
+    licenseType: 'cdl_general',
+    questions:   verified(cdlFederalQuestions),
+    passingScore: 0.80,
+  },
+
   // ── CDL Endorsement Banks — federal (state-agnostic) ─────────────────────
   // Each endorsement is independently scalable: import its file, add a quiz here.
   // Actual test: 20 questions each, pass with 16 correct (80%) — FMCSA standard.
@@ -2083,6 +2285,806 @@ export const MOCK_EXAM_DEFS: MockExamDef[] = [
     questionCount: 50,
     seed:          3,
     timeLimitSecs: 45 * 60,
+    description:   'Third exam simulation — no repeated questions from #1 or #2.',
+  },
+
+  // ── Indiana ───────────────────────────────────────────────────────────────
+  {
+    examId:        'indiana-permit-mock-1',
+    label:         'Indiana BMV Driver Knowledge Test Mock Exam #1',
+    shortLabel:    'Mock Exam #1',
+    baseTestId:    'indiana-permit',
+    questionCount: 25,
+    seed:          1,
+    timeLimitSecs: 40 * 60,
+    description:   'Simulates the Indiana BMV knowledge test — 25 questions, 40 min.',
+  },
+  {
+    examId:        'indiana-permit-mock-2',
+    label:         'Indiana BMV Driver Knowledge Test Mock Exam #2',
+    shortLabel:    'Mock Exam #2',
+    baseTestId:    'indiana-permit',
+    questionCount: 25,
+    seed:          2,
+    timeLimitSecs: 40 * 60,
+    description:   'A unique second simulation with a different question mix.',
+  },
+  {
+    examId:        'indiana-permit-mock-3',
+    label:         'Indiana BMV Driver Knowledge Test Mock Exam #3',
+    shortLabel:    'Mock Exam #3',
+    baseTestId:    'indiana-permit',
+    questionCount: 25,
+    seed:          3,
+    timeLimitSecs: 40 * 60,
+    description:   'Third exam simulation — no repeated questions from #1 or #2.',
+  },
+
+  // ── Alabama ───────────────────────────────────────────────────────────────
+  {
+    examId:        'alabama-permit-mock-1',
+    label:         'Alabama ALEA Driver Knowledge Test Mock Exam #1',
+    shortLabel:    'Mock Exam #1',
+    baseTestId:    'alabama-permit',
+    questionCount: 25,
+    seed:          1,
+    timeLimitSecs: 40 * 60,
+    description:   'Simulates the Alabama ALEA knowledge test — 25 questions, 40 min.',
+  },
+  {
+    examId:        'alabama-permit-mock-2',
+    label:         'Alabama ALEA Driver Knowledge Test Mock Exam #2',
+    shortLabel:    'Mock Exam #2',
+    baseTestId:    'alabama-permit',
+    questionCount: 25,
+    seed:          2,
+    timeLimitSecs: 40 * 60,
+    description:   'A unique second simulation with a different question mix.',
+  },
+  {
+    examId:        'alabama-permit-mock-3',
+    label:         'Alabama ALEA Driver Knowledge Test Mock Exam #3',
+    shortLabel:    'Mock Exam #3',
+    baseTestId:    'alabama-permit',
+    questionCount: 25,
+    seed:          3,
+    timeLimitSecs: 40 * 60,
+    description:   'Third exam simulation — no repeated questions from #1 or #2.',
+  },
+
+  // ── Colorado ──────────────────────────────────────────────────────────────
+  {
+    examId:        'colorado-permit-mock-1',
+    label:         'Colorado DMV Driver Knowledge Test Mock Exam #1',
+    shortLabel:    'Mock Exam #1',
+    baseTestId:    'colorado-permit',
+    questionCount: 25,
+    seed:          1,
+    timeLimitSecs: 40 * 60,
+    description:   'Simulates the Colorado DMV knowledge test — 25 questions, 40 min.',
+  },
+  {
+    examId:        'colorado-permit-mock-2',
+    label:         'Colorado DMV Driver Knowledge Test Mock Exam #2',
+    shortLabel:    'Mock Exam #2',
+    baseTestId:    'colorado-permit',
+    questionCount: 25,
+    seed:          2,
+    timeLimitSecs: 40 * 60,
+    description:   'A unique second simulation with a different question mix.',
+  },
+  {
+    examId:        'colorado-permit-mock-3',
+    label:         'Colorado DMV Driver Knowledge Test Mock Exam #3',
+    shortLabel:    'Mock Exam #3',
+    baseTestId:    'colorado-permit',
+    questionCount: 25,
+    seed:          3,
+    timeLimitSecs: 40 * 60,
+    description:   'Third exam simulation — no repeated questions from #1 or #2.',
+  },
+
+  // ── Kentucky ──────────────────────────────────────────────────────────────
+  {
+    examId:        'kentucky-permit-mock-1',
+    label:         'Kentucky Driver Knowledge Test Mock Exam #1',
+    shortLabel:    'Mock Exam #1',
+    baseTestId:    'kentucky-permit',
+    questionCount: 25,
+    seed:          1,
+    timeLimitSecs: 40 * 60,
+    description:   'Simulates the Kentucky knowledge test — 25 questions, 40 min.',
+  },
+  {
+    examId:        'kentucky-permit-mock-2',
+    label:         'Kentucky Driver Knowledge Test Mock Exam #2',
+    shortLabel:    'Mock Exam #2',
+    baseTestId:    'kentucky-permit',
+    questionCount: 25,
+    seed:          2,
+    timeLimitSecs: 40 * 60,
+    description:   'A unique second simulation with a different question mix.',
+  },
+  {
+    examId:        'kentucky-permit-mock-3',
+    label:         'Kentucky Driver Knowledge Test Mock Exam #3',
+    shortLabel:    'Mock Exam #3',
+    baseTestId:    'kentucky-permit',
+    questionCount: 25,
+    seed:          3,
+    timeLimitSecs: 40 * 60,
+    description:   'Third exam simulation — no repeated questions from #1 or #2.',
+  },
+
+  // ── Louisiana ─────────────────────────────────────────────────────────────
+  {
+    examId:        'louisiana-permit-mock-1',
+    label:         'Louisiana OMV Driver Knowledge Test Mock Exam #1',
+    shortLabel:    'Mock Exam #1',
+    baseTestId:    'louisiana-permit',
+    questionCount: 25,
+    seed:          1,
+    timeLimitSecs: 40 * 60,
+    description:   'Simulates the Louisiana OMV knowledge test — 25 questions, 40 min.',
+  },
+  {
+    examId:        'louisiana-permit-mock-2',
+    label:         'Louisiana OMV Driver Knowledge Test Mock Exam #2',
+    shortLabel:    'Mock Exam #2',
+    baseTestId:    'louisiana-permit',
+    questionCount: 25,
+    seed:          2,
+    timeLimitSecs: 40 * 60,
+    description:   'A unique second simulation with a different question mix.',
+  },
+  {
+    examId:        'louisiana-permit-mock-3',
+    label:         'Louisiana OMV Driver Knowledge Test Mock Exam #3',
+    shortLabel:    'Mock Exam #3',
+    baseTestId:    'louisiana-permit',
+    questionCount: 25,
+    seed:          3,
+    timeLimitSecs: 40 * 60,
+    description:   'Third exam simulation — no repeated questions from #1 or #2.',
+  },
+
+  // ── Minnesota ─────────────────────────────────────────────────────────────
+  {
+    examId:        'minnesota-permit-mock-1',
+    label:         'Minnesota DVS Driver Knowledge Test Mock Exam #1',
+    shortLabel:    'Mock Exam #1',
+    baseTestId:    'minnesota-permit',
+    questionCount: 25,
+    seed:          1,
+    timeLimitSecs: 40 * 60,
+    description:   'Simulates the Minnesota DVS knowledge test — 25 questions, 40 min.',
+  },
+  {
+    examId:        'minnesota-permit-mock-2',
+    label:         'Minnesota DVS Driver Knowledge Test Mock Exam #2',
+    shortLabel:    'Mock Exam #2',
+    baseTestId:    'minnesota-permit',
+    questionCount: 25,
+    seed:          2,
+    timeLimitSecs: 40 * 60,
+    description:   'A unique second simulation with a different question mix.',
+  },
+  {
+    examId:        'minnesota-permit-mock-3',
+    label:         'Minnesota DVS Driver Knowledge Test Mock Exam #3',
+    shortLabel:    'Mock Exam #3',
+    baseTestId:    'minnesota-permit',
+    questionCount: 25,
+    seed:          3,
+    timeLimitSecs: 40 * 60,
+    description:   'Third exam simulation — no repeated questions from #1 or #2.',
+  },
+
+  // ── Arkansas ──────────────────────────────────────────────────────────────
+  {
+    examId:        'arkansas-permit-mock-1',
+    label:         'Arkansas Driver License Knowledge Test Mock Exam #1',
+    shortLabel:    'Mock Exam #1',
+    baseTestId:    'arkansas-permit',
+    questionCount: 25,
+    seed:          1,
+    timeLimitSecs: 40 * 60,
+    description:   'Simulates the Arkansas knowledge test — 25 questions, 40 min.',
+  },
+  {
+    examId:        'arkansas-permit-mock-2',
+    label:         'Arkansas Driver License Knowledge Test Mock Exam #2',
+    shortLabel:    'Mock Exam #2',
+    baseTestId:    'arkansas-permit',
+    questionCount: 25,
+    seed:          2,
+    timeLimitSecs: 40 * 60,
+    description:   'A unique second simulation with a different question mix.',
+  },
+  {
+    examId:        'arkansas-permit-mock-3',
+    label:         'Arkansas Driver License Knowledge Test Mock Exam #3',
+    shortLabel:    'Mock Exam #3',
+    baseTestId:    'arkansas-permit',
+    questionCount: 25,
+    seed:          3,
+    timeLimitSecs: 40 * 60,
+    description:   'Third exam simulation — no repeated questions from #1 or #2.',
+  },
+
+  // ── Iowa ──────────────────────────────────────────────────────────────────
+  {
+    examId:        'iowa-permit-mock-1',
+    label:         'Iowa DOT Driver Knowledge Test Mock Exam #1',
+    shortLabel:    'Mock Exam #1',
+    baseTestId:    'iowa-permit',
+    questionCount: 25,
+    seed:          1,
+    timeLimitSecs: 40 * 60,
+    description:   'Simulates the Iowa DOT knowledge test — 25 questions, 40 min.',
+  },
+  {
+    examId:        'iowa-permit-mock-2',
+    label:         'Iowa DOT Driver Knowledge Test Mock Exam #2',
+    shortLabel:    'Mock Exam #2',
+    baseTestId:    'iowa-permit',
+    questionCount: 25,
+    seed:          2,
+    timeLimitSecs: 40 * 60,
+    description:   'A unique second simulation with a different question mix.',
+  },
+  {
+    examId:        'iowa-permit-mock-3',
+    label:         'Iowa DOT Driver Knowledge Test Mock Exam #3',
+    shortLabel:    'Mock Exam #3',
+    baseTestId:    'iowa-permit',
+    questionCount: 25,
+    seed:          3,
+    timeLimitSecs: 40 * 60,
+    description:   'Third exam simulation — no repeated questions from #1 or #2.',
+  },
+
+  // ── Mississippi ───────────────────────────────────────────────────────────
+  {
+    examId:        'mississippi-permit-mock-1',
+    label:         'Mississippi Driver Knowledge Test Mock Exam #1',
+    shortLabel:    'Mock Exam #1',
+    baseTestId:    'mississippi-permit',
+    questionCount: 30,
+    seed:          1,
+    timeLimitSecs: 45 * 60,
+    description:   'Simulates the Mississippi knowledge test — 30 questions, 45 min.',
+  },
+  {
+    examId:        'mississippi-permit-mock-2',
+    label:         'Mississippi Driver Knowledge Test Mock Exam #2',
+    shortLabel:    'Mock Exam #2',
+    baseTestId:    'mississippi-permit',
+    questionCount: 30,
+    seed:          2,
+    timeLimitSecs: 45 * 60,
+    description:   'A unique second simulation with a different question mix.',
+  },
+  {
+    examId:        'mississippi-permit-mock-3',
+    label:         'Mississippi Driver Knowledge Test Mock Exam #3',
+    shortLabel:    'Mock Exam #3',
+    baseTestId:    'mississippi-permit',
+    questionCount: 30,
+    seed:          3,
+    timeLimitSecs: 45 * 60,
+    description:   'Third exam simulation — no repeated questions from #1 or #2.',
+  },
+
+  // ── Kansas ────────────────────────────────────────────────────────────────
+  {
+    examId:        'kansas-permit-mock-1',
+    label:         'Kansas Driver Knowledge Test Mock Exam #1',
+    shortLabel:    'Mock Exam #1',
+    baseTestId:    'kansas-permit',
+    questionCount: 25,
+    seed:          1,
+    timeLimitSecs: 40 * 60,
+    description:   'Simulates the Kansas knowledge test — 25 questions, 40 min.',
+  },
+  {
+    examId:        'kansas-permit-mock-2',
+    label:         'Kansas Driver Knowledge Test Mock Exam #2',
+    shortLabel:    'Mock Exam #2',
+    baseTestId:    'kansas-permit',
+    questionCount: 25,
+    seed:          2,
+    timeLimitSecs: 40 * 60,
+    description:   'A unique second simulation with a different question mix.',
+  },
+  {
+    examId:        'kansas-permit-mock-3',
+    label:         'Kansas Driver Knowledge Test Mock Exam #3',
+    shortLabel:    'Mock Exam #3',
+    baseTestId:    'kansas-permit',
+    questionCount: 25,
+    seed:          3,
+    timeLimitSecs: 40 * 60,
+    description:   'Third exam simulation — no repeated questions from #1 or #2.',
+  },
+
+  // ── New Mexico ────────────────────────────────────────────────────────────
+  {
+    examId:        'new-mexico-permit-mock-1',
+    label:         'New Mexico MVD Driver Knowledge Test Mock Exam #1',
+    shortLabel:    'Mock Exam #1',
+    baseTestId:    'new-mexico-permit',
+    questionCount: 25,
+    seed:          1,
+    timeLimitSecs: 40 * 60,
+    description:   'Simulates the New Mexico MVD knowledge test — 25 questions, 40 min.',
+  },
+  {
+    examId:        'new-mexico-permit-mock-2',
+    label:         'New Mexico MVD Driver Knowledge Test Mock Exam #2',
+    shortLabel:    'Mock Exam #2',
+    baseTestId:    'new-mexico-permit',
+    questionCount: 25,
+    seed:          2,
+    timeLimitSecs: 40 * 60,
+    description:   'A unique second simulation with a different question mix.',
+  },
+  {
+    examId:        'new-mexico-permit-mock-3',
+    label:         'New Mexico MVD Driver Knowledge Test Mock Exam #3',
+    shortLabel:    'Mock Exam #3',
+    baseTestId:    'new-mexico-permit',
+    questionCount: 25,
+    seed:          3,
+    timeLimitSecs: 40 * 60,
+    description:   'Third exam simulation — no repeated questions from #1 or #2.',
+  },
+
+  // ── Nebraska ──────────────────────────────────────────────────────────────
+  {
+    examId:        'nebraska-permit-mock-1',
+    label:         'Nebraska DMV Driver Knowledge Test Mock Exam #1',
+    shortLabel:    'Mock Exam #1',
+    baseTestId:    'nebraska-permit',
+    questionCount: 25,
+    seed:          1,
+    timeLimitSecs: 40 * 60,
+    description:   'Simulates the Nebraska DMV knowledge test — 25 questions, 40 min.',
+  },
+  {
+    examId:        'nebraska-permit-mock-2',
+    label:         'Nebraska DMV Driver Knowledge Test Mock Exam #2',
+    shortLabel:    'Mock Exam #2',
+    baseTestId:    'nebraska-permit',
+    questionCount: 25,
+    seed:          2,
+    timeLimitSecs: 40 * 60,
+    description:   'A unique second simulation with a different question mix.',
+  },
+  {
+    examId:        'nebraska-permit-mock-3',
+    label:         'Nebraska DMV Driver Knowledge Test Mock Exam #3',
+    shortLabel:    'Mock Exam #3',
+    baseTestId:    'nebraska-permit',
+    questionCount: 25,
+    seed:          3,
+    timeLimitSecs: 40 * 60,
+    description:   'Third exam simulation — no repeated questions from #1 or #2.',
+  },
+
+  // ── Idaho ─────────────────────────────────────────────────────────────────
+  {
+    examId:        'idaho-permit-mock-1',
+    label:         'Idaho ITD Driver Knowledge Test Mock Exam #1',
+    shortLabel:    'Mock Exam #1',
+    baseTestId:    'idaho-permit',
+    questionCount: 40,
+    seed:          1,
+    timeLimitSecs: 60 * 60,
+    description:   'Simulates the Idaho ITD knowledge test — 40 questions, 60 min.',
+  },
+  {
+    examId:        'idaho-permit-mock-2',
+    label:         'Idaho ITD Driver Knowledge Test Mock Exam #2',
+    shortLabel:    'Mock Exam #2',
+    baseTestId:    'idaho-permit',
+    questionCount: 40,
+    seed:          2,
+    timeLimitSecs: 60 * 60,
+    description:   'A unique second simulation with a different question mix.',
+  },
+  {
+    examId:        'idaho-permit-mock-3',
+    label:         'Idaho ITD Driver Knowledge Test Mock Exam #3',
+    shortLabel:    'Mock Exam #3',
+    baseTestId:    'idaho-permit',
+    questionCount: 40,
+    seed:          3,
+    timeLimitSecs: 60 * 60,
+    description:   'Third exam simulation — no repeated questions from #1 or #2.',
+  },
+
+  // ── West Virginia ─────────────────────────────────────────────────────────
+  {
+    examId:        'west-virginia-permit-mock-1',
+    label:         'West Virginia DMV Driver Knowledge Test Mock Exam #1',
+    shortLabel:    'Mock Exam #1',
+    baseTestId:    'west-virginia-permit',
+    questionCount: 25,
+    seed:          1,
+    timeLimitSecs: 40 * 60,
+    description:   'Simulates the West Virginia DMV knowledge test — 25 questions, 40 min.',
+  },
+  {
+    examId:        'west-virginia-permit-mock-2',
+    label:         'West Virginia DMV Driver Knowledge Test Mock Exam #2',
+    shortLabel:    'Mock Exam #2',
+    baseTestId:    'west-virginia-permit',
+    questionCount: 25,
+    seed:          2,
+    timeLimitSecs: 40 * 60,
+    description:   'A unique second simulation with a different question mix.',
+  },
+  {
+    examId:        'west-virginia-permit-mock-3',
+    label:         'West Virginia DMV Driver Knowledge Test Mock Exam #3',
+    shortLabel:    'Mock Exam #3',
+    baseTestId:    'west-virginia-permit',
+    questionCount: 25,
+    seed:          3,
+    timeLimitSecs: 40 * 60,
+    description:   'Third exam simulation — no repeated questions from #1 or #2.',
+  },
+
+  // ── Hawaii ────────────────────────────────────────────────────────────────
+  {
+    examId:        'hawaii-permit-mock-1',
+    label:         'Hawaii Driver Knowledge Test Mock Exam #1',
+    shortLabel:    'Mock Exam #1',
+    baseTestId:    'hawaii-permit',
+    questionCount: 30,
+    seed:          1,
+    timeLimitSecs: 45 * 60,
+    description:   'Simulates the Hawaii knowledge test — 30 questions, 45 min.',
+  },
+  {
+    examId:        'hawaii-permit-mock-2',
+    label:         'Hawaii Driver Knowledge Test Mock Exam #2',
+    shortLabel:    'Mock Exam #2',
+    baseTestId:    'hawaii-permit',
+    questionCount: 30,
+    seed:          2,
+    timeLimitSecs: 45 * 60,
+    description:   'A unique second simulation with a different question mix.',
+  },
+  {
+    examId:        'hawaii-permit-mock-3',
+    label:         'Hawaii Driver Knowledge Test Mock Exam #3',
+    shortLabel:    'Mock Exam #3',
+    baseTestId:    'hawaii-permit',
+    questionCount: 30,
+    seed:          3,
+    timeLimitSecs: 45 * 60,
+    description:   'Third exam simulation — no repeated questions from #1 or #2.',
+  },
+
+  // ── New Hampshire ─────────────────────────────────────────────────────────
+  {
+    examId:        'new-hampshire-permit-mock-1',
+    label:         'New Hampshire DMV Driver Knowledge Test Mock Exam #1',
+    shortLabel:    'Mock Exam #1',
+    baseTestId:    'new-hampshire-permit',
+    questionCount: 40,
+    seed:          1,
+    timeLimitSecs: 60 * 60,
+    description:   'Simulates the New Hampshire DMV knowledge test — 40 questions, 60 min.',
+  },
+  {
+    examId:        'new-hampshire-permit-mock-2',
+    label:         'New Hampshire DMV Driver Knowledge Test Mock Exam #2',
+    shortLabel:    'Mock Exam #2',
+    baseTestId:    'new-hampshire-permit',
+    questionCount: 40,
+    seed:          2,
+    timeLimitSecs: 60 * 60,
+    description:   'A unique second simulation with a different question mix.',
+  },
+  {
+    examId:        'new-hampshire-permit-mock-3',
+    label:         'New Hampshire DMV Driver Knowledge Test Mock Exam #3',
+    shortLabel:    'Mock Exam #3',
+    baseTestId:    'new-hampshire-permit',
+    questionCount: 40,
+    seed:          3,
+    timeLimitSecs: 60 * 60,
+    description:   'Third exam simulation — no repeated questions from #1 or #2.',
+  },
+
+  // ── Maine ─────────────────────────────────────────────────────────────────
+  {
+    examId:        'maine-permit-mock-1',
+    label:         'Maine BMV Driver Knowledge Test Mock Exam #1',
+    shortLabel:    'Mock Exam #1',
+    baseTestId:    'maine-permit',
+    questionCount: 30,
+    seed:          1,
+    timeLimitSecs: 45 * 60,
+    description:   'Simulates the Maine BMV knowledge test — 30 questions, 45 min.',
+  },
+  {
+    examId:        'maine-permit-mock-2',
+    label:         'Maine BMV Driver Knowledge Test Mock Exam #2',
+    shortLabel:    'Mock Exam #2',
+    baseTestId:    'maine-permit',
+    questionCount: 30,
+    seed:          2,
+    timeLimitSecs: 45 * 60,
+    description:   'A unique second simulation with a different question mix.',
+  },
+  {
+    examId:        'maine-permit-mock-3',
+    label:         'Maine BMV Driver Knowledge Test Mock Exam #3',
+    shortLabel:    'Mock Exam #3',
+    baseTestId:    'maine-permit',
+    questionCount: 30,
+    seed:          3,
+    timeLimitSecs: 45 * 60,
+    description:   'Third exam simulation — no repeated questions from #1 or #2.',
+  },
+
+  // ── Montana ───────────────────────────────────────────────────────────────
+  {
+    examId:        'montana-permit-mock-1',
+    label:         'Montana DMV Driver Knowledge Test Mock Exam #1',
+    shortLabel:    'Mock Exam #1',
+    baseTestId:    'montana-permit',
+    questionCount: 33,
+    seed:          1,
+    timeLimitSecs: 50 * 60,
+    description:   'Simulates the Montana knowledge test — 33 questions, 50 min.',
+  },
+  {
+    examId:        'montana-permit-mock-2',
+    label:         'Montana DMV Driver Knowledge Test Mock Exam #2',
+    shortLabel:    'Mock Exam #2',
+    baseTestId:    'montana-permit',
+    questionCount: 33,
+    seed:          2,
+    timeLimitSecs: 50 * 60,
+    description:   'A unique second simulation with a different question mix.',
+  },
+  {
+    examId:        'montana-permit-mock-3',
+    label:         'Montana DMV Driver Knowledge Test Mock Exam #3',
+    shortLabel:    'Mock Exam #3',
+    baseTestId:    'montana-permit',
+    questionCount: 33,
+    seed:          3,
+    timeLimitSecs: 50 * 60,
+    description:   'Third exam simulation — no repeated questions from #1 or #2.',
+  },
+
+  // ── Rhode Island ──────────────────────────────────────────────────────────
+  {
+    examId:        'rhode-island-permit-mock-1',
+    label:         'Rhode Island DMV Driver Knowledge Test Mock Exam #1',
+    shortLabel:    'Mock Exam #1',
+    baseTestId:    'rhode-island-permit',
+    questionCount: 40,
+    seed:          1,
+    timeLimitSecs: 60 * 60,
+    description:   'Simulates the Rhode Island DMV knowledge test — 40 questions, 60 min.',
+  },
+  {
+    examId:        'rhode-island-permit-mock-2',
+    label:         'Rhode Island DMV Driver Knowledge Test Mock Exam #2',
+    shortLabel:    'Mock Exam #2',
+    baseTestId:    'rhode-island-permit',
+    questionCount: 40,
+    seed:          2,
+    timeLimitSecs: 60 * 60,
+    description:   'A unique second simulation with a different question mix.',
+  },
+  {
+    examId:        'rhode-island-permit-mock-3',
+    label:         'Rhode Island DMV Driver Knowledge Test Mock Exam #3',
+    shortLabel:    'Mock Exam #3',
+    baseTestId:    'rhode-island-permit',
+    questionCount: 40,
+    seed:          3,
+    timeLimitSecs: 60 * 60,
+    description:   'Third exam simulation — no repeated questions from #1 or #2.',
+  },
+
+  // ── Delaware ──────────────────────────────────────────────────────────────
+  {
+    examId:        'delaware-permit-mock-1',
+    label:         'Delaware DMV Driver Knowledge Test Mock Exam #1',
+    shortLabel:    'Mock Exam #1',
+    baseTestId:    'delaware-permit',
+    questionCount: 32,
+    seed:          1,
+    timeLimitSecs: 50 * 60,
+    description:   'Simulates the Delaware DMV knowledge test — 32 questions, 50 min.',
+  },
+  {
+    examId:        'delaware-permit-mock-2',
+    label:         'Delaware DMV Driver Knowledge Test Mock Exam #2',
+    shortLabel:    'Mock Exam #2',
+    baseTestId:    'delaware-permit',
+    questionCount: 32,
+    seed:          2,
+    timeLimitSecs: 50 * 60,
+    description:   'A unique second simulation with a different question mix.',
+  },
+  {
+    examId:        'delaware-permit-mock-3',
+    label:         'Delaware DMV Driver Knowledge Test Mock Exam #3',
+    shortLabel:    'Mock Exam #3',
+    baseTestId:    'delaware-permit',
+    questionCount: 32,
+    seed:          3,
+    timeLimitSecs: 50 * 60,
+    description:   'Third exam simulation — no repeated questions from #1 or #2.',
+  },
+
+  // ── South Dakota ──────────────────────────────────────────────────────────
+  {
+    examId:        'south-dakota-permit-mock-1',
+    label:         'South Dakota DPS Driver Knowledge Test Mock Exam #1',
+    shortLabel:    'Mock Exam #1',
+    baseTestId:    'south-dakota-permit',
+    questionCount: 25,
+    seed:          1,
+    timeLimitSecs: 40 * 60,
+    description:   'Simulates the South Dakota DPS knowledge test — 25 questions, 40 min.',
+  },
+  {
+    examId:        'south-dakota-permit-mock-2',
+    label:         'South Dakota DPS Driver Knowledge Test Mock Exam #2',
+    shortLabel:    'Mock Exam #2',
+    baseTestId:    'south-dakota-permit',
+    questionCount: 25,
+    seed:          2,
+    timeLimitSecs: 40 * 60,
+    description:   'A unique second simulation with a different question mix.',
+  },
+  {
+    examId:        'south-dakota-permit-mock-3',
+    label:         'South Dakota DPS Driver Knowledge Test Mock Exam #3',
+    shortLabel:    'Mock Exam #3',
+    baseTestId:    'south-dakota-permit',
+    questionCount: 25,
+    seed:          3,
+    timeLimitSecs: 40 * 60,
+    description:   'Third exam simulation — no repeated questions from #1 or #2.',
+  },
+
+  // ── North Dakota ──────────────────────────────────────────────────────────
+  {
+    examId:        'north-dakota-permit-mock-1',
+    label:         'North Dakota DOT Driver Knowledge Test Mock Exam #1',
+    shortLabel:    'Mock Exam #1',
+    baseTestId:    'north-dakota-permit',
+    questionCount: 25,
+    seed:          1,
+    timeLimitSecs: 40 * 60,
+    description:   'Simulates the North Dakota DOT knowledge test — 25 questions, 40 min.',
+  },
+  {
+    examId:        'north-dakota-permit-mock-2',
+    label:         'North Dakota DOT Driver Knowledge Test Mock Exam #2',
+    shortLabel:    'Mock Exam #2',
+    baseTestId:    'north-dakota-permit',
+    questionCount: 25,
+    seed:          2,
+    timeLimitSecs: 40 * 60,
+    description:   'A unique second simulation with a different question mix.',
+  },
+  {
+    examId:        'north-dakota-permit-mock-3',
+    label:         'North Dakota DOT Driver Knowledge Test Mock Exam #3',
+    shortLabel:    'Mock Exam #3',
+    baseTestId:    'north-dakota-permit',
+    questionCount: 25,
+    seed:          3,
+    timeLimitSecs: 40 * 60,
+    description:   'Third exam simulation — no repeated questions from #1 or #2.',
+  },
+
+  // ── Alaska ────────────────────────────────────────────────────────────────
+  {
+    examId:        'alaska-permit-mock-1',
+    label:         'Alaska DMV Driver Knowledge Test Mock Exam #1',
+    shortLabel:    'Mock Exam #1',
+    baseTestId:    'alaska-permit',
+    questionCount: 20,
+    seed:          1,
+    timeLimitSecs: 30 * 60,
+    description:   'Simulates the Alaska DMV knowledge test — 20 questions, 30 min.',
+  },
+  {
+    examId:        'alaska-permit-mock-2',
+    label:         'Alaska DMV Driver Knowledge Test Mock Exam #2',
+    shortLabel:    'Mock Exam #2',
+    baseTestId:    'alaska-permit',
+    questionCount: 20,
+    seed:          2,
+    timeLimitSecs: 30 * 60,
+    description:   'A unique second simulation with a different question mix.',
+  },
+  {
+    examId:        'alaska-permit-mock-3',
+    label:         'Alaska DMV Driver Knowledge Test Mock Exam #3',
+    shortLabel:    'Mock Exam #3',
+    baseTestId:    'alaska-permit',
+    questionCount: 20,
+    seed:          3,
+    timeLimitSecs: 30 * 60,
+    description:   'Third exam simulation — no repeated questions from #1 or #2.',
+  },
+
+  // ── Vermont ───────────────────────────────────────────────────────────────
+  {
+    examId:        'vermont-permit-mock-1',
+    label:         'Vermont DMV Driver Knowledge Test Mock Exam #1',
+    shortLabel:    'Mock Exam #1',
+    baseTestId:    'vermont-permit',
+    questionCount: 20,
+    seed:          1,
+    timeLimitSecs: 30 * 60,
+    description:   'Simulates the Vermont DMV knowledge test — 20 questions, 30 min.',
+  },
+  {
+    examId:        'vermont-permit-mock-2',
+    label:         'Vermont DMV Driver Knowledge Test Mock Exam #2',
+    shortLabel:    'Mock Exam #2',
+    baseTestId:    'vermont-permit',
+    questionCount: 20,
+    seed:          2,
+    timeLimitSecs: 30 * 60,
+    description:   'A unique second simulation with a different question mix.',
+  },
+  {
+    examId:        'vermont-permit-mock-3',
+    label:         'Vermont DMV Driver Knowledge Test Mock Exam #3',
+    shortLabel:    'Mock Exam #3',
+    baseTestId:    'vermont-permit',
+    questionCount: 20,
+    seed:          3,
+    timeLimitSecs: 30 * 60,
+    description:   'Third exam simulation — no repeated questions from #1 or #2.',
+  },
+
+  // ── Wyoming ───────────────────────────────────────────────────────────────
+  {
+    examId:        'wyoming-permit-mock-1',
+    label:         'Wyoming DOT Driver Knowledge Test Mock Exam #1',
+    shortLabel:    'Mock Exam #1',
+    baseTestId:    'wyoming-permit',
+    questionCount: 25,
+    seed:          1,
+    timeLimitSecs: 40 * 60,
+    description:   'Simulates the Wyoming DOT knowledge test — 25 questions, 40 min.',
+  },
+  {
+    examId:        'wyoming-permit-mock-2',
+    label:         'Wyoming DOT Driver Knowledge Test Mock Exam #2',
+    shortLabel:    'Mock Exam #2',
+    baseTestId:    'wyoming-permit',
+    questionCount: 25,
+    seed:          2,
+    timeLimitSecs: 40 * 60,
+    description:   'A unique second simulation with a different question mix.',
+  },
+  {
+    examId:        'wyoming-permit-mock-3',
+    label:         'Wyoming DOT Driver Knowledge Test Mock Exam #3',
+    shortLabel:    'Mock Exam #3',
+    baseTestId:    'wyoming-permit',
+    questionCount: 25,
+    seed:          3,
+    timeLimitSecs: 40 * 60,
     description:   'Third exam simulation — no repeated questions from #1 or #2.',
   },
 ];
