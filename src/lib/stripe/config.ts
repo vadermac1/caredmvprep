@@ -53,7 +53,7 @@ export const PRODUCT_CONFIG: Record<SubscriptionProduct, ProductConfig> = {
 
   cdl: {
     label:       "CDL Core",
-    description: "General Knowledge, Air Brakes, and Combination Vehicles banks",
+    description: "General Knowledge, Air Brakes, Combination Vehicles, Passenger, and School Bus banks",
     recurring: {
       priceCents: 1900,
       priceId:    process.env.STRIPE_PRICE_CDL_MONTHLY   ?? '',
@@ -95,15 +95,15 @@ export const PRODUCT_CONFIG: Record<SubscriptionProduct, ProductConfig> = {
     },
   },
 
-  // Future products — question banks not yet complete; hidden from pricing page
+  // Bundled into CDL Core — not sold separately; DB enum values must remain.
   cdl_school_bus: {
-    label:       "School Bus Package",
-    description: "CDL School Bus (S) endorsement question bank",
+    label:       "School Bus",
+    description: "CDL School Bus (S) endorsement question bank — included with CDL Core",
   },
 
   cdl_passenger: {
-    label:       "Passenger Package",
-    description: "CDL Passenger (P) endorsement question bank",
+    label:       "Passenger",
+    description: "CDL Passenger (P) endorsement question bank — included with CDL Core",
   },
 };
 
@@ -194,8 +194,8 @@ export const QUIZ_PRODUCT_MAP: Partial<Record<string, SubscriptionProduct>> = {
   'cdl-doubles-triples':      'cdl_doubles_triples',
   'cdl-air-brakes':           'cdl',
   'cdl-combination-vehicles': 'cdl',
-  'cdl-passenger':            'cdl_passenger',
-  'cdl-school-bus':           'cdl_school_bus',
+  'cdl-passenger':            'cdl',
+  'cdl-school-bus':           'cdl',
 };
 
 // Formats cents as "$12" or "$29" (no trailing .00)
