@@ -2288,6 +2288,38 @@ export const MOCK_EXAM_DEFS: MockExamDef[] = [
     description:   'Third exam simulation — no repeated questions from #1 or #2.',
   },
 
+  // ── South Carolina ────────────────────────────────────────────────────────
+  {
+    examId:        'south-carolina-permit-mock-1',
+    label:         'South Carolina SCDMV Knowledge Test Mock Exam #1',
+    shortLabel:    'Mock Exam #1',
+    baseTestId:    'south-carolina-permit',
+    questionCount: 25,
+    seed:          1,
+    timeLimitSecs: 40 * 60,
+    description:   'Simulates the South Carolina SCDMV knowledge test — 25 questions, 40 min.',
+  },
+  {
+    examId:        'south-carolina-permit-mock-2',
+    label:         'South Carolina SCDMV Knowledge Test Mock Exam #2',
+    shortLabel:    'Mock Exam #2',
+    baseTestId:    'south-carolina-permit',
+    questionCount: 25,
+    seed:          2,
+    timeLimitSecs: 40 * 60,
+    description:   'A unique second simulation with a different question mix.',
+  },
+  {
+    examId:        'south-carolina-permit-mock-3',
+    label:         'South Carolina SCDMV Knowledge Test Mock Exam #3',
+    shortLabel:    'Mock Exam #3',
+    baseTestId:    'south-carolina-permit',
+    questionCount: 25,
+    seed:          3,
+    timeLimitSecs: 40 * 60,
+    description:   'Third exam simulation — no repeated questions from #1 or #2.',
+  },
+
   // ── Indiana ───────────────────────────────────────────────────────────────
   {
     examId:        'indiana-permit-mock-1',

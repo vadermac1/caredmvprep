@@ -68,6 +68,8 @@ export function generateMotoFAQs(sf: StateFacts): FAQ[] {
   const helmetNote =
     sf.motoHelmetLaw === "all-ages"
       ? `${sf.state} requires all motorcycle riders and passengers to wear a helmet at all times.`
+      : sf.motoHelmetLaw === "under-19"
+      ? `${sf.state} requires riders and passengers under 19 to wear a helmet, and also requires newly-endorsed riders to wear a helmet for their first 2 years regardless of age.`
       : sf.motoHelmetLaw === "under-18"
       ? `${sf.state} requires riders and passengers under 18 to wear a helmet.`
       : sf.motoHelmetLaw === "none"
