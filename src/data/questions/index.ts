@@ -72,6 +72,8 @@ import sdDmvQuestions                from './dmv/south-dakota';
 import sdMotoQuestions               from './motorcycle/south-dakota';
 import ndDmvQuestions                from './dmv/north-dakota';
 import ndMotoQuestions               from './motorcycle/north-dakota';
+import akDmvQuestions                from './dmv/alaska';
+import akMotoQuestions               from './motorcycle/alaska';
 import cdlFederalQuestions           from './cdl/federal';
 import cdlSchoolBusQuestions         from './cdl/school-bus';
 import cdlTankVehicleQuestions       from './cdl/tank-vehicles';
@@ -1132,6 +1134,38 @@ export const quizRegistry: Record<string, QuizConfig> = {
     testId:      'north-dakota-cdl-general',
     label:       'North Dakota CDL General Knowledge Practice Test',
     state:       'ND',
+    licenseType: 'cdl_general',
+    questions:   verified(cdlFederalQuestions),
+    passingScore: 0.80,  // 40 of 50 — federal FMCSA standard
+  },
+
+  // ── Alaska ────────────────────────────────────────────────────────────────
+  // DL test: 20Q / 16-correct / 80% — dmv.alaska.gov (state-facts confirmed)
+  // Motorcycle: 25Q / 20-correct / 80% — dmv.alaska.gov (state-facts confirmed)
+  // Helmet law: all-ages universal (AS § 28.35.240). Lane splitting: ILLEGAL.
+  // Permit min age: 14 (AS § 28.15.057). Online testing: ak.knowtodrive.com.
+  // MSF BRC waives skills test only; knowledge test still required.
+  // NOT in LIVE_STATE_SLUGS or LIVE_STATE_ABBRS — needs_review status.
+  'alaska-permit': {
+    testId:      'alaska-permit',
+    label:       'Alaska DMV Practice Test',
+    state:       'AK',
+    licenseType: 'permit',
+    questions:   verified(akDmvQuestions),
+    passingScore: 0.80,  // 16 of 20 — Alaska DMV standard (80%), confirmed dmv.alaska.gov
+  },
+  'alaska-motorcycle': {
+    testId:      'alaska-motorcycle',
+    label:       'Alaska Motorcycle Practice Test',
+    state:       'AK',
+    licenseType: 'motorcycle',
+    questions:   verified(akMotoQuestions),
+    passingScore: 0.80,  // 20 of 25 — Alaska DMV standard (80%), confirmed dmv.alaska.gov
+  },
+  'alaska-cdl-general': {
+    testId:      'alaska-cdl-general',
+    label:       'Alaska CDL General Knowledge Practice Test',
+    state:       'AK',
     licenseType: 'cdl_general',
     questions:   verified(cdlFederalQuestions),
     passingScore: 0.80,  // 40 of 50 — federal FMCSA standard

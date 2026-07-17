@@ -60,8 +60,9 @@ const stateFacts: StateFacts[] = [
     cdlGeneralKnowledgeQuestions: 50,
     cdlGeneralKnowledgeToPass: 40,
     cdlGeneralKnowledgePassingPct: "80%",
-    lastVerifiedAt: VERIFIED,
-    notes: "Knowledge test can be taken online via ak.knowtodrive.com. Helmet law is universal. Course waiver: MSF BRC or state-equivalent waives skills test only; knowledge test still required.",
+    lastVerifiedAt: '2026-07-16',
+    verifiedBy: 'Alaska DMV state-facts entry + AS Title 28 statutes + Alaska Driver Manual (dmv.alaska.gov/media/t5ef5vi2/dlman.pdf); question banks authored 2026-07-16',
+    notes: "Knowledge test can be taken online via ak.knowtodrive.com. Helmet law is universal (AS § 28.35.240) — ALL riders and passengers regardless of age. Lane splitting ILLEGAL. Course waiver: MSF BRC or state-equivalent waives skills test only; knowledge test still required. DUI: adult 0.08% (AS § 28.35.030); under-21 absolute sobriety (0.00%); CDL 0.04%; aggravated at 0.16%+. Implied consent refusal: 1st = 90 days; 2nd = 1 year; 3rd = 3 years (AS § 28.35.032). Speed: interstate 65 mph; rural highway 55 mph; residential 20 mph; school zone 20 mph. Cell phone: handheld ban all drivers (AS § 28.35.161), $500 first offense. Seat belt: primary enforcement, front-seat all occupants, under-16 in all seats (AS § 28.05.095). Child restraint: under 8 AND under 65 lbs must use approved child safety seat. High-beam dim: 500 ft oncoming / 300 ft following. Studded tires: Oct 1–Apr 15. Moose-vehicle collisions: major fatality cause. Online testing: ak.knowtodrive.com. Permit min age: 14 (AS § 28.15.057); GDL: 6-month hold, 40 supervised hours (10 at night), midnight-5am curfew.",
   },
   {
     state: "Arizona",
