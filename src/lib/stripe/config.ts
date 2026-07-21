@@ -138,6 +138,33 @@ const LIVE_STATE_SLUGS = [
   'connecticut',
   'nevada',
   'utah',
+  'south-carolina',
+  'indiana',
+  'alabama',
+  'colorado',
+  'kentucky',
+  'louisiana',
+  'minnesota',
+  // Batch 2 — remaining 19 states
+  'alaska',
+  'arkansas',
+  'delaware',
+  'hawaii',
+  'idaho',
+  'iowa',
+  'kansas',
+  'maine',
+  'mississippi',
+  'montana',
+  'nebraska',
+  'new-hampshire',
+  'new-mexico',
+  'north-dakota',
+  'rhode-island',
+  'south-dakota',
+  'vermont',
+  'west-virginia',
+  'wyoming',
 ] as const;
 
 // Subset of LIVE_STATE_SLUGS that also has a motorcycle question bank wired
@@ -159,15 +186,57 @@ export const LIVE_MOTORCYCLE_STATE_SLUGS = [
   'maryland',
   'massachusetts',
   'oregon',
+  'indiana',
+  'alabama',
+  'colorado',
+  'minnesota',
+  'south-carolina',
+  // Batch 2 — all 50 states
+  'alaska',
+  'arkansas',
+  'connecticut',
+  'delaware',
+  'hawaii',
+  'idaho',
+  'iowa',
+  'kansas',
+  'kentucky',
+  'louisiana',
+  'maine',
+  'michigan',
+  'mississippi',
+  'montana',
+  'nebraska',
+  'nevada',
+  'new-hampshire',
+  'new-jersey',
+  'new-mexico',
+  'north-dakota',
+  'oklahoma',
+  'rhode-island',
+  'south-dakota',
+  'tennessee',
+  'utah',
+  'vermont',
+  'washington',
+  'west-virginia',
+  'wisconsin',
+  'wyoming',
 ] as const;
 
 // Abbr-keyed equivalents for callers (checkout, onboarding, pricing state
 // pickers) that work with two-letter state codes instead of URL slugs.
 export const LIVE_STATE_ABBRS = new Set<string>([
-  'CA', 'TX', 'FL', 'NY', 'PA', 'IL', 'OH', 'GA', 'NC', 'AZ', 'MI', 'MO', 'TN', 'VA', 'WA', 'NJ', 'MD', 'MA', 'WI', 'OR', 'OK', 'CT', 'NV', 'UT',
+  'CA', 'TX', 'FL', 'NY', 'PA', 'IL', 'OH', 'GA', 'NC', 'AZ', 'MI', 'MO', 'TN', 'VA', 'WA', 'NJ', 'MD', 'MA', 'WI', 'OR', 'OK', 'CT', 'NV', 'UT', 'SC', 'IN', 'AL', 'CO', 'KY', 'LA', 'MN',
+  // Batch 2 — remaining 19 states
+  'AK', 'AR', 'DE', 'HI', 'ID', 'IA', 'KS', 'ME', 'MS', 'MT', 'NE', 'NH', 'NM', 'ND', 'RI', 'SD', 'VT', 'WV', 'WY',
 ]);
 export const LIVE_MOTORCYCLE_STATE_ABBRS = new Set<string>([
   'CA', 'TX', 'FL', 'NY', 'PA', 'IL', 'OH', 'GA', 'NC', 'AZ', 'MO', 'VA', 'MD', 'MA', 'OR',
+  'IN', 'AL', 'CO', 'MN', 'SC',
+  // Batch 2 — all 50 states
+  'AK', 'AR', 'CT', 'DE', 'HI', 'ID', 'IA', 'KS', 'KY', 'LA', 'ME', 'MI', 'MS', 'MT',
+  'NE', 'NV', 'NH', 'NJ', 'NM', 'ND', 'OK', 'RI', 'SD', 'TN', 'UT', 'VT', 'WA', 'WV', 'WI', 'WY',
 ]);
 
 function buildStateQuizProductMap(): Partial<Record<string, SubscriptionProduct>> {
